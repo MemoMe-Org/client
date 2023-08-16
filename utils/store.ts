@@ -12,4 +12,13 @@ const UserStore = create<UserStoreStates>()((set) => ({
     resetStates: () => set(initialUserStore)
 }))
 
-export { UserStore }
+const useTextEditor = create<TextEditorStates>()((set) => ({
+    isBold: false,
+    isItalic: false,
+    isUnderline: false,
+    setIsBold: (isBold: boolean) => set({ isBold }),
+    setIsItalic: (isItalic: boolean) => set({ isItalic }),
+    setIsUnderline: (isUnderline: boolean) => set({ isUnderline }),
+}))
+
+export { UserStore, useTextEditor }
