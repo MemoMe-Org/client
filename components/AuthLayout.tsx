@@ -9,22 +9,36 @@ const AuthLayout: FC<{ children: React.ReactNode }> = ({ children }) => {
 
 
     return (
-        <form className="card w-[95vw] max-w-[550px] mx-auto my-10 px-5 py-10">
-            {children}
-            <div className="mt-3 flex justify-between">
+        <form className="card w-[95vw] max-w-[550px] mx-auto my-10 px-5 py-7">
+            <div className="text-xl tracking-wider font-semibold mb-5 md:text-2xl">
                 {
-                    pathName === "/login" &&
-                    <p>
-                        <Link href='/password/verify'>Forgot Password?</Link>
-                    </p>
+                    pathName === "/login" ?
+                        <h3>
+                            Login
+                        </h3> :
+                        <h3>
+                            Sign Up
+                        </h3>
                 }
             </div>
-            <div className="flex items-center justify-center gap-3 my-7">
+            <article>
+                {children}
+                <div className='flex justify-end mt-3'>
+                    <button className="rounded-full font-medium tracking-wider text-xl px-3 py-2 bg-clr-4 text-white hover:bg-clr-6 trans">
+                        {
+                            pathName === "/signup" ?
+                                'Sign Up' : pathName === "/login" ?
+                                    'Log In' : 'Submit'
+                        }
+                    </button>
+                </div>
+            </article>
+            <div className="flex items-center justify-center gap-3">
                 <span className="border-[1.5px] border-white w-full rounded-md" />
                 <span className="font-medium tracking-wide">Or</span>
                 <span className="border-[1.5px] border-white w-full rounded-md" />
             </div>
-            <div className={`${lato.className} flex flex-col gap-5`}>
+            <div className={`${lato.className} flex flex-col gap-4 my-3`}>
                 <button className='provider-btn'>
                     <span>Google</span>
                     <FcGoogle className="text-2xl" />
@@ -34,16 +48,16 @@ const AuthLayout: FC<{ children: React.ReactNode }> = ({ children }) => {
                     <AiOutlineGithub className="text-2xl" />
                 </button>
             </div>
-            <div>
+            <div className="flex justify-end mt-2 text-[15px]">
                 {
                     pathName === "/signup" ?
                         <p>
-                            Already has an account?
-                            <Link href='/login'>Login</Link>
+                            <span className="mr-2">Already have an account?</span>
+                            <Link href='/login' className="font-medium">Login</Link>
                         </p> :
                         <p>
-                            {`Don't have an account?`}
-                            <Link href='/login'>Sign Up</Link>
+                            <span className="mr-2">{`Don't have an account?`}</span>
+                            <Link href='/signup' className="font-medium">Sign Up</Link>
                         </p>
                 }
             </div>
