@@ -15,7 +15,7 @@ const page = () => {
 
     return (
         <AuthLayout>
-            <article className='flex flex-col gap-3'>
+            <article className='flex flex-col gap-5'>
                 <Input
                     type='email'
                     label='Email'
