@@ -14,6 +14,7 @@
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.15",
+    "date-fns": "^2.30.0",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.13",
     "next": "13.4.13",
@@ -21,6 +22,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.1",
+    "react-icons": "^4.10.1",
     "tailwindcss": "3.3.3",
     "typescript": "5.1.6",
     "zustand": "^4.4.1"
