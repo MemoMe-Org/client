@@ -1,12 +1,11 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+import { Toaster } from 'react-hot-toast'
+import QueryProvider from '@/components/QueryProvider'
 
 export const metadata: Metadata = {
   title: 'MemoMe',
-  description: 'A lot of stuffs.',
+  description: '...',
 }
 
 export default function RootLayout({
@@ -16,7 +15,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>
+        <Toaster
+          position="top-center"
+          reverseOrder={false} />
+        <QueryProvider>
+          {children}
+        </QueryProvider>
+      </body>
     </html>
   )
 }
