@@ -2,29 +2,27 @@ import { FC } from 'react'
 import Link from 'next/link'
 import { lato } from '@/public/fonts/f'
 import { usePathname } from 'next/navigation'
+import { handleSignIn } from '@/lib/signin'
 import { FcGoogle, AiOutlineGithub } from '@/public/icons/ico'
 
-const AuthLayout: FC<{ children: React.ReactNode }> = ({ children }) => {
+const AuthLayout: FC<AuthProps> = ({ children, handler }) => {
     const pathName = usePathname()
 
-
     return (
-        <form className="card w-[95vw] max-w-[550px] mx-auto my-10 px-5 py-7">
+        <form onSubmit={(e) => e.preventDefault()}
+            className="card w-[95vw] max-w-[550px] mx-auto my-10 px-5 py-7 mt-14">
             <div className="text-xl tracking-wider font-semibold mb-5 md:text-2xl">
                 {
-                    pathName === "/login" ?
-                        <h3>
-                            Login
-                        </h3> :
-                        <h3>
-                            Sign Up
-                        </h3>
+                    <h2>
+                        {pathName === "/login" ? 'Login' : 'Sign Up'}
+                    </h2>
                 }
             </div>
             <article>
                 {children}
                 <div className='flex justify-end mt-3'>
-                    <button className="rounded-full font-medium tracking-wider text-xl px-3 py-2 bg-clr-4 text-white hover:bg-clr-6 trans">
+                    <button onClick={async () => await handler()}
+                        className="rounded-full font-medium tracking-wider text-xl px-3 py-2 bg-clr-4 text-white hover:bg-clr-6 trans">
                         {
                             pathName === "/signup" ?
                                 'Sign Up' : pathName === "/login" ?
@@ -39,11 +37,15 @@ const AuthLayout: FC<{ children: React.ReactNode }> = ({ children }) => {
                 <span className="border-[1.5px] border-white w-full rounded-md" />
             </div>
             <div className={`${lato.className} flex flex-col gap-4 my-3`}>
-                <button className='provider-btn'>
+                <button
+                    className='provider-btn'
+                    onClick={() => handleSignIn('google')}>
                     <span>Google</span>
                     <FcGoogle className="text-2xl" />
                 </button>
-                <button className='provider-btn'>
+                <button
+                    className='provider-btn'
+                    onClick={() => handleSignIn('github')}>
                     <span>Github</span>
                     <AiOutlineGithub className="text-2xl" />
                 </button>
