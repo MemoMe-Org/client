@@ -1,6 +1,6 @@
 type AuthMethod = 'google' | 'github'
 
-type NotificationAction = 'error' | 'success'
+type NotifyAction = 'error' | 'success'
 
 interface AuthProps {
     children: ReactNode,
