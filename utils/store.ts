@@ -2,14 +2,16 @@ import { create } from 'zustand'
 
 const initialUserStore = {
     email: '',
+    userId: '',
     password: ''
 }
 
 const UserStore = create<UserStoreStates>()((set) => ({
     ...initialUserStore,
+    resetStates: () => set(initialUserStore),
     setEmail: (email: string) => set({ email }),
+    setUserId: (userId: string) => set({ userId }),
     setPassword: (password: string) => set({ password }),
-    resetStates: () => set(initialUserStore)
 }))
 
 const useTextEditor = create<TextEditorStates>()((set) => ({
