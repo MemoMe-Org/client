@@ -6,10 +6,12 @@ import notify from '@/utils/notify'
 import Input from '@/components/Input'
 import { UserStore } from '@/utils/store'
 import throwError from '@/utils/throwError'
+import { useRouter } from 'next/navigation'
 import AuthLayout from '@/components/AuthLayout'
 import { AxiosResponse, AxiosError } from 'axios'
 
 const page = () => {
+    const router = useRouter()
     const {
         userId, setPassword,
         password, setUserId,
@@ -21,8 +23,10 @@ const page = () => {
             .then((res: AxiosResponse) => {
                 resetStates()
                 notify('success', res.data?.msg)
-            })
-            .catch((err: AxiosError) => throwError(err))
+                setTimeout(() => {
+                    router.push('/profile')
+                }, 300)
+            }).catch((err: AxiosError) => throwError(err))
     }
 
     return (
@@ -32,12 +36,14 @@ const page = () => {
                     type='text'
                     label='Email or Username'
                     value={userId}
-                    onChange={setUserId} />
+                    onChange={setUserId}
+                />
                 <Input
                     type='password'
                     label='Password'
                     value={password}
-                    onChange={setPassword} />
+                    onChange={setPassword}
+                />
             </article>
         </AuthLayout>
     )
