@@ -1,5 +1,7 @@
 type AuthMethod = 'google' | 'github'
 
+type NotificationAction = 'error' | 'success'
+
 interface AuthProps {
     children: ReactNode,
     handler: () => Promise<void>
@@ -23,10 +25,12 @@ interface TextEditorStates {
 }
 
 interface UserStoreStates {
+    token: string
     email: string
     userId: string
     password: string
     resetStates: () => void
+    setToken: (token: string) => void
     setEmail: (email: string) => void
     setUserId: (userId: string) => void
     setPassword: (password: string) => void
