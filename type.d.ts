@@ -1,7 +1,15 @@
+type AuthMethod = 'google' | 'github'
+
+interface AuthProps {
+    children: ReactNode,
+    handler: () => Promise<void>
+}
+
 interface InputProps<T> {
     value: T
     type: string
     label: string
+    placeholder?: string
     onChange: (value: T) => void
 }
 
@@ -15,9 +23,11 @@ interface TextEditorStates {
 }
 
 interface UserStoreStates {
-    email: string,
+    email: string
+    userId: string
     password: string
     resetStates: () => void
     setEmail: (email: string) => void
+    setUserId: (userId: string) => void
     setPassword: (password: string) => void
 } 
