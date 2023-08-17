@@ -1,8 +1,8 @@
 import { FC } from 'react'
 import Link from 'next/link'
 import { lato } from '@/public/fonts/f'
-import { usePathname } from 'next/navigation'
 import { handleSignIn } from '@/lib/signin'
+import { usePathname } from 'next/navigation'
 import { FcGoogle, AiOutlineGithub } from '@/public/icons/ico'
 
 const AuthLayout: FC<AuthProps> = ({ children, handler }) => {
@@ -39,15 +39,17 @@ const AuthLayout: FC<AuthProps> = ({ children, handler }) => {
             <div className={`${lato.className} flex flex-col gap-4 my-3`}>
                 <button
                     className='provider-btn'
-                    onClick={() => handleSignIn('google')}>
-                    <span>Google</span>
+                    onClick={() => handleSignIn('google')}
+                >
                     <FcGoogle className="text-2xl" />
+                    <span>Google</span>
                 </button>
                 <button
                     className='provider-btn'
-                    onClick={() => handleSignIn('github')}>
-                    <span>Github</span>
+                    onClick={() => handleSignIn('github')}
+                >
                     <AiOutlineGithub className="text-2xl" />
+                    <span>Github</span>
                 </button>
             </div>
             <div className="flex justify-end mt-2 text-[15px]">
