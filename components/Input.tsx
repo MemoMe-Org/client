@@ -24,7 +24,7 @@ const Input: FC<InputProps<string>> = ({
                 type={type}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className="outline-none py-1 px-1 text-lg border-[1px] border-clr-8 focus:border-[2px] focus:border-clr-1 trans"
+                className="outline-none rounded-full py-1 px-1 text-lg border-[1px] border-clr-8 focus:border-[2px] focus:border-clr-1 trans"
             />
         </div>
     )
