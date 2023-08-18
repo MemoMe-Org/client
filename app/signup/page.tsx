@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client"
-import { useState } from 'react'
 import axios from '@/app/api/axios'
 import notify from '@/utils/notify'
 import Input from '@/components/Input'
@@ -13,12 +12,10 @@ import { AxiosResponse, AxiosError } from 'axios'
 const page = () => {
     const router = useRouter()
     const {
-        email, setPassword,
-        password, setEmail,
-        resetStates
+        email, setPassword, password,
+        setEmail, resetStates, password2,
+        setPassword2, loading, setLoading,
     } = UserStore()
-
-    const [password2, setPassword2] = useState<string>("")
 
     const handleSignup = async () => {
         await axios.post('/auth/signup', {
