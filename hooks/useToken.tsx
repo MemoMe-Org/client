@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import getCookie from '@/utils/getCookie'
 import { UserStore } from '@/utils/store'
 
-const page = () => {
+const useToken = () => {
     const { token, setToken } = UserStore()
 
     useEffect(() => {
@@ -16,4 +16,4 @@ const page = () => {
     return token
 }
 
-export default page
+export default useToken
