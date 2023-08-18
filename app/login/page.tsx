@@ -42,6 +42,7 @@ const page = () => {
                     type='password'
                     label='Password'
                     value={password}
+                    placeholder="********"
                     onChange={setPassword}
                 />
             </article>
