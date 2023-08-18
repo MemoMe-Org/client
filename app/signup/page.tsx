@@ -37,6 +37,7 @@ const page = () => {
                     type='email'
                     label='Email'
                     value={email}
+                    placeholder='example@mail.com'
                     onChange={setEmail}
                 />
                 <Input
