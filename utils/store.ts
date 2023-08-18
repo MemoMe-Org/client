@@ -3,7 +3,9 @@ import { create } from 'zustand'
 const initialUserStore = {
     email: '',
     userId: '',
-    password: ''
+    password: '',
+    password2: '',
+    loading: false,
 }
 
 const UserStore = create<UserStoreStates>()((set) => ({
@@ -13,7 +15,9 @@ const UserStore = create<UserStoreStates>()((set) => ({
     setToken: (token: string) => set({ token }),
     setEmail: (email: string) => set({ email }),
     setUserId: (userId: string) => set({ userId }),
+    setLoading: (loading: boolean) => set({ loading }),
     setPassword: (password: string) => set({ password }),
+    setPassword2: (password2: string) => set({ password2 }),
 }))
 
 const useTextEditor = create<TextEditorStates>()((set) => ({
