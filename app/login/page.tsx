@@ -13,9 +13,8 @@ import { AxiosResponse, AxiosError } from 'axios'
 const page = () => {
     const router = useRouter()
     const {
-        userId, setPassword,
-        password, setUserId,
-        resetStates
+        resetStates, loading, setLoading
+        userId, setPassword, password, setUserId,
     } = UserStore()
 
     const handleLogin = async () => {
