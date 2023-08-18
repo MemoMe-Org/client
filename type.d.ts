@@ -28,10 +28,14 @@ interface UserStoreStates {
     token: string
     email: string
     userId: string
+    loading: boolean
     password: string
+    password2: string
     resetStates: () => void
     setToken: (token: string) => void
     setEmail: (email: string) => void
     setUserId: (userId: string) => void
+    setLoading: (loading: boolean) => void
     setPassword: (password: string) => void
+    setPassword2: (password2: string) => void
 } 
