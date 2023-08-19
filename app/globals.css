@@ -11,41 +11,46 @@ html {
 }
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+    :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 0, 0, 0;
+    }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
+    @apply relative;
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
 }
 
 .card {
-  background: rgba( 237, 226, 226, 0.05 );
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  backdrop-filter: blur( 0px );
-  -webkit-backdrop-filter: blur( 0px );
-  border-radius: 10px;
-  border: 1px solid rgba( 255, 255, 255, 0.18 );
+    background: rgba( 237, 226, 226, 0.05 );
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    backdrop-filter: blur( 0px );
+    -webkit-backdrop-filter: blur( 0px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 .provider-btn {
-  @apply rounded-full border-[2px] border-clr-3 px-5 py-2 flex items-center justify-center gap-5 text-xl font-bold tracking-widest bg-white hover:bg-clr-11 trans;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+    @apply rounded-full border-[2px] border-clr-3 px-5 py-2 flex items-center justify-center gap-5 text-xl font-bold tracking-widest bg-white hover:bg-clr-11 trans;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+}
+
+.submit-btn {
+    @apply rounded-full font-medium tracking-wider text-xl px-3 py-2 bg-clr-4 text-white trans hover:bg-clr-6
 }
 
 .editor-box {
@@ -212,13 +217,13 @@ body {
 
 /* Loader Three */
 .loader {
-  @apply m-auto border-[5px] border-[#EAF0F6] rounded-full border-t-[#006FC9] w-[23px] h-[23px];
-  animation: spinner 4s linear infinite;
+    @apply m-auto border-[5px] border-[#EAF0F6] rounded-full border-t-[#006FC9] w-[23px] h-[23px];
+    animation: spinner 4s linear infinite;
 }
 
 @keyframes spinner {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 
@@ -240,7 +245,7 @@ body {
 }
 @keyframes progres{
     0%{
-      width: 0%;
+        width: 0%;
     }
     25%{
         width: 50%;
