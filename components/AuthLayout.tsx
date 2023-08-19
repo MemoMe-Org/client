@@ -57,11 +57,11 @@ const AuthLayout: FC<AuthProps> = ({ children, handler, pathName }) => {
                     pathName === 'signup' ?
                         <p>
                             <span className="mr-2">Already have an account?</span>
-                            <Link href='login' className="font-medium">Login</Link>
+                            <Link href='/login' className="font-medium">Login</Link>
                         </p> :
                         <p>
                             <span className="mr-2">{`Don't have an account?`}</span>
-                            <Link href='signup' className="font-medium">Sign Up</Link>
+                            <Link href='/signup' className="font-medium">Sign Up</Link>
                         </p>
                 }
             </div>
