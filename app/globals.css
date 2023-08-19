@@ -147,7 +147,17 @@ body {
     left: 12px;
 }
 
-/* Loader Two */
+@keyframes lds-roller {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* Loader One */
 .loading-spin {
     @apply w-[25px] h-[25px] relative grid place-items-center overflow-hidden;
     animation: dis-appear 2s ease-in-out infinite;
@@ -177,14 +187,32 @@ body {
     --duration: 1.5s;
 }
 
+@keyframes dis-appear {
+    0%,
+    100% {
+        color: rgba(201, 198, 198, 1);
+    }
+
+    25%,
+    75% {
+        color: rgba(201, 198, 198, 0.5);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
 /* Loader Three */
 .loader {
-  margin: auto;
-  border: 20px solid #EAF0F6;
-  border-radius: 50%;
-  border-top: 20px solid #FF7A59;
-  width: 200px;
-  height: 200px;
+  @apply m-auto border-[5px] border-[#EAF0F6] rounded-full border-t-[#006FC9] w-[23px] h-[23px];
   animation: spinner 4s linear infinite;
 }
 
