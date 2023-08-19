@@ -9,7 +9,6 @@ import throwError from '@/utils/throwError'
 import { useRouter } from 'next/navigation'
 import AuthLayout from '@/components/AuthLayout'
 import { AxiosResponse, AxiosError } from 'axios'
-import { ptSans } from '@/public/fonts/f'
 
 const page = () => {
     const router = useRouter()
@@ -33,7 +32,7 @@ const page = () => {
 
     return (
         <AuthLayout handler={handleLogin} pathName='login'>
-            <article className={`${ptSans.className} flex flex-col gap-5`}>
+            <article className='flex flex-col gap-5'>
                 <Input
                     type='text'
                     label='Email or Username'
