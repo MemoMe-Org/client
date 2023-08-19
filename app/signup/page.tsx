@@ -14,10 +14,11 @@ const page = () => {
     const {
         email, setPassword, password,
         setEmail, resetStates, password2,
-        setPassword2, loading, setLoading,
+        setPassword2, setLoading,
     } = UserStore()
 
     const handleSignup = async () => {
+        setLoading(true)
         await axios.post('/auth/signup', {
             email, password, password2
         }).then((res: AxiosResponse) => {
@@ -28,6 +29,7 @@ const page = () => {
                 router.push('/login')
             }, 300)
         }).catch((err: AxiosError) => throwError(err))
+            .finally(() => setLoading(false))
     }
 
     return (
