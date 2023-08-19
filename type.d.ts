@@ -3,7 +3,8 @@ type AuthMethod = 'google' | 'github'
 type NotifyAction = 'error' | 'success'
 
 interface AuthProps {
-    children: ReactNode,
+    children: ReactNode
+    pathName?: 'login' | 'signup'
     handler: () => Promise<void>
 }
 
