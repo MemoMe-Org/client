@@ -16,6 +16,10 @@ interface InputProps<T> {
     onChange: (value: T) => void
 }
 
+interface NavProps {
+    isAuthenticated: boolean
+}
+
 interface TextEditorStates {
     isBold: boolean
     isItalic: boolean
