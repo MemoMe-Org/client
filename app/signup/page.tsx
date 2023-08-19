@@ -2,6 +2,7 @@
 "use client"
 import axios from '@/app/api/axios'
 import notify from '@/utils/notify'
+import NavBar from '@/components/Nav'
 import Input from '@/components/Input'
 import { UserStore } from '@/utils/store'
 import throwError from '@/utils/throwError'
@@ -33,29 +34,32 @@ const page = () => {
     }
 
     return (
-        <AuthLayout handler={handleSignup} pathName='signup'>
-            <article className='flex flex-col gap-5'>
-                <Input
-                    type='email'
-                    label='Email'
-                    value={email}
-                    placeholder='example@mail.com'
-                    onChange={setEmail}
-                />
-                <Input
-                    type='password'
-                    label='Password'
-                    value={password}
-                    onChange={setPassword}
-                />
-                <Input
-                    type='password'
-                    label='Confirm Password'
-                    value={password2}
-                    onChange={setPassword2}
-                />
-            </article>
-        </AuthLayout>
+        <>
+            <NavBar isAuthenticated={false} pathName='signup' />
+            <AuthLayout handler={handleSignup} pathName='signup'>
+                <article className='flex flex-col gap-5'>
+                    <Input
+                        type='email'
+                        label='Email'
+                        value={email}
+                        placeholder='example@mail.com'
+                        onChange={setEmail}
+                    />
+                    <Input
+                        type='password'
+                        label='Password'
+                        value={password}
+                        onChange={setPassword}
+                    />
+                    <Input
+                        type='password'
+                        label='Confirm Password'
+                        value={password2}
+                        onChange={setPassword2}
+                    />
+                </article>
+            </AuthLayout>
+        </>
     )
 }
 
