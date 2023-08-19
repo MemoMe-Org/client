@@ -1,4 +1,4 @@
-import { formatDistanceToNow, parseISO } from "date-fns"
+import { formatDistanceToNow, parseISO } from 'date-fns'
 
 const getPeriod = (timestamp: string): string => {
     let period: string = ''
