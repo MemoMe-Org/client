@@ -11,7 +11,7 @@ const AuthLayout: FC<AuthProps> = ({ children, handler, pathName }) => {
 
     return (
         <form onSubmit={(e) => e.preventDefault()}
-            className="card w-[95vw] max-w-[550px] mx-auto my-10 px-5 py-7 mt-14">
+            className="card w-[95vw] max-w-[550px] mx-auto mt-20 px-5 py-7">
             <div className="text-xl tracking-wider font-semibold mb-5 md:text-2xl">
                 {
                     <h2>
@@ -23,7 +23,7 @@ const AuthLayout: FC<AuthProps> = ({ children, handler, pathName }) => {
                 {children}
                 <div className='flex justify-end mt-3'>
                     <button onClick={async () => await handler()}
-                        className="rounded-full font-medium tracking-wider text-xl px-3 py-2 bg-clr-4 text-white hover:bg-clr-6 trans">
+                        className="submit-btn">
                         {loading ? <LoaderThree /> :
                             <>
                                 {
