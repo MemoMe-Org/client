@@ -1,6 +1,7 @@
 import {
     Inter, Poppins,
     Questrial, Lato,
+    PT_Sans,
 } from 'next/font/google'
 
 const questrial = Questrial({
@@ -23,8 +24,14 @@ const poppins = Poppins({
     subsets: ['latin']
 })
 
+const ptSans = PT_Sans({
+    weight: ['400', '700'],
+    subsets: ['latin']
+})
+
 
 export {
     inter, poppins,
     lato, questrial,
+    ptSans
 }
