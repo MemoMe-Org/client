@@ -1,6 +1,6 @@
 import { toast } from "react-hot-toast"
 
-const notify = (msg: string, action: NotifyAction) => {
+const notify = (action: NotifyAction, msg: string) => {
     if (action === 'success') {
         toast.success(msg, {
             duration: 1900
