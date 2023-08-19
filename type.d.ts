@@ -2,9 +2,12 @@ type AuthMethod = 'google' | 'github'
 
 type NotifyAction = 'error' | 'success'
 
-interface AuthProps {
-    children: ReactNode
+interface PathName {
     pathName?: 'login' | 'signup'
+}
+
+interface AuthProps extends PathName {
+    children: ReactNode
     handler: () => Promise<void>
 }
 
@@ -16,7 +19,11 @@ interface InputProps<T> {
     onChange: (value: T) => void
 }
 
-interface NavProps {
+interface NavProps extends PathName {
+    data?: {
+        username?: string
+        avatar_url?: string,
+    }
     isAuthenticated: boolean
 }
 
