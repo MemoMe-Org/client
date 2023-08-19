@@ -13,7 +13,7 @@ import { AxiosResponse, AxiosError } from 'axios'
 const page = () => {
     const router = useRouter()
     const {
-        resetStates, loading, setLoading
+        resetStates, loading, setLoading,
         userId, setPassword, password, setUserId,
     } = UserStore()
 
@@ -29,7 +29,7 @@ const page = () => {
     }
 
     return (
-        <AuthLayout handler={handleLogin}>
+        <AuthLayout handler={handleLogin} pathName='login'>
             <article className='flex flex-col gap-5'>
                 <Input
                     type='text'
