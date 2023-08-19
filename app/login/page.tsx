@@ -13,11 +13,12 @@ import { AxiosResponse, AxiosError } from 'axios'
 const page = () => {
     const router = useRouter()
     const {
-        resetStates, loading, setLoading,
-        userId, setPassword, password, setUserId,
+        resetStates, setLoading, userId,
+        setPassword, password, setUserId,
     } = UserStore()
 
     const handleLogin = async () => {
+        setLoading(true)
         await axios.post('/auth/login', { userId, password })
             .then((res: AxiosResponse) => {
                 resetStates()
@@ -26,6 +27,7 @@ const page = () => {
                     router.push('/profile')
                 }, 300)
             }).catch((err: AxiosError) => throwError(err))
+            .finally(() => setLoading(false))
     }
 
     return (
