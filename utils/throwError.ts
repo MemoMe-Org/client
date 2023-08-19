@@ -1,4 +1,4 @@
-import notify from "./notify"
+import notify from './notify'
 
 const throwError = (err: any): void => {
     const msg = err.response?.data?.msg
