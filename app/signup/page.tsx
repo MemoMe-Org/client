@@ -31,7 +31,7 @@ const page = () => {
     }
 
     return (
-        <AuthLayout handler={handleSignup}>
+        <AuthLayout handler={handleSignup} pathName='signup'>
             <article className='flex flex-col gap-5'>
                 <Input
                     type='email'
