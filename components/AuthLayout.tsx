@@ -1,10 +1,14 @@
 import { FC } from 'react'
 import Link from 'next/link'
+import { LoaderThree } from './Loader'
 import { lato } from '@/public/fonts/f'
+import { UserStore } from '@/utils/store'
 import { handleSignIn } from '@/lib/signin'
 import { FcGoogle, AiOutlineGithub } from '@/public/icons/ico'
 
 const AuthLayout: FC<AuthProps> = ({ children, handler, pathName }) => {
+    const { loading } = UserStore()
+
     return (
         <form onSubmit={(e) => e.preventDefault()}
             className="card w-[95vw] max-w-[550px] mx-auto my-10 px-5 py-7 mt-14">
@@ -20,10 +24,14 @@ const AuthLayout: FC<AuthProps> = ({ children, handler, pathName }) => {
                 <div className='flex justify-end mt-3'>
                     <button onClick={async () => await handler()}
                         className="rounded-full font-medium tracking-wider text-xl px-3 py-2 bg-clr-4 text-white hover:bg-clr-6 trans">
-                        {
-                            pathName === 'signup' ?
-                                'Sign Up' : pathName === 'login' ?
-                                    'Log In' : 'Submit'
+                        {loading ? <LoaderThree /> :
+                            <>
+                                {
+                                    pathName === 'signup' ?
+                                        'Sign Up' : pathName === 'login' ?
+                                            'Log In' : 'Submit'
+                                }
+                            </>
                         }
                     </button>
                 </div>
