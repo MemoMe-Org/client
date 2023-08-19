@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    scroll-behavior: smooth;
+}
+
+.trans {
+    @apply transition-all ease-in-out duration-200
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -36,6 +44,101 @@ body {
 }
 
 .provider-btn {
-  @apply rounded-md border-2 px-5 py-2 flex items-center justify-evenly text-xl font-bold tracking-widest bg-white hover:bg-clr-11;
+  @apply rounded-md border-[2px] border-clr-3 px-5 py-2 flex items-center justify-center gap-5 text-xl font-bold tracking-widest bg-white hover:bg-clr-11 trans;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+}
+
+.editor-box {
+    @apply outline-none p-1.5 text-lg text-clr-3 min-h-[120px] tracking-wide
+}
+
+.editor-btn {
+    @apply  rounded-md p-1 text-clr-3 trans
+}
+
+.editor-btn.active, .editor-btn:hover {
+    @apply bg-clr-7
+}
+
+
+@keyframes opacity {
+  0% {
+    opacity: 0.05;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+
+.animate-opacity {
+  animation: opacity infinite 1s alternate-reverse;
+}
+
+.shiny-text {
+  -webkit-animation: shine 2s linear infinite alternate;
+  animation: shine 2s linear infinite alternate;
+  border-style: none;
+  color: #ededed;
+  font-weight: 500;
+  -webkit-mask-image: linear-gradient(
+    -75deg,
+    rgba(0, 0, 0, 0.6) 30%,
+    #000 50%,
+    rgba(0, 0, 0, 0.6) 70%
+  );
+  -webkit-mask-size: 200%;
+  outline: none;
+  text-decoration: none;
+}
+
+@keyframes shine {
+  0% {
+    -webkit-mask-position: 150%;
+  }
+  100% {
+    -webkit-mask-position: -50%;
+  }
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(90%);
+  }
+}
+
+.animate-slide {
+  animation: slide infinite 1s alternate-reverse;
+}
+
+.shiny-div {
+  position: relative;
+  overflow: hidden;
+}
+
+.shiny-div::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    -75deg,
+    rgba(0, 0, 0, 0.6) 30%,
+    #000 50%,
+    rgba(0, 0, 0, 0.6) 70%
+  );
+  background-size: 200%;
+  animation: shimmer 2s linear infinite alternate;
+}
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
 }
