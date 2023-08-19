@@ -13,7 +13,7 @@ const Input: FC<InputProps<string>> = ({
         <div className="flex flex-col gap-2">
             <div className="flex justify-between items-center">
                 <label className={`tracking-widest font-medium ${poppins.className}`}>
-                    {label}
+                    {label} <span className="text-clr-4 tex-lg font-bold">*</span>
                 </label>
                 {
                     pathName === "/login" && type === "password" &&
