@@ -1,3 +1,7 @@
+import {
+    FiLogOut, FiSettings,
+    RiAccountCircleFill
+} from '@/public/icons/ico'
 import Link from 'next/link'
 import Image from 'next/image'
 import axios from '@/app/api/axios'
@@ -6,7 +10,6 @@ import { AxiosResponse } from 'axios'
 import useToken from '@/hooks/useToken'
 import { useRouter } from 'next/navigation'
 import { kaushan, poppins } from '@/public/fonts/f'
-import { FiLogOut, FiSettings, RiAccountCircleFill } from '@/public/icons/ico'
 
 const NavBar: FC<NavProps> = ({ isAuthenticated, pathName, data }) => {
     const token = useToken()
