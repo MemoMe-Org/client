@@ -67,7 +67,7 @@ const NavBar: FC<NavProps> = ({ isAuthenticated, pathName, data }) => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <button onClick={async () => logout()}
+                                    <button onClick={async () => await logout()}
                                         className='flex items-center gap-3 trans hover:text-red-500'>
                                         <span>Logout</span>
                                         <FiLogOut />
