@@ -65,6 +65,16 @@ body {
     @apply bg-clr-7
 }
 
+.nav-modal {
+    @apply absolute top-14 -right-5 z-50 w-32 min-h-[20px] bg-white tracking-wide rounded-lg pl-3 py-2 flex flex-col justify-center gap-2 text-clr-2 trans;
+    transform: translateY(-400%);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.nav-modal.active {
+    transform: translate(0)
+}
+
 /* Loader Two */
 .lds-roller {
     @apply relative w-[80px] h-[80px];
@@ -259,4 +269,4 @@ body {
     100%{
         width: 100%;
     }
-};
+}
