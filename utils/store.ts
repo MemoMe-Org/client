@@ -3,6 +3,7 @@ import { create } from 'zustand'
 const initialUserStore = {
     email: '',
     userId: '',
+    auth: false,
     password: '',
     password2: '',
     loading: false,
@@ -12,6 +13,7 @@ const UserStore = create<UserStoreStates>()((set) => ({
     token: '',
     ...initialUserStore,
     resetStates: () => set(initialUserStore),
+    setAuth: (auth: boolean) => set({ auth }),
     setToken: (token: string) => set({ token }),
     setEmail: (email: string) => set({ email }),
     setUserId: (userId: string) => set({ userId }),
