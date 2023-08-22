@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         "clr-0": "#FFFFFF",
-        "clr-1": "#FF9300",
+        "clr-1": "#FF9400",
         "clr-2": "#FBA42D",
         "clr-3": "#FBBE2C",
         "clr-4": "#3D3D3D",
