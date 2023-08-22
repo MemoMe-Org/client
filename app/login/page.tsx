@@ -24,6 +24,7 @@ const page = () => {
             .then((res: AxiosResponse) => {
                 resetStates()
                 notify('success', res.data?.msg)
+                localStorage.setItem('settings', JSON.stringify(res.data?.settings))
                 setTimeout(() => {
                     router.push('/profile')
                 }, 300)
@@ -33,7 +34,7 @@ const page = () => {
 
     return (
         <>
-            <NavBar isAuthenticated={false} pathName='login' />
+            <NavBar isAuthenticated={false} />
             <AuthLayout handler={handleLogin} pathName='login'>
                 <article className='flex flex-col gap-5'>
                     <Input
