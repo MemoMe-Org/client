@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import {
     FiLogOut, FiSettings,
     RiAccountCircleFill
@@ -27,7 +28,7 @@ const NavBar: FC<NavProps> = ({ isAuthenticated, pathName, data }) => {
 
     return (
         <header className='fixed top-0 w-full'>
-            <nav className='px-10 py-5 flex justify-between w-full items-center'>
+            <nav className='md:px-14 px-10 py-5 flex justify-between w-full items-center'>
                 <Link href='/'
                     className={`font-bold tracking-wide text-2xl ${kaushan.className} md:text-4xl`}>
                     <span className='text-clr-8'>Memo</span>
@@ -50,7 +51,7 @@ const NavBar: FC<NavProps> = ({ isAuthenticated, pathName, data }) => {
                                 className='relative rounded-full overflow-hidden w-[50px] h-[50px] object-cover border-[0.3125rem] border-clr-5 flex-shrink-0'>
                                 {
                                     data?.avatar_url ?
-                                        <Image src={data.avatar_url} alt='avatar' width={300} height={300} priority className='' /> :
+                                        <img src={data.avatar_url} alt='avatar' width={300} height={300} loading='lazy' /> :
                                         <div className={`${poppins.className} font-bold text-lg text-clr-2`}>
                                             {data?.username![0].toUpperCase()}
                                         </div>
