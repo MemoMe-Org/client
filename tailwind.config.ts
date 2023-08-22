@@ -8,11 +8,6 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
       colors: {
         "clr-0": "#FFFFFF",
         "clr-1": "#FF9300",
@@ -24,7 +19,8 @@ const config: Config = {
         "clr-7": "#BFD5E2",
         "clr-8": "#DE8209",
         "clr-9": "#BD7112",
-        'clr-10': '#9D601B',
+        "clr-10": '#9D601B',
+        "clr-11": "#f1faee",
         "clr-x": "rgba(0, 0, 0, 0.25)",
       }
     },
