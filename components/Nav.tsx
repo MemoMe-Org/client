@@ -12,7 +12,7 @@ import useToken from '@/hooks/useToken'
 import { poppins } from '@/public/fonts/f'
 import { useRouter } from 'next/navigation'
 
-const NavBar: FC<NavProps> = ({ isAuthenticated, pathName, data }) => {
+const NavBar: FC<NavProps> = ({ isAuthenticated, data }) => {
     const token = useToken()
     const router = useRouter()
     const [open, setOpen] = useState<boolean>(false)
@@ -40,7 +40,7 @@ const NavBar: FC<NavProps> = ({ isAuthenticated, pathName, data }) => {
                     {!isAuthenticated && <div className='object-cover overflow-hidden w-24 h-14'>
                         <Image
                             src='https://d15zb4m4p46ai4.cloudfront.net/Dist/logo-2.png'
-                            alt='logo' loading='lazy'
+                            alt='logo' priority
                             width={300} height={300} />
                     </div>}
                     {
@@ -77,7 +77,6 @@ const NavBar: FC<NavProps> = ({ isAuthenticated, pathName, data }) => {
                                         <FiLogOut />
                                     </button>
                                 </li>
-
                             </ul>
                         </>
                     }
