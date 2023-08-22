@@ -9,8 +9,8 @@ import axios from '@/app/api/axios'
 import { useState, FC } from 'react'
 import { AxiosResponse } from 'axios'
 import useToken from '@/hooks/useToken'
+import { poppins } from '@/public/fonts/f'
 import { useRouter } from 'next/navigation'
-import { kaushan, poppins } from '@/public/fonts/f'
 
 const NavBar: FC<NavProps> = ({ isAuthenticated, pathName, data }) => {
     const token = useToken()
@@ -28,27 +28,27 @@ const NavBar: FC<NavProps> = ({ isAuthenticated, pathName, data }) => {
 
     return (
         <header className='fixed top-0 w-full'>
-            <nav className='md:px-14 px-10 py-5 flex justify-between w-full items-center'>
+            <nav className='md:px-14 px-10 py-3 flex justify-between w-full items-center'>
                 <Link href='/'
-                    className={`font-bold tracking-wide text-2xl ${kaushan.className} md:text-4xl`}>
-                    <span className='text-clr-8'>Memo</span>
-                    <span className='text-clr-1'>Me</span>
+                    className={`rounded-full object-cover overflow-hidden w-14 h-10`}>
+                    <Image
+                        src='https://d15zb4m4p46ai4.cloudfront.net/Dist/logo.png'
+                        alt='logo' priority
+                        width={150} height={150} />
                 </Link>
                 <div className='relative'>
-                    {
-                        pathName === 'login' &&
-                        <Link className='submit-btn' href='/signup'>Sign Up</Link>
-                    }
-                    {
-                        pathName === 'signup' &&
-                        <Link className='submit-btn' href='/login'>Login</Link>
-                    }
+                    {!isAuthenticated && <div className='object-cover overflow-hidden w-24 h-14'>
+                        <Image
+                            src='https://d15zb4m4p46ai4.cloudfront.net/Dist/logo-2.png'
+                            alt='logo' loading='lazy'
+                            width={300} height={300} />
+                    </div>}
                     {
                         isAuthenticated &&
-                        <div>
+                        <>
                             <button
                                 onClick={() => setOpen(!open)}
-                                className='relative rounded-full overflow-hidden w-[50px] h-[50px] object-cover border-[0.3125rem] border-clr-5 flex-shrink-0'>
+                                className='relative rounded-full overflow-hidden w-[50px] h-[50px] object-cover border-[0.125rem] border-clr-2 flex-shrink-0'>
                                 {
                                     data?.avatar_url ?
                                         <img src={data.avatar_url} alt='avatar' width={300} height={300} loading='lazy' /> :
@@ -72,14 +72,14 @@ const NavBar: FC<NavProps> = ({ isAuthenticated, pathName, data }) => {
                                 </li>
                                 <li>
                                     <button onClick={async () => await logout()}
-                                        className='flex items-center gap-3 trans hover:text-red-500'>
+                                        className='flex items-center gap-3 trans hover:text-clr-10'>
                                         <span>Logout</span>
                                         <FiLogOut />
                                     </button>
                                 </li>
 
                             </ul>
-                        </div>
+                        </>
                     }
                 </div>
             </nav>
