@@ -35,7 +35,7 @@ const page = () => {
 
     return (
         <>
-            <NavBar isAuthenticated={false} pathName='signup' />
+            <NavBar isAuthenticated={false} />
             <AuthLayout handler={handleSignup} pathName='signup'>
                 <article className='flex flex-col gap-5'>
                     <Input
