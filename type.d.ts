@@ -19,7 +19,7 @@ interface InputProps<T> {
     onChange: (value: T) => void
 }
 
-interface NavProps extends PathName {
+interface NavProps {
     data?: {
         username?: string
         avatar_url?: string,
@@ -37,6 +37,7 @@ interface TextEditorStates {
 }
 
 interface UserStoreStates {
+    auth: boolean
     token: string
     email: string
     userId: string
@@ -44,10 +45,17 @@ interface UserStoreStates {
     password: string
     password2: string
     resetStates: () => void
+    setAuth: (auth: boolean) => void
     setToken: (token: string) => void
     setEmail: (email: string) => void
     setUserId: (userId: string) => void
     setLoading: (loading: boolean) => void
     setPassword: (password: string) => void
     setPassword2: (password2: string) => void
-} 
+}
+
+interface Params {
+    params: {
+        username: string
+    }
+}
