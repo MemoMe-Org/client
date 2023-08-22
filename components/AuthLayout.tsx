@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import Link from 'next/link'
 import { LoaderThree } from './Loader'
-import { lato } from '@/public/fonts/f'
 import { UserStore } from '@/utils/store'
 import { handleSignIn } from '@/lib/signin'
+import { lato, poppins } from '@/public/fonts/f'
 import { FcGoogle, AiOutlineGithub } from '@/public/icons/ico'
 
 const AuthLayout: FC<AuthProps> = ({ children, handler, pathName }) => {
@@ -12,13 +12,10 @@ const AuthLayout: FC<AuthProps> = ({ children, handler, pathName }) => {
     return (
         <form onSubmit={(e) => e.preventDefault()}
             className="card w-[95vw] max-w-[550px] mx-auto mt-20 px-5 py-7">
-            <div className="text-xl tracking-wider font-semibold mb-5 md:text-2xl">
-                {
-                    <h2>
-                        {pathName === 'login' ? 'Login' : 'Sign Up'}
-                    </h2>
-                }
-            </div>
+            <h2
+                className={`${poppins.className} text-2xl tracking-wider font-medium mb-7 md:text-3xl text-clr-4`}>
+                {pathName === 'login' ? 'Login' : 'Sign Up'}
+            </h2>
             <article>
                 {children}
                 <div className='flex justify-end mt-3'>
@@ -64,12 +61,12 @@ const AuthLayout: FC<AuthProps> = ({ children, handler, pathName }) => {
                 {
                     pathName === 'signup' ?
                         <p>
-                            <span className="mr-2">Already have an account?</span>
-                            <Link href='/login' className="font-medium">Login</Link>
+                            <span className="mr-2 text-clr-4">Already have an account?</span>
+                            <Link href='/login' className="text-clr-1 hover:text-clr-8 trans font-medium">Login</Link>
                         </p> :
                         <p>
-                            <span className="mr-2">{`Don't have an account?`}</span>
-                            <Link href='/signup' className="font-medium">Sign Up</Link>
+                            <span className="mr-2 text-clr-4">{`Don't have an account?`}</span>
+                            <Link href='/signup' className="text-clr-1 hover:text-clr-8 trans font-medium">Sign Up</Link>
                         </p>
                 }
             </div>
