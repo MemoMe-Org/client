@@ -17,7 +17,6 @@ const NavBar: FC<NavProps> = ({ isAuthenticated, data }) => {
     const router = useRouter()
     const [open, setOpen] = useState<boolean>(false)
 
-
     const logout = async () => {
         await axios.get('/auth/logout', {
             headers: {
@@ -27,8 +26,8 @@ const NavBar: FC<NavProps> = ({ isAuthenticated, data }) => {
     }
 
     return (
-        <header className='fixed top-0 w-full'>
-            <nav className='md:px-14 px-10 py-3 flex justify-between w-full items-center'>
+        <header>
+            <nav className='nav-bar'>
                 <Link href='/'
                     className={`rounded-full object-cover overflow-hidden w-14 h-10`}>
                     <Image
