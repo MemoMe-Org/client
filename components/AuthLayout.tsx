@@ -11,7 +11,7 @@ const AuthLayout: FC<AuthProps> = ({ children, handler, pathName }) => {
 
     return (
         <form onSubmit={(e) => e.preventDefault()}
-            className="card w-[95vw] max-w-[550px] mx-auto mt-20 px-5 py-7">
+            className="card w-[95vw] max-w-[550px] mx-auto mt-24 px-5 py-7">
             <h2
                 className={`${poppins.className} text-2xl tracking-wider font-medium mb-7 md:text-3xl text-clr-4`}>
                 {pathName === 'login' ? 'Login' : 'Sign Up'}
