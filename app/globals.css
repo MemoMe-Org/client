@@ -42,8 +42,17 @@ body {
     @apply bg-clr-7
 }
 
+header {
+    @apply fixed top-0 w-full;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.nav-bar {
+    @apply md:px-14 px-10 md:py-2 py-1 flex justify-between w-full items-center;
+}
+
 .nav-modal {
-    @apply absolute top-14 right-1 z-50 w-40 min-h-[20px] bg-clr-0 tracking-wide rounded-lg pl-3 py-2 flex flex-col justify-center gap-2 text-clr-2 trans;
+    @apply absolute top-16 right-1 z-[99999] w-40 min-h-[20px] tracking-wide rounded-lg pl-3 py-2 flex flex-col justify-center gap-2 text-clr-2 trans;
     transform: translateY(-400%);
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
@@ -52,9 +61,6 @@ body {
     transform: translate(0)
 }
 
-.small-profile {
-    background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(14,38,214,1) 89%, rgba(0,212,255,1) 100%);
-}
 
 /* Loader Two */
 .lds-roller {
