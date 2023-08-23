@@ -17,6 +17,8 @@ const page = () => {
     const token = useToken()
     const router = useRouter()
 
+    const [auth, setAuth] = useState<boolean>(false)
+
     const { refetch, data, isLoading } = useQuery({
         queryKey: ['profile'],
         queryFn: async () => {
@@ -25,8 +27,8 @@ const page = () => {
                     'Authorization': `Bearer ${token}`
                 }
             }).then((res: AxiosResponse) => {
-                const data = res.data || {}
-                localStorage.setItem('settins', JSON.stringify(data?.settings))
+                setAuth(true)
+                return res.data || {}
             }).catch((err: AxiosError) => {
                 const statusCode: unknown = err.response?.status
                 if (statusCode === 401 || statusCode === 403) {
@@ -39,13 +41,13 @@ const page = () => {
         enabled: false
     })
 
-    console.log(data)
-
     useEffect(() => {
         if (token) refetch()
     }, [token])
 
     if (isLoading) return <LoaderTwo />
+
+    console.log(data)
 
     const avatar_url = data?.user?.Profile?.avatar?.url
 
