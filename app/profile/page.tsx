@@ -35,9 +35,9 @@ const page = () => {
                 if (statusCode === 401 || statusCode === 403) {
                     router.push('/login')
                 } else {
+                    throwError(err)
                     setAuth(true)
                 }
-                throwError(err)
             })
         },
         enabled: false
