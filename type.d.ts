@@ -7,6 +7,7 @@ interface PathName {
 }
 
 interface AuthProps extends PathName {
+    title: string
     children: ReactNode
     handler: () => Promise<void>
 }
@@ -37,14 +38,16 @@ interface TextEditorStates {
 }
 
 interface UserStoreStates {
+    otp: string
     auth: boolean
-    token: string | undefined
     email: string
     userId: string
     loading: boolean
     password: string
     password2: string
+    token: string | undefined
     resetStates: () => void
+    setOtp: (otp: string) => void
     setAuth: (auth: boolean) => void
     setToken: (token: string) => void
     setEmail: (email: string) => void
