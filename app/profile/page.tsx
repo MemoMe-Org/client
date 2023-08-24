@@ -12,6 +12,7 @@ import Messages from '@/components/Messages'
 import { LoaderTwo } from '@/components/Loader'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
+import Levels from '@/components/Levels'
 
 const page = () => {
     const token = useToken()
@@ -49,14 +50,21 @@ const page = () => {
 
     console.log(data)
 
+    const username = data?.user?.username
     const avatar_url = data?.user?.Profile?.avatar?.url
 
     return (
         <main>
             <NavBar isAuthenticated={auth} data={
                 avatar_url ? { avatar_url: avatar_url } :
-                    { username: data?.user?.username }
+                    { username }
             } />
+
+            <Levels
+                msgPoint={data?.user?.Profile?.msgPoint}
+                pollPoint={data?.user?.Profile?.pollPoint}
+            />
+
         </main>
     )
 }

@@ -23,10 +23,17 @@ interface InputProps<T> {
 interface NavProps {
     data?: {
         username?: string
-        avatar_url?: string,
+        avatar_url?: string
     }
     isAuthenticated: boolean
 }
+
+interface LevelProps {
+    msgPoint: number
+    pollPoint: number
+}
+
+type LevelType = 'message' | 'overall' | 'poll'
 
 interface TextEditorStates {
     isBold: boolean
