@@ -6,7 +6,7 @@ import { handleSignIn } from '@/lib/signin'
 import { lato, poppins } from '@/public/fonts/f'
 import { FcGoogle, AiOutlineGithub } from '@/public/icons/ico'
 
-const AuthLayout: FC<AuthProps> = ({ children, handler, pathName }) => {
+const AuthLayout: FC<AuthProps> = ({ children, handler, pathName, title }) => {
     const { loading } = UserStore()
 
     return (
@@ -14,7 +14,7 @@ const AuthLayout: FC<AuthProps> = ({ children, handler, pathName }) => {
             className="card w-[95vw] max-w-[550px] mx-auto mt-24 px-5 py-7">
             <h2
                 className={`${poppins.className} text-2xl tracking-wider font-medium mb-7 md:text-3xl text-clr-4`}>
-                {pathName === 'login' ? 'Login' : 'Sign Up'}
+                {title}
             </h2>
             <article>
                 {children}
@@ -37,9 +37,9 @@ const AuthLayout: FC<AuthProps> = ({ children, handler, pathName }) => {
                 (pathName === 'signup' || pathName === 'login') &&
                 <>
                     <div className="flex items-center justify-center gap-3">
-                        <span className="border-[1.5px] border-white w-full rounded-md" />
+                        <span className="border-[1.5px] border-clr-x w-full rounded-md" />
                         <span className="font-medium tracking-wide">Or</span>
-                        <span className="border-[1.5px] border-white w-full rounded-md" />
+                        <span className="border-[1.5px] border-clr-x w-full rounded-md" />
                     </div>
                     <div className={`${lato.className} flex flex-col gap-4 my-3`}>
                         <button
