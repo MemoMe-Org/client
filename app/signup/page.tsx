@@ -36,7 +36,11 @@ const page = () => {
     return (
         <>
             <NavBar isAuthenticated={false} />
-            <AuthLayout handler={handleSignup} pathName='signup'>
+            <AuthLayout
+                handler={handleSignup}
+                pathName='signup'
+                title='Sign Up'
+            >
                 <article className='flex flex-col gap-5'>
                     <Input
                         type='email'
