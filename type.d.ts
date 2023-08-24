@@ -38,7 +38,7 @@ interface TextEditorStates {
 
 interface UserStoreStates {
     auth: boolean
-    token: string
+    token: string | undefined
     email: string
     userId: string
     loading: boolean
