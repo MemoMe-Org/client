@@ -10,7 +10,7 @@ const initialUserStore = {
 }
 
 const UserStore = create<UserStoreStates>()((set) => ({
-    token: '',
+    token: undefined,
     ...initialUserStore,
     resetStates: () => set(initialUserStore),
     setAuth: (auth: boolean) => set({ auth }),
