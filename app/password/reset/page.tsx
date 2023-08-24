@@ -7,12 +7,14 @@ import NavBar from '@/components/Nav'
 import Input from '@/components/Input'
 import OtpInput from 'react-otp-input'
 import { UserStore } from '@/utils/store'
+import { useRouter } from 'next/navigation'
 import { FcLock } from '@/public/icons/ico'
 import throwError from '@/utils/throwError'
 import AuthLayout from '@/components/AuthLayout'
 import { AxiosError, AxiosResponse } from 'axios'
 
 const page = () => {
+    const router = useRouter()
     const {
         setLoading, password, setPassword2,
         otp, setOtp, setPassword, password2
@@ -24,6 +26,9 @@ const page = () => {
             '/auth/verify', { otp, password, password2 }
         ).then((res: AxiosResponse) => {
             notify('success', res.data?.msg)
+            setTimeout(() => {
+                router.push('/login')
+            }, 300)
         }).catch((err: AxiosError) => {
             throwError(err)
         }).finally(() => setLoading(false))
