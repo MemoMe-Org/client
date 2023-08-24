@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 
 const initialUserStore = {
+    otp: '',
     email: '',
     userId: '',
     auth: false,
@@ -12,6 +13,7 @@ const initialUserStore = {
 const UserStore = create<UserStoreStates>()((set) => ({
     token: undefined,
     ...initialUserStore,
+    setOtp: (otp: string) => set({ otp }),
     resetStates: () => set(initialUserStore),
     setAuth: (auth: boolean) => set({ auth }),
     setToken: (token: string) => set({ token }),
