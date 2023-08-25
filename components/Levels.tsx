@@ -1,43 +1,48 @@
+import { handleLevel } from '@/lib/level'
 import { FC, useEffect, useState } from 'react'
-import { generativeApi } from '@/app/api/axios'
-
 
 const Levels: FC<LevelProps> = ({ msgPoint, pollPoint }) => {
-    const [data, setData] = useState<any[]>([])
-
-    const handleLevel = async (level: LevelType, point: number) => {
-        const { data } = await generativeApi.get(
-            `/levels/${level}?point=${point}`
-        )
-        return data
-    }
+    const [data, setData] = useState<{
+        point: number
+        level: string
+        type: LevelType
+    }[]>([])
 
     useEffect(() => {
-        const overallPoint = (msgPoint + pollPoint) / 2
-        const tempData: {
-            point: number
-            level: LevelType
-        }[] = [
-                {
-                    point: msgPoint,
-                    level: 'message'
-                },
-                {
-                    point: pollPoint,
-                    level: 'poll'
-                },
-                {
-                    point: overallPoint,
-                    level: 'overall'
-                },
-            ]
+        const overallPoint = parseInt(((msgPoint + pollPoint) / 3).toFixed(2))
+        const tempData: ILevel[] = [
+            {
+                total: 320,
+                type: 'message',
+                point: msgPoint,
+            },
+            {
+                total: 320,
+                type: 'poll',
+                point: pollPoint,
+            },
+            {
+                total: 400,
+                type: 'overall',
+                point: overallPoint,
+            },
+        ]
 
-        const dataPromises = tempData.map(async (temp) => {
-            return await handleLevel(temp.level, temp.point)
-        });
+        const fetchData = async () => {
+            const dataPromises = tempData.map(async (temp) => {
+                const promisedData = await handleLevel(temp.type, temp.point)
+                const data = {
+                    type: temp.type,
+                    point: temp.point,
+                    level: promisedData?.level
+                }
+                return data
+            })
+            const resolvedData = await Promise.all(dataPromises)
+            setData(resolvedData)
+        }
 
-        (async () => await Promise.all(dataPromises))()
-
+        (async () => await fetchData())()
     }, [msgPoint, pollPoint])
 
     return (
