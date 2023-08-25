@@ -35,6 +35,12 @@ interface LevelProps {
 
 type LevelType = 'message' | 'overall' | 'poll'
 
+interface ILevel {
+    point: number
+    total: number
+    type: LevelType
+}
+
 interface TextEditorStates {
     isBold: boolean
     isItalic: boolean
