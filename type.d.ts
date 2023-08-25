@@ -3,7 +3,7 @@ type AuthMethod = 'google' | 'github'
 type NotifyAction = 'error' | 'success'
 
 interface PathName {
-    pathName?: 'login' | 'signup'
+    pathName?: 'login' | 'signup' | string
 }
 
 interface AuthProps extends PathName {
@@ -80,4 +80,8 @@ interface Params {
     params: {
         username: string
     }
+}
+
+interface IProfile extends PathName {
+    user: any,
 }
