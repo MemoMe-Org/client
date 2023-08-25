@@ -35,9 +35,15 @@ interface LevelProps {
 
 type LevelType = 'message' | 'overall' | 'poll'
 
-interface ILevel {
+interface TempLevel {
     point: number
     total: number
+    type: LevelType
+}
+
+interface ILevel {
+    point: number
+    level: string
     type: LevelType
 }
 
