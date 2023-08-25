@@ -2,15 +2,11 @@ import { handleLevel } from '@/lib/level'
 import { FC, useEffect, useState } from 'react'
 
 const Levels: FC<LevelProps> = ({ msgPoint, pollPoint }) => {
-    const [data, setData] = useState<{
-        point: number
-        level: string
-        type: LevelType
-    }[]>([])
+    const [data, setData] = useState<ILevel[]>([])
 
     useEffect(() => {
         const overallPoint = parseInt(((msgPoint + pollPoint) / 3).toFixed(2))
-        const tempData: ILevel[] = [
+        const tempData: TempLevel[] = [
             {
                 total: 320,
                 type: 'message',
@@ -31,7 +27,7 @@ const Levels: FC<LevelProps> = ({ msgPoint, pollPoint }) => {
         const fetchData = async () => {
             const dataPromises = tempData.map(async (temp) => {
                 const promisedData = await handleLevel(temp.type, temp.point)
-                const data = {
+                const data: ILevel = {
                     type: temp.type,
                     point: temp.point,
                     level: promisedData?.level
