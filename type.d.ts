@@ -3,7 +3,7 @@ type AuthMethod = 'google' | 'github'
 type NotifyAction = 'error' | 'success'
 
 interface PathName {
-    pathName?: 'login' | 'signup' | string
+    pathName?: 'login' | 'signup' | 'main' | 'user'
 }
 
 interface AuthProps extends PathName {
@@ -33,7 +33,7 @@ interface LevelProps {
     pollPoint: number
 }
 
-type LevelType = 'message' | 'overall' | 'poll'
+type LevelType = 'message' | 'poll'
 
 interface TempLevel {
     point: number
