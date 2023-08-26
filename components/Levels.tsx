@@ -5,22 +5,16 @@ const Levels: FC<LevelProps> = ({ msgPoint, pollPoint }) => {
     const [data, setData] = useState<ILevel[]>([])
 
     useEffect(() => {
-        const overallPoint = parseInt(((msgPoint + pollPoint) / 3).toFixed(2))
         const tempData: TempLevel[] = [
             {
-                total: 320,
+                total: 800,
                 type: 'message',
                 point: msgPoint,
             },
             {
-                total: 320,
+                total: 2225,
                 type: 'poll',
                 point: pollPoint,
-            },
-            {
-                total: 400,
-                type: 'overall',
-                point: overallPoint,
             },
         ]
 
@@ -40,6 +34,8 @@ const Levels: FC<LevelProps> = ({ msgPoint, pollPoint }) => {
 
         (async () => await fetchData())()
     }, [msgPoint, pollPoint])
+
+    console.log(data)
 
     return (
         <></>
