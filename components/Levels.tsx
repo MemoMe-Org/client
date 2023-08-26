@@ -24,6 +24,7 @@ const Levels: FC<LevelProps> = ({ msgPoint, pollPoint }) => {
                 const data: ILevel = {
                     type: temp.type,
                     point: temp.point,
+                    total: temp.total,
                     level: promisedData?.level
                 }
                 return data
@@ -38,7 +39,30 @@ const Levels: FC<LevelProps> = ({ msgPoint, pollPoint }) => {
     console.log(data)
 
     return (
-        <></>
+        <section>
+            {data?.map((level: ILevel, index) => {
+                const innerWidth = (level.point / level.total) * 100
+
+                return (
+                    <article key={index} className='flex flex-col gap-2 mt-5 w-full'>
+                        <div className='flex gap-2 items-center w-full'>
+                            <span>
+                                {level.type}
+                            </span>
+                            :
+                            <div className=' w-full h-8 md:h-5 bg-clr-3 rounded-full overflow-hidden flex items-center justify-between'>
+                                <span className='absolute text-xs w-full'>{level.level}</span>
+                                <span className='absolute text-xs w-full'>{level.point}</span>
+                                <div style={{
+                                    width: `${innerWidth}%`
+                                }} className='bg-clr-10 h-full rounded-full'>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                )
+            })}
+        </section>
     )
 }
 
