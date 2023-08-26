@@ -24,7 +24,7 @@ body {
 }
 
 .profile-avatar {
-    @apply relative rounded-full overflow-hidden w-[7rem] h-[7rem] object-cover border-[0.125rem] border-clr-5 flex-shrink-0 md:w-[9rem] md:h-[9rem];
+    @apply relative rounded-full overflow-hidden w-[5rem] h-[5rem] object-cover border-[0.125rem] border-clr-5 flex-shrink-0 md:w-[7rem] md:h-[7rem];
 }
 
 .profile-avatar img {
