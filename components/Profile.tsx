@@ -11,10 +11,6 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
 
     return (
         <main className='profile-main'>
-            <Levels
-                msgPoint={user?.Profile?.msgPoint}
-                pollPoint={user?.Profile?.pollPoint}
-            />
             <section className="profile-header">
                 <h1 className='text-2xl text-clr-13 font-semibold tracking-wide md:text-3xl'>
                     {pathName === 'main' ? "Profile" : "User Profile"}
@@ -70,11 +66,18 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                                 </>
                             }
                         </>
-                        <div>
+                        <div className='flex flex-col gap-3'>
                             <h3
                                 className='leading-tight font-semibold cursor-pointer text-clr-2 text-xl md:text-3xl lg:text-5xl underline tracking-wide hover:text-clr-3 trans'>
                                 @{user?.username}
                             </h3>
+                            {
+                                !user?.Settings?.showLevels &&
+                                <Levels
+                                    msgPoint={user?.Profile?.msgPoint}
+                                    pollPoint={user?.Profile?.pollPoint}
+                                />
+                            }
                         </div>
                     </div>
                 </article>
