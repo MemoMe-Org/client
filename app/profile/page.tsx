@@ -59,7 +59,7 @@ const page = () => {
 
             <Profile
                 user={data?.user}
-                pathName='profile'
+                pathName='main'
             />
         </>
     )
