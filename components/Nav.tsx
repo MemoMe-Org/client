@@ -64,14 +64,14 @@ const NavBar: FC<NavProps> = ({ isAuthenticated, data }) => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href='/account' className='flex items-center gap-3 hover:text-clr-3'>
+                                    <Link href='/account' className='flex items-center gap-3 trans hover:text-clr-3'>
                                         <RiAccountCircleFill />
                                         <span>Account</span>
                                     </Link>
                                 </li>
                                 <li>
                                     <button onClick={async () => await logout()}
-                                        className='flex items-center gap-3 trans hover:text-clr-10'>
+                                        className='flex items-center gap-3 trans hover:text-clr-9'>
                                         <span>Logout</span>
                                         <FiLogOut />
                                     </button>
