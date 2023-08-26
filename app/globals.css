@@ -14,6 +14,51 @@ body {
     @apply relative bg-clr-0
 }
 
+.profile-cards {
+    @apply flex flex-col gap-5
+}
+
+.profile-card {
+    @apply bg-clr-12 p-5 w-full rounded-lg;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.profile-avatar {
+    @apply relative rounded-full overflow-hidden w-[7rem] h-[7rem] object-cover border-[0.125rem] border-clr-5 flex-shrink-0 md:w-[9rem] md:h-[9rem];
+}
+
+.profile-avatar img {
+    @apply w-full h-full object-cover
+}
+
+.profile-card-center {
+    @apply w-full flex gap-9 items-center
+}
+
+.profile-edit-btn {
+    @apply text-sm text-clr-4 trans
+}
+
+.profile-edit-btn:hover {
+    @apply text-clr-6 underline
+}
+
+.profile-card-info {
+    @apply flex justify-between items-center py-1.5 border-b-[0.08125rem]
+}
+
+.cam-ico {
+    @apply absolute top-0 right-0 z-[9999] w-full h-full flex items-center justify-center
+}
+
+.profile-main {
+    @apply w-[95vw] max-w-[1200px] mx-auto px-3 mt-20;
+}
+
+.profile-header {
+    @apply w-full flex justify-between items-center mb-7
+}
+
 .card {
     @apply bg-clr-11 rounded-md;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -51,7 +96,7 @@ header {
 }
 
 .nav-modal {
-    @apply absolute top-16 right-1 z-[99999] w-40 min-h-[20px] tracking-wide rounded-lg pl-3 py-2 flex flex-col justify-center gap-2 text-clr-2 trans;
+    @apply absolute top-16 right-1 w-40 min-h-[20px] tracking-wide rounded-lg pl-3 py-2 flex flex-col justify-center gap-2 text-clr-2 trans bg-white;
     transform: translateY(-400%);
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
