@@ -44,6 +44,7 @@ interface TempLevel {
 interface ILevel {
     point: number
     level: string
+    total: number
     type: LevelType
 }
 

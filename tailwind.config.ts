@@ -21,6 +21,8 @@ const config: Config = {
         "clr-9": "#BD7112",
         "clr-10": '#9D601B',
         "clr-11": "#f1faee",
+        "clr-12": "rgb(241, 245, 248)",
+        "clr-13": "rgb(16, 42, 66)",
         "clr-x": "rgba(0, 0, 0, 0.25)",
       }
     },
