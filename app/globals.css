@@ -35,18 +35,6 @@ body {
     @apply w-full flex gap-9 items-center
 }
 
-.profile-edit-btn {
-    @apply text-sm text-clr-4 trans
-}
-
-.profile-edit-btn:hover {
-    @apply text-clr-6 underline
-}
-
-.profile-card-info {
-    @apply flex justify-between items-center py-1.5 border-b-[0.08125rem]
-}
-
 .cam-ico {
     @apply absolute top-0 right-0 z-[9999] w-full h-full flex items-center justify-center
 }
