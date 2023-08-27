@@ -272,6 +272,7 @@ header {
     border-radius: 15px;
     animation: progres 4s infinite linear;    
 }
+
 @keyframes progres{
     0%{
         width: 0%;
