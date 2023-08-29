@@ -6,7 +6,10 @@ import { handleSignIn } from '@/lib/signin'
 import { lato, poppins } from '@/public/fonts/f'
 import { FcGoogle, AiOutlineGithub } from '@/public/icons/ico'
 
-const AuthLayout: FC<AuthProps> = ({ children, handler, pathName, title }) => {
+const AuthLayout: FC<AuthProps> = ({
+    children, handler,
+    pathName, title, btnLabel
+}) => {
     const { loading } = UserStore()
 
     return (
@@ -24,9 +27,7 @@ const AuthLayout: FC<AuthProps> = ({ children, handler, pathName, title }) => {
                         {loading ? <LoaderThree /> :
                             <>
                                 {
-                                    pathName === 'signup' ?
-                                        'Sign Up' : pathName === 'login' ?
-                                            'Log In' : 'Submit'
+                                    btnLabel || 'Submit'
                                 }
                             </>
                         }
