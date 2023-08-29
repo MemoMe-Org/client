@@ -38,9 +38,9 @@ const page = () => {
         <>
             <NavBar isAuthenticated={false} />
             <AuthLayout
+                btnLabel='Reset'
                 handler={handlePswdReset}
-                title='Password Reset'
-            >
+                title='Password Reset'>
                 <article className='flex flex-col gap-5'>
                     <OtpInput
                         value={otp}
