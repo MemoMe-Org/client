@@ -37,9 +37,10 @@ const page = () => {
         <>
             <NavBar isAuthenticated={false} />
             <AuthLayout
-                handler={handleSignup}
+                title='Signup'
                 pathName='signup'
-                title='Sign Up'
+                btnLabel='Sign Up'
+                handler={handleSignup}
             >
                 <article className='flex flex-col gap-5'>
                     <Input
