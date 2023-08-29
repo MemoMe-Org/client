@@ -32,9 +32,9 @@ const page = () => {
         <>
             <NavBar isAuthenticated={false} />
             <AuthLayout
+                btnLabel='Send OTP'
                 title='Find your account'
-                handler={handleReqeustOTP}
-            >
+                handler={handleReqeustOTP}>
                 <Input
                     type='email'
                     label='Email'
