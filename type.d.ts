@@ -8,6 +8,7 @@ interface PathName {
 
 interface AuthProps extends PathName {
     title: string
+    btnLabel?: string
     children: ReactNode
     handler: () => Promise<void>
 }
@@ -35,18 +36,15 @@ interface LevelProps {
 
 type LevelType = 'message' | 'poll'
 
-interface TempLevel {
+type TempLevel = {
     point: number
     total: number
     type: LevelType
 }
 
-interface ILevel {
-    point: number
+type ILevel = {
     level: string
-    total: number
-    type: LevelType
-}
+} & TempLevel
 
 interface TextEditorStates {
     isBold: boolean
