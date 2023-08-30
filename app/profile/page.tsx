@@ -22,7 +22,7 @@ const page = () => {
     const { refetch, data, isLoading } = useQuery({
         queryKey: ['profile'],
         queryFn: async () => {
-            return await axios.get('/api/profile', {
+            return await axios.get('/auth/api/profile', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
