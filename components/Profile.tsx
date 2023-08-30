@@ -1,16 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { FC, useState } from 'react'
+import Link from 'next/link'
 import Levels from './Levels'
-import { AiOutlineCamera } from 'react-icons/ai'
-import { poppins } from '@/public/fonts/f'
+import { FC, useState } from 'react'
+import { poppins, questrial } from '@/public/fonts/f'
+import {
+    AiOutlineCamera, AiOutlinePlus, LuVerified
+} from '@/public/icons/ico'
 
 const Profile: FC<IProfile> = ({ user, pathName }) => {
     console.log(user)
     const [onMouse, setOnMouse] = useState<boolean>(false)
+    const [plusClicked, setPlusClicked] = useState<boolean>(false)
 
     return (
-        <main className='profile-main'>
+        <main className='profile-main overflow-hidden'>
+            {pathName === 'main' && <button className='plus'>
+                <AiOutlinePlus
+                    className={`plus-icon ${plusClicked && 'active'} w-full`}
+                    onClick={() => setPlusClicked((prev) => !prev)}
+                />
+            </button>}
             <section className="profile-header">
                 <h1 className='text-2xl text-clr-13 font-semibold tracking-wide md:text-3xl'>
                     {pathName === 'main' ? "Profile" : "User Profile"}
@@ -31,9 +41,6 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                                                 title="Edit avatar"
                                                 loading='lazy'
                                             />
-                                            <div className={`${onMouse && 'cam-ico'}`}>
-                                                <AiOutlineCamera className="text-clr-0 text-4xl md:text-5xl lg:text-6xl" />
-                                            </div>
                                         </div> :
                                         <div className='rounded-full overflow-hidden w-[7rem] h-[7rem] flex items-center justify-center border-[0.125rem] border-clr-5 flex-shrink-0'>
                                             <div className={`${poppins.className} font-bold text-5xl text-clr-2`}>
@@ -54,31 +61,55 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                                                 loading='lazy'
                                             />
                                             <div className={`${onMouse && 'cam-ico'}`}>
-                                                <AiOutlineCamera className="text-clr-0 text-4xl md:text-5xl lg:text-6xl" />
+                                                <AiOutlineCamera
+                                                    className="text-clr-0 text-4xl md:text-5xl lg:text-6xl"
+                                                />
                                             </div>
                                         </div> :
-                                        <div className='rounded-full overflow-hidden w-[7rem] h-[7rem] flex items-center justify-center border-[0.125rem] border-clr-5 flex-shrink-0'>
+                                        <div
+                                            onMouseLeave={() => setOnMouse(false)}
+                                            onMouseEnter={() => setOnMouse(true)}
+                                            className={`${onMouse && 'before:content-[""] before:bg-clr-x before:absolute before:top-0 before:right-0 before:w-full before:h-full before:z-[999] cursor-pointer'} relative rounded-full overflow-hidden w-[7rem] h-[7rem] flex items-center justify-center border-[0.125rem] border-clr-5 flex-shrink-0`}>
                                             <div className={`${poppins.className} font-bold text-5xl text-clr-2`}>
                                                 {user?.username![0].toUpperCase()}
+                                            </div>
+                                            <div className={`hidden ${onMouse && 'cam-ico'}`}>
+                                                <AiOutlineCamera
+                                                    className="text-clr-0 text-4xl md:text-5xl lg:text-6xl"
+                                                />
                                             </div>
                                         </div>
                                     }
                                 </>
                             }
                         </>
-                        <div className='flex flex-col gap-3'>
-                            <h3
-                                className='leading-tight font-semibold cursor-pointer text-clr-2 text-xl md:text-3xl lg:text-5xl underline tracking-wide hover:text-clr-3 trans'>
+                        <p className='flex gap-3 items-center justify-center font-semibold cursor-pointer text-clr-2 text-xl md:text-3xl lg:text-5xl tracking-wide'>
+                            <Link href={`/anon/${user?.username}`} target='_check'>
                                 @{user?.username}
-                            </h3>
-                            {
-                                !user?.Settings?.showLevels &&
+                            </Link>
+                            {user?.Account?.verified && <LuVerified />}
+                        </p>
+                    </div>
+                </article>
+                <article className='profile-card'>
+                    <div>
+                        <span
+                            className={`${questrial.className} px-2 py-1 rounded-full text-clr-11 font-semibold tracking-wider`}
+                            style={{
+                                background: `linear-gradient(138deg, rgba(60,49,49,1) 75%, rgba(251,164,45,1) 100%)`
+                            }}>
+                            Profile Views: {user?.Profile?.views}
+                        </span>
+                        {
+                            pathName === 'main' ?
                                 <Levels
-                                    msgPoint={user?.Profile?.msgPoint}
-                                    pollPoint={user?.Profile?.pollPoint}
+                                    msgPoint={user?.Profile?.msg_point}
+                                    pollPoint={user?.Profile?.poll_point}
+                                /> : user?.Settings?.show_levels && <Levels
+                                    msgPoint={user?.Profile?.msg_point}
+                                    pollPoint={user?.Profile?.poll_point}
                                 />
-                            }
-                        </div>
+                        }
                     </div>
                 </article>
             </section>
