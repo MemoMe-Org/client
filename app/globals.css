@@ -11,7 +11,7 @@ html {
 }
 
 body {
-    @apply relative bg-clr-0
+    @apply relative bg-clr-0 overflow-hidden
 }
 
 .profile-cards {
@@ -47,6 +47,20 @@ body {
     @apply w-full flex justify-between items-center mb-7
 }
 
+.plus {
+    @apply fixed z-[999] bottom-14 right-9 p-2 bg-clr-12 cursor-pointer rounded-full text-2xl lg:text-5xl md:text-4xl ;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    animation: bounce 2s ease-in-out infinite
+}
+
+.plus-icon {
+    @apply text-clr-4;
+}
+
+.plus-icon.active {
+    animation: half-rotate 300ms linear;
+}
+
 .card {
     @apply bg-clr-11 rounded-md;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -75,6 +89,15 @@ body {
     @apply bg-clr-7
 }
 
+.level-bar {
+    @apply bg-clr-12 rounded-full p-0.5 overflow-hidden w-[250px] h-5;
+}
+
+.level-bar[value]::-webkit-progress-value {
+    background-image: -webkit-linear-gradient(-45deg, transparent 33%, rgba(0, 0, 0, .1) 33%, rgba(0,0, 0, .1) 66%, transparent 66%), -webkit-linear-gradient(top,  rgba(255, 255, 255, .25),rgba(0, 0, 0, .25)), -webkit-linear-gradient(left,#FF9400, #f44);
+    @apply rounded relative;
+}
+
 header {
     @apply fixed top-0 w-full;
 }
@@ -100,7 +123,7 @@ header {
 }
 
 .lds-roller div {
-    animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    animation: rotate 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     transform-origin: 40px 40px;
 }
 
@@ -181,15 +204,6 @@ header {
     left: 12px;
 }
 
-@keyframes lds-roller {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
 
 /* Loader One */
 .loading-spin {
@@ -243,16 +257,36 @@ header {
     }
 }
 
+@keyframes half-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(90deg);
+    }
+}
+
+@keyframes bounce {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.10);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
 
 /* Loader Three */
 .loader {
     @apply m-auto border-[5px] border-[#EAF0F6] rounded-full border-t-clr-4 w-[23px] h-[23px];
-    animation: spinner 4s linear infinite;
-}
-
-@keyframes spinner {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    animation: rotate 4s linear infinite;
 }
 
 
@@ -273,7 +307,7 @@ header {
     animation: progres 4s infinite linear;    
 }
 
-@keyframes progres{
+@keyframes progres {
     0%{
         width: 0%;
     }
