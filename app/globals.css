@@ -6,12 +6,12 @@ html {
     scroll-behavior: smooth;
 }
 
-.trans {
-    @apply transition-all ease-in-out duration-200
-}
-
 body {
     @apply relative bg-clr-0 overflow-hidden
+}
+
+.trans {
+    @apply transition-all ease-in-out duration-200
 }
 
 .profile-cards {
