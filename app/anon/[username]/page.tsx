@@ -7,14 +7,20 @@ import NavBar from '@/components/Nav'
 import useToken from '@/hooks/useToken'
 import throwError from '@/utils/throwError'
 import { useRouter } from 'next/navigation'
+import { questrial } from '@/public/fonts/f'
 import { LoaderTwo } from '@/components/Loader'
-import { LuVerified } from '@/public/icons/ico'
+import { useMessageStore } from '@/utils/store'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
+import { LuVerified, BsFillSendFill } from '@/public/icons/ico'
 
 const page = ({ params: { username } }: Params) => {
     const token = useToken()
     const router = useRouter()
+    const {
+        loading, setLoading,
+        progress, setProgress
+    } = useMessageStore()
 
     const { data, isLoading, refetch } = useQuery({
         queryKey: ['anon-user'],
@@ -58,6 +64,22 @@ const page = ({ params: { username } }: Params) => {
     const name = data?.username
     const avatar_url = data?.avatar?.url
 
+    const sendMsg = async (): Promise<void> => {
+        setLoading(true)
+        await axios.post(
+            '', {},
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                onUploadProgress(progressEvent) {
+                    const percentage = (progressEvent.loaded / (progressEvent.total || 1)) * 100
+                    setProgress(percentage)
+                },
+            }
+        ).finally(() => setLoading(false))
+    }
+
     return (
         <>
             <NavBar
@@ -66,7 +88,7 @@ const page = ({ params: { username } }: Params) => {
             />
 
             <main className='w-full min-h-screen bg-clr-12 pt-5'>
-                <section className='w-[90vw] ml-9'>
+                <section className='w-[90vw] max-w-[700px] flex flex-col gap-7 mx-auto'>
                     <article className='flex gap-4 items-center'>
                         <div className='flex flex-col gap-1.5'>
                             <div className='flex gap-2 items-center'>
@@ -75,10 +97,31 @@ const page = ({ params: { username } }: Params) => {
                             </div>
                             <p>{data?.bio}</p>
                         </div>
+                        <div>
+                            {/* avatar container */}
+                        </div>
                     </article>
-                </section>
-                <section className='w-[90vw] min-h-[250px] mx-auto py-5 px-3 rounded-lg bg-clr-0'>
-
+                    <article
+                        className='relative min-h-[250px] py-5 px-3 rounded-lg bg-clr-0'
+                        style={{
+                            boxShadow: `rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;`
+                        }}>
+                        <div className='absolute top-2.5 right-3.5'>
+                            {!loading && <button
+                                className={`rounded-full px-3 py-1.5 font-medium tracking-wider bg-clr-1 text-clr-11 flex gap-2 items-center text-lg hover:bg-clr-8 hover:text-clr-11 ${questrial.className}`}
+                                onClick={async () => await sendMsg()}>
+                                <BsFillSendFill />
+                                <span>Send</span>
+                            </button>}
+                            {loading && <div className='w-[100px] bg-clr-6 h-5 overflow-hidden rounded-full trans'>
+                                <div
+                                    className='h-full bg-clr-1 rounded-full trans'
+                                    style={{
+                                        width: `${progress}%`
+                                    }} />
+                            </div>}
+                        </div>
+                    </article>
                 </section>
             </main>
         </>
