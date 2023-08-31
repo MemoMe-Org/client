@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation'
 import { LoaderTwo } from '@/components/Loader'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
+import NavBar from '@/components/Nav'
 
 const page = ({ params: { username } }: Params) => {
     const token = useToken()
@@ -18,10 +19,15 @@ const page = ({ params: { username } }: Params) => {
         queryKey: ['anon-user'],
         queryFn: async () => {
             return await axios.get(
-                `/api/user/anon/${username.toLowerCase().trim()}?token=${token}`
+                `/api/msg/anon/${username.toLowerCase().trim()}`,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                }
             )
                 .then((res: AxiosResponse) => {
-                    return res.data
+                    return res.data?.user
                 }).catch((err: AxiosError) => {
                     const statusCode: unknown = err.response?.status
                     if (statusCode === 401 || statusCode === 404) {
@@ -49,7 +55,9 @@ const page = ({ params: { username } }: Params) => {
     console.log(data)
 
     return (
-        <></>
+        <>
+
+        </>
     )
 }
 
