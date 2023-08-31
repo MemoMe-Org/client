@@ -3,10 +3,11 @@
 import Link from 'next/link'
 import Levels from './Levels'
 import { FC, useState } from 'react'
-import { poppins, questrial } from '@/public/fonts/f'
 import {
     AiOutlineCamera, AiOutlinePlus, LuVerified
 } from '@/public/icons/ico'
+import formatNumber from '@/utils/formatNumber'
+import { poppins, questrial } from '@/public/fonts/f'
 
 const Profile: FC<IProfile> = ({ user, pathName }) => {
     console.log(user)
@@ -94,11 +95,11 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                 <article className='profile-card'>
                     <div>
                         <span
-                            className={`${questrial.className} px-2 py-1 rounded-full text-clr-11 font-semibold tracking-wider`}
+                            className={`${questrial.className} px-2.5 py-1.5 rounded-full text-clr-11 font-semibold tracking-wider`}
                             style={{
                                 background: `linear-gradient(138deg, rgba(60,49,49,1) 75%, rgba(251,164,45,1) 100%)`
                             }}>
-                            Profile Views: {user?.Profile?.views}
+                            Profile Views: {formatNumber(user?.Profile?.views)}
                         </span>
                         {
                             pathName === 'main' ?

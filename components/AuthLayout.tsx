@@ -14,7 +14,7 @@ const AuthLayout: FC<AuthProps> = ({
 
     return (
         <form onSubmit={(e) => e.preventDefault()}
-            className="card w-[95vw] max-w-[550px] mx-auto mt-24 px-5 py-7">
+            className="card w-[92vw] max-w-[500px] mx-auto mt-3 px-5 py-7">
             <h2
                 className={`${poppins.className} text-2xl tracking-wider font-medium mb-7 md:text-3xl text-clr-4`}>
                 {title}
