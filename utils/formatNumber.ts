@@ -1,6 +1,6 @@
-const formatNumber = (n: number) => {
+const formatNumber = (n: number): string => {
     if (!Number(n)) {
-        throw new Error("Not a number!")
+        return "0"
     }
 
     const k = 1_000
