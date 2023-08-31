@@ -40,7 +40,7 @@ body {
 }
 
 .profile-main {
-    @apply w-[95vw] max-w-[1200px] mx-auto px-3 mt-20;
+    @apply w-[95vw] max-w-[1200px] mx-auto px-3 mt-5;
 }
 
 .profile-header {
@@ -48,7 +48,7 @@ body {
 }
 
 .plus {
-    @apply fixed z-[999] bottom-14 right-9 p-2 bg-clr-12 cursor-pointer rounded-full text-2xl lg:text-5xl md:text-4xl ;
+    @apply fixed z-[999] bottom-14 right-9 p-2 bg-clr-12 cursor-pointer rounded-full text-2xl lg:text-4xl md:text-3xl ;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     animation: bounce 2s ease-in-out infinite
 }
@@ -99,7 +99,7 @@ body {
 }
 
 header {
-    @apply fixed top-0 w-full;
+    @apply sticky top-0 w-full z-[999999];
 }
 
 .nav-bar {
