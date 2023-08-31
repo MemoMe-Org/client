@@ -9,7 +9,11 @@ const TextEditor: React.FC<{ textEditorRef: any }> = ({ textEditorRef }) => {
         isUnderline, setIsUnderline
     } = useTextEditor()
 
-    const exec = (command: string, get: boolean, set: (get: boolean) => void) => {
+    const exec = (
+        command: string,
+        get: boolean,
+        set: (get: boolean) => void
+    ): void => {
         document.execCommand(command, false)
         set(!get)
     }
