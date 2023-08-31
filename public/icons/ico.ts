@@ -1,4 +1,5 @@
 import { LuVerified } from 'react-icons/lu'
+import { BsFillSendFill } from 'react-icons/bs'
 import { LiaPollHSolid } from 'react-icons/lia'
 import { FcGoogle, FcLock } from 'react-icons/fc'
 import { RiAccountCircleFill } from 'react-icons/ri'
@@ -12,5 +13,5 @@ export {
     AiOutlineGithub, FcGoogle, FaUnderline, FaItalic, FaBold,
     FiLogOut, FiSettings, RiAccountCircleFill, FcLock,
     AiOutlineCamera, AiOutlinePlus, LiaPollHSolid,
-    BiSolidMessageDetail, LuVerified
+    BiSolidMessageDetail, LuVerified, BsFillSendFill
 }
