@@ -33,4 +33,20 @@ const useTextEditor = create<TextEditorStates>()((set) => ({
     setIsUnderline: (isUnderline: boolean) => set({ isUnderline }),
 }))
 
-export { UserStore, useTextEditor }
+const initialMessageStore = {
+    texts: '',
+    progress: 0,
+    medias: null,
+    loading: false,
+}
+
+const useMessageStore = create<MessageStoreStates>()((set) => ({
+    ...initialMessageStore,
+    resetStates: () => set(initialMessageStore),
+    setTexts: (texts: string) => set({ texts }),
+    setLoading: (loading: boolean) => set({ loading }),
+    setProgress: (progress: number) => set({ progress }),
+    setMedias: (medias: null | File[]) => set({ medias }),
+}))
+
+export { UserStore, useTextEditor, useMessageStore }
