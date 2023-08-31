@@ -75,6 +75,18 @@ interface UserStoreStates {
     setPassword2: (password2: string) => void
 }
 
+interface MessageStoreStates {
+    texts: string
+    loading: boolean
+    progress: number
+    medias: File[] | null
+    resetStates: () => void
+    setTexts: (texts: string) => void
+    setLoading: (loading: boolean) => void
+    setProgress: (progress: number) => void
+    setMedias: (medias: File[] | null) => void
+}
+
 interface Params {
     params: {
         username: string
