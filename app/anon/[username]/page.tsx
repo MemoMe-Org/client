@@ -2,6 +2,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client"
+import Link from 'next/link'
+import axios from '@/app/api/axios'
 import NavBar from '@/components/Nav'
 import useToken from '@/hooks/useToken'
 import { useEffect, useRef } from 'react'
@@ -12,7 +14,6 @@ import { useMessageStore } from '@/utils/store'
 import { useQuery } from '@tanstack/react-query'
 import TextEditor from '@/components/TextEditor'
 import { AxiosError, AxiosResponse } from 'axios'
-import axios, { generativeApi } from '@/app/api/axios'
 import { lato, poppins, questrial } from '@/public/fonts/f'
 import { LuVerified, BsFillSendFill } from '@/public/icons/ico'
 
@@ -98,12 +99,14 @@ const page = ({ params: { username } }: Params) => {
             }
         ).then((res: AxiosResponse) => {
             resetStates()
+            setTimeout(() => {
+                if (data?.isAuthenticated) {
+                    router.push('/profile')
+                } else {
+                    router.push('/login')
+                }
+            }, 500)
         }).catch((err: AxiosError) => throwError(err)).finally(() => setLoading(false))
-    }
-
-    const genMsgType = async (): Promise<string> => {
-        const response = await generativeApi.get(`/questions/${data?.msg_type}?choice=random`)
-        return response.data?.question
     }
 
     return (
@@ -126,13 +129,13 @@ const page = ({ params: { username } }: Params) => {
                                         className='object-cover w-full h-full'
                                     /> :
                                     <div className={`${lato.className} text-clr-2 text-3xl font-bold`}>
-                                        {name[0].toUpperCase()}
+                                        {name ? name![0].toUpperCase() : "0"}
                                     </div>
                             }
                         </div>
                         <div className='flex flex-col gap-1.5 flex-wrap'>
                             <div className={`${questrial.className} flex gap-2 items-center text-clr-2 font-medium text-lg`}>
-                                <h5>@{data?.username}</h5>
+                                <Link href={`/profile/${data?.username}`}>@{data?.username}</Link>
                                 {data?.verified && <LuVerified />}
                             </div>
                             <p className={`${poppins.className} text-clr-13 text-sm`}>
@@ -143,9 +146,9 @@ const page = ({ params: { username } }: Params) => {
                     <article
                         className='relative min-h-[250px] py-5 px-3 rounded-lg bg-clr-0'
                         style={{
-                            boxShadow: `rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;`
+                            boxShadow: `rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px`
                         }}>
-                        <div className='absolute top-2.5 right-3.5'>
+                        <div className='absolute bottom-2.5 right-3.5'>
                             {!loading ?
                                 <button
                                     className={`rounded-full px-3 py-1.5 font-medium tracking-wider bg-clr-1 text-clr-11 flex gap-2 items-center text-lg hover:bg-clr-8 hover:text-clr-11 ${questrial.className}`}
@@ -153,16 +156,22 @@ const page = ({ params: { username } }: Params) => {
                                     <BsFillSendFill />
                                     <span>Send</span>
                                 </button> :
-                                <div className='w-[100px] bg-clr-6 h-5 overflow-hidden rounded-full trans'>
+                                <div className='w-[100px] bg-clr-6 h-5 overflow-hidden rounded-full'>
                                     <div
-                                        className='h-full bg-clr-1 rounded-full trans'
+                                        className='h-full bg-clr-1 rounded-full transition-all duration-300 ease-in-out'
                                         style={{
                                             width: `${progress}%`
                                         }} />
                                 </div>}
                         </div>
-
+                        <h5 className={`${questrial.className} absolute top-2 left-4 text-lg text-clr-13 tracking-wider font-semibold`}>
+                            Send me an anonymous message.
+                        </h5>
                         {/* Containers */}
+                        {data?.allowTexts && <TextEditor
+                            textEditorRef={textEditorRef}
+                            msgType={data?.msg_type || 'all'}
+                        />}
                     </article>
                 </section>
             </main>
