@@ -63,7 +63,6 @@ const page = ({ params: { username } }: Params) => {
     console.log(data)
 
     const name = data?.username
-    const msg_type = data?.msg_type
     const avatar_url = data?.avatar?.url
 
     const sendMsg = async (): Promise<void> => {
