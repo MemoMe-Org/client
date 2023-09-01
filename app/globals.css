@@ -7,7 +7,7 @@ html {
 }
 
 body {
-    @apply relative bg-clr-0 overflow-hidden
+    @apply relative bg-clr-0 overflow-x-hidden
 }
 
 .trans {
