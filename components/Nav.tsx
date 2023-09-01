@@ -5,9 +5,8 @@ import {
 } from '@/public/icons/ico'
 import Link from 'next/link'
 import Image from 'next/image'
-import axios from '@/app/api/axios'
+import logout from '@/lib/logout'
 import { useState, FC } from 'react'
-import { AxiosResponse } from 'axios'
 import useToken from '@/hooks/useToken'
 import { poppins } from '@/public/fonts/f'
 import { useRouter } from 'next/navigation'
@@ -17,12 +16,9 @@ const NavBar: FC<NavProps> = ({ isAuthenticated, data }) => {
     const router = useRouter()
     const [open, setOpen] = useState<boolean>(false)
 
-    const logout = async () => {
-        await axios.get('/auth/logout', {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }).then((res: AxiosResponse) => router.push('/login'))
+    const handleLogout = async () => {
+        const res = await logout(token as string)
+        if (res) router.push('/login')
     }
 
     return (
@@ -70,7 +66,7 @@ const NavBar: FC<NavProps> = ({ isAuthenticated, data }) => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <button onClick={async () => await logout()}
+                                    <button onClick={async () => await handleLogout()}
                                         className='flex items-center gap-3 trans hover:text-clr-9'>
                                         <span>Logout</span>
                                         <FiLogOut />
