@@ -76,12 +76,10 @@ interface UserStoreStates {
 }
 
 interface MessageStoreStates {
-    texts: string
     loading: boolean
     progress: number
     medias: File[] | null
     resetStates: () => void
-    setTexts: (texts: string) => void
     setLoading: (loading: boolean) => void
     setProgress: (progress: number) => void
     setMedias: (medias: File[] | null) => void
