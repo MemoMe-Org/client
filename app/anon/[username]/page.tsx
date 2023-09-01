@@ -101,12 +101,8 @@ const page = ({ params: { username } }: Params) => {
     }
 
     const genMsgType = async (): Promise<string> => {
-        return await generativeApi.get(`/questions/${data?.msg_type}?choice=random`)
-            .then((res: AxiosResponse) => {
-                return res.data
-            }).catch((err: AxiosError) => {
-                throwError(err)
-            })
+        const response = await generativeApi.get(`/questions/${data?.msg_type}?choice=random`)
+        return response.data?.question
     }
 
     return (
@@ -136,19 +132,20 @@ const page = ({ params: { username } }: Params) => {
                             boxShadow: `rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;`
                         }}>
                         <div className='absolute top-2.5 right-3.5'>
-                            {!loading && <button
-                                className={`rounded-full px-3 py-1.5 font-medium tracking-wider bg-clr-1 text-clr-11 flex gap-2 items-center text-lg hover:bg-clr-8 hover:text-clr-11 ${questrial.className}`}
-                                onClick={async () => await sendMsg()}>
-                                <BsFillSendFill />
-                                <span>Send</span>
-                            </button>}
-                            {loading && <div className='w-[100px] bg-clr-6 h-5 overflow-hidden rounded-full trans'>
-                                <div
-                                    className='h-full bg-clr-1 rounded-full trans'
-                                    style={{
-                                        width: `${progress}%`
-                                    }} />
-                            </div>}
+                            {!loading ?
+                                <button
+                                    className={`rounded-full px-3 py-1.5 font-medium tracking-wider bg-clr-1 text-clr-11 flex gap-2 items-center text-lg hover:bg-clr-8 hover:text-clr-11 ${questrial.className}`}
+                                    onClick={async () => await sendMsg()}>
+                                    <BsFillSendFill />
+                                    <span>Send</span>
+                                </button> :
+                                <div className='w-[100px] bg-clr-6 h-5 overflow-hidden rounded-full trans'>
+                                    <div
+                                        className='h-full bg-clr-1 rounded-full trans'
+                                        style={{
+                                            width: `${progress}%`
+                                        }} />
+                                </div>}
                         </div>
                     </article>
                 </section>
