@@ -78,14 +78,14 @@ body {
 }
 
 .editor-box {
-    @apply outline-none p-1.5 text-lg text-clr-3 min-h-[120px] tracking-wide
+    @apply outline-none px-2.5 py-2 text-lg text-clr-4 min-h-[150px] tracking-wide border-clr-11 focus:border-clr-4
 }
 
 .editor-btn {
-    @apply  rounded-md p-1 text-clr-3 trans
+    @apply  rounded-md p-1 text-clr-5 trans
 }
 
-.editor-btn.active, .editor-btn:hover {
+.editor-btn.active {
     @apply bg-clr-7
 }
 
