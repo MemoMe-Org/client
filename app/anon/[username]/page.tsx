@@ -14,6 +14,7 @@ import { useMessageStore } from '@/utils/store'
 import { useQuery } from '@tanstack/react-query'
 import TextEditor from '@/components/TextEditor'
 import { AxiosError, AxiosResponse } from 'axios'
+import MediasUpload from '@/components/MediaUpload'
 import { lato, poppins, questrial } from '@/public/fonts/f'
 import { LuVerified, BsFillSendFill } from '@/public/icons/ico'
 
@@ -144,7 +145,7 @@ const page = ({ params: { username } }: Params) => {
                         </div>
                     </article>
                     <article
-                        className='relative min-h-[250px] py-5 px-3 rounded-lg bg-clr-0'
+                        className='relative min-h-[250px] p-5 rounded-lg bg-clr-0'
                         style={{
                             boxShadow: `rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px`
                         }}>
@@ -164,14 +165,16 @@ const page = ({ params: { username } }: Params) => {
                                         }} />
                                 </div>}
                         </div>
-                        <h5 className={`${questrial.className} absolute top-2 left-4 text-lg text-clr-13 tracking-wider font-semibold`}>
-                            Send me an anonymous message.
+                        <h5 className={`${poppins.className} absolute top-2 left-4 text-lg text-clr-13 tracking-wider font-semibold`}>
+                            {`I won't know who sent it!`}
                         </h5>
                         {/* Containers */}
                         {data?.allowTexts && <TextEditor
                             textEditorRef={textEditorRef}
                             msgType={data?.msg_type || 'all'}
                         />}
+
+                        {data?.allowFiles && <MediasUpload />}
                     </article>
                 </section>
             </main>
