@@ -1,10 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client"
-import { useEffect } from 'react'
-import axios from '@/app/api/axios'
 import NavBar from '@/components/Nav'
 import useToken from '@/hooks/useToken'
+import { useEffect, useRef } from 'react'
 import throwError from '@/utils/throwError'
 import { useRouter } from 'next/navigation'
 import { questrial } from '@/public/fonts/f'
@@ -12,15 +11,17 @@ import { LoaderTwo } from '@/components/Loader'
 import { useMessageStore } from '@/utils/store'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
+import axios, { generativeApi } from '@/app/api/axios'
 import { LuVerified, BsFillSendFill } from '@/public/icons/ico'
 
 const page = ({ params: { username } }: Params) => {
     const token = useToken()
     const router = useRouter()
     const {
-        loading, setLoading,
-        progress, setProgress
+        progress, medias, resetStates,
+        loading, setProgress, setLoading,
     } = useMessageStore()
+    const textEditorRef = useRef<HTMLDivElement>(null)
 
     const { data, isLoading, refetch } = useQuery({
         queryKey: ['anon-user'],
@@ -62,12 +63,30 @@ const page = ({ params: { username } }: Params) => {
     console.log(data)
 
     const name = data?.username
+    const msg_type = data?.msg_type
     const avatar_url = data?.avatar?.url
 
     const sendMsg = async (): Promise<void> => {
         setLoading(true)
+
+        const payload = {
+            texts: textEditorRef.current ? textEditorRef.current.innerHTML : ''
+        }
+
+        const formData: FormData = new FormData()
+
+        if (medias) {
+            for (let i = 0; i < medias.length; i++) {
+                formData.append('anon_files', medias[i], medias[i].name)
+            }
+        }
+
+        for (const key in payload) {
+            formData.append(key, payload[key as keyof typeof payload])
+        }
+
         await axios.post(
-            '', {},
+            `/api/msg/anon/${username}`, formData,
             {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -77,7 +96,18 @@ const page = ({ params: { username } }: Params) => {
                     setProgress(percentage)
                 },
             }
-        ).finally(() => setLoading(false))
+        ).then((res: AxiosResponse) => {
+            resetStates()
+        }).catch((err: AxiosError) => throwError(err)).finally(() => setLoading(false))
+    }
+
+    const genMsgType = async (): Promise<string> => {
+        return await generativeApi.get(`/questions/${data?.msg_type}?choice=random`)
+            .then((res: AxiosResponse) => {
+                return res.data
+            }).catch((err: AxiosError) => {
+                throwError(err)
+            })
     }
 
     return (
