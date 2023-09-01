@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client"
@@ -6,12 +7,13 @@ import useToken from '@/hooks/useToken'
 import { useEffect, useRef } from 'react'
 import throwError from '@/utils/throwError'
 import { useRouter } from 'next/navigation'
-import { questrial } from '@/public/fonts/f'
 import { LoaderTwo } from '@/components/Loader'
 import { useMessageStore } from '@/utils/store'
 import { useQuery } from '@tanstack/react-query'
+import TextEditor from '@/components/TextEditor'
 import { AxiosError, AxiosResponse } from 'axios'
 import axios, { generativeApi } from '@/app/api/axios'
+import { lato, poppins, questrial } from '@/public/fonts/f'
 import { LuVerified, BsFillSendFill } from '@/public/icons/ico'
 
 const page = ({ params: { username } }: Params) => {
@@ -33,17 +35,16 @@ const page = ({ params: { username } }: Params) => {
                         'Authorization': `Bearer ${token}`
                     }
                 }
-            )
-                .then((res: AxiosResponse) => {
-                    return res.data?.user
-                }).catch((err: AxiosError) => {
-                    const statusCode: unknown = err.response?.status
-                    if (statusCode === 401 || statusCode === 404) {
-                        router.push('/404')
-                    } else {
-                        throwError(err)
-                    }
-                })
+            ).then((res: AxiosResponse) => {
+                return res.data?.user
+            }).catch((err: AxiosError) => {
+                const statusCode: unknown = err.response?.status
+                if (statusCode === 401 || statusCode === 404) {
+                    router.push('/404')
+                } else {
+                    throwError(err)
+                }
+            })
         },
         enabled: false
     })
@@ -115,15 +116,28 @@ const page = ({ params: { username } }: Params) => {
             <main className='w-full min-h-screen bg-clr-12 pt-5'>
                 <section className='w-[90vw] max-w-[700px] flex flex-col gap-7 mx-auto'>
                     <article className='flex gap-4 items-center'>
-                        <div className='flex flex-col gap-1.5'>
-                            <div className='flex gap-2 items-center'>
+                        <div className='grid place-items-center h-[5rem] w-[5rem] rounded-full overflow-hidden border-[2px] bg-clr-0 border-clr-5'>
+                            {
+                                avatar_url ?
+                                    <img
+                                        src={avatar_url}
+                                        alt='avatar'
+                                        loading='lazy'
+                                        className='object-cover w-full h-full'
+                                    /> :
+                                    <div className={`${lato.className} text-clr-2 text-3xl font-bold`}>
+                                        {name[0].toUpperCase()}
+                                    </div>
+                            }
+                        </div>
+                        <div className='flex flex-col gap-1.5 flex-wrap'>
+                            <div className={`${questrial.className} flex gap-2 items-center text-clr-2 font-medium text-lg`}>
                                 <h5>@{data?.username}</h5>
                                 {data?.verified && <LuVerified />}
                             </div>
-                            <p>{data?.bio}</p>
-                        </div>
-                        <div>
-                            {/* avatar container */}
+                            <p className={`${poppins.className} text-clr-13 text-sm`}>
+                                {data?.bio}
+                            </p>
                         </div>
                     </article>
                     <article
@@ -147,6 +161,8 @@ const page = ({ params: { username } }: Params) => {
                                         }} />
                                 </div>}
                         </div>
+
+                        {/* Containers */}
                     </article>
                 </section>
             </main>
