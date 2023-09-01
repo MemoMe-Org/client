@@ -46,6 +46,8 @@ type ILevel = {
     level: string
 } & TempLevel
 
+type GenMsgType = 'normal' | 'all' | 'relationship' | 'nasty'
+
 interface TextEditorStates {
     isBold: boolean
     isItalic: boolean
