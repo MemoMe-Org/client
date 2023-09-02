@@ -2,20 +2,33 @@
 "use client"
 import Link from 'next/link'
 import Levels from './Levels'
-import { FC, useState } from 'react'
+import dynamic from 'next/dynamic'
+import { FC, useState, useEffect } from 'react'
 import {
     AiOutlineCamera, AiOutlinePlus, LuVerified
 } from '@/public/icons/ico'
 import formatNumber from '@/utils/formatNumber'
 import { poppins, questrial } from '@/public/fonts/f'
+import { useRouter, useSearchParams } from 'next/navigation'
+
+const PollTab = dynamic(() => import('@/components/Polls/Polls'))
+const MessageTab = dynamic(() => import('@/components/Messages/Messages'))
 
 const Profile: FC<IProfile> = ({ user, pathName }) => {
     console.log(user)
     const [onMouse, setOnMouse] = useState<boolean>(false)
+    const [activeTab, setActiveTab] = useState<ActiveTab>('message')
     const [plusClicked, setPlusClicked] = useState<boolean>(false)
 
+    const router = useRouter()
+    const searchParams = useSearchParams()
+
+    useEffect(() => {
+        router.push(`/profile?tab=${activeTab}`)
+    }, [searchParams, router, activeTab])
+
     return (
-        <main className='profile-main overflow-hidden'>
+        <main className='profile'>
             {pathName === 'main' &&
                 <button
                     className='fixed z-[999] bottom-14 right-9 p-2 bg-clr-12 cursor-pointer rounded-full text-2xl lg:text-4xl md:text-3xl'
@@ -29,11 +42,11 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
             <article className=''>
 
             </article>
-            <section className="profile-header">
+            <article className="profile-header">
                 <h1 className='text-2xl text-clr-13 font-semibold tracking-wide md:text-3xl'>
                     {pathName === 'main' ? "Profile" : "User Profile"}
                 </h1>
-            </section>
+            </article>
             <section className="profile-cards">
                 <article className="profile-card">
                     <div className="profile-card-center">
@@ -120,6 +133,19 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                         }
                     </div>
                 </article>
+                <article className='flex gap-9 mt-5'>
+                    <button
+                        onClick={() => setActiveTab('message')}
+                        className={`${questrial.className} tab ${activeTab === 'message' && 'active'}`}>
+                        Message
+                    </button>
+                    <button onClick={() => setActiveTab('poll')}
+                        className={`${questrial.className} tab ${activeTab === 'poll' && 'active'}`}>
+                        Poll
+                    </button>
+                </article>
+                {activeTab === 'poll' && <PollTab />}
+                {activeTab === 'message' && <MessageTab />}
             </section>
         </main>
     )
