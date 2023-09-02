@@ -35,12 +35,14 @@ const useTextEditor = create<TextEditorStates>()((set) => ({
 
 const initialMessageStore = {
     progress: 0,
+    sent: false,
     medias: null,
     loading: false,
 }
 
 const useMessageStore = create<MessageStoreStates>()((set) => ({
     ...initialMessageStore,
+    setSent: (sent: boolean) => set({ sent }),
     resetStates: () => set(initialMessageStore),
     setLoading: (loading: boolean) => set({ loading }),
     setProgress: (progress: number) => set({ progress }),
