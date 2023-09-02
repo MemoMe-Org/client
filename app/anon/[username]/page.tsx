@@ -53,6 +53,10 @@ const page = ({ params: { username } }: Params) => {
     })
 
     useEffect(() => {
+        document.title = `${username} | Send me anonymous message`
+    }, [])
+
+    useEffect(() => {
         if (token) {
             refetch()
         } else {
