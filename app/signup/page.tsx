@@ -40,8 +40,7 @@ const page = () => {
                 title='Signup'
                 pathName='signup'
                 btnLabel='Sign Up'
-                handler={handleSignup}
-            >
+                handler={handleSignup}>
                 <article className='flex flex-col gap-5'>
                     <Input
                         type='email'
