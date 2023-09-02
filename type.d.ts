@@ -29,6 +29,10 @@ interface NavProps {
     isAuthenticated: boolean
 }
 
+interface TabProps {
+    username: string
+}
+
 interface LevelProps {
     msgPoint: number
     pollPoint: number
