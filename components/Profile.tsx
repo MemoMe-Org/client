@@ -16,13 +16,17 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
 
     return (
         <main className='profile-main overflow-hidden'>
-            {pathName === 'main' && <button
-                className='plus'
-                onClick={() => setPlusClicked((prev) => !prev)}>
-                <AiOutlinePlus className={`plus-icon ${plusClicked && 'active'} w-full`}
-                />
-            </button>}
-            <article>
+            {pathName === 'main' &&
+                <button
+                    className='fixed z-[999] bottom-14 right-9 p-2 bg-clr-12 cursor-pointer rounded-full text-2xl lg:text-4xl md:text-3xl'
+                    style={{
+                        boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+                        animation: 'bounce 2s ease-in-out infinite'
+                    }}
+                    onClick={() => setPlusClicked((prev) => !prev)}>
+                    <AiOutlinePlus className={`plus-icon ${plusClicked && 'active'} w-full`} />
+                </button>}
+            <article className=''>
 
             </article>
             <section className="profile-header">
