@@ -1,6 +1,7 @@
 "use client"
+import { FC, useEffect } from 'react'
 
-const Messages = () => {
+const Messages: FC<TabProps> = ({ username }) => {
     return (
         <section>
             <header className="flex items-center justify-between">
