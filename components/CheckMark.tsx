@@ -10,8 +10,6 @@ const CheckMark: FC<CheckMark> = ({ get, set }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    console.log(get)
-
     return (
         <div className={`${get ? 'wrapper' : 'hidden'}`}>
             <svg className="animated-check" viewBox="0 0 24 24">
