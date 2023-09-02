@@ -39,18 +39,12 @@ body {
     @apply absolute top-0 right-0 z-[9999] w-full h-full flex items-center justify-center
 }
 
-.profile-main {
+.profile {
     @apply w-[95vw] max-w-[1200px] mx-auto px-3 mt-5;
 }
 
 .profile-header {
     @apply w-full flex justify-between items-center mb-7
-}
-
-.plus {
-    @apply fixed z-[999] bottom-14 right-9 p-2 bg-clr-12 cursor-pointer rounded-full text-2xl lg:text-4xl md:text-3xl ;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    animation: bounce 2s ease-in-out infinite
 }
 
 .plus-icon {
@@ -59,6 +53,14 @@ body {
 
 .plus-icon.active {
     animation: half-rotate 300ms linear;
+}
+
+.tab {
+    @apply tracking-wider font-medium text-[19px] py-1.5 px-1
+}
+
+.tab.active {
+    @apply border-b-2 border-l-clr-4
 }
 
 .card {
