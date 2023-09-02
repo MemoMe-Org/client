@@ -114,7 +114,7 @@ const page = ({ params: { username } }: Params) => {
                 } else {
                     router.push('/login')
                 }
-            }, 2300)
+            }, 2500)
         }).catch((err: AxiosError) => throwError(err)).finally(() => setLoading(false))
     }
 
