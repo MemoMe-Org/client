@@ -53,7 +53,7 @@ const page = ({ params: { username } }: Params) => {
     })
 
     useEffect(() => {
-        document.title = `${username} | Send me anonymous message`
+        document.title = `${username} | Send me an anonymous message`
     }, [])
 
     useEffect(() => {
