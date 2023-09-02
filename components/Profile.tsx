@@ -145,7 +145,7 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                     </button>
                 </article>
                 {activeTab === 'poll' && <PollTab />}
-                {activeTab === 'message' && <MessageTab />}
+                {activeTab === 'message' && <MessageTab username={user?.username} />}
             </section>
         </main>
     )
