@@ -9,6 +9,7 @@ import useToken from '@/hooks/useToken'
 import { useEffect, useRef } from 'react'
 import throwError from '@/utils/throwError'
 import { useRouter } from 'next/navigation'
+import CheckMark from '@/components/CheckMark'
 import { LoaderTwo } from '@/components/Loader'
 import { useMessageStore } from '@/utils/store'
 import { useQuery } from '@tanstack/react-query'
@@ -22,8 +23,8 @@ const page = ({ params: { username } }: Params) => {
     const token = useToken()
     const router = useRouter()
     const {
-        progress, medias, resetStates,
-        loading, setProgress, setLoading,
+        sent, setSent, progress, setProgress,
+        medias, resetStates, loading, setLoading,
     } = useMessageStore()
     const textEditorRef = useRef<HTMLDivElement>(null)
 
@@ -63,8 +64,6 @@ const page = ({ params: { username } }: Params) => {
 
     if (isLoading) return <LoaderTwo />
 
-    console.log(data)
-
     const name = data?.username
     const avatar_url = data?.avatar?.url
 
@@ -87,11 +86,19 @@ const page = ({ params: { username } }: Params) => {
             formData.append(key, payload[key as keyof typeof payload])
         }
 
+        let totalContentLength = 0
+        formData.forEach((value) => {
+            if (value instanceof Blob) {
+                totalContentLength += value.size
+            }
+        })
+
         await axios.post(
             `/api/msg/anon/${username}`, formData,
             {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'multipart/form-data',
+                    'Content-Length': `${totalContentLength}`
                 },
                 onUploadProgress(progressEvent) {
                     const percentage = (progressEvent.loaded / (progressEvent.total || 1)) * 100
@@ -100,13 +107,14 @@ const page = ({ params: { username } }: Params) => {
             }
         ).then((res: AxiosResponse) => {
             resetStates()
+            setSent(true)
             setTimeout(() => {
                 if (data?.isAuthenticated) {
                     router.push('/profile')
                 } else {
                     router.push('/login')
                 }
-            }, 500)
+            }, 2300)
         }).catch((err: AxiosError) => throwError(err)).finally(() => setLoading(false))
     }
 
@@ -116,7 +124,10 @@ const page = ({ params: { username } }: Params) => {
                 isAuthenticated={data?.isAuthenticated}
                 data={avatar_url ? { avatar_url } : { username: name }}
             />
-
+            <CheckMark
+                get={sent}
+                set={setSent}
+            />
             <main className='w-full min-h-screen bg-clr-12 pt-5'>
                 <section className='w-[90vw] max-w-[700px] flex flex-col gap-7 mx-auto'>
                     <article className='flex gap-4 items-center'>
@@ -145,36 +156,40 @@ const page = ({ params: { username } }: Params) => {
                         </div>
                     </article>
                     <article
-                        className='relative min-h-[250px] p-5 rounded-lg bg-clr-0'
+                        className={`${(data?.allowTexts && data?.allowFiles) ? 'min-h-[450px]' : (!data?.allowTexts && data?.allowFiles) ? 'min-h-[270px]' : (data?.allowTexts && !data?.allowFiles) ? 'min-h-[340px]' : 'min-h-[150px]'} relative p-5 rounded-lg bg-clr-0`}
                         style={{
                             boxShadow: `rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px`
                         }}>
-                        <div className='absolute bottom-2.5 right-3.5'>
-                            {!loading ?
-                                <button
-                                    className={`rounded-full px-3 py-1.5 font-medium tracking-wider bg-clr-1 text-clr-11 flex gap-2 items-center text-lg hover:bg-clr-8 hover:text-clr-11 ${questrial.className}`}
-                                    onClick={async () => await sendMsg()}>
-                                    <BsFillSendFill />
-                                    <span>Send</span>
-                                </button> :
-                                <div className='w-[100px] bg-clr-6 h-5 overflow-hidden rounded-full'>
-                                    <div
-                                        className='h-full bg-clr-1 rounded-full transition-all duration-300 ease-in-out'
-                                        style={{
-                                            width: `${progress}%`
-                                        }} />
-                                </div>}
-                        </div>
-                        <h5 className={`${poppins.className} absolute top-2 left-4 text-lg text-clr-13 tracking-wider font-semibold`}>
-                            {`I won't know who sent it!`}
-                        </h5>
-                        {/* Containers */}
-                        {data?.allowTexts && <TextEditor
-                            textEditorRef={textEditorRef}
-                            msgType={data?.msg_type || 'all'}
-                        />}
-
-                        {data?.allowFiles && <MediasUpload />}
+                        {(!data?.allowTexts && !data?.allowFiles) ?
+                            <p className={`${poppins.className} text-xl font-medium tracking-wide text-clr-13`}>
+                                {`They've currently turned off all their channels.`}
+                            </p> :
+                            <>
+                                <div className='absolute bottom-2.5 right-3.5'>
+                                    {!loading ?
+                                        <button
+                                            className={`rounded-full px-3 py-1.5 font-medium tracking-wider bg-clr-1 text-clr-11 flex gap-2 items-center text-lg hover:bg-clr-8 hover:text-clr-11 ${questrial.className}`}
+                                            onClick={async () => await sendMsg()}>
+                                            <BsFillSendFill />
+                                            <span>Send</span>
+                                        </button> :
+                                        <div className='w-[100px] bg-clr-6 h-5 overflow-hidden rounded-full'>
+                                            <div
+                                                className='h-full bg-clr-1 rounded-full transition-all duration-500 ease-in-out'
+                                                style={{
+                                                    width: `${progress}%`
+                                                }} />
+                                        </div>}
+                                </div>
+                                {(!data?.allowTexts && !data?.allowFiles) || <h5 className={`${poppins.className} absolute top-2 left-4 text-lg text-clr-13 tracking-wider font-semibold`}>
+                                    {`I won't know who sent it!`}
+                                </h5>}
+                                {data?.allowTexts && <TextEditor
+                                    textEditorRef={textEditorRef}
+                                    msgType={data?.msg_type || 'all'}
+                                />}
+                                {data?.allowFiles && <MediasUpload />}
+                            </>}
                     </article>
                 </section>
             </main>
