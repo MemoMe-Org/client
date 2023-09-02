@@ -32,7 +32,7 @@ const MediasUpload: FC = () => {
                 <span className='text-clr-7'>*</span>
             </h6>
             <label htmlFor='anon_files'
-                className='flex justify-between gap-2 items-center border-[2px] border-dashed border-clr-12 min-h-[50px] w-full rounded-xl mt-2 px-1 py-1.5 cursor-pointer'>
+                className='flex justify-between gap-2 items-center border-[2px] border-dashed border-clr-12 min-h-[50px] w-full rounded-xl mt-2 px-2 py-1.5 cursor-pointer'>
                 <AiOutlineCloudUpload />
                 <div className='flex flex-col gap-2 text-xs flex-shrink items-center'>
                     {!medias && <span>Maximum of two files.</span>}
