@@ -137,11 +137,11 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                     <button
                         onClick={() => setActiveTab('message')}
                         className={`${questrial.className} tab ${activeTab === 'message' && 'active'}`}>
-                        Message
+                        Messages
                     </button>
                     <button onClick={() => setActiveTab('poll')}
                         className={`${questrial.className} tab ${activeTab === 'poll' && 'active'}`}>
-                        Poll
+                        Polls
                     </button>
                 </article>
                 {activeTab === 'poll' && <PollTab />}
