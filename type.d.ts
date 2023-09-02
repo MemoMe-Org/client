@@ -78,10 +78,12 @@ interface UserStoreStates {
 }
 
 interface MessageStoreStates {
+    sent: boolean
     loading: boolean
     progress: number
     medias: File[] | null
     resetStates: () => void
+    setSent: (sent: boolean) => void
     setLoading: (loading: boolean) => void
     setProgress: (progress: number) => void
     setMedias: (medias: File[] | null) => void
@@ -95,4 +97,9 @@ interface Params {
 
 interface IProfile extends PathName {
     user: any,
+}
+
+interface CheckMark {
+    get: boolean
+    set: (get: boolean) => void
 }
