@@ -39,8 +39,7 @@ const page = () => {
                 title='Login'
                 pathName='login'
                 btnLabel='Log In'
-                handler={handleLogin}
-            >
+                handler={handleLogin}>
                 <article className='flex flex-col gap-5'>
                     <Input
                         type='text'
