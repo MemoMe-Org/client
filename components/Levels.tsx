@@ -46,7 +46,7 @@ const Levels: FC<LevelProps> = ({ msgPoint, pollPoint }) => {
                         </span>
                     </p>
                     <progress
-                        title={`${point}`}
+                        title={`${point.toFixed(1)}`}
                         className='level-bar'
                         value={point} max={total} />
                 </article>
