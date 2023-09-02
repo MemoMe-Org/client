@@ -34,6 +34,8 @@ interface LevelProps {
     pollPoint: number
 }
 
+type ActiveTab = 'message' | 'poll'
+
 type LevelType = 'message' | 'poll'
 
 type TempLevel = {
