@@ -24,7 +24,7 @@ const TextEditor: FC<{
         set(!get)
     }
 
-    const insertText = async (): Promise<void> => {
+    const supriseMe = async (): Promise<void> => {
         const insertText = await genMsg(msgType)
         const contentEditable = textEditorRef.current
         if (contentEditable && insertText) {
@@ -64,7 +64,7 @@ const TextEditor: FC<{
                         </button>
                     </div>
                     <button
-                        onClick={async () => await insertText()}
+                        onClick={async () => await supriseMe()}
                         className={`${poppins.className} tracking-wider px-2 py-1 rounded-lg bg-clr-4 text-clr-12 hover:bg-clr-5 trans`}
                         style={{
                             boxShadow: `rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px`
