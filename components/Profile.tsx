@@ -16,12 +16,15 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
 
     return (
         <main className='profile-main overflow-hidden'>
-            {pathName === 'main' && <button className='plus'>
-                <AiOutlinePlus
-                    className={`plus-icon ${plusClicked && 'active'} w-full`}
-                    onClick={() => setPlusClicked((prev) => !prev)}
+            {pathName === 'main' && <button
+                className='plus'
+                onClick={() => setPlusClicked((prev) => !prev)}>
+                <AiOutlinePlus className={`plus-icon ${plusClicked && 'active'} w-full`}
                 />
             </button>}
+            <article>
+
+            </article>
             <section className="profile-header">
                 <h1 className='text-2xl text-clr-13 font-semibold tracking-wide md:text-3xl'>
                     {pathName === 'main' ? "Profile" : "User Profile"}
