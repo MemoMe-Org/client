@@ -36,7 +36,7 @@ const MediasUpload: FC = () => {
                 <AiOutlineCloudUpload />
                 <div className='flex flex-col gap-2 text-xs flex-shrink items-center'>
                     {!medias && <span>Maximum of two files.</span>}
-                    <span>JPG, MP4, PNG - 9MB</span>
+                    <span>JPG, MP4, PNG - 9MB Max Each</span>
                     {medias && <span>{`${medias.length} file(s) selected.`}</span>}
                 </div>
                 {
