@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import Levels from './Levels'
 import dynamic from 'next/dynamic'
+import Avatar from './Modals/Avatar'
 import { useRouter } from 'next/navigation'
 import formatNumber from '@/utils/formatNumber'
 import { FC, useState, useEffect } from 'react'
@@ -28,6 +29,8 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
 
     return (
         <main className='profile'>
+            {/* Modals */}
+            <Avatar />
             {pathName === 'main' &&
                 <button
                     className='fixed z-[999] bottom-14 right-9 p-2 bg-clr-1 cursor-pointer rounded-full text-xl lg:text-3xl md:text-2xl'
@@ -38,7 +41,7 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                     onClick={() => setPlusClicked((prev) => !prev)}>
                     <AiOutlinePlus className={`plus-icon ${plusClicked && 'active'} w-full`} />
                 </button>}
-            {plusClicked && <article className={`bg-transparent absolute right-9 bottom-24 z-[9999] flex flex-col gap-5 mb-3`}>
+            <article className={`${plusClicked && 'show-action'} action`}>
                 <button
                     className={`${poppins.className} flex gap-3 items-center tracking-wide text-clr-2 hover:text-clr-9 trans w-full`}>
                     <span >
@@ -53,7 +56,7 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                     </span>
                     <FaPollH className='text-lg lg:text-2xl md:text-xl' />
                 </button>
-            </article>}
+            </article>
             <article className="profile-header">
                 <h1 className='text-2xl text-clr-13 font-semibold tracking-wide md:text-3xl'>
                     {pathName === 'main' ? "Profile" : "User Profile"}
