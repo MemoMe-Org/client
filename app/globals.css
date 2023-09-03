@@ -48,7 +48,7 @@ body {
 }
 
 .plus-icon {
-    @apply text-clr-4;
+    @apply text-clr-0;
 }
 
 .plus-icon.active {
