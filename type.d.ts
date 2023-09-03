@@ -63,6 +63,11 @@ interface TextEditorStates {
     setIsUnderline: (isUnderline: boolean) => void
 }
 
+interface ModalProps {
+    open: boolean
+    children: ReactNOde
+}
+
 interface UserStoreStates {
     otp: string
     auth: boolean
