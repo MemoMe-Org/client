@@ -1,4 +1,3 @@
-import { MdMessage } from 'react-icons/md'
 import { LuVerified } from 'react-icons/lu'
 import { BsFillSendFill } from 'react-icons/bs'
 import { LiaPollHSolid } from 'react-icons/lia'
@@ -15,5 +14,5 @@ export {
     FiLogOut, FiSettings, RiAccountCircleFill, FcLock,
     BiSolidMessageDetail, LuVerified, BsFillSendFill,
     AiOutlineCamera, AiOutlinePlus, LiaPollHSolid,
-    AiOutlineCloudUpload, FaPollH, MdMessage
+    AiOutlineCloudUpload, FaPollH
 }
