@@ -63,6 +63,16 @@ body {
     @apply border-b-2 border-l-clr-4
 }
 
+.action {
+    transform: translateY(-200%);
+    @apply bg-transparent absolute right-9 bottom-24 z-[9999] flex flex-col gap-5 mb-3 opacity-0 trans;
+}
+
+.action.show-action {
+    @apply opacity-[1];
+    transform: translate(0);
+}
+
 .card {
     @apply bg-clr-11 rounded-md;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -134,12 +144,13 @@ header {
 }
 
 .nav-modal {
-    @apply absolute top-16 right-1 w-40 min-h-[20px] tracking-wide rounded-lg pl-3 py-2 flex flex-col justify-center gap-2 text-clr-2 trans bg-white;
-    transform: translateY(-400%);
+    @apply absolute top-16 right-1 w-40 min-h-[20px] tracking-wide rounded-lg pl-3 py-2 flex flex-col justify-center gap-2 text-clr-2 trans bg-white opacity-0;
+    transform: translateY(200%);
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .nav-modal.active {
+    @apply opacity-[1];
     transform: translate(0)
 }
 
