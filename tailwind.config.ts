@@ -24,6 +24,7 @@ const config: Config = {
         "clr-12": "rgb(241, 245, 248)",
         "clr-13": "rgb(16, 42, 66)",
         "clr-x": "rgba(0, 0, 0, 0.25)",
+        "clr-y": "rgba(0, 0, 0, 0.5)",
       }
     },
   },
