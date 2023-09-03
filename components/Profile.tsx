@@ -9,6 +9,7 @@ import {
 } from '@/public/icons/ico'
 import formatNumber from '@/utils/formatNumber'
 import { poppins, questrial } from '@/public/fonts/f'
+import { BiSolidMessageDetail, FaPollH } from '@/public/icons/ico'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 const PollTab = dynamic(() => import('@/components/Polls/Polls'))
@@ -39,8 +40,21 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                     onClick={() => setPlusClicked((prev) => !prev)}>
                     <AiOutlinePlus className={`plus-icon ${plusClicked && 'active'} w-full`} />
                 </button>}
-            <article className=''>
-
+            <article className={`bg-transparent absolute right-9 bottom-24 z-[9999] flex flex-col gap-5`}>
+                <button
+                    className={`${poppins.className} flex gap-3 items-center tracking-wide text-clr-2 text-lg hover:text-clr-9 trans w-full`}>
+                    <BiSolidMessageDetail />
+                    <span >
+                        Anonymous Link
+                    </span>
+                </button>
+                <button
+                    className='flex gap-3 items-center'>
+                    <FaPollH />
+                    <span>
+                        Host a Poll
+                    </span>
+                </button>
             </article>
             <article className="profile-header">
                 <h1 className='text-2xl text-clr-13 font-semibold tracking-wide md:text-3xl'>
