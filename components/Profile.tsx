@@ -3,36 +3,34 @@
 import Link from 'next/link'
 import Levels from './Levels'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/navigation'
+import formatNumber from '@/utils/formatNumber'
 import { FC, useState, useEffect } from 'react'
 import {
     AiOutlineCamera, AiOutlinePlus, LuVerified
 } from '@/public/icons/ico'
-import formatNumber from '@/utils/formatNumber'
 import { poppins, questrial } from '@/public/fonts/f'
 import { BiSolidMessageDetail, FaPollH } from '@/public/icons/ico'
-import { useRouter, useSearchParams } from 'next/navigation'
 
 const PollTab = dynamic(() => import('@/components/Polls/Polls'))
 const MessageTab = dynamic(() => import('@/components/Messages/Messages'))
 
 const Profile: FC<IProfile> = ({ user, pathName }) => {
     console.log(user)
-    const [onMouse, setOnMouse] = useState<boolean>(false)
-    const [activeTab, setActiveTab] = useState<ActiveTab>('message')
-    const [plusClicked, setPlusClicked] = useState<boolean>(false)
-
     const router = useRouter()
-    const searchParams = useSearchParams()
+    const [onMouse, setOnMouse] = useState<boolean>(false)
+    const [plusClicked, setPlusClicked] = useState<boolean>(false)
+    const [activeTab, setActiveTab] = useState<ActiveTab>('message')
 
     useEffect(() => {
         router.push(`/profile?tab=${activeTab}`)
-    }, [searchParams, router, activeTab])
+    }, [router, activeTab])
 
     return (
         <main className='profile'>
             {pathName === 'main' &&
                 <button
-                    className='fixed z-[999] bottom-14 right-9 p-2 bg-clr-12 cursor-pointer rounded-full text-2xl lg:text-4xl md:text-3xl'
+                    className='fixed z-[999] bottom-14 right-9 p-2 bg-clr-1 cursor-pointer rounded-full text-xl lg:text-3xl md:text-2xl'
                     style={{
                         boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
                         animation: 'bounce 2s ease-in-out infinite'
@@ -40,22 +38,22 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                     onClick={() => setPlusClicked((prev) => !prev)}>
                     <AiOutlinePlus className={`plus-icon ${plusClicked && 'active'} w-full`} />
                 </button>}
-            <article className={`bg-transparent absolute right-9 bottom-24 z-[9999] flex flex-col gap-5`}>
+            {plusClicked && <article className={`bg-transparent absolute right-9 bottom-24 z-[9999] flex flex-col gap-5 mb-3`}>
                 <button
-                    className={`${poppins.className} flex gap-3 items-center tracking-wide text-clr-2 text-lg hover:text-clr-9 trans w-full`}>
-                    <BiSolidMessageDetail />
+                    className={`${poppins.className} flex gap-3 items-center tracking-wide text-clr-2 hover:text-clr-9 trans w-full`}>
                     <span >
                         Anonymous Link
                     </span>
+                    <BiSolidMessageDetail className='text-lg lg:text-2xl md:text-xl' />
                 </button>
                 <button
-                    className='flex gap-3 items-center'>
-                    <FaPollH />
+                    className={`${poppins.className} flex gap-3 items-center tracking-wide text-clr-2 hover:text-clr-9 trans w-full`}>
                     <span>
                         Host a Poll
                     </span>
+                    <FaPollH className='text-lg lg:text-2xl md:text-xl' />
                 </button>
-            </article>
+            </article>}
             <article className="profile-header">
                 <h1 className='text-2xl text-clr-13 font-semibold tracking-wide md:text-3xl'>
                     {pathName === 'main' ? "Profile" : "User Profile"}
