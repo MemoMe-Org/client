@@ -162,6 +162,50 @@ header {
     transform: translate(0)
 }
 
+.modal-header {
+    @apply text-xl font-semibold tracking-wider w-fit
+}
+
+.modal-form {
+    @apply w-full flex flex-col gap-5 mt-2
+}
+
+.modal-btn-container {
+    @apply flex gap-3 absolute bottom-2 right-3
+}
+
+.save-btn {
+    @apply px-6 trans
+}
+
+.save-btn:disabled {
+    @apply bg-clr-5 text-clr-4
+}
+
+.save-btn:not([disabled]) {
+    @apply bg-clr-13 text-clr-0
+}
+
+.cancel-btn {
+    @apply text-clr-4 border-[1px] border-clr-9 px-5 trans
+}
+
+.cancel-btn, .save-btn {
+    @apply text-[14px] py-1.5 tracking-wider font-medium
+}
+
+.change-avatar:hover {
+    @apply text-clr-3
+}
+
+.del-avatar:hover {
+    @apply text-clr-10
+}
+
+.change-avatar, .del-avatar {
+    @apply flex gap-3 items-center cursor-pointer text-clr-4 trans;
+}
+
 
 /* Loader Two */
 .lds-roller {
