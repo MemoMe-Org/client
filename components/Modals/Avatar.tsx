@@ -31,7 +31,8 @@ const Avatar: FC<ModalComponent> = ({ get, set, data }) => {
             '/auth/api/avatar', formData,
             {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'multipart/formdata'
                 }
             }
         ).then((res: AxiosResponse) => {
