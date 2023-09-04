@@ -69,6 +69,7 @@ interface UserStoreStates {
     loading: boolean
     password: string
     password2: string
+    avatar: File | null
     token: string | undefined
     resetStates: () => void
     setOtp: (otp: string) => void
@@ -78,6 +79,7 @@ interface UserStoreStates {
     setUserId: (userId: string) => void
     setLoading: (loading: boolean) => void
     setPassword: (password: string) => void
+    setAvatar: (avatar: File | null) => void
     setPassword2: (password2: string) => void
 }
 
@@ -94,9 +96,11 @@ interface MessageStoreStates {
 }
 
 interface ModalStates {
+    loading: boolean
     avatarModal: boolean
     shareLinkModal: boolean
     createPollModal: boolean
+    setLoading: (loading: boolean) => void
     setAvatarModal: (avatarModal: boolean) => void
     setShareLinkModal: (shareLinkModal: boolean) => void
     setCreatePollModal: (createPollModal: boolean) => void
@@ -109,7 +113,7 @@ interface Params {
 }
 
 interface IProfile extends PathName {
-    user: any,
+    user: any
 }
 
 interface State<T> {
