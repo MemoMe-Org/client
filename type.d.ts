@@ -38,8 +38,6 @@ interface LevelProps {
     pollPoint: number
 }
 
-type ActiveTab = 'message' | 'poll'
-
 type LevelType = 'message' | 'poll'
 
 type TempLevel = {
@@ -61,11 +59,6 @@ interface TextEditorStates {
     setIsBold: (isBold: boolean) => void
     setIsItalic: (isItalic: boolean) => void
     setIsUnderline: (isUnderline: boolean) => void
-}
-
-interface ModalProps {
-    open: boolean
-    children: ReactNOde
 }
 
 interface UserStoreStates {
@@ -100,6 +93,15 @@ interface MessageStoreStates {
     setMedias: (medias: File[] | null) => void
 }
 
+interface ModalStates {
+    avatarModal: boolean
+    shareLinkModal: boolean
+    createPollModal: boolean
+    setAvatarModal: (avatarModal: boolean) => void
+    setShareLinkModal: (shareLinkModal: boolean) => void
+    setCreatePollModal: (createPollModal: boolean) => void
+}
+
 interface Params {
     params: {
         username: string
@@ -110,7 +112,11 @@ interface IProfile extends PathName {
     user: any,
 }
 
-interface CheckMark {
-    get: boolean
-    set: (get: boolean) => void
+interface State<T> {
+    get: T
+    set: (get: T) => void
+}
+
+interface ModalProps extends State<boolean> {
+    children: ReactNOde
 }
