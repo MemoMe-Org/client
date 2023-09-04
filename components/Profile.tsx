@@ -5,6 +5,7 @@ import Levels from './Levels'
 import dynamic from 'next/dynamic'
 import Avatar from './Modals/Avatar'
 import { useRouter } from 'next/navigation'
+import { useModalStore } from '@/utils/store'
 import formatNumber from '@/utils/formatNumber'
 import { FC, useState, useEffect } from 'react'
 import {
@@ -19,9 +20,13 @@ const MessageTab = dynamic(() => import('@/components/Messages/Messages'))
 const Profile: FC<IProfile> = ({ user, pathName }) => {
     console.log(user)
     const router = useRouter()
+    const {
+        avatarModal, setAvatarModal
+    } = useModalStore()
+
     const [onMouse, setOnMouse] = useState<boolean>(false)
     const [plusClicked, setPlusClicked] = useState<boolean>(false)
-    const [activeTab, setActiveTab] = useState<ActiveTab>('message')
+    const [activeTab, setActiveTab] = useState<LevelType>('message')
 
     useEffect(() => {
         router.push(`/profile?tab=${activeTab}`)
@@ -30,7 +35,10 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
     return (
         <main className='profile'>
             {/* Modals */}
-            <Avatar />
+            <Avatar
+                get={avatarModal}
+                set={setAvatarModal}
+            />
             {pathName === 'main' &&
                 <button
                     className='fixed z-[999] bottom-14 right-9 p-2 bg-clr-1 cursor-pointer rounded-full text-xl lg:text-3xl md:text-2xl'
@@ -78,7 +86,7 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                                                 loading='lazy'
                                             />
                                         </div> :
-                                        <div className='rounded-full overflow-hidden w-[7rem] h-[7rem] flex items-center justify-center border-[0.125rem] border-clr-5 flex-shrink-0'>
+                                        <div className='profile-not-avatar'>
                                             <div className={`${poppins.className} font-bold text-5xl text-clr-2`}>
                                                 {user?.username![0].toUpperCase()}
                                             </div>
@@ -88,9 +96,10 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                                 <>
                                     {user?.Profile?.avatar?.url ?
                                         <div
+                                            onClick={() => setAvatarModal(!avatarModal)}
                                             onMouseLeave={() => setOnMouse(false)}
                                             onMouseEnter={() => setOnMouse(true)}
-                                            className={`${onMouse && 'before:content-[""] before:bg-clr-x before:absolute before:top-0 before:right-0 before:w-full before:h-full before:z-[999] cursor-pointer'} profile-avatar`}>
+                                            className={`${onMouse && 'hovered'} profile-avatar`}>
                                             <img
                                                 src={user?.Profile?.avatar?.url}
                                                 alt="avatar"
@@ -103,9 +112,10 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                                             </div>
                                         </div> :
                                         <div
+                                            onClick={() => setAvatarModal(!avatarModal)}
                                             onMouseLeave={() => setOnMouse(false)}
                                             onMouseEnter={() => setOnMouse(true)}
-                                            className={`${onMouse && 'before:content-[""] before:bg-clr-x before:absolute before:top-0 before:right-0 before:w-full before:h-full before:z-[999] cursor-pointer'} relative rounded-full overflow-hidden w-[7rem] h-[7rem] flex items-center justify-center border-[0.125rem] border-clr-5 flex-shrink-0`}>
+                                            className={`${onMouse && 'hovered'} relative profile-not-avatar`}>
                                             <div className={`${poppins.className} font-bold text-5xl text-clr-2`}>
                                                 {user?.username![0].toUpperCase()}
                                             </div>
