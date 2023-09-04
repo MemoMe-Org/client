@@ -27,6 +27,14 @@ body {
     @apply relative rounded-full overflow-hidden w-[5rem] h-[5rem] object-cover border-[0.125rem] border-clr-5 flex-shrink-0 md:w-[7rem] md:h-[7rem];
 }
 
+.profile-avatar.hovered {
+    @apply before:content-[""] before:bg-clr-x before:absolute before:top-0 before:right-0 before:w-full before:h-full before:z-[999] cursor-pointer
+}
+
+.profile-not-avatar {
+    @apply rounded-full overflow-hidden w-[7rem] h-[7rem] flex items-center justify-center border-[0.125rem] border-clr-5 flex-shrink-0;
+}
+
 .profile-avatar img {
     @apply w-full h-full object-cover
 }
@@ -65,7 +73,7 @@ body {
 
 .action {
     transform: translateY(-200%);
-    @apply bg-transparent absolute right-9 bottom-24 z-[9999] flex flex-col gap-5 mb-3 opacity-0 trans;
+    @apply bg-transparent absolute right-9 bottom-24 z-[9999] flex flex-col gap-5 mb-8 opacity-0 trans;
 }
 
 .action.show-action {
