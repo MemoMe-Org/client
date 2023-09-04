@@ -95,7 +95,7 @@ const Avatar: FC<ModalComponent> = ({ get, set, data }) => {
                                 </div> :
                                 <div className='profile-not-avatar'>
                                     <div className={`${poppins.className} font-bold text-5xl text-clr-2`}>
-                                        {data?.username![0].toUpperCase()}
+                                        {data?.username ? data?.username[0].toUpperCase() : '0'}
                                     </div>
                                 </div>
                             }

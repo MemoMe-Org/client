@@ -13,6 +13,7 @@ import {
 } from '@/public/icons/ico'
 import { poppins, questrial } from '@/public/fonts/f'
 import { BiSolidMessageDetail, FaPollH } from '@/public/icons/ico'
+import Socials from './Modals/Socials'
 
 const PollTab = dynamic(() => import('@/components/Polls/Polls'))
 const MessageTab = dynamic(() => import('@/components/Messages/Messages'))
@@ -21,7 +22,8 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
     console.log(user)
     const router = useRouter()
     const {
-        avatarModal, setAvatarModal
+        avatarModal, setAvatarModal,
+        shareLinkModal, setShareLinkModal,
     } = useModalStore()
 
     const [onMouse, setOnMouse] = useState<boolean>(false)
@@ -43,6 +45,10 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                     avatar: user?.Profile?.avatar,
                 }}
             />
+            <Socials
+                get={shareLinkModal}
+                set={setShareLinkModal}
+            />
             {pathName === 'main' &&
                 <button
                     className='fixed z-[999] bottom-14 right-9 p-2 bg-clr-1 cursor-pointer rounded-full text-xl lg:text-3xl md:text-2xl'
@@ -55,6 +61,7 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                 </button>}
             <article className={`${plusClicked && 'show-action'} action`}>
                 <button
+                    onClick={() => setShareLinkModal(true)}
                     className={`${poppins.className} flex gap-3 items-center tracking-wide text-clr-2 hover:text-clr-9 trans w-full`}>
                     <span >
                         Anonymous Link
@@ -93,7 +100,7 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                                         </div> :
                                         <div className='profile-not-avatar'>
                                             <div className={`${poppins.className} font-bold text-5xl text-clr-2`}>
-                                                {user?.username![0].toUpperCase()}
+                                                {user?.username ? user?.username[0].toUpperCase() : '0'}
                                             </div>
                                         </div>
                                     }
