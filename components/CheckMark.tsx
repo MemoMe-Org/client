@@ -1,6 +1,6 @@
 import { useEffect, FC } from 'react'
 
-const CheckMark: FC<CheckMark> = ({ get, set }) => {
+const CheckMark: FC<State<boolean>> = ({ get, set }) => {
     useEffect(() => {
         const timeout = setTimeout(() => {
             set(false)
