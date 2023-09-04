@@ -1,7 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 import {
+    RiAccountCircleFill,
     FiLogOut, FiSettings,
-    RiAccountCircleFill
 } from '@/public/icons/ico'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -46,7 +45,13 @@ const NavBar: FC<NavProps> = ({ isAuthenticated, data }) => {
                                 className='relative rounded-full overflow-hidden w-[50px] h-[50px] object-cover border-[0.125rem] border-clr-2 flex-shrink-0'>
                                 {
                                     data?.avatar_url ?
-                                        <img src={data.avatar_url} alt='avatar' width={300} height={300} loading='lazy' /> :
+                                        <Image
+                                            width={300}
+                                            height={300}
+                                            alt='avatar'
+                                            loading='lazy'
+                                            src={data.avatar_url}
+                                        /> :
                                         <div className={`${poppins.className} font-bold text-lg text-clr-2`}>
                                             {data?.username![0].toUpperCase()}
                                         </div>
