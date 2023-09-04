@@ -1,7 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
 "use client"
 import Link from 'next/link'
 import Levels from './Levels'
+import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import Avatar from './Modals/Avatar'
 import { useRouter } from 'next/navigation'
@@ -79,11 +79,12 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                                     {user?.Profile?.avatar?.url ?
                                         <div
                                             className={`profile-avatar`}>
-                                            <img
-                                                src={user?.Profile?.avatar?.url}
-                                                alt="avatar"
-                                                title="Edit avatar"
+                                            <Image
+                                                alt='avatar'
+                                                width={300}
+                                                height={300}
                                                 loading='lazy'
+                                                src={user?.Profile?.avatar?.url}
                                             />
                                         </div> :
                                         <div className='profile-not-avatar'>
@@ -100,10 +101,12 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                                             onMouseLeave={() => setOnMouse(false)}
                                             onMouseEnter={() => setOnMouse(true)}
                                             className={`${onMouse && 'hovered'} profile-avatar`}>
-                                            <img
-                                                src={user?.Profile?.avatar?.url}
-                                                alt="avatar"
+                                            <Image
+                                                alt='avatar'
+                                                width={300}
+                                                height={300}
                                                 loading='lazy'
+                                                src={user?.Profile?.avatar?.url}
                                             />
                                             <div className={`${onMouse && 'cam-ico'}`}>
                                                 <AiOutlineCamera
