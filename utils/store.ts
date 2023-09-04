@@ -5,6 +5,7 @@ const initialUserStore = {
     email: '',
     userId: '',
     auth: false,
+    avatar: null,
     password: '',
     password2: '',
     loading: false,
@@ -20,6 +21,7 @@ const UserStore = create<UserStoreStates>()((set) => ({
     setEmail: (email: string) => set({ email }),
     setUserId: (userId: string) => set({ userId }),
     setLoading: (loading: boolean) => set({ loading }),
+    setAvatar: (avatar: File | null) => set({ avatar }),
     setPassword: (password: string) => set({ password }),
     setPassword2: (password2: string) => set({ password2 }),
 }))
@@ -50,9 +52,11 @@ const useMessageStore = create<MessageStoreStates>()((set) => ({
 }))
 
 const useModalStore = create<ModalStates>()((set) => ({
+    loading: false,
     avatarModal: false,
     shareLinkModal: false,
     createPollModal: false,
+    setLoading: (loading: boolean) => set({ loading }),
     setAvatarModal: (avatarModal: boolean) => set({ avatarModal }),
     setShareLinkModal: (shareLinkModal: boolean) => set({ shareLinkModal }),
     setCreatePollModal: (createPollModal: boolean) => set({ createPollModal }),
