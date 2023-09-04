@@ -2,9 +2,13 @@
 import Modal from '../Modal'
 import Image from 'next/image'
 import blob from '@/utils/file'
+import axios from '@/app/api/axios'
+import notify from '@/utils/notify'
 import useToken from '@/hooks/useToken'
 import { LoaderThree } from '../Loader'
+import throwError from '@/utils/throwError'
 import { ChangeEvent, FC, useState } from 'react'
+import { AxiosResponse, AxiosError } from 'axios'
 import { poppins, questrial } from '@/public/fonts/f'
 import { UserStore, useModalStore } from '@/utils/store'
 import { AiOutlineCloudUpload, RiDeleteBin6Line } from '@/public/icons/ico'
@@ -16,11 +20,44 @@ const Avatar: FC<ModalComponent> = ({ get, set, data }) => {
     const [avatarPreview, setAvatarPreview] = useState<string>('')
 
     const changeAvatar = async (): Promise<void> => {
+        setLoading(true)
 
+        const formData = new FormData()
+        if (avatar) {
+            formData.append('avatar', avatar, avatar.name)
+        }
+
+        await axios.post(
+            '/auth/api/avatar', formData,
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+        ).then((res: AxiosResponse) => {
+            set(false)
+            notify('success', res.data?.msg)
+            setTimeout(() => {
+                window.location.reload()
+            }, 450)
+        }).catch((err: AxiosError) => throwError(err)).finally(() => setLoading(false))
     }
 
     const delAvatar = async (): Promise<void> => {
-
+        await axios.delete(
+            '/auth/api/avatar',
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+        ).then((res: AxiosResponse) => {
+            set(false)
+            notify('success', res.data?.msg)
+            setTimeout(() => {
+                window.location.reload()
+            }, 450)
+        }).catch((err: AxiosError) => throwError(err))
     }
 
     const cancel = () => {
@@ -40,29 +77,28 @@ const Avatar: FC<ModalComponent> = ({ get, set, data }) => {
                 className='modal-form'
                 onSubmit={(e) => e.preventDefault()}>
                 <div className='mx-auto'>
-                    {
-                        avatarPreview ?
-                            <div className='profile-avatar'>
-                                <img src={avatarPreview} alt='avatar' />
-                            </div> :
-                            <>
-                                {data?.avatar?.url ?
-                                    <div className='profile-avatar'>
-                                        <Image
-                                            width={300}
-                                            height={300}
-                                            alt='avatar'
-                                            loading='lazy'
-                                            src={data?.avatar?.url}
-                                        />
-                                    </div> :
-                                    <div className='profile-not-avatar'>
-                                        <div className={`${poppins.className} font-bold text-5xl text-clr-2`}>
-                                            {data?.username![0].toUpperCase()}
-                                        </div>
+                    {avatarPreview ?
+                        <div className='profile-avatar'>
+                            <img src={avatarPreview} alt='avatar' />
+                        </div> :
+                        <>
+                            {data?.avatar?.url ?
+                                <div className='profile-avatar'>
+                                    <Image
+                                        width={300}
+                                        height={300}
+                                        alt='avatar'
+                                        loading='lazy'
+                                        src={data?.avatar?.url}
+                                    />
+                                </div> :
+                                <div className='profile-not-avatar'>
+                                    <div className={`${poppins.className} font-bold text-5xl text-clr-2`}>
+                                        {data?.username![0].toUpperCase()}
                                     </div>
-                                }
-                            </>
+                                </div>
+                            }
+                        </>
                     }
                 </div>
                 <input
@@ -88,7 +124,6 @@ const Avatar: FC<ModalComponent> = ({ get, set, data }) => {
                     </button>
                 </article>
             </form>
-
             <div className='modal-btn-container'>
                 <button
                     type='submit'
