@@ -120,3 +120,7 @@ interface State<T> {
 interface ModalProps extends State<boolean> {
     children: ReactNode
 }
+
+interface ModalComponent extends State<boolean> {
+    data?: T
+}
