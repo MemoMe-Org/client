@@ -38,6 +38,10 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
             <Avatar
                 get={avatarModal}
                 set={setAvatarModal}
+                data={{
+                    username: user?.username,
+                    avatar: user?.Profile?.avatar,
+                }}
             />
             {pathName === 'main' &&
                 <button
