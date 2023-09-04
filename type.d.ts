@@ -118,5 +118,5 @@ interface State<T> {
 }
 
 interface ModalProps extends State<boolean> {
-    children: ReactNOde
+    children: ReactNode
 }
