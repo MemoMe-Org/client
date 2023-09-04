@@ -5,9 +5,9 @@ import blob from '@/utils/file'
 import useToken from '@/hooks/useToken'
 import { LoaderThree } from '../Loader'
 import { ChangeEvent, FC, useState } from 'react'
+import { poppins, questrial } from '@/public/fonts/f'
 import { UserStore, useModalStore } from '@/utils/store'
 import { AiOutlineCloudUpload, RiDeleteBin6Line } from '@/public/icons/ico'
-import { poppins } from '@/public/fonts/f'
 
 const Avatar: FC<ModalComponent> = ({ get, set, data }) => {
     const token = useToken()
@@ -46,7 +46,7 @@ const Avatar: FC<ModalComponent> = ({ get, set, data }) => {
                                 <img src={avatarPreview} alt='avatar' />
                             </div> :
                             <>
-                                {!data?.avatar?.url ?
+                                {data?.avatar?.url ?
                                     <div className='profile-avatar'>
                                         <Image
                                             width={300}
@@ -72,16 +72,16 @@ const Avatar: FC<ModalComponent> = ({ get, set, data }) => {
                     className='hidden'
                     onChange={(e) => handleFile(e)}
                 />
-                <article className='profile-avatar-btn'>
+                <article className={`flex flex-col gap-5 w-fit mt-5 mb-2 tracking-wider`}>
                     <label
                         htmlFor='avatar'
-                        className='change-avatar'>
+                        className={`${questrial.className} change-avatar`}>
                         <AiOutlineCloudUpload />
                         <span>Change photo</span>
                     </label>
                     <button
                         type='button'
-                        className='del-avatar'
+                        className={`${questrial.className} del-avatar`}
                         onClick={async () => await delAvatar()}>
                         <RiDeleteBin6Line />
                         <span>Remove photo</span>
@@ -89,10 +89,11 @@ const Avatar: FC<ModalComponent> = ({ get, set, data }) => {
                 </article>
             </form>
 
-            <div className="modal-btn-container">
+            <div className='modal-btn-container'>
                 <button
-                    className='save-btn' disabled={!Boolean(avatar)}
                     type='submit'
+                    className='save-btn'
+                    disabled={!Boolean(avatar)}
                     onClick={async () => await changeAvatar()}>
                     {loading ? <LoaderThree /> : 'Save'}
                 </button>
