@@ -49,4 +49,13 @@ const useMessageStore = create<MessageStoreStates>()((set) => ({
     setMedias: (medias: null | File[]) => set({ medias }),
 }))
 
-export { UserStore, useTextEditor, useMessageStore }
+const useModalStore = create<ModalStates>()((set) => ({
+    avatarModal: false,
+    shareLinkModal: false,
+    createPollModal: false,
+    setAvatarModal: (avatarModal: boolean) => set({ avatarModal }),
+    setShareLinkModal: (shareLinkModal: boolean) => set({ shareLinkModal }),
+    setCreatePollModal: (createPollModal: boolean) => set({ createPollModal }),
+}))
+
+export { UserStore, useTextEditor, useMessageStore, useModalStore }
