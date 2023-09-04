@@ -129,7 +129,7 @@ const Avatar: FC<ModalComponent> = ({ get, set, data }) => {
                 <button
                     type='submit'
                     className='save-btn'
-                    disabled={!Boolean(avatar)}
+                    disabled={!Boolean(avatarPreview)}
                     onClick={async () => await changeAvatar()}>
                     {loading ? <LoaderThree /> : 'Save'}
                 </button>
