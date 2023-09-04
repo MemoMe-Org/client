@@ -1,11 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import Modal from '../Modal'
+import Image from 'next/image'
 import blob from '@/utils/file'
 import useToken from '@/hooks/useToken'
 import { LoaderThree } from '../Loader'
 import { ChangeEvent, FC, useState } from 'react'
 import { UserStore, useModalStore } from '@/utils/store'
 import { AiOutlineCloudUpload, RiDeleteBin6Line } from '@/public/icons/ico'
+import { poppins } from '@/public/fonts/f'
 
 const Avatar: FC<ModalComponent> = ({ get, set, data }) => {
     const token = useToken()
@@ -37,17 +39,30 @@ const Avatar: FC<ModalComponent> = ({ get, set, data }) => {
             <form
                 className='modal-form'
                 onSubmit={(e) => e.preventDefault()}>
-                <div className='profile-avatar md:w-[12rem] md:h-[12rem] mx-auto'>
-                    {avatarPreview ?
-                        <img src={avatarPreview} alt='avatar' /> :
-                        <>
-                            {data?.avatar?.url ?
-                                <img src={data?.avatar?.url}
-                                    width={300} height={300} alt='avatar' loading='lazy' /> :
-                                <img src="https://res.cloudinary.com/kawojue/image/upload/v1685607626/TOOPCC/Staffs/avatar_ndluis.webp"
-                                    width={300} height={300} alt='avatar' loading='lazy' />
-                            }
-                        </>
+                <div className='mx-auto'>
+                    {
+                        avatarPreview ?
+                            <div className='profile-avatar'>
+                                <img src={avatarPreview} alt='avatar' />
+                            </div> :
+                            <>
+                                {!data?.avatar?.url ?
+                                    <div className='profile-avatar'>
+                                        <Image
+                                            width={300}
+                                            height={300}
+                                            alt='avatar'
+                                            loading='lazy'
+                                            src={data?.avatar?.url}
+                                        />
+                                    </div> :
+                                    <div className='profile-not-avatar'>
+                                        <div className={`${poppins.className} font-bold text-5xl text-clr-2`}>
+                                            {data?.username![0].toUpperCase()}
+                                        </div>
+                                    </div>
+                                }
+                            </>
                     }
                 </div>
                 <input
