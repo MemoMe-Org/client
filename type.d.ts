@@ -84,12 +84,16 @@ interface UserStoreStates {
 }
 
 interface MessageStoreStates {
+    page: number
     sent: boolean
+    messages: any[]
     loading: boolean
     progress: number
     medias: File[] | null
     resetStates: () => void
+    setPage: (page: number) => void
     setSent: (sent: boolean) => void
+    setMessages: (messages: any[]) => void
     setLoading: (loading: boolean) => void
     setProgress: (progress: number) => void
     setMedias: (medias: File[] | null) => void
