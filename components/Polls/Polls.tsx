@@ -1,7 +1,7 @@
 "use client"
 import { FC } from 'react'
 
-const Polls: FC = () => {
+const Polls: FC<TabProps> = ({ username }) => {
     return (
         <></>
     )
