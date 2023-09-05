@@ -28,8 +28,8 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
     } = useModalStore()
 
     const [onMouse, setOnMouse] = useState<boolean>(false)
-    const [activeTab, setActiveTab] = useState<string>(tab || '')
     const [plusClicked, setPlusClicked] = useState<boolean>(false)
+    const [activeTab, setActiveTab] = useState<string>(tab || 'message')
 
     useEffect(() => {
         router.push(`/profile?tab=${activeTab}`)
