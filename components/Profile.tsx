@@ -5,7 +5,6 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import Avatar from './Modals/Avatar'
 import Socials from './Modals/Socials'
-import { useRouter } from 'next/navigation'
 import { useModalStore } from '@/utils/store'
 import formatNumber from '@/utils/formatNumber'
 import { FC, useState, useEffect } from 'react'
@@ -13,6 +12,7 @@ import {
     AiOutlineCamera, AiOutlinePlus, LuVerified
 } from '@/public/icons/ico'
 import { poppins, questrial } from '@/public/fonts/f'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { BiSolidMessageDetail, FaPollH } from '@/public/icons/ico'
 
 const PollTab = dynamic(() => import('@/components/Polls/Polls'))
@@ -21,14 +21,15 @@ const MessageTab = dynamic(() => import('@/components/Messages/Messages'))
 const Profile: FC<IProfile> = ({ user, pathName }) => {
     console.log(user)
     const router = useRouter()
+    const tab = useSearchParams().get('tab')
     const {
         avatarModal, setAvatarModal,
         shareLinkModal, setShareLinkModal,
     } = useModalStore()
 
     const [onMouse, setOnMouse] = useState<boolean>(false)
+    const [activeTab, setActiveTab] = useState<string>(tab || '')
     const [plusClicked, setPlusClicked] = useState<boolean>(false)
-    const [activeTab, setActiveTab] = useState<LevelType>('message')
 
     useEffect(() => {
         router.push(`/profile?tab=${activeTab}`)
