@@ -18,8 +18,7 @@ import { BiSolidMessageDetail, FaPollH } from '@/public/icons/ico'
 const PollTab = dynamic(() => import('@/components/Polls/Polls'))
 const MessageTab = dynamic(() => import('@/components/Messages/Messages'))
 
-const Profile: FC<IProfile> = ({ user, pathName }) => {
-    console.log(user)
+const Profile: FC<IProfile> = ({ user, pathName, username }) => {
     const router = useRouter()
     const tab = useSearchParams().get('tab')
     const {
@@ -32,8 +31,12 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
     const [activeTab, setActiveTab] = useState<string>(tab || 'message')
 
     useEffect(() => {
-        router.push(`/profile?tab=${activeTab}`)
-    }, [router, activeTab])
+        if (pathName === 'main') {
+            router.push(`/profile?tab=${activeTab}`)
+        } else {
+            router.push(`/${username}?tab=${activeTab}`)
+        }
+    }, [router, activeTab, pathName, username])
 
     return (
         <main className='profile'>
@@ -92,10 +95,10 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                                         <div
                                             className={`profile-avatar`}>
                                             <Image
+                                                priority
                                                 alt='avatar'
                                                 width={300}
                                                 height={300}
-                                                loading='lazy'
                                                 src={user?.Profile?.avatar?.url}
                                             />
                                         </div> :
@@ -114,10 +117,10 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                                             onMouseEnter={() => setOnMouse(true)}
                                             className={`${onMouse && 'hovered'} profile-avatar`}>
                                             <Image
+                                                priority
                                                 alt='avatar'
                                                 width={300}
                                                 height={300}
-                                                loading='lazy'
                                                 src={user?.Profile?.avatar?.url}
                                             />
                                             <div className={`${onMouse && 'cam-ico'}`}>
@@ -184,7 +187,7 @@ const Profile: FC<IProfile> = ({ user, pathName }) => {
                         Polls
                     </button>
                 </article>
-                {activeTab === 'poll' && <PollTab />}
+                {activeTab === 'poll' && <PollTab username={user?.username} />}
                 {activeTab === 'message' && <MessageTab username={user?.username} />}
             </section>
         </main>
