@@ -13,10 +13,10 @@ import CheckMark from '@/components/CheckMark'
 import { LoaderTwo } from '@/components/Loader'
 import { useMessageStore } from '@/utils/store'
 import { useQuery } from '@tanstack/react-query'
-import TextEditor from '@/components/TextEditor'
 import { AxiosError, AxiosResponse } from 'axios'
-import MediasUpload from '@/components/MediaUpload'
+import TextEditor from '@/components/Messages/TextEditor'
 import { lato, poppins, questrial } from '@/public/fonts/f'
+import MediasUpload from '@/components/Messages/MediaUpload'
 import { LuVerified, BsFillSendFill } from '@/public/icons/ico'
 
 const page = ({ params: { username } }: Params) => {
