@@ -49,8 +49,8 @@ const page = ({ params: { username } }: Params) => {
 
     if (isLoading) return <LoaderTwo />
 
-    const name = data?.username
-    const avatar_url = data?.Profile?.avatar?.url
+    const name = data?.authUser?.username
+    const avatar_url = data?.authUser?.Profile?.avatar?.url
 
     return (
         <>
