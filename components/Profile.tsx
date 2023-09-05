@@ -4,6 +4,7 @@ import Levels from './Levels'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import Avatar from './Modals/Avatar'
+import Socials from './Modals/Socials'
 import { useRouter } from 'next/navigation'
 import { useModalStore } from '@/utils/store'
 import formatNumber from '@/utils/formatNumber'
@@ -13,7 +14,6 @@ import {
 } from '@/public/icons/ico'
 import { poppins, questrial } from '@/public/fonts/f'
 import { BiSolidMessageDetail, FaPollH } from '@/public/icons/ico'
-import Socials from './Modals/Socials'
 
 const PollTab = dynamic(() => import('@/components/Polls/Polls'))
 const MessageTab = dynamic(() => import('@/components/Messages/Messages'))
