@@ -33,10 +33,12 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
     useEffect(() => {
         if (pathName === 'main') {
             router.push(`/profile?tab=${activeTab}`)
+            document.title = 'Profile | MemoMe'
         } else {
             router.push(`/${username}?tab=${activeTab}`)
+            document.title = `Profile | ${user?.username}`
         }
-    }, [router, activeTab, pathName, username])
+    }, [router, activeTab, pathName, username, user])
 
     return (
         <main className='profile'>
@@ -54,32 +56,34 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
                 set={setShareLinkModal}
             />
             {pathName === 'main' &&
-                <button
-                    className='fixed z-[999] bottom-14 right-9 p-2 bg-clr-1 cursor-pointer rounded-full text-xl lg:text-3xl md:text-2xl'
-                    style={{
-                        boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
-                        animation: 'bounce 2s ease-in-out infinite'
-                    }}
-                    onClick={() => setPlusClicked((prev) => !prev)}>
-                    <AiOutlinePlus className={`plus-icon ${plusClicked && 'active'} w-full`} />
-                </button>}
-            <article className={`${plusClicked && 'show-action'} action`}>
-                <button
-                    onClick={() => setShareLinkModal(true)}
-                    className={`${poppins.className} flex gap-3 items-center tracking-wide text-clr-2 hover:text-clr-9 trans w-full`}>
-                    <span >
-                        Anonymous Link
-                    </span>
-                    <BiSolidMessageDetail className='text-lg lg:text-2xl md:text-xl' />
-                </button>
-                <button
-                    className={`${poppins.className} flex gap-3 items-center tracking-wide text-clr-2 hover:text-clr-9 trans w-full`}>
-                    <span>
-                        Host a Poll
-                    </span>
-                    <FaPollH className='text-lg lg:text-2xl md:text-xl' />
-                </button>
-            </article>
+                <>
+                    <button
+                        className='fixed z-[999] bottom-14 right-9 p-2 bg-clr-1 cursor-pointer rounded-full text-xl lg:text-3xl md:text-2xl'
+                        style={{
+                            boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+                            animation: 'bounce 2s ease-in-out infinite'
+                        }}
+                        onClick={() => setPlusClicked((prev) => !prev)}>
+                        <AiOutlinePlus className={`plus-icon ${plusClicked && 'active'} w-full`} />
+                    </button>
+                    <article className={`${plusClicked ? 'show-action' : ''} action`}>
+                        <button
+                            onClick={() => setShareLinkModal(true)}
+                            className={`${poppins.className} flex gap-3 items-center tracking-wide text-clr-2 hover:text-clr-9 trans w-full`}>
+                            <span >
+                                Anonymous Link
+                            </span>
+                            <BiSolidMessageDetail className='text-lg lg:text-2xl md:text-xl' />
+                        </button>
+                        <button
+                            className={`${poppins.className} flex gap-3 items-center tracking-wide text-clr-2 hover:text-clr-9 trans w-full`}>
+                            <span>
+                                Host a Poll
+                            </span>
+                            <FaPollH className='text-lg lg:text-2xl md:text-xl' />
+                        </button>
+                    </article>
+                </>}
             <article className="profile-header">
                 <h1 className='text-2xl text-clr-13 font-semibold tracking-wide md:text-3xl'>
                     {pathName === 'main' ? "Profile" : "User Profile"}
