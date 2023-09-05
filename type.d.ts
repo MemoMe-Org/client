@@ -114,6 +114,7 @@ interface Params {
 
 interface IProfile extends PathName {
     user: any
+    username?: string
 }
 
 interface State<T> {
