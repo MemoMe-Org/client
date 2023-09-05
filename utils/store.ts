@@ -36,17 +36,21 @@ const useTextEditor = create<TextEditorStates>()((set) => ({
 }))
 
 const initialMessageStore = {
+    page: 1,
     progress: 0,
     sent: false,
     medias: null,
+    messages: [],
     loading: false,
 }
 
 const useMessageStore = create<MessageStoreStates>()((set) => ({
     ...initialMessageStore,
+    setPage: (page: number) => set({ page }),
     setSent: (sent: boolean) => set({ sent }),
     resetStates: () => set(initialMessageStore),
     setLoading: (loading: boolean) => set({ loading }),
+    setMessages: (messages: any[]) => set({ messages }),
     setProgress: (progress: number) => set({ progress }),
     setMedias: (medias: null | File[]) => set({ medias }),
 }))
