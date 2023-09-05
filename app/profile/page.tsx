@@ -27,7 +27,7 @@ const page = () => {
                 }
             }).then((res: AxiosResponse) => {
                 setAuth(true)
-                return res.data || {}
+                return res.data?.user || {}
             }).catch((err: AxiosError) => {
                 const statusCode: unknown = err.response?.status
                 if (statusCode === 401 || statusCode === 403) {
@@ -46,8 +46,8 @@ const page = () => {
 
     if (isLoading) return <LoaderTwo />
 
-    const username = data?.user?.username
-    const avatar_url = data?.user?.Profile?.avatar?.url
+    const username = data?.username
+    const avatar_url = data?.Profile?.avatar?.url
 
     return (
         <>
@@ -57,7 +57,7 @@ const page = () => {
             />
 
             <Profile
-                user={data?.user}
+                user={data}
                 pathName='main'
             />
         </>
