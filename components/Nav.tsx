@@ -46,14 +46,14 @@ const NavBar: FC<NavProps> = ({ isAuthenticated, data }) => {
                                 {
                                     data?.avatar_url ?
                                         <Image
+                                            priority
                                             width={300}
                                             height={300}
                                             alt='avatar'
-                                            loading='lazy'
                                             src={data.avatar_url}
                                         /> :
                                         <div className={`${poppins.className} font-bold text-lg text-clr-2`}>
-                                            {data?.username![0].toUpperCase()}
+                                            {data?.username ? data?.username[0].toUpperCase() : ''}
                                         </div>
                                 }
                             </button>
