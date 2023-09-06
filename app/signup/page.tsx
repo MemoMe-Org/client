@@ -35,7 +35,10 @@ const page = () => {
 
     return (
         <>
-            <NavBar isAuthenticated={false} />
+            <NavBar
+                pathName='signup'
+                isAuthenticated={false}
+            />
             <AuthLayout
                 title='Signup'
                 pathName='signup'

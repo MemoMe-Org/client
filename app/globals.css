@@ -151,9 +151,13 @@ header {
     @apply md:px-14 px-10 md:py-2 py-1 flex justify-between w-full items-center;
 }
 
+.nav-btn-link {
+    @apply px-2 rounded-lg py-1 md:text-lg tracking-wider font-medium text-clr-0 bg-clr-4;
+}
+
 .nav-modal {
     @apply absolute top-16 right-1 w-40 min-h-[20px] tracking-wide rounded-lg pl-3 py-2 flex flex-col justify-center gap-2 text-clr-2 trans bg-white opacity-0;
-    transform: translateY(200%);
+    transform: translateY(-200%);
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
