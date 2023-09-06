@@ -73,12 +73,14 @@ body {
 
 .action {
     transform: translateY(-200%);
-    @apply bg-transparent absolute right-9 bottom-24 z-[9999] flex flex-col gap-5 mb-8 opacity-0 trans;
+    visibility: hidden;
+    @apply bg-transparent absolute right-9 bottom-28 z-0 flex flex-col gap-5 opacity-0 trans;
 }
 
 .action.show-action {
-    @apply opacity-[1];
+    @apply opacity-[1] z-[9999];
     transform: translate(0);
+    visibility: visible;
 }
 
 .card {
@@ -158,12 +160,14 @@ header {
 .nav-modal {
     @apply absolute top-16 right-1 w-40 min-h-[20px] tracking-wide rounded-lg pl-3 py-2 flex flex-col justify-center gap-2 text-clr-2 trans bg-white opacity-0;
     transform: translateY(-200%);
+    visibility: hidden;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .nav-modal.active {
     @apply opacity-[1];
-    transform: translate(0)
+    visibility: visible;
+    transform: translate(0);
 }
 
 .modal-header {
