@@ -39,7 +39,6 @@ const page = ({ params: { username } }: Params) => {
                     }
                 }
             ).then((res: AxiosResponse) => {
-                console.log(res.data?.user)
                 return res.data?.user
             }).catch((err: AxiosError) => {
                 const statusCode: unknown = err.response?.status
