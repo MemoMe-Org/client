@@ -24,7 +24,7 @@ const page = ({ params: { username } }: Params) => {
                     'Authorization': `Bearer ${token}`
                 }
             }).then((res: AxiosResponse) => {
-                return res.data?.user || {}
+                return res.data || {}
             }).catch((err: AxiosError) => {
                 const statusCode: unknown = err.response?.status
                 if (statusCode === 401 || statusCode === 404) {
@@ -55,12 +55,12 @@ const page = ({ params: { username } }: Params) => {
     return (
         <>
             <NavBar
-                isAuthenticated={data?.isAuthenticated}
+                isAuthenticated={data?.authUser?.isAuthenticated}
                 data={avatar_url ? { avatar_url } : { username: name }}
             />
 
             <Profile
-                user={data}
+                user={data?.user}
                 pathName='user'
                 username={username}
             />
