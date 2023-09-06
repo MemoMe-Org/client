@@ -104,13 +104,17 @@ interface MessageStates {
     date: string
     texts?: string | TrustedHTML
     private: boolean
-    files: [{
-        idx?: string
-        url?: string
-        path?: string
-        type?: string
-    }]
+    files: MsgFile[]
 }
+
+interface MsgFile {
+    idx: string
+    url: string
+    path: string
+    type: FileType
+}
+
+type FileType = 'video/mp4' | 'image/png' | 'image/jpeg'
 
 interface ModalStates {
     loading: boolean
