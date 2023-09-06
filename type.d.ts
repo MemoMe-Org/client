@@ -99,6 +99,19 @@ interface MessageStoreStates {
     setTotalMessages: (totalMessages: number) => void
 }
 
+interface MessageStates {
+    id: string
+    date: string
+    texts?: string | TrustedHTML
+    private: boolean
+    files: [{
+        idx?: string
+        url?: string
+        path?: string
+        type?: string
+    }]
+}
+
 interface ModalStates {
     loading: boolean
     avatarModal: boolean
