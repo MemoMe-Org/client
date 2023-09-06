@@ -10,7 +10,9 @@ import useToken from '@/hooks/useToken'
 import { poppins } from '@/public/fonts/f'
 import { useRouter } from 'next/navigation'
 
-const NavBar: FC<NavProps> = ({ isAuthenticated, data }) => {
+const NavBar: FC<NavProps> = ({
+    isAuthenticated, data, pathName
+}) => {
     const token = useToken()
     const router = useRouter()
     const [open, setOpen] = useState<boolean>(false)
@@ -23,38 +25,50 @@ const NavBar: FC<NavProps> = ({ isAuthenticated, data }) => {
     return (
         <header>
             <nav className='nav-bar'>
-                <Link href='/'
-                    className={`rounded-full object-cover overflow-hidden w-14 h-10`}>
-                    <Image
-                        src='https://d15zb4m4p46ai4.cloudfront.net/Dist/logo.png'
-                        alt='logo' priority
-                        width={150} height={150} />
-                </Link>
-                <div className='relative'>
-                    {!isAuthenticated && <div className='object-cover overflow-hidden w-24 h-14'>
+                {isAuthenticated ?
+                    <Link href='/'
+                        className={`rounded-full object-cover overflow-hidden w-14 h-10`}>
+                        <Image
+                            src='https://d15zb4m4p46ai4.cloudfront.net/Dist/logo.png'
+                            alt='logo' priority
+                            width={150} height={150} />
+                    </Link> :
+                    <div className='object-cover overflow-hidden w-24 h-14'>
                         <Image
                             src='https://d15zb4m4p46ai4.cloudfront.net/Dist/logo-2.png'
                             alt='logo' priority
                             width={300} height={300} />
-                    </div>}
-                    {
-                        isAuthenticated &&
+                    </div>
+                }
+                <div className='relative'>
+                    {!isAuthenticated &&
+                        <>
+                            {pathName === 'signup' ?
+                                <Link href='/login' className={`${poppins.className} nav-btn-link`}>
+                                    Login
+                                </Link> :
+                                <Link href='/login' className={`${poppins.className} nav-btn-link`}>
+                                    Sign Up
+                                </Link>
+                            }
+                        </>
+                    }
+                    {isAuthenticated &&
                         <>
                             <button
                                 onClick={() => setOpen(!open)}
                                 className='relative rounded-full overflow-hidden w-[50px] h-[50px] object-cover border-[0.125rem] border-clr-2 flex-shrink-0'>
-                                {
-                                    data?.avatar_url ?
-                                        <Image
-                                            priority
-                                            width={300}
-                                            height={300}
-                                            alt='avatar'
-                                            src={data.avatar_url}
-                                        /> :
-                                        <div className={`${poppins.className} font-bold text-lg text-clr-2`}>
-                                            {data?.username ? data?.username[0].toUpperCase() : ''}
-                                        </div>
+                                {data?.avatar_url ?
+                                    <Image
+                                        priority
+                                        width={300}
+                                        height={300}
+                                        alt='avatar'
+                                        src={data.avatar_url}
+                                    /> :
+                                    <div className={`${poppins.className} font-bold text-lg text-clr-2`}>
+                                        {data?.username ? data?.username[0].toUpperCase() : ''}
+                                    </div>
                                 }
                             </button>
                             <ul className={`${open && 'active'} font-medium nav-modal`}>
