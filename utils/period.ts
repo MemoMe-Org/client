@@ -5,7 +5,7 @@ const getPeriod = (timestamp: string): string => {
     if (timestamp) {
         const date: Date = parseISO(timestamp)
         const timePeriod: string = formatDistanceToNow(date)
-        period = `${timePeriod} ago..`
+        period = `${timePeriod}..`
     }
     return period
 }
