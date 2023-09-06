@@ -5,7 +5,7 @@ import axios from '@/app/api/axios'
 import { AxiosResponse } from 'axios'
 import useToken from '@/hooks/useToken'
 import { LoaderThree } from '../Loader'
-import { prompt } from '@/public/fonts/f'
+import { poppins, prompt } from '@/public/fonts/f'
 import { FC, useEffect, useState } from 'react'
 import { useMessageStore } from '@/utils/store'
 
@@ -48,27 +48,29 @@ const Messages: FC<TabProps> = ({ username }) => {
     }, [token, page])
 
     return (
-        <section className='relative mb-[20px]'>
-            <header className="flex items-center justify-between">
-                <h3>{totalMessages}</h3>
+        <section className='mb-[20px]'>
+            <header className="text-left">
+                <h3 className={`${poppins.className} font-medium text-sm tracking-wide mb-3`}>
+                    {totalMessages} Messages
+                </h3>
             </header>
-            <article className="grid w-full">
+            <article className="w-full gap-7 place-items-center grid grid-cols-1 md:grid-cols-2">
                 {messages.map((message) => (
                     <Message
                         key={message.id}
                         message={message}
                     />
                 ))}
-                <div className='w-full flex justify-center items-center'>
-                    {fetching ?
-                        <LoaderThree /> :
-                        <button
-                            className={`${messages.length === totalMessages && 'hidden'} ${prompt.className} mt-3 px-3 py-1.5 text-lg tracking-wider bg-clr-13 text-clr-0 w-fit rounded-full`}
-                            onClick={() => setPage((prev) => prev + 1)}>
-                            Load more
-                        </button>}
-                </div>
             </article>
+            <div className='w-full flex justify-center items-center'>
+                {fetching ?
+                    <LoaderThree /> :
+                    <button
+                        className={`${messages.length === totalMessages && 'hidden'} ${prompt.className} mt-3 px-3 py-1.5 text-lg tracking-wider bg-clr-13 text-clr-0 w-fit rounded-full`}
+                        onClick={() => setPage((prev) => prev + 1)}>
+                        Load more
+                    </button>}
+            </div>
         </section>
     )
 }
