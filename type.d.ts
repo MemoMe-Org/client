@@ -21,7 +21,7 @@ interface InputProps<T> {
     onChange: (value: T) => void
 }
 
-interface NavProps {
+interface NavProps extends PathName {
     data?: {
         username?: string
         avatar_url?: string
