@@ -1,8 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
+import Message from './Message'
 import axios from '@/app/api/axios'
 import { AxiosResponse } from 'axios'
 import useToken from '@/hooks/useToken'
+import { LoaderThree } from '../Loader'
+import { prompt } from '@/public/fonts/f'
 import { FC, useEffect, useState } from 'react'
 import { useMessageStore } from '@/utils/store'
 
@@ -14,7 +17,7 @@ const Messages: FC<TabProps> = ({ username }) => {
         setFetching, totalMessages,
     } = useMessageStore()
     const [page, setPage] = useState<number>(1)
-    const [messages, setMessages] = useState<any[]>([])
+    const [messages, setMessages] = useState<MessageStates[]>([])
 
     const fetchMessages = async (): Promise<void> => {
         if (fetching) {
@@ -44,19 +47,27 @@ const Messages: FC<TabProps> = ({ username }) => {
         }
     }, [token, page])
 
-    console.log(messages)
-
     return (
-        <section className='mb-[200px]'>
+        <section className='relative mb-[20px]'>
             <header className="flex items-center justify-between">
-                <h3>30 Messages</h3>
+                <h3>{totalMessages}</h3>
             </header>
             <article className="grid w-full">
-                <button
-                    className={`${messages.length === totalMessages && 'hidden'}`}
-                    onClick={() => setPage((prev) => prev + 1)}>
-                    Load more
-                </button>
+                {messages.map((message) => (
+                    <Message
+                        key={message.id}
+                        message={message}
+                    />
+                ))}
+                <div className='w-full flex justify-center items-center'>
+                    {fetching ?
+                        <LoaderThree /> :
+                        <button
+                            className={`${messages.length === totalMessages && 'hidden'} ${prompt.className} mt-3 px-3 py-1.5 text-lg tracking-wider bg-clr-13 text-clr-0 w-fit rounded-full`}
+                            onClick={() => setPage((prev) => prev + 1)}>
+                            Load more
+                        </button>}
+                </div>
             </article>
         </section>
     )
