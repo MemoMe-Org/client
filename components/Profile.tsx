@@ -6,11 +6,11 @@ import dynamic from 'next/dynamic'
 import Avatar from './Modals/Avatar'
 import Socials from './Modals/Socials'
 import { useModalStore } from '@/utils/store'
-import formatNumber from '@/utils/formatNumber'
 import { FC, useState, useEffect } from 'react'
 import {
     AiOutlineCamera, AiOutlinePlus, LuVerified
 } from '@/public/icons/ico'
+import { formatNumber } from '@/utils/formatNumber'
 import { poppins, questrial } from '@/public/fonts/f'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { BiSolidMessageDetail, FaPollH } from '@/public/icons/ico'
