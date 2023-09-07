@@ -164,7 +164,7 @@ const page = ({ params: { username } }: Params) => {
                         style={{
                             boxShadow: `rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px`
                         }}>
-                        {(!data?.allowTexts && !data?.allowFiles) ?
+                        {(data?.allowTexts === false && data?.allowFiles === false) ?
                             <p className={`${poppins.className} text-xl font-medium tracking-wide text-clr-13`}>
                                 {`They've currently turned off all their channels.`}
                             </p> :
