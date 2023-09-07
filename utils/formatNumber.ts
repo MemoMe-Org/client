@@ -26,7 +26,7 @@ const formatSize = (size: number) => {
     } else if (size >= KB) {
         format = `${(size / KB).toFixed(2)}KB`
     } else {
-        format = ''
+        format = size
     }
 
     return format
