@@ -48,7 +48,7 @@ const Messages: FC<TabProps> = ({ username }) => {
     }, [token, page])
 
     return (
-        <section className='mb-[20px]'>
+        <section className='mb-[30px]'>
             <header className="text-left">
                 <h3 className={`${poppins.className} font-medium text-sm tracking-wide mb-3`}>
                     {totalMessages} Messages
