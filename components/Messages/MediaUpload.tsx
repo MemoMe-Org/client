@@ -2,6 +2,7 @@
 import { poppins } from '@/public/fonts/f'
 import { ChangeEvent, FC, useRef } from 'react'
 import { useMessageStore } from '@/utils/store'
+import { formatSize } from '@/utils/formatNumber'
 import { AiOutlineCloudUpload } from '@/public/icons/ico'
 
 const MediasUpload: FC = () => {
@@ -37,7 +38,12 @@ const MediasUpload: FC = () => {
                 <div className='flex flex-col gap-2 text-xs flex-shrink items-center'>
                     {!medias && <span>Maximum of two files.</span>}
                     <span>JPG, MP4, PNG - 9MB Max Each</span>
-                    {medias && <span>{`${medias.length} file(s) selected.`}</span>}
+                    {medias &&
+                        <span>
+                            {
+                                `${medias.length} file(s) selected - ${medias?.map((media) => formatSize(media.size))}`
+                            }
+                        </span>}
                 </div>
                 {
                     medias ?
