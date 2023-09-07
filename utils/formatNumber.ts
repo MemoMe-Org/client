@@ -15,4 +15,21 @@ const formatNumber = (n: number): string => {
     }
 }
 
-export default formatNumber
+const formatSize = (size: number) => {
+    let format = ''
+
+    const KB = 1_024
+    const MB = 1_024 * 1_024
+
+    if (size >= MB) {
+        format = `${(size / MB).toFixed(2)}MB`
+    } else if (size >= KB) {
+        format = `${(size / KB).toFixed(2)}KB`
+    } else {
+        format = ''
+    }
+
+    return format
+}
+
+export { formatNumber, formatSize }
