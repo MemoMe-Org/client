@@ -136,19 +136,18 @@ const page = ({ params: { username } }: Params) => {
                 <section className='w-[90vw] max-w-[700px] flex flex-col gap-7 mx-auto'>
                     <article className='flex gap-4 items-center'>
                         <div className='grid place-items-center h-[5rem] w-[5rem] rounded-full overflow-hidden border-[2px] bg-clr-0 border-clr-5'>
-                            {
-                                avatar_url ?
-                                    <Image
-                                        src={avatar_url}
-                                        alt='avatar'
-                                        priority
-                                        width={300}
-                                        height={300}
-                                        className='object-cover w-full h-full'
-                                    /> :
-                                    <div className={`${lato.className} text-clr-2 text-3xl font-bold`}>
-                                        {name ? name![0].toUpperCase() : "0"}
-                                    </div>
+                            {avatar_url ?
+                                <Image
+                                    alt='avatar'
+                                    priority
+                                    width={300}
+                                    height={300}
+                                    src={avatar_url}
+                                    className='object-cover w-full h-full'
+                                /> :
+                                <div className={`${lato.className} text-clr-2 text-3xl font-bold`}>
+                                    {name ? name![0].toUpperCase() : "0"}
+                                </div>
                             }
                         </div>
                         <div className='flex flex-col gap-1.5 flex-wrap'>
