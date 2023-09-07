@@ -14,7 +14,10 @@ const checkFile = (file: any): boolean => {
     return false
 }
 
-const blob = (e: ChangeEvent<HTMLInputElement>, set: (get: string) => void): void => {
+const blob = (
+    e: ChangeEvent<HTMLInputElement>,
+    set: (get: string) => void
+): void => {
     const file: any = e.target.files![0]
     const reader: FileReader = new FileReader()
     if (checkFile(file)) {
