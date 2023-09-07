@@ -1,8 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 import Link from 'next/link'
+import Image from 'next/image'
 import axios from '@/app/api/axios'
 import NavBar from '@/components/Nav'
 import useToken from '@/hooks/useToken'
@@ -138,10 +138,12 @@ const page = ({ params: { username } }: Params) => {
                         <div className='grid place-items-center h-[5rem] w-[5rem] rounded-full overflow-hidden border-[2px] bg-clr-0 border-clr-5'>
                             {
                                 avatar_url ?
-                                    <img
+                                    <Image
                                         src={avatar_url}
                                         alt='avatar'
-                                        loading='lazy'
+                                        priority
+                                        width={300}
+                                        height={300}
                                         className='object-cover w-full h-full'
                                     /> :
                                     <div className={`${lato.className} text-clr-2 text-3xl font-bold`}>
