@@ -152,7 +152,9 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
                             }
                         </>
                         <p className='flex gap-3 items-center justify-center font-semibold cursor-pointer text-clr-2 text-xl md:text-3xl lg:text-5xl tracking-wide'>
-                            <Link href={`/anon/${user?.username}`} target='_check'>
+                            <Link
+                                href={`/anon/${user?.username}`}
+                                target='_blank'>
                                 @{user?.username}
                             </Link>
                             {user?.Account?.verified && <LuVerified />}

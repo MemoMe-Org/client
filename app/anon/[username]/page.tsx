@@ -152,7 +152,11 @@ const page = ({ params: { username } }: Params) => {
                         </div>
                         <div className='flex flex-col gap-1.5 flex-wrap'>
                             <div className={`${questrial.className} flex gap-2 items-center text-clr-2 font-medium text-lg`}>
-                                <Link href={`/${data?.username}`}>@{data?.username}</Link>
+                                <Link
+                                    href={`/${data?.username}`}
+                                    target='_blank'>
+                                    @{data?.username}
+                                </Link>
                                 {data?.verified && <LuVerified />}
                             </div>
                             <p className={`${poppins.className} text-clr-13 text-sm`}>
