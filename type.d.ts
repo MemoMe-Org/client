@@ -150,3 +150,10 @@ interface ModalProps extends State<boolean> {
 interface ModalComponent extends State<boolean> {
     data?: T
 }
+
+type MyPageType = 'settings' | 'profile' | 'account'
+
+interface MyPage {
+    param: MyPageType
+    children: (props: { data: any }) => ReactNode
+}
