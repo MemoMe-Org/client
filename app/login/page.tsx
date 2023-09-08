@@ -24,7 +24,6 @@ const page = () => {
             .then((res: AxiosResponse) => {
                 resetStates()
                 notify('success', res.data?.msg)
-                localStorage.setItem('settings', JSON.stringify(res.data?.settings))
                 setTimeout(() => {
                     router.push('/profile')
                 }, 300)
