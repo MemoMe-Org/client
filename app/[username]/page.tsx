@@ -24,7 +24,7 @@ const page = ({ params: { username } }: Params) => {
                     'Authorization': `Bearer ${token}`
                 }
             }).then((res: AxiosResponse) => {
-                return res.data || {}
+                return res.data
             }).catch((err: AxiosError) => {
                 const statusCode: unknown = err.response?.status
                 if (statusCode === 401 || statusCode === 404) {
