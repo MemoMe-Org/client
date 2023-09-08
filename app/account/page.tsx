@@ -23,11 +23,11 @@ const page = () => {
                                     <p>This is your account username.</p>
                                     <div>
                                         <div>memome.one/</div>
+                                        <input
+                                            value={userId}
+                                            onChange={(e) => setUserId(e.target.value)}
+                                        />
                                     </div>
-                                    <input
-                                        value={userId}
-                                        onChange={(e) => setUserId(e.target.value)}
-                                    />
                                 </div>
                                 <footer>
                                     <p>Please use 32 characters at maximum.</p>
