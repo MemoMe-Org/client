@@ -42,10 +42,10 @@ const Messages: FC<TabProps> = ({ username }) => {
 
     useEffect(() => {
         if (token) {
-            (async () => await fetchMessages())()
+            fetchMessages()
         } else {
             if (token === '') {
-                (async () => await fetchMessages())()
+                fetchMessages()
             }
         }
     }, [token, page])
