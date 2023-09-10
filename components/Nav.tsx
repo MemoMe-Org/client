@@ -6,19 +6,17 @@ import Link from 'next/link'
 import Image from 'next/image'
 import logout from '@/lib/logout'
 import { useState, FC } from 'react'
-import useToken from '@/hooks/useToken'
 import { poppins } from '@/public/fonts/f'
 import { useRouter } from 'next/navigation'
 
 const NavBar: FC<NavProps> = ({
     isAuthenticated, data, pathName
 }) => {
-    const token = useToken()
     const router = useRouter()
     const [open, setOpen] = useState<boolean>(false)
 
     const handleLogout = async () => {
-        const res = await logout(token as string)
+        const res = await logout()
         if (res) router.push('/login')
     }
 
