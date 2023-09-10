@@ -1,18 +1,17 @@
-import axiosReq from 'axios'
+import axiosStatic from 'axios'
 
 const isProd = process.env.NODE_ENV === 'production'
 
 const baseUrl = isProd ? process.env.NEXT_PUBLIC_AUTH_URL : 'http://localhost:2002'
 const generativeUrl = isProd ? process.env.NEXT_PUBLIC_GEN_URL : 'http://localhost:1002'
 
-const axios = axiosReq.create({
+const axios = axiosStatic.create({
     baseURL: baseUrl,
     withCredentials: true,
     headers: {
         'Content-Type': 'application/json'
     }
 })
-
 
 axios.interceptors.response.use(
     (response) => {
@@ -24,7 +23,7 @@ axios.interceptors.response.use(
         if (err.response.status === 401 && err.response.data.message === 'Access token expired.') {
             try {
                 const res = await axios.post('/auth/refresh')
-                document.cookie = `access_token=${res.data.access_token}; path=/; domain=''; secure; samesite=strict; max-age=${20 * 60}`
+                req.headers.authorization = `Bearer ${res.data.access_token}`
 
                 return axios(req)
             } catch (refreshError) {
@@ -34,8 +33,14 @@ axios.interceptors.response.use(
     }
 )
 
+const axiosReq = axiosStatic.create({
+    baseURL: baseUrl,
+    headers: {
+        'Content-Type': 'application/json'
+    }
+})
 
-const generativeApi = axiosReq.create({
+const generativeApi = axiosStatic.create({
     baseURL: generativeUrl,
     headers: {
         'Content-Type': 'application/json'
@@ -43,4 +48,4 @@ const generativeApi = axiosReq.create({
 })
 
 export default axios
-export { generativeApi }
+export { generativeApi, axiosReq }
