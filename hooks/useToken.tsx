@@ -1,19 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 import { useEffect } from 'react'
+import getCookie from '@/utils/getCookie'
 import { UserStore } from '@/utils/store'
 
 const useToken = () => {
     const { token, setToken } = UserStore()
 
     useEffect(() => {
-        const authCookie = document.cookie
-            .split('; ')
-            .find((row: any) => row.startsWith(`auth=`))
-            ?.split('=')[1] || ''
+        const access_token = getCookie('access_token')
 
-        setToken(authCookie)
+        setToken(access_token)
     }, [])
 
     return token
