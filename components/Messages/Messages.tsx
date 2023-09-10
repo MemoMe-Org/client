@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 import Message from './Message'
-import axios from '@/app/api/axios'
 import { AxiosResponse } from 'axios'
 import useToken from '@/hooks/useToken'
 import { LoaderThree } from '../Loader'
 import MessageMenu from './MessageMenu'
+import { axiosReq } from '@/app/api/axios'
 import { FC, useEffect, useState } from 'react'
 import { useMessageStore } from '@/utils/store'
 import { poppins, prompt } from '@/public/fonts/f'
@@ -26,7 +26,7 @@ const Messages: FC<TabProps> = ({ username }) => {
             return
         }
         setFetching(true)
-        await axios.get(
+        await axiosReq.get(
             `/api/msg/${username}?limit=${limit}&page=${page}`,
             {
                 headers: {
