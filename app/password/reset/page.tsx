@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client"
-import axios from '@/app/api/axios'
 import notify from '@/utils/notify'
 import NavBar from '@/components/Nav'
 import Input from '@/components/Input'
 import OtpInput from 'react-otp-input'
 import { UserStore } from '@/utils/store'
+import { axiosReq } from '@/app/api/axios'
 import { useRouter } from 'next/navigation'
 import { FcLock } from '@/public/icons/ico'
 import throwError from '@/utils/throwError'
@@ -22,7 +22,7 @@ const page = () => {
 
     const handlePswdReset = async () => {
         setLoading(true)
-        await axios.post(
+        await axiosReq.post(
             '/auth/verify', { otp, password, password2 }
         ).then((res: AxiosResponse) => {
             notify('success', res.data?.msg)

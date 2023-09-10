@@ -2,9 +2,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 import { useEffect } from 'react'
-import axios from '@/app/api/axios'
 import NavBar from '@/components/Nav'
 import useToken from '@/hooks/useToken'
+import { axiosReq } from '@/app/api/axios'
 import Profile from '@/components/Profile'
 import throwError from '@/utils/throwError'
 import { useRouter } from 'next/navigation'
@@ -19,7 +19,7 @@ const page = ({ params: { username } }: Params) => {
     const { refetch, data, isLoading } = useQuery({
         queryKey: ['user_profile'],
         queryFn: async () => {
-            return await axios.get(`/api/user/${username}`, {
+            return await axiosReq.get(`/api/user/${username}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

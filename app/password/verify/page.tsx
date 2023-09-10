@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client"
-import axios from '@/app/api/axios'
 import notify from '@/utils/notify'
 import NavBar from '@/components/Nav'
 import Input from '@/components/Input'
 import { UserStore } from '@/utils/store'
+import { axiosReq } from '@/app/api/axios'
 import throwError from '@/utils/throwError'
 import { useRouter } from 'next/navigation'
 import AuthLayout from '@/components/AuthLayout'
@@ -17,7 +17,7 @@ const page = () => {
 
     const handleReqeustOTP = async () => {
         setLoading(true)
-        await axios.post('/auth/req-otp', { email })
+        await axiosReq.post('/auth/req-otp', { email })
             .then((res: AxiosResponse) => {
                 notify('success', res.data?.msg)
                 setTimeout(() => {

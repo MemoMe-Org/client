@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client"
-import axios from '@/app/api/axios'
 import notify from '@/utils/notify'
 import NavBar from '@/components/Nav'
 import Input from '@/components/Input'
 import { UserStore } from '@/utils/store'
+import { axiosReq } from '@/app/api/axios'
 import throwError from '@/utils/throwError'
 import { useRouter } from 'next/navigation'
 import AuthLayout from '@/components/AuthLayout'
@@ -20,7 +20,7 @@ const page = () => {
 
     const handleSignup = async () => {
         setLoading(true)
-        await axios.post('/auth/signup', {
+        await axiosReq.post('/auth/signup', {
             email, password, password2
         }).then((res: AxiosResponse) => {
             resetStates()

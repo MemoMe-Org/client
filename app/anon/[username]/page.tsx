@@ -3,10 +3,10 @@
 "use client"
 import Link from 'next/link'
 import Image from 'next/image'
-import axios from '@/app/api/axios'
 import NavBar from '@/components/Nav'
 import useToken from '@/hooks/useToken'
 import { useEffect, useRef } from 'react'
+import { axiosReq } from '@/app/api/axios'
 import throwError from '@/utils/throwError'
 import { useRouter } from 'next/navigation'
 import CheckMark from '@/components/CheckMark'
@@ -31,7 +31,7 @@ const page = ({ params: { username } }: Params) => {
     const { data, isLoading, refetch } = useQuery({
         queryKey: ['anon-user'],
         queryFn: async () => {
-            return await axios.get(
+            return await axiosReq.get(
                 `/api/msg/anon/${username.toLowerCase().trim()}`,
                 {
                     headers: {
@@ -97,7 +97,7 @@ const page = ({ params: { username } }: Params) => {
             }
         })
 
-        await axios.post(
+        await axiosReq.post(
             `/api/msg/anon/${username}`, formData,
             {
                 headers: {

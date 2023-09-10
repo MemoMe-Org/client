@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client"
-import axios from '@/app/api/axios'
 import notify from '@/utils/notify'
 import NavBar from '@/components/Nav'
 import Input from '@/components/Input'
+import { axiosReq } from '@/app/api/axios'
 import { UserStore } from '@/utils/store'
 import throwError from '@/utils/throwError'
 import { useRouter } from 'next/navigation'
@@ -20,7 +20,7 @@ const page = () => {
 
     const handleLogin = async () => {
         setLoading(true)
-        await axios.post('/auth/login', { userId, password })
+        await axiosReq.post('/auth/login', { userId, password })
             .then((res: AxiosResponse) => {
                 resetStates()
                 notify('success', res.data?.msg)
