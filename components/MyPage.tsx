@@ -8,39 +8,43 @@ import throwError from '@/utils/throwError'
 import { useRouter } from 'next/navigation'
 import { LoaderTwo } from '@/components/Loader'
 import { useEffect, useState, FC } from 'react'
-import { useQuery } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
 
 const MyPage: FC<MyPage> = ({ children, param }) => {
     const token = useToken()
     const router = useRouter()
 
+    const [data, setData] = useState<any>({})
     const [auth, setAuth] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
-    const { refetch, data, isLoading } = useQuery({
-        queryKey: [param],
-        queryFn: async () => {
-            return await axios.get(`/auth/api/${param}`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            }).then((res: AxiosResponse) => {
-                setAuth(true)
-                return res.data?.user || {}
-            }).catch((err: AxiosError) => {
-                const statusCode: unknown = err.response?.status
-                if (statusCode === 401 || statusCode === 403) {
-                    router.push('/login')
-                } else {
-                    throwError(err)
-                }
-            })
-        },
-        enabled: false
-    })
+    const handleMyPage = async (): Promise<void> => {
+        setIsLoading(true)
+        await axios.get(`/auth/api/${param}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then((res: AxiosResponse) => {
+            setAuth(true)
+            setData(res.data?.user || {})
+        }).catch((err: AxiosError) => {
+            const statusCode: unknown = err.response?.status
+            if (statusCode === 401 || statusCode === 403) {
+                router.push('/login')
+            } else {
+                throwError(err)
+            }
+        }).finally(() => setIsLoading(false))
+    }
 
     useEffect(() => {
-        if (token) refetch()
+        if (token) {
+            handleMyPage()
+        } else {
+            if (token === '') {
+                handleMyPage()
+            }
+        }
     }, [token])
 
     if (isLoading) return <LoaderTwo />
