@@ -4,11 +4,9 @@
 import axios from '@/app/api/axios'
 import NavBar from '@/components/Nav'
 import useToken from '@/hooks/useToken'
-import throwError from '@/utils/throwError'
 import { useRouter } from 'next/navigation'
 import { LoaderTwo } from '@/components/Loader'
 import { useEffect, useState, FC } from 'react'
-import { AxiosError, AxiosResponse } from 'axios'
 
 const MyPage: FC<MyPage> = ({ children, param }) => {
     const token = useToken()
@@ -20,21 +18,15 @@ const MyPage: FC<MyPage> = ({ children, param }) => {
 
     const handleMyPage = async (): Promise<void> => {
         setIsLoading(true)
-        await axios.get(`/auth/api/${param}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }).then((res: AxiosResponse) => {
+        try {
+            const res = await axios.get(`/auth/api/${param}`)
             setAuth(true)
             setData(res.data?.user || {})
-        }).catch((err: AxiosError) => {
-            const statusCode: unknown = err.response?.status
-            if (statusCode === 401 || statusCode === 403) {
-                router.push('/login')
-            } else {
-                throwError(err)
-            }
-        }).finally(() => setIsLoading(false))
+        } catch (err: any) {
+            console.log(err)
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     useEffect(() => {

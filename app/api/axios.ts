@@ -20,7 +20,7 @@ axios.interceptors.response.use(
     async (err) => {
         const req = err.config
 
-        if (err.response.status === 401 && err.response.data.message === 'Access token expired.') {
+        if (err.response.status === 401 && err.response.data.msg === 'Access token expired.') {
             try {
                 const res = await axios.post('/auth/refresh')
                 req.headers.authorization = `Bearer ${res.data.access_token}`
