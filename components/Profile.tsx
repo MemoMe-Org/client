@@ -139,7 +139,7 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
                                             onMouseEnter={() => setOnMouse(true)}
                                             className={`${onMouse && 'hovered'} relative profile-not-avatar`}>
                                             <div className={`${poppins.className} font-bold text-5xl text-clr-2`}>
-                                                {user?.username![0].toUpperCase()}
+                                                {user?.username ? user?.username[0].toUpperCase() : '0'}
                                             </div>
                                             <div className={`hidden ${onMouse && 'cam-ico'}`}>
                                                 <AiOutlineCamera
