@@ -1,11 +1,12 @@
-import axiosStatic from 'axios'
+import getCookie from '@/utils/getCookie'
+import axiosStatic, { AxiosInstance } from 'axios'
 
 const isProd = process.env.NODE_ENV === 'production'
 
 const baseUrl = isProd ? process.env.NEXT_PUBLIC_AUTH_URL : 'http://localhost:2002'
 const generativeUrl = isProd ? process.env.NEXT_PUBLIC_GEN_URL : 'http://localhost:1002'
 
-const axios = axiosStatic.create({
+const axios: AxiosInstance = axiosStatic.create({
     baseURL: baseUrl,
     withCredentials: true,
     headers: {
@@ -13,17 +14,29 @@ const axios = axiosStatic.create({
     }
 })
 
+axios.interceptors.request.use(
+    (config) => {
+        const accessToken = getCookie('access_token')
+        if (accessToken) {
+            config.headers.Authorization = `Bearer ${accessToken}`
+        }
+        return config
+    },
+    (error) => {
+        return Promise.reject(error)
+    }
+)
+
 axios.interceptors.response.use(
     (response) => {
         return response
     },
     async (err) => {
-        const req = err.config
-
-        if (err.response.status === 401 && err.response.data.msg === 'Access token expired.') {
+        if (err.response.status === 401) {
+            const req = err.config
             try {
                 const res = await axios.post('/auth/refresh')
-                req.headers.authorization = `Bearer ${res.data.access_token}`
+                req.headers.authorization = `Bearer ${res.data?.access_token}`
 
                 return axios(req)
             } catch (refreshError) {
@@ -33,11 +46,12 @@ axios.interceptors.response.use(
     }
 )
 
-const axiosReq = axiosStatic.create({
+const axiosReq: AxiosInstance = axiosStatic.create({
     baseURL: baseUrl,
     headers: {
         'Content-Type': 'application/json'
-    }
+    },
+    withCredentials: true
 })
 
 const generativeApi = axiosStatic.create({
