@@ -214,6 +214,15 @@ header {
     @apply flex gap-3 items-center cursor-pointer text-clr-4 trans;
 }
 
+.social-list {
+    @apply rounded-lg w-full bg-clr-1 text-clr-0;
+}
+
+.social-list p,
+.social-list a {
+    @apply flex justify-between items-center px-2 py-1.5 text-lg tracking-wider;
+}
+
 
 /* Loader Two */
 .lds-roller {
