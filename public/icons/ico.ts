@@ -9,7 +9,10 @@ import { FiLogOut, FiSettings } from 'react-icons/fi'
 import { BsFillSendFill, BsDownload } from 'react-icons/bs'
 import { RiDeleteBin6Line, RiDeleteBin7Line } from 'react-icons/ri'
 import { FaUnderline, FaItalic, FaBold, FaPollH } from 'react-icons/fa'
-import { AiOutlineGithub, AiOutlineCamera, AiOutlinePlus, AiOutlineCloudUpload } from 'react-icons/ai'
+import {
+    AiOutlineGithub, AiOutlineCamera, AiOutlinePlus, AiOutlineCloudUpload,
+    AiOutlineTwitter, AiOutlineWhatsApp, AiFillCopy
+} from 'react-icons/ai'
 
 
 export {
@@ -17,5 +20,6 @@ export {
     FaUnderline, FaItalic, BiSolidMessageDetail, LuVerified, BsFillSendFill,
     AiOutlineCamera, AiOutlinePlus, LiaPollHSolid, AiOutlineCloudUpload,
     FaPollH, ImCancelCircle, RiDeleteBin6Line, FaBold, BsDownload,
-    MdOutlinePrivacyTip, RiDeleteBin7Line
+    MdOutlinePrivacyTip, RiDeleteBin7Line, AiOutlineTwitter,
+    AiOutlineWhatsApp, AiFillCopy
 }
