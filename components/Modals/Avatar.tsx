@@ -4,9 +4,7 @@ import Image from 'next/image'
 import blob from '@/utils/file'
 import axios from '@/app/api/axios'
 import notify from '@/utils/notify'
-import useToken from '@/hooks/useToken'
 import { LoaderThree } from '../Loader'
-import throwError from '@/utils/throwError'
 import { ChangeEvent, FC, useState } from 'react'
 import { AxiosResponse, AxiosError } from 'axios'
 import { poppins, questrial } from '@/public/fonts/f'
@@ -14,7 +12,6 @@ import { UserStore, useModalStore } from '@/utils/store'
 import { AiOutlineCloudUpload, RiDeleteBin6Line } from '@/public/icons/ico'
 
 const Avatar: FC<ModalComponent> = ({ get, set, data }) => {
-    const token = useToken()
     const { avatar, setAvatar } = UserStore()
     const { loading, setLoading } = useModalStore()
     const [avatarPreview, setAvatarPreview] = useState<string>('')
@@ -27,38 +24,34 @@ const Avatar: FC<ModalComponent> = ({ get, set, data }) => {
             formData.append('avatar', avatar, avatar.name)
         }
 
-        await axios.post(
-            '/auth/api/avatar', formData,
-            {
+        try {
+            const res = await axios.post(
+                '/auth/api/avatar', formData, {
                 headers: {
-                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/formdata'
                 }
-            }
-        ).then((res: AxiosResponse) => {
+            })
             set(false)
             notify('success', res.data?.msg)
             setTimeout(() => {
                 window.location.reload()
             }, 450)
-        }).catch((err: AxiosError) => throwError(err)).finally(() => setLoading(false))
+        } catch (err) {
+            console.log(err)
+        } finally {
+            setLoading(false)
+        }
     }
 
     const delAvatar = async (): Promise<void> => {
-        await axios.delete(
-            '/auth/api/avatar',
-            {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            }
-        ).then((res: AxiosResponse) => {
-            set(false)
-            notify('success', res.data?.msg)
-            setTimeout(() => {
-                window.location.reload()
-            }, 450)
-        }).catch((err: AxiosError) => throwError(err))
+        await axios.delete('/auth/api/avatar')
+            .then((res: AxiosResponse) => {
+                set(false)
+                notify('success', res.data?.msg)
+                setTimeout(() => {
+                    window.location.reload()
+                }, 450)
+            })
     }
 
     const cancel = () => {
