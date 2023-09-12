@@ -33,7 +33,7 @@ const Modal: FC<ModalProps> = ({ children, get, set }) => {
                             >
                                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-clr-12 p-6 text-left align-middle shadow-xl transition-all">
                                     <button
-                                        className={`${poppins.className} absolute top-2 right-2 p-2 bg-clr-1 text-clr-0 font-semibold text-lg md:text-xl trans hover:text-clr-6 hover:bg-clr-9 rounded-full`}
+                                        className={`${poppins.className} absolute top-2 right-2 p-2 bg-clr-4 text-clr-0 font-semibold text-lg md:text-xl trans hover:text-clr-6 hover:bg-clr-5 rounded-full`}
                                         onClick={() => set(!get)}>
                                         <ImCancelCircle />
                                     </button>
