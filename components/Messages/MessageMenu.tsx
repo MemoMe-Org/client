@@ -1,6 +1,5 @@
 import axios from '@/app/api/axios'
 import notify from '@/utils/notify'
-import useToken from '@/hooks/useToken'
 import { poppins } from '@/public/fonts/f'
 import throwError from '@/utils/throwError'
 import { useMessageStore } from '@/utils/store'
@@ -15,32 +14,25 @@ const MessageMenu: FC<{
     messages: MessageStates[],
     setMessages: Dispatch<SetStateAction<MessageStates[]>>
 }> = ({ message, messages, setMessages }) => {
-    const token = useToken()
     const { setTotalMessages } = useMessageStore()
     const [visible, setVisible] = useState<boolean>(message.private)
 
     const handleVisibility = async (msgId: string) => {
-        await axios.get(`/api/msg/edit/${msgId}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }).then((res: AxiosResponse) => {
-            setVisible((prev) => !prev)
-            notify('success', res.data?.msg)
-        }).catch((err: AxiosError) => throwError(err))
+        await axios.get(`/api/msg/edit/${msgId}`)
+            .then((res: AxiosResponse) => {
+                setVisible((prev) => !prev)
+                notify('success', res.data?.msg)
+            }).catch((err: AxiosError) => throwError(err))
     }
 
     const handleDelete = async (msgId: string) => {
-        await axios.delete(`/api/msg/delete/${msgId}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }).then((res: AxiosResponse) => {
-            notify('success', res.data?.msg)
-            const filteredMessages = messages.filter((msg) => msg.id !== msgId)
-            setMessages(filteredMessages)
-            setTotalMessages(filteredMessages.length)
-        }).catch((err: AxiosError) => throwError(err))
+        await axios.delete(`/api/msg/delete/${msgId}`)
+            .then((res: AxiosResponse) => {
+                notify('success', res.data?.msg)
+                const filteredMessages = messages.filter((msg) => msg.id !== msgId)
+                setMessages(filteredMessages)
+                setTotalMessages(filteredMessages.length)
+            }).catch((err: AxiosError) => throwError(err))
     }
 
     return (
