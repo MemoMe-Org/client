@@ -8,7 +8,6 @@ const page = () => {
     return (
         <MyPage param='account'>
             {({ data }) => {
-                setUserId(data?.username)
                 return (
                     <main className='profile'>
                         <article className="profile-header">
@@ -24,6 +23,7 @@ const page = () => {
                                     <div>
                                         <div>memome.one/</div>
                                         <input
+                                            placeholder={data?.username}
                                             value={userId}
                                             onChange={(e) => setUserId(e.target.value)}
                                         />

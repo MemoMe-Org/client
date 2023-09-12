@@ -74,7 +74,7 @@ body {
 .action {
     transform: translateY(-200%);
     visibility: hidden;
-    @apply bg-transparent absolute right-9 bottom-28 z-0 flex flex-col gap-5 opacity-0 trans;
+    @apply bg-transparent fixed right-9 bottom-28 z-0 flex flex-col gap-5 opacity-0 trans;
 }
 
 .action.show-action {

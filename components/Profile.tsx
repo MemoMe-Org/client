@@ -69,7 +69,7 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
                         onClick={() => setPlusClicked((prev) => !prev)}>
                         <AiOutlinePlus className={`plus-icon ${plusClicked && 'active'} w-full`} />
                     </button>
-                    <article className={`${plusClicked ? 'show-action' : ''} action`}>
+                    <div className={`${plusClicked ? 'show-action' : ''} action`}>
                         <button
                             onClick={() => setShareLinkModal(true)}
                             className={`${poppins.className} flex gap-3 items-center tracking-wide text-clr-2 hover:text-clr-9 trans w-full`}>
@@ -85,7 +85,7 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
                             </span>
                             <FaPollH className='text-lg lg:text-2xl md:text-xl' />
                         </button>
-                    </article>
+                    </div>
                 </>}
             <article className="profile-header">
                 <h1 className='text-2xl text-clr-13 font-semibold tracking-wide md:text-3xl'>
