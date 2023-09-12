@@ -41,14 +41,14 @@ const Messages: FC<TabProps> = ({ username }) => {
     }
 
     useEffect(() => {
-        if (token) {
+        if (token && username) {
             fetchMessages()
         } else {
-            if (token === '') {
+            if (token === '' && username) {
                 fetchMessages()
             }
         }
-    }, [token, page])
+    }, [token, page, username])
 
     return (
         <section className='mb-[30px]'>
