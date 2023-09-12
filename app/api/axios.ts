@@ -1,7 +1,7 @@
-import getCookie from '@/utils/getCookie'
-import throwError from '@/utils/throwError'
-import axiosStatic, { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
+import axiosStatic, { AxiosInstance } from 'axios'
 
+let refSubs = []
+let isRef = false
 const isProd = process.env.NODE_ENV === 'production'
 
 const baseUrl = isProd ? process.env.NEXT_PUBLIC_AUTH_URL : 'http://localhost:2002'
@@ -15,36 +15,33 @@ const axios: AxiosInstance = axiosStatic.create({
     }
 })
 
-axios.interceptors.request.use(
-    (config) => {
-        const accessToken = getCookie('access_token')
-        if (accessToken) {
-            config.headers.authorization = `Bearer ${accessToken}`
-        }
-        return config
-    },
-    (error) => {
-        return Promise.reject(error)
-    }
-)
-
 axios.interceptors.response.use(
     (response) => {
         return response
     },
-    async (err) => {
-        const req = err.config
-        if (err.response && err.response.status === 401 && !req._retry) {
-            req._retry = true
-            await axios.post('/auth/refresh')
-                .then((res: AxiosResponse) => {
-                    req.headers.authorization = `Bearer ${res.data?.access_token}`
+    async (error) => {
+        if (error.response.status === 401) {
+            const req = error.config
+
+            if (!isRef) {
+                isRef = true
+                try {
+                    await axios.post('/auth/refresh')
                     return axios(req)
-                }).catch((err: AxiosError) => {
-                    throwError(err)
+                } catch (err) {
                     return Promise.reject(err)
+                } finally {
+                    isRef = false
+                }
+            } else {
+                return new Promise((resolve) => {
+                    refSubs.push(() => {
+                        resolve(axios(req))
+                    })
                 })
+            }
         }
+        return Promise.reject(error)
     }
 )
 
