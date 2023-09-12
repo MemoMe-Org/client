@@ -7,7 +7,6 @@ import { prompt } from '@/public/fonts/f'
 import { BsDownload } from '@/public/icons/ico'
 
 const Message: FC<{ message: MessageStates }> = ({ message }) => {
-    console.log(message)
 
     const captureDivRef = useRef<HTMLDivElement>(null)
 
@@ -26,6 +25,8 @@ const Message: FC<{ message: MessageStates }> = ({ message }) => {
             downloadLink.download = `memome_${id}.png`
             downloadLink.click()
         })
+
+        // trust me - I am coming back to it.
     }
 
     return (
