@@ -17,19 +17,21 @@ const Levels: FC<LevelProps> = ({ msgPoint, pollPoint }) => {
                 type: 'poll',
                 point: pollPoint,
             },
-        ];
+        ]
 
-        (async (): Promise<void> => {
-            const resolvedData = await Promise.all(tempData.map(async (temp) => {
-                const promisedData = await handleLevel(temp.type, temp.point)
-                const data: ILevel = {
-                    ...temp,
-                    level: promisedData?.level
-                }
-                return data
-            }))
-            setData(resolvedData)
-        })()
+        if (msgPoint && pollPoint) {
+            (async (): Promise<void> => {
+                const resolvedData = await Promise.all(tempData.map(async (temp) => {
+                    const promisedData = await handleLevel(temp.type, temp.point)
+                    const data: ILevel = {
+                        ...temp,
+                        level: promisedData?.level
+                    }
+                    return data
+                }))
+                setData(resolvedData)
+            })()
+        }
     }, [msgPoint, pollPoint])
 
     return (
