@@ -54,6 +54,9 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
             <Socials
                 get={shareLinkModal}
                 set={setShareLinkModal}
+                data={{
+                    username: user?.username,
+                }}
             />
             {pathName === 'main' &&
                 <>
