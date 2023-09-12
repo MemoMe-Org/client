@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 import { useEffect } from 'react'
 import getCookie from '@/utils/getCookie'
@@ -11,7 +10,7 @@ const useToken = () => {
         const access_token = getCookie('access_token')
 
         setToken(access_token)
-    }, [])
+    }, [setToken])
 
     return token
 }
