@@ -1,5 +1,6 @@
 import getCookie from '@/utils/getCookie'
-import axiosStatic, { AxiosInstance } from 'axios'
+import throwError from '@/utils/throwError'
+import axiosStatic, { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -18,7 +19,7 @@ axios.interceptors.request.use(
     (config) => {
         const accessToken = getCookie('access_token')
         if (accessToken) {
-            config.headers.Authorization = `Bearer ${accessToken}`
+            config.headers.authorization = `Bearer ${accessToken}`
         }
         return config
     },
@@ -32,16 +33,17 @@ axios.interceptors.response.use(
         return response
     },
     async (err) => {
-        if (err.response.status === 401) {
-            const req = err.config
-            try {
-                const res = await axios.post('/auth/refresh')
-                req.headers.authorization = `Bearer ${res.data?.access_token}`
-
-                return axios(req)
-            } catch (refreshError) {
-                return Promise.reject(refreshError)
-            }
+        const req = err.config
+        if (err.response && err.response.status === 401 && !req._retry) {
+            req._retry = true
+            await axios.post('/auth/refresh')
+                .then((res: AxiosResponse) => {
+                    req.headers.authorization = `Bearer ${res.data?.access_token}`
+                    return axios(req)
+                }).catch((err: AxiosError) => {
+                    throwError(err)
+                    return Promise.reject(err)
+                })
         }
     }
 )
