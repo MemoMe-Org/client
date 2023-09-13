@@ -11,7 +11,9 @@ import { AxiosError, AxiosResponse } from 'axios'
 
 const MyPage: FC<MyPage> = ({ children, param }) => {
     const router = useRouter()
-    const { setUserId } = UserStore()
+    const {
+        setUserId, setDisabled
+    } = UserStore()
     const [data, setData] = useState<any>({})
     const [auth, setAuth] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -21,8 +23,11 @@ const MyPage: FC<MyPage> = ({ children, param }) => {
         await axios.get(`/auth/api/${param}`)
             .then((res: AxiosResponse) => {
                 setAuth(true)
-                setData(res.data?.user || {})
-                setUserId(res.data?.user?.username)
+                const user = res.data?.user || {}
+                setData(user)
+                setUserId(user?.username)
+                setDisabled(user?.Account?.disabled)
+                // more set actions coming
             }).catch((err: AxiosError) => {
                 const statusCodes: unknown = err.response?.status
                 if (statusCodes === 401 || statusCodes === 403) {
@@ -46,7 +51,6 @@ const MyPage: FC<MyPage> = ({ children, param }) => {
                 isAuthenticated={auth}
                 data={avatar_url ? { avatar_url } : { username }}
             />
-
             {children({ data })}
         </>
     )
