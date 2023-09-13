@@ -5,6 +5,7 @@ import axios from '@/app/api/axios'
 import NavBar from '@/components/Nav'
 import { UserStore } from '@/utils/store'
 import { useRouter } from 'next/navigation'
+import throwError from '@/utils/throwError'
 import { LoaderTwo } from '@/components/Loader'
 import { useEffect, useState, FC } from 'react'
 import { AxiosError, AxiosResponse } from 'axios'
@@ -32,6 +33,8 @@ const MyPage: FC<MyPage> = ({ children, param }) => {
                 const statusCodes: unknown = err.response?.status
                 if (statusCodes === 401 || statusCodes === 403) {
                     router.push('/login')
+                } else {
+                    throwError(err)
                 }
             }).finally(() => setIsLoading(false))
     }
