@@ -9,6 +9,7 @@ const initialUserStore = {
     password: '',
     password2: '',
     loading: false,
+    disabled: false,
 }
 
 const UserStore = create<UserStoreStates>()((set) => ({
@@ -23,6 +24,7 @@ const UserStore = create<UserStoreStates>()((set) => ({
     setLoading: (loading: boolean) => set({ loading }),
     setAvatar: (avatar: File | null) => set({ avatar }),
     setPassword: (password: string) => set({ password }),
+    setDisabled: (disabled: boolean) => set({ disabled }),
     setPassword2: (password2: string) => set({ password2 }),
 }))
 
