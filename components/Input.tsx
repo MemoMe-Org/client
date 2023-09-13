@@ -27,6 +27,10 @@ const Input: FC<InputProps<string>> = ({
             <input
                 type={type}
                 value={value}
+                autoComplete='off'
+                spellCheck='false'
+                autoCorrect='false'
+                autoCapitalize='false'
                 placeholder={placeholder}
                 onChange={(e) => onChange(type === "email" ? e.target.value.toLowerCase().trim() : e.target.value)}
                 className="outline-none rounded-full py-1 px-1.5 text-[15px] text-clr-4 tracking-wider border-[2px] border-clr-3 focus:border-clr-1 focus:bg-clr-11 trans"
