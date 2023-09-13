@@ -89,7 +89,6 @@ const NavBar: FC<NavProps> = ({
                                         <span>Settings</span>
                                     </Link>
                                 </li>
-
                                 <li>
                                     <button onClick={async () => await handleLogout()}
                                         className='flex items-center gap-3 trans hover:text-clr-9'>
