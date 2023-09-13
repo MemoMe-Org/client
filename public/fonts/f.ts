@@ -10,7 +10,7 @@ const questrial = Questrial({
 })
 
 const inter = Inter({
-    weight: '400',
+    weight: ['400', '500', '700'],
     subsets: ['latin']
 })
 
