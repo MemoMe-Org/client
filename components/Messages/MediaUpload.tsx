@@ -6,8 +6,8 @@ import { formatSize } from '@/utils/formatNumber'
 import { AiOutlineCloudUpload } from '@/public/icons/ico'
 
 const MediasUpload: FC = () => {
-    const fileInputRef = useRef<HTMLInputElement>(null)
     const { medias, setMedias } = useMessageStore()
+    const fileInputRef = useRef<HTMLInputElement>(null)
 
     const handleFileButtonClick = () => {
         if (fileInputRef.current) {
