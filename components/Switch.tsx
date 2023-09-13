@@ -1,11 +1,11 @@
 import { FC } from 'react'
 import { Switch } from '@headlessui/react'
 
-const SwitchBtn: FC<State<boolean>> = ({ get, set }) => {
+const SwitchBtn: FC<SwitchProps> = ({ get, handler }) => {
     return (
         <Switch
             checked={get}
-            onChange={set}
+            onChange={async () => await handler()}
             className={`${get ? 'bg-clr-9' : 'bg-clr-3'}
             relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}>
             <span
