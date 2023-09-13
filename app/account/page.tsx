@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client"
+import axios from '../api/axios'
 import { useState } from 'react'
 import notify from '@/utils/notify'
 import MyPage from '@/components/MyPage'
 import { UserStore } from '@/utils/store'
 import Input from '@/components/EditInput'
 import SwitchBtn from '@/components/Switch'
-import { inter, poppins } from '@/public/fonts/f'
-import axios from '../api/axios'
-import { AxiosError, AxiosResponse } from 'axios'
 import throwError from '@/utils/throwError'
+import { inter, poppins } from '@/public/fonts/f'
+import { AxiosError, AxiosResponse } from 'axios'
 import { LoaderThree } from '@/components/Loader'
 
 const page = () => {
