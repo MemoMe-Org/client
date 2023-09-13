@@ -3,6 +3,7 @@
 "use client"
 import axios from '@/app/api/axios'
 import NavBar from '@/components/Nav'
+import { UserStore } from '@/utils/store'
 import { useRouter } from 'next/navigation'
 import { LoaderTwo } from '@/components/Loader'
 import { useEffect, useState, FC } from 'react'
@@ -10,6 +11,7 @@ import { AxiosError, AxiosResponse } from 'axios'
 
 const MyPage: FC<MyPage> = ({ children, param }) => {
     const router = useRouter()
+    const { setUserId } = UserStore()
     const [data, setData] = useState<any>({})
     const [auth, setAuth] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -20,6 +22,7 @@ const MyPage: FC<MyPage> = ({ children, param }) => {
             .then((res: AxiosResponse) => {
                 setAuth(true)
                 setData(res.data?.user || {})
+                setUserId(res.data?.user?.username)
             }).catch((err: AxiosError) => {
                 const statusCodes: unknown = err.response?.status
                 if (statusCodes === 401 || statusCodes === 403) {
