@@ -120,6 +120,10 @@ body {
     @apply rounded relative;
 }
 
+.save-btn-2 {
+    @apply trans bg-clr-16 hover:bg-clr-16/75 text-clr-0 rounded-lg px-3 py-1.5 text-sm md:text-base shadow-md disabled:bg-clr-16/30
+}
+
 /* Check mark */
 .wrapper {
     @apply h-[100vh] flex justify-center items-center bg-clr-0 fixed top-0 z-[99999999] w-full;
