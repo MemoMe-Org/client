@@ -68,6 +68,7 @@ interface UserStoreStates {
     userId: string
     loading: boolean
     password: string
+    disabled: boolean
     password2: string
     avatar: File | null
     token: string | undefined
@@ -79,6 +80,7 @@ interface UserStoreStates {
     setUserId: (userId: string) => void
     setLoading: (loading: boolean) => void
     setPassword: (password: string) => void
+    setDisabled: (disabled: boolean) => void
     setAvatar: (avatar: File | null) => void
     setPassword2: (password2: string) => void
 }
