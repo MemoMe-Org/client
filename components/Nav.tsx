@@ -7,12 +7,13 @@ import Image from 'next/image'
 import logout from '@/lib/logout'
 import { useState, FC } from 'react'
 import { poppins } from '@/public/fonts/f'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 
 const NavBar: FC<NavProps> = ({
     isAuthenticated, data, pathName
 }) => {
     const router = useRouter()
+    const pathname = usePathname()
     const [open, setOpen] = useState<boolean>(false)
 
     const handleLogout = async () => {
@@ -70,18 +71,25 @@ const NavBar: FC<NavProps> = ({
                                 }
                             </button>
                             <ul className={`${open && 'active'} font-medium nav-modal`}>
-                                <li>
-                                    <Link href='/settings' className='flex items-center gap-3 trans hover:text-clr-3'>
-                                        <FiSettings />
-                                        <span>Settings</span>
+                                <li className={`${pathname === '/profile' && 'hidden'}`}>
+                                    <Link href='/profile' className='flex items-center gap-3 trans hover:text-clr-3'>
+                                        <RiAccountCircleFill />
+                                        <span>Profile</span>
                                     </Link>
                                 </li>
-                                <li>
+                                <li className={`${pathname === '/account' && 'hidden'}`}>
                                     <Link href='/account' className='flex items-center gap-3 trans hover:text-clr-3'>
                                         <RiAccountCircleFill />
                                         <span>Account</span>
                                     </Link>
                                 </li>
+                                <li className={`${pathname === '/settings' && 'hidden'}`}>
+                                    <Link href='/settings' className='flex items-center gap-3 trans hover:text-clr-3'>
+                                        <FiSettings />
+                                        <span>Settings</span>
+                                    </Link>
+                                </li>
+
                                 <li>
                                     <button onClick={async () => await handleLogout()}
                                         className='flex items-center gap-3 trans hover:text-clr-9'>
