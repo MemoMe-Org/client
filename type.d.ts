@@ -153,6 +153,10 @@ interface ModalComponent extends State<boolean> {
     data?: T
 }
 
+interface SwitchProps extends State<boolean> {
+    handler: () => Promise<void>
+}
+
 type MyPageType = 'settings' | 'profile' | 'account'
 
 interface MyPage {
