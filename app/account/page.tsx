@@ -26,7 +26,7 @@ const page = () => {
 
     const editPswd = async (): Promise<void> => {
         setPswdLoading(true)
-        await axios.put(
+        await axios.patch(
             '/auth/api/account/reset-pswd',
             { pswd, password, password2 }
         ).then((res: AxiosResponse) => {
@@ -162,7 +162,7 @@ const page = () => {
                                             Permanently remove your Personal Account and all of its contents from Memome.
                                         </p>
                                     </div>
-                                    <footer className='px-7 py-2 md:flex-col md:justify-center md:gap-5 flex justify-between items-center bg-clr-20 w-full border-t-[0.75px]'>
+                                    <footer className='flex md:justify-between items-center flex-col text-center gap-3 px-7 py-2 bg-clr-20 w-full border-t-[0.75px]'>
                                         <p className='text-clr-17 text-xs md:text-sm'>
                                             This action is Irreversible, so please continue with caution.
                                         </p>
