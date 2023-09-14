@@ -5,15 +5,15 @@ import Link from 'next/link'
 import Image from 'next/image'
 import NavBar from '@/components/Nav'
 import useToken from '@/hooks/useToken'
-import { useEffect, useRef } from 'react'
 import { axiosReq } from '@/app/api/axios'
 import throwError from '@/utils/throwError'
-import { useRouter } from 'next/navigation'
 import CheckMark from '@/components/CheckMark'
 import { LoaderTwo } from '@/components/Loader'
 import { useMessageStore } from '@/utils/store'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
+import { useEffect, useRef, useState } from 'react'
+import { notFound, useRouter } from 'next/navigation'
 import TextEditor from '@/components/Messages/TextEditor'
 import { lato, poppins, questrial } from '@/public/fonts/f'
 import MediasUpload from '@/components/Messages/MediaUpload'
@@ -27,6 +27,7 @@ const page = ({ params: { username } }: Params) => {
         medias, resetStates, loading, setLoading,
     } = useMessageStore()
     const textEditorRef = useRef<HTMLDivElement>(null)
+    const [forbidden, setForbidden] = useState<boolean>(false)
 
     const { data, isLoading, refetch } = useQuery({
         queryKey: ['anon-user'],
@@ -43,7 +44,7 @@ const page = ({ params: { username } }: Params) => {
             }).catch((err: AxiosError) => {
                 const statusCode: unknown = err.response?.status
                 if (statusCode === 401 || statusCode === 404) {
-                    router.push('/404')
+                    setForbidden(true)
                 } else {
                     throwError(err)
                 }
@@ -67,6 +68,8 @@ const page = ({ params: { username } }: Params) => {
     }, [token])
 
     if (isLoading) return <LoaderTwo />
+
+    if (forbidden) return notFound()
 
     const name = data?.username
     const avatar_url = data?.avatar?.url
