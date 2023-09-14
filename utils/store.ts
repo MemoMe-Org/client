@@ -15,26 +15,26 @@ const initialUserStore = {
 const UserStore = create<UserStoreStates>()((set) => ({
     token: undefined,
     ...initialUserStore,
-    setOtp: (otp: string) => set({ otp }),
+    setOtp: (otp) => set({ otp }),
+    setAuth: (auth) => set({ auth }),
+    setToken: (token) => set({ token }),
+    setEmail: (email) => set({ email }),
+    setUserId: (userId) => set({ userId }),
+    setAvatar: (avatar) => set({ avatar }),
     resetStates: () => set(initialUserStore),
-    setAuth: (auth: boolean) => set({ auth }),
-    setToken: (token: string) => set({ token }),
-    setEmail: (email: string) => set({ email }),
-    setUserId: (userId: string) => set({ userId }),
-    setLoading: (loading: boolean) => set({ loading }),
-    setAvatar: (avatar: File | null) => set({ avatar }),
-    setPassword: (password: string) => set({ password }),
-    setDisabled: (disabled: boolean) => set({ disabled }),
-    setPassword2: (password2: string) => set({ password2 }),
+    setLoading: (loading) => set({ loading }),
+    setPassword: (password) => set({ password }),
+    setDisabled: (disabled) => set({ disabled }),
+    setPassword2: (password2) => set({ password2 }),
 }))
 
 const useTextEditor = create<TextEditorStates>()((set) => ({
     isBold: false,
     isItalic: false,
     isUnderline: false,
-    setIsBold: (isBold: boolean) => set({ isBold }),
-    setIsItalic: (isItalic: boolean) => set({ isItalic }),
-    setIsUnderline: (isUnderline: boolean) => set({ isUnderline }),
+    setIsBold: (isBold) => set({ isBold }),
+    setIsItalic: (isItalic) => set({ isItalic }),
+    setIsUnderline: (isUnderline) => set({ isUnderline }),
 }))
 
 const initialMessageStore = {
@@ -48,13 +48,13 @@ const initialMessageStore = {
 
 const useMessageStore = create<MessageStoreStates>()((set) => ({
     ...initialMessageStore,
-    setSent: (sent: boolean) => set({ sent }),
+    setSent: (sent) => set({ sent }),
+    setMedias: (medias) => set({ medias }),
+    setLoading: (loading) => set({ loading }),
     resetStates: () => set(initialMessageStore),
-    setLoading: (loading: boolean) => set({ loading }),
-    setFetching: (fetching: boolean) => set({ fetching }),
-    setProgress: (progress: number) => set({ progress }),
-    setMedias: (medias: null | File[]) => set({ medias }),
-    setTotalMessages: (totalMessages: number) => set({ totalMessages }),
+    setFetching: (fetching) => set({ fetching }),
+    setProgress: (progress) => set({ progress }),
+    setTotalMessages: (totalMessages) => set({ totalMessages }),
 }))
 
 const useModalStore = create<ModalStates>()((set) => ({
@@ -62,10 +62,22 @@ const useModalStore = create<ModalStates>()((set) => ({
     avatarModal: false,
     shareLinkModal: false,
     createPollModal: false,
-    setLoading: (loading: boolean) => set({ loading }),
-    setAvatarModal: (avatarModal: boolean) => set({ avatarModal }),
-    setShareLinkModal: (shareLinkModal: boolean) => set({ shareLinkModal }),
-    setCreatePollModal: (createPollModal: boolean) => set({ createPollModal }),
+    setLoading: (loading) => set({ loading }),
+    setAvatarModal: (avatarModal) => set({ avatarModal }),
+    setShareLinkModal: (shareLinkModal) => set({ shareLinkModal }),
+    setCreatePollModal: (createPollModal) => set({ createPollModal }),
 }))
 
-export { UserStore, useTextEditor, useMessageStore, useModalStore }
+
+const usePoll = create<Poll>()((set) => ({
+    options: [
+        { id: 1, option: '' },
+        { id: 2, option: '' },
+    ],
+    setOptions: (options) => set({ options })
+}))
+
+export {
+    UserStore, useTextEditor, useModalStore,
+    useMessageStore, usePoll,
+}
