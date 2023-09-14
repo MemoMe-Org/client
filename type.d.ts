@@ -163,3 +163,13 @@ interface MyPage {
     param: MyPageType
     children: (props: { data: any }) => ReactNode
 }
+
+interface PollOption {
+    id: number
+    option: string
+}
+
+interface Poll {
+    options: PollOption[]
+    setOptions: (poll: PollOption[]) => void
+}
