@@ -5,6 +5,7 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import Avatar from './Modals/Avatar'
 import Socials from './Modals/Socials'
+import CreatePoll from './Polls/CreatePoll'
 import { useModalStore } from '@/utils/store'
 import { FC, useState, useEffect } from 'react'
 import {
@@ -24,6 +25,7 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
     const {
         avatarModal, setAvatarModal,
         shareLinkModal, setShareLinkModal,
+        createPollModal, setCreatePollModal,
     } = useModalStore()
 
     const [onMouse, setOnMouse] = useState<boolean>(false)
@@ -54,6 +56,13 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
             <Socials
                 get={shareLinkModal}
                 set={setShareLinkModal}
+                data={{
+                    username: user?.username,
+                }}
+            />
+            <CreatePoll
+                get={createPollModal}
+                set={setCreatePollModal}
                 data={{
                     username: user?.username,
                 }}
