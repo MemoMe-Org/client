@@ -25,36 +25,35 @@ const MediasUpload: FC<MediaUploadProps> = ({ get, set, id }) => {
     }
 
     return (
-        <section className='mt-6'>
+        <section className='py-1.5 px-0.5 mt-2'>
             <h6 className={`flex gap-2 items-center text-[16px] font-medium tracking-wide ${poppins.className}`}>
                 <span className='text-clr-4'>Medias</span>
                 <span className='text-clr-7'>*</span>
             </h6>
-            <label htmlFor='anon_files'
-                className='flex justify-between gap-2 items-center border-[2px] border-dashed border-clr-12 min-h-[50px] w-full rounded-xl mt-2 px-2 py-1.5 cursor-pointer'>
+            <label htmlFor={id}
+                className='flex justify-between gap-2 items-center border-[2px] border-dashed border-clr-17 min-h-[50px] w-full rounded-xl mt-2 px-2 py-1.5 cursor-pointer'>
                 <AiOutlineCloudUpload />
                 <div className='flex flex-col gap-2 text-xs flex-shrink items-center'>
                     {!get && <span>Maximum of two files.</span>}
-                    <span>JPG, MP4, PNG - 9MB Max Each</span>
+                    <span>JPG, MP4, PNG - 9MB</span>
                     {get &&
                         <span>
                             {
-                                `${get.length} file(s) selected - ${get?.map((media) => formatSize(media.size))}`
+                                `${get.length} file(s) - ${get?.map((media) => formatSize(media.size))}`
                             }
                         </span>}
                 </div>
-                {
-                    get ?
-                        <button
-                            onClick={() => set(null)}
-                            className={`${poppins.className} px-1 py-0.5 rounded-full text-sm border-[1px] border-clr-11 hover:bg-clr-6 hover:text-clr-5 trans`}>
-                            Clear
-                        </button> :
-                        <button
-                            onClick={handleFileButtonClick}
-                            className={`${poppins.className} px-1 py-0.5 rounded-full text-sm border-[1px] border-clr-11 hover:bg-clr-6 hover:text-clr-5 trans`}>
-                            Browse
-                        </button>
+                {get ?
+                    <button
+                        onClick={() => set(null)}
+                        className={`${poppins.className} px-1 py-0.5 rounded-full text-sm border-[1px] border-clr-11 hover:bg-clr-6 hover:text-clr-5 trans`}>
+                        Clear
+                    </button> :
+                    <button
+                        onClick={() => handleFileButtonClick()}
+                        className={`${poppins.className} px-1 py-0.5 rounded-full text-sm border-[1px] border-clr-11 hover:bg-clr-6 hover:text-clr-5 trans`}>
+                        Browse
+                    </button>
                 }
             </label>
             <input
