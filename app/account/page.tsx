@@ -84,7 +84,7 @@ const page = () => {
                                             onChange={setUserId}
                                         />
                                     </div>
-                                    <footer className='px-7 py-2 flex justify-between items-center bg-clr-14 w-full border-t-[0.75px]'>
+                                    <footer className='profile-footer'>
                                         <p className='text-clr-17 text-xs md:text-sm'>
                                             Please use 32 characters at maximum.
                                         </p>
@@ -97,7 +97,7 @@ const page = () => {
                                     </footer>
                                 </article>
                                 {/* Change Password */}
-                                <article className='rounded-lg border-[0.75px]  overflow-hidden'>
+                                {data?.auth_method === 'local' && <article className='rounded-lg border-[0.75px]  overflow-hidden'>
                                     <div className='flex flex-col gap-3.5 pt-8 px-6 pb-5'>
                                         <h3 className={`${inter.className} text-clr-16 font-medium tracking-wide text-[20px]`}>
                                             Change Password
@@ -123,7 +123,7 @@ const page = () => {
                                             />
                                         </div>
                                     </div>
-                                    <footer className='px-7 py-2 flex justify-between items-center bg-clr-14 w-full border-t-[0.75px]'>
+                                    <footer className='profile-footer'>
                                         <p className='text-clr-17 text-xs md:text-sm'>
                                             Please choose a strong password.
                                         </p>
@@ -133,7 +133,7 @@ const page = () => {
                                             {pswdLoading ? <LoaderThree /> : 'Save'}
                                         </button>
                                     </footer>
-                                </article>
+                                </article>}
                                 {/* Account disabling */}
                                 <article className='rounded-lg border-[0.75px]  overflow-hidden'>
                                     <div className='flex flex-col gap-3.5 pt-8 px-6 pb-5'>
@@ -146,7 +146,7 @@ const page = () => {
                                             handler={toggleDisbility}
                                         />
                                     </div>
-                                    <footer className='px-7 py-2 flex justify-between items-center bg-clr-14 w-full border-t-[0.75px]'>
+                                    <footer className='profile-footer'>
                                         <p className='text-clr-17 text-xs md:text-sm'>
                                             Make your account {disabled ? 'active.' : 'inactive.'}
                                         </p>
