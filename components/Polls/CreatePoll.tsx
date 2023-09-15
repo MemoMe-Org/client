@@ -18,7 +18,7 @@ const CreatePoll: FC<State<boolean>> = ({ get, set }) => {
         setTitle, options, title,
         hosting, setHosting, pollUrl,
         medias, setMedias, setOptions,
-        setPollUrl,
+        setPollUrl, setPollToDefault,
     } = usePoll()
 
     const handlePollHost = async (): Promise<void> => {
@@ -37,10 +37,8 @@ const CreatePoll: FC<State<boolean>> = ({ get, set }) => {
             }
         }
 
-        for (const option in payload.options) {
-            formData.append('options', option)
-        }
 
+        formData.append('options', payload.options as any)
         formData.append('texts', payload.texts)
 
         await axios.post(
@@ -54,6 +52,7 @@ const CreatePoll: FC<State<boolean>> = ({ get, set }) => {
         ).then((res: AxiosResponse) => {
             set(false)
             setPollModal(true)
+            setPollToDefault()
             setPollUrl(res.data?.url)
         }).catch((err: AxiosError) => throwError(err))
             .finally(() => setHosting(false))
