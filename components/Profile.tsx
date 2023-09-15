@@ -88,6 +88,7 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
                             <BiSolidMessageDetail className='text-lg lg:text-2xl md:text-xl' />
                         </button>
                         <button
+                            onClick={() => setCreatePollModal(true)}
                             className={`${poppins.className} flex gap-3 items-center tracking-wide text-clr-2 hover:text-clr-9 trans w-full`}>
                             <span>
                                 Host a Poll
