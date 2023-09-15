@@ -182,6 +182,7 @@ interface Poll {
     medias: File[] | null
     expiry: null | string
     options: PollOption[]
+    setPollToDefault: () => void
     setTitle: (title: string) => void
     setPollUrl: (pollUrl: string) => void
     setHosting: (hosting: boolean) => void
