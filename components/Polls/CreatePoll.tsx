@@ -26,10 +26,7 @@ const CreatePoll: FC<State<boolean>> = ({ get, set }) => {
 
         const formData: FormData = new FormData()
 
-        const payload = {
-            options,
-            texts: title,
-        }
+        formData.append('title', title)
 
         if (medias) {
             for (let i = 0; i < medias.length; i++) {
@@ -37,9 +34,9 @@ const CreatePoll: FC<State<boolean>> = ({ get, set }) => {
             }
         }
 
-
-        formData.append('options', payload.options as any)
-        formData.append('texts', payload.texts)
+        for (const option of options) {
+            formData.append('options', option.option)
+        }
 
         await axios.post(
             '/api/poll/create',
@@ -64,6 +61,7 @@ const CreatePoll: FC<State<boolean>> = ({ get, set }) => {
                 get={pollModal}
                 set={setPollModal}
             >
+                <p>{pollUrl}</p>
                 {/* Poll url modal */}
             </Modal>
             <Modal
