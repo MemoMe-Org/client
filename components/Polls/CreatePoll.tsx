@@ -1,11 +1,15 @@
-import { ChangeEvent, FC } from 'react'
 import Modal from '../Modal'
 import { usePoll } from '@/utils/store'
+import { ChangeEvent, FC, useState } from 'react'
 
 const CreatePoll: FC<ModalComponent> = ({ get, set, data }) => {
     const {
+        file, setFile,
         options, setOptions
     } = usePoll()
+    const [
+        filePreview, setMFilePreview
+    ] = useState<string>('')
 
     const handleOptionChange = (
         id: number,
