@@ -168,7 +168,7 @@ const page = ({ params: { username } }: Params) => {
                         </div>
                     </article>
                     <article
-                        className={`${(data?.allowTexts && data?.allowFiles) ? 'min-h-[450px]' : (!data?.allowTexts && data?.allowFiles) ? 'min-h-[270px]' : (data?.allowTexts && !data?.allowFiles) ? 'min-h-[340px]' : 'min-h-[150px]'} relative p-5 rounded-lg bg-clr-0`}
+                        className={`rounded-lg bg-clr-0 p-5 relative ${(data?.allowTexts && data?.allowFiles) ? 'min-h-[450px]' : (!data?.allowTexts && data?.allowFiles) ? 'min-h-[270px]' : (data?.allowTexts && !data?.allowFiles) ? 'min-h-[340px]' : 'min-h-[150px]'}`}
                         style={{
                             boxShadow: `rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px`
                         }}>
@@ -177,22 +177,20 @@ const page = ({ params: { username } }: Params) => {
                                 {`They've currently turned off all their channels.`}
                             </p> :
                             <>
-                                <div className='absolute bottom-2.5 right-3.5'>
-                                    {!loading ?
-                                        <button
-                                            className={`rounded-full px-3 py-1.5 font-medium tracking-wider bg-clr-1 text-clr-11 flex gap-2 items-center text-lg hover:bg-clr-8 hover:text-clr-11 ${questrial.className}`}
-                                            onClick={async () => await sendMsg()}>
-                                            <BsFillSendFill />
-                                            <span>Send</span>
-                                        </button> :
-                                        <div className='w-[100px] bg-clr-6 h-5 overflow-hidden rounded-full'>
-                                            <div
-                                                className='h-full bg-clr-1 rounded-full transition-all duration-500 ease-in-out'
-                                                style={{
-                                                    width: `${progress}%`
-                                                }} />
-                                        </div>}
-                                </div>
+                                {!loading ?
+                                    <button
+                                        className={`rounded-full px-3 py-1.5 font-medium tracking-wider bg-clr-1 text-clr-11 flex gap-2 items-center text-lg hover:bg-clr-8 hover:text-clr-11 ${questrial.className} absolute bottom-2.5 right-3.5`}
+                                        onClick={async () => await sendMsg()}>
+                                        <BsFillSendFill />
+                                        <span>Send</span>
+                                    </button> :
+                                    <div className='w-[100px] bg-clr-6 h-5 overflow-hidden rounded-full'>
+                                        <div
+                                            className='h-full bg-clr-1 rounded-full transition-all duration-500 ease-in-out'
+                                            style={{
+                                                width: `${progress}%`
+                                            }} />
+                                    </div>}
                                 {(!data?.allowTexts && !data?.allowFiles) || <h5 className={`${poppins.className} absolute top-2 left-4 text-lg text-clr-13 tracking-wider font-semibold`}>
                                     {`I won't know who sent it!`}
                                 </h5>}
