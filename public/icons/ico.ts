@@ -11,7 +11,8 @@ import { RiDeleteBin6Line, RiDeleteBin7Line } from 'react-icons/ri'
 import { FaUnderline, FaItalic, FaBold, FaPollH } from 'react-icons/fa'
 import {
     AiOutlineGithub, AiOutlineCamera, AiOutlinePlus, AiOutlineCloudUpload,
-    AiOutlineTwitter, AiOutlineWhatsApp, AiFillCopy
+    AiOutlineTwitter, AiOutlineWhatsApp, AiFillCopy, AiOutlinePlusSquare,
+    AiOutlineMinusSquare
 } from 'react-icons/ai'
 
 
@@ -21,5 +22,6 @@ export {
     AiOutlineCamera, AiOutlinePlus, LiaPollHSolid, AiOutlineCloudUpload,
     FaPollH, ImCancelCircle, RiDeleteBin6Line, FaBold, BsDownload,
     MdOutlinePrivacyTip, RiDeleteBin7Line, AiOutlineTwitter,
-    AiOutlineWhatsApp, AiFillCopy
+    AiOutlineWhatsApp, AiFillCopy, AiOutlinePlusSquare,
+    AiOutlineMinusSquare
 }
