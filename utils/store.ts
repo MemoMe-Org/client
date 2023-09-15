@@ -72,14 +72,14 @@ const useModalStore = create<ModalStates>()((set) => ({
 
 const usePoll = create<Poll>()((set) => ({
     title: '',
-    file: null,
+    medias: null,
     expiry: null,
     options: [
         { id: uuid(), option: '' },
         { id: uuid(), option: '' },
     ],
-    setFile: (file) => set({ file }),
     setTitle: (title) => set({ title }),
+    setMedias: (medias) => set({ medias }),
     setExpiry: (expiry) => set({ expiry }),
     setOptions: (options) => set({ options }),
 }))
