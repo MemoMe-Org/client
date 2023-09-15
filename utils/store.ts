@@ -60,10 +60,12 @@ const useMessageStore = create<MessageStoreStates>()((set) => ({
 
 const useModalStore = create<ModalStates>()((set) => ({
     loading: false,
+    pollModal: false,
     avatarModal: false,
     shareLinkModal: false,
     createPollModal: false,
     setLoading: (loading) => set({ loading }),
+    setPollModal: (pollModal) => set({ pollModal }),
     setAvatarModal: (avatarModal) => set({ avatarModal }),
     setShareLinkModal: (shareLinkModal) => set({ shareLinkModal }),
     setCreatePollModal: (createPollModal) => set({ createPollModal }),
@@ -72,8 +74,10 @@ const useModalStore = create<ModalStates>()((set) => ({
 
 const usePoll = create<Poll>()((set) => ({
     title: '',
+    pollUrl: '',
     medias: null,
     expiry: null,
+    hosting: false,
     options: [
         { id: uuid(), option: '' },
         { id: uuid(), option: '' },
@@ -81,6 +85,8 @@ const usePoll = create<Poll>()((set) => ({
     setTitle: (title) => set({ title }),
     setMedias: (medias) => set({ medias }),
     setExpiry: (expiry) => set({ expiry }),
+    setPollUrl: (pollUrl) => set({ pollUrl }),
+    setHosting: (hosting) => set({ hosting }),
     setOptions: (options) => set({ options }),
 }))
 
