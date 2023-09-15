@@ -129,6 +129,10 @@ interface ModalStates {
     setCreatePollModal: (createPollModal: boolean) => void
 }
 
+interface MediaUploadProps extends State<File[] | null> {
+    id: string
+}
+
 interface Params {
     params: {
         username: string
@@ -165,11 +169,17 @@ interface MyPage {
 }
 
 interface PollOption {
-    id: number
+    id: string
     option: string
 }
 
 interface Poll {
+    title: string
+    file: File | null
+    expiry: null | string
     options: PollOption[]
+    setTitle: (title: string) => void
+    setFile: (file: File | null) => void
     setOptions: (poll: PollOption[]) => void
+    setExpiry: (expiry: null | string) => void
 }
