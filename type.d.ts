@@ -120,10 +120,12 @@ type FileType = 'video/mp4' | 'image/png' | 'image/jpeg'
 
 interface ModalStates {
     loading: boolean
+    pollModal: boolean,
     avatarModal: boolean
     shareLinkModal: boolean
     createPollModal: boolean
     setLoading: (loading: boolean) => void
+    setPollModal: (pollModal: boolean) => void
     setAvatarModal: (avatarModal: boolean) => void
     setShareLinkModal: (shareLinkModal: boolean) => void
     setCreatePollModal: (createPollModal: boolean) => void
@@ -175,10 +177,14 @@ interface PollOption {
 
 interface Poll {
     title: string
+    pollUrl: string
+    hosting: boolean
     medias: File[] | null
     expiry: null | string
     options: PollOption[]
     setTitle: (title: string) => void
+    setPollUrl: (pollUrl: string) => void
+    setHosting: (hosting: boolean) => void
     setOptions: (poll: PollOption[]) => void
     setMedias: (medias: File[] | null) => void
     setExpiry: (expiry: null | string) => void
