@@ -77,7 +77,10 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
                     </button>
                     <div className={`${plusClicked ? 'show-action' : ''} action`}>
                         <button
-                            onClick={() => setShareLinkModal(true)}
+                            onClick={() => {
+                                setShareLinkModal(true)
+                                setPlusClicked((prev) => !prev)
+                            }}
                             className={`${poppins.className} flex gap-3 items-center tracking-wide text-clr-2 hover:text-clr-9 trans w-full`}>
                             <span >
                                 Anonymous Link
@@ -85,7 +88,10 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
                             <BiSolidMessageDetail className='text-lg lg:text-2xl md:text-xl' />
                         </button>
                         <button
-                            onClick={() => setCreatePollModal(true)}
+                            onClick={() => {
+                                setCreatePollModal(true)
+                                setPlusClicked((prev) => !prev)
+                            }}
                             className={`${poppins.className} flex gap-3 items-center tracking-wide text-clr-2 hover:text-clr-9 trans w-full`}>
                             <span>
                                 Host a Poll
