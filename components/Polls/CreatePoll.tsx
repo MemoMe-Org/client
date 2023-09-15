@@ -8,8 +8,8 @@ import { AiOutlineMinusSquare } from '@/public/icons/ico'
 
 const CreatePoll: FC<ModalComponent> = ({ get, set, data }) => {
     const {
-        files, setFiles, setOptions,
         setTitle, options, title,
+        medias, setMedias, setOptions,
     } = usePoll()
     const [
         filePreview, setMFilePreview
@@ -62,8 +62,8 @@ const CreatePoll: FC<ModalComponent> = ({ get, set, data }) => {
                     onChange={setTitle}
                 />
                 <MediasUpload
-                    get={files}
-                    set={setFiles}
+                    get={medias}
+                    set={setMedias}
                     id='poll_files'
                 />
                 <article className='flex flex-col gap-2 mt-5 w-full'>
