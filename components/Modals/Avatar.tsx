@@ -62,7 +62,12 @@ const Avatar: FC<ModalComponent> = ({ get, set, data }) => {
     }
 
     const handleFile = (e: ChangeEvent<HTMLInputElement>): void => {
-        blob(e, setAvatarPreview, MaxSize['5MB'])
+        blob(
+            e,
+            setAvatarPreview,
+            MaxSize['5MB'],
+            'jpg', 'png'
+        )
         if (e.target.files?.length) {
             setAvatar(e.target.files[0])
         }
