@@ -72,6 +72,15 @@ const useModalStore = create<ModalStates>()((set) => ({
 }))
 
 
+const pollInitialState = {
+    title: '',
+    medias: null,
+    options: [
+        { id: uuid(), option: '' },
+        { id: uuid(), option: '' },
+    ],
+}
+
 const usePoll = create<Poll>()((set) => ({
     title: '',
     pollUrl: '',
@@ -88,6 +97,7 @@ const usePoll = create<Poll>()((set) => ({
     setPollUrl: (pollUrl) => set({ pollUrl }),
     setHosting: (hosting) => set({ hosting }),
     setOptions: (options) => set({ options }),
+    setPollToDefault: () => set(pollInitialState),
 }))
 
 export {
