@@ -10,6 +10,7 @@ import { AxiosResponse, AxiosError } from 'axios'
 import { poppins, questrial } from '@/public/fonts/f'
 import { UserStore, useModalStore } from '@/utils/store'
 import { AiOutlineCloudUpload, RiDeleteBin6Line } from '@/public/icons/ico'
+import MaxSize from '@/enums/fileMaxSizes'
 
 const Avatar: FC<ModalComponent> = ({ get, set, data }) => {
     const { avatar, setAvatar } = UserStore()
@@ -61,8 +62,10 @@ const Avatar: FC<ModalComponent> = ({ get, set, data }) => {
     }
 
     const handleFile = (e: ChangeEvent<HTMLInputElement>): void => {
-        blob(e, setAvatarPreview)
-        setAvatar(e.target.files![0])
+        blob(e, setAvatarPreview, MaxSize['5MB'])
+        if (e.target.files?.length) {
+            setAvatar(e.target.files[0])
+        }
     }
 
     return (
