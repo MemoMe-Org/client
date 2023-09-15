@@ -21,10 +21,11 @@ const blob = (
     e: ChangeEvent<HTMLInputElement>,
     set: (get: string) => void,
     maxSize: MaxSize,
+    ...extensions: string[]
 ): void => {
     const file: any = e.target.files![0]
     const reader: FileReader = new FileReader()
-    if (checkFile(file, maxSize)) {
+    if (checkFile(file, maxSize, ...extensions)) {
         reader.readAsDataURL(file)
         reader.onload = () => {
             set(reader.result as string)
