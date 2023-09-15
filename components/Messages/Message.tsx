@@ -32,7 +32,7 @@ const Message: FC<{ message: MessageStates }> = ({ message }) => {
     return (
         <>
             <article
-                className={` ${message.files.length === 0 ? 'flex items-center justify-center' : ''} relative  w-[280px] md:w-[380px] sm:w-[230px] min-h-[220px] md:min-h-[250px] rounded-[30px] p-3 bg-clr-11`}
+                className={` ${message.files.length === 0 && 'flex items-center justify-center'} relative  sm:w-[280px] md:w-[350px] w-[230px] sm:min-h-[235px] md:min-h-[250px] min-h-[220px] rounded-[30px] p-3 bg-clr-11`}
                 style={{
                     boxShadow: `10px 10px 18px 0 rgba(0, 0, 0, 0.3), inset -10px -10px 18px 0 rgba(0, 0, 0, 0.3), inset 10px 10px 18px 0 rgba(255, 255, 255, 0.2)`
                 }}>
