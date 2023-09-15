@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { v4 as uuid } from 'uuid'
 
 const initialUserStore = {
     otp: '',
@@ -70,11 +71,17 @@ const useModalStore = create<ModalStates>()((set) => ({
 
 
 const usePoll = create<Poll>()((set) => ({
+    title: '',
+    file: null,
+    expiry: null,
     options: [
-        { id: 1, option: '' },
-        { id: 2, option: '' },
+        { id: uuid(), option: '' },
+        { id: uuid(), option: '' },
     ],
-    setOptions: (options) => set({ options })
+    setFile: (file) => set({ file }),
+    setTitle: (title) => set({ title }),
+    setExpiry: (expiry) => set({ expiry }),
+    setOptions: (options) => set({ options }),
 }))
 
 export {
