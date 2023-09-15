@@ -175,11 +175,11 @@ interface PollOption {
 
 interface Poll {
     title: string
-    file: File | null
+    medias: File[] | null
     expiry: null | string
     options: PollOption[]
     setTitle: (title: string) => void
-    setFile: (file: File | null) => void
     setOptions: (poll: PollOption[]) => void
+    setMedias: (medias: File[] | null) => void
     setExpiry: (expiry: null | string) => void
 }
