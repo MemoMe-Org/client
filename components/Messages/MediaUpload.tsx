@@ -1,12 +1,10 @@
 "use client"
 import { poppins } from '@/public/fonts/f'
 import { ChangeEvent, FC, useRef } from 'react'
-import { useMessageStore } from '@/utils/store'
 import { formatSize } from '@/utils/formatNumber'
 import { AiOutlineCloudUpload } from '@/public/icons/ico'
 
-const MediasUpload: FC = () => {
-    const { medias, setMedias } = useMessageStore()
+const MediasUpload: FC<MediaUploadProps> = ({ get, set, id }) => {
     const fileInputRef = useRef<HTMLInputElement>(null)
 
     const handleFileButtonClick = () => {
@@ -23,7 +21,7 @@ const MediasUpload: FC = () => {
             fileList.push(files![i])
         }
 
-        setMedias(fileList)
+        set(fileList)
     }
 
     return (
@@ -36,19 +34,19 @@ const MediasUpload: FC = () => {
                 className='flex justify-between gap-2 items-center border-[2px] border-dashed border-clr-12 min-h-[50px] w-full rounded-xl mt-2 px-2 py-1.5 cursor-pointer'>
                 <AiOutlineCloudUpload />
                 <div className='flex flex-col gap-2 text-xs flex-shrink items-center'>
-                    {!medias && <span>Maximum of two files.</span>}
+                    {!get && <span>Maximum of two files.</span>}
                     <span>JPG, MP4, PNG - 9MB Max Each</span>
-                    {medias &&
+                    {get &&
                         <span>
                             {
-                                `${medias.length} file(s) selected - ${medias?.map((media) => formatSize(media.size))}`
+                                `${get.length} file(s) selected - ${get?.map((media) => formatSize(media.size))}`
                             }
                         </span>}
                 </div>
                 {
-                    medias ?
+                    get ?
                         <button
-                            onClick={() => setMedias(null)}
+                            onClick={() => set(null)}
                             className={`${poppins.className} px-1 py-0.5 rounded-full text-sm border-[1px] border-clr-11 hover:bg-clr-6 hover:text-clr-5 trans`}>
                             Clear
                         </button> :
@@ -60,9 +58,9 @@ const MediasUpload: FC = () => {
                 }
             </label>
             <input
+                id={id}
                 multiple
                 type='file'
-                id='anon_files'
                 className='hidden'
                 ref={fileInputRef}
                 onChange={(e) => handleFile(e)}
