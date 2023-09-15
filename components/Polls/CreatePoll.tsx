@@ -6,7 +6,7 @@ import { ChangeEvent, FC, useState } from 'react'
 import MediasUpload from '../Messages/MediaUpload'
 import { AiOutlineMinusSquare } from '@/public/icons/ico'
 
-const CreatePoll: FC<ModalComponent> = ({ get, set }) => {
+const CreatePoll: FC<State<boolean>> = ({ get, set }) => {
     const {
         setTitle, options, title,
         medias, setMedias, setOptions,
