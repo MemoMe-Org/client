@@ -23,8 +23,8 @@ const page = ({ params: { username } }: Params) => {
     const token = useToken()
     const router = useRouter()
     const {
-        sent, setSent, progress, setProgress,
-        medias, resetStates, loading, setLoading,
+        setProgress, medias, loading, setLoading,
+        setMedias, sent, resetStates, setSent, progress,
     } = useMessageStore()
     const textEditorRef = useRef<HTMLDivElement>(null)
     const [forbidden, setForbidden] = useState<boolean>(false)
@@ -200,7 +200,11 @@ const page = ({ params: { username } }: Params) => {
                                     textEditorRef={textEditorRef}
                                     msgType={data?.msg_type || 'all'}
                                 />}
-                                {data?.allowFiles && <MediasUpload />}
+                                {data?.allowFiles && <MediasUpload
+                                    get={medias}
+                                    set={setMedias}
+                                    id='anon_files'
+                                />}
                             </>}
                     </article>
                 </section>
