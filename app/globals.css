@@ -55,6 +55,10 @@ body {
     @apply w-full flex justify-between items-center mb-7
 }
 
+.profile-footer {
+    @apply px-7 py-2 flex justify-between items-center bg-clr-14 w-full border-t-[0.75px]
+}
+
 .plus-icon {
     @apply text-clr-0;
 }
