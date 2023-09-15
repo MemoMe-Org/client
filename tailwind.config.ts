@@ -32,6 +32,11 @@ const config: Config = {
         "clr-20": "rgb(255, 240, 240)",
         "clr-x": "rgba(0, 0, 0, 0.25)",
         "clr-y": "rgba(0, 0, 0, 0.5)",
+      },
+      screens: {
+        sm: '600px',
+        md: '800px',
+        lg: '960px'
       }
     },
   },
