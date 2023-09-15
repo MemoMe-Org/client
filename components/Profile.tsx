@@ -63,9 +63,6 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
             <CreatePoll
                 get={createPollModal}
                 set={setCreatePollModal}
-                data={{
-                    username: user?.username,
-                }}
             />
             {pathName === 'main' &&
                 <>
