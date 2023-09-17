@@ -9,6 +9,7 @@ import MediasUpload from '../Messages/MediaUpload'
 import { inter, questrial } from '@/public/fonts/f'
 import { useModalStore, usePoll } from '@/utils/store'
 import { AiOutlineMinusSquare, AiOutlinePlusSquare } from '@/public/icons/ico'
+import Share from '../Modals/Share'
 
 const CreatePoll: FC<State<boolean>> = ({ get, set }) => {
     const {
@@ -57,13 +58,14 @@ const CreatePoll: FC<State<boolean>> = ({ get, set }) => {
 
     return (
         <>
-            <Modal
+            <Share
                 get={pollModal}
                 set={setPollModal}
-            >
-                <p>{pollUrl}</p>
-                {/* Poll url modal */}
-            </Modal>
+                data={{
+                    share: `Vote here: ${pollUrl}`
+                }}
+                title='Share your poll link for people to vote.'
+            />
             <Modal
                 get={get}
                 set={set}>
