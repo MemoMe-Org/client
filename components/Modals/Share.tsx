@@ -4,7 +4,7 @@ import { FC, useState } from 'react'
 import {
     AiOutlineTwitter, AiOutlineWhatsApp, AiFillCopy
 } from '@/public/icons/ico'
-import { prompt } from '@/public/fonts/f'
+import { poppins, prompt } from '@/public/fonts/f'
 import { copyToClipboard } from '@/utils/copyToClipboard'
 
 const Share: FC<ModalComponent> = ({ get, set, data, title }) => {
@@ -12,7 +12,7 @@ const Share: FC<ModalComponent> = ({ get, set, data, title }) => {
 
     return (
         <Modal get={get} set={set}>
-            {title && <h3 className={`${prompt.className} text-clr-13 text-lg font-medium`}>
+            {title && <h3 className={`${poppins.className} text-clr-13 text-lg font-medium`}>
                 {title}
             </h3>}
             <ul className='flex flex-col gap-4 mt-6'>
