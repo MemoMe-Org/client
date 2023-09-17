@@ -5,30 +5,20 @@ import {
     AiOutlineTwitter, AiOutlineWhatsApp, AiFillCopy
 } from '@/public/icons/ico'
 import { prompt } from '@/public/fonts/f'
+import { copyToClipboard } from '@/utils/copyToClipboard'
 
-const Socials: FC<ModalComponent> = ({ get, set, data }) => {
-    const share = `Please, send me anonymous messages on https://memome.one/anon/${data?.username}`
-
+const Share: FC<ModalComponent> = ({ get, set, data, title }) => {
     const [copy, setCopy] = useState('Copy to clipboard')
-
-    const copyToClipboard = async (value: string) => {
-        try {
-            await navigator.clipboard.writeText(value)
-            setCopy('Link Copied!')
-            setTimeout(() => {
-                setCopy('Copy to clipboard')
-            }, 1200)
-        } catch (err) {
-            setCopy('Failed to copy!')
-        }
-    }
 
     return (
         <Modal get={get} set={set}>
+            {title && <h3 className={`${prompt.className} text-clr-13 text-lg font-medium`}>
+                {title}
+            </h3>}
             <ul className='flex flex-col gap-4 mt-6'>
                 <li
                     className={`${prompt.className} social-list`}
-                    onClick={async () => await copyToClipboard(share)}>
+                    onClick={async () => await copyToClipboard(data?.share, setCopy)}>
                     <p>
                         <span>{copy}</span>
                         <AiFillCopy />
@@ -36,14 +26,14 @@ const Socials: FC<ModalComponent> = ({ get, set, data }) => {
                 </li>
                 <li className={`${prompt.className} social-list`}>
                     <Link target="_blank"
-                        href={`https://twitter.com/intent/tweet?text=${share}`}>
+                        href={`https://twitter.com/intent/tweet?text=${data?.share}`}>
                         <p>Twitter</p>
                         <AiOutlineTwitter />
                     </Link>
                 </li>
                 <li className={`${prompt.className} social-list`}>
                     <Link target="_blank"
-                        href={`https://api.whatsapp.com/send?text=${share}`}>
+                        href={`https://api.whatsapp.com/send?text=${data?.share}`}>
                         <p>WhatsApp</p>
                         <AiOutlineWhatsApp />
                     </Link>
@@ -53,4 +43,4 @@ const Socials: FC<ModalComponent> = ({ get, set, data }) => {
     )
 }
 
-export default Socials
+export default Share
