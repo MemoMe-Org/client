@@ -2,6 +2,7 @@ import { FC } from 'react'
 import Modal from '../Modal'
 import { v4 as uuid } from 'uuid'
 import axios from '@/app/api/axios'
+import Share from '../Modals/Share'
 import { LoaderThree } from '../Loader'
 import throwError from '@/utils/throwError'
 import { AxiosError, AxiosResponse } from 'axios'
@@ -9,7 +10,6 @@ import MediasUpload from '../Messages/MediaUpload'
 import { inter, questrial } from '@/public/fonts/f'
 import { useModalStore, usePoll } from '@/utils/store'
 import { AiOutlineMinusSquare, AiOutlinePlusSquare } from '@/public/icons/ico'
-import Share from '../Modals/Share'
 
 const CreatePoll: FC<State<boolean>> = ({ get, set }) => {
     const {
