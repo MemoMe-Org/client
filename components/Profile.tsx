@@ -3,8 +3,8 @@ import Link from 'next/link'
 import Levels from './Levels'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
+import Share from './Modals/Share'
 import Avatar from './Modals/Avatar'
-import Socials from './Modals/Socials'
 import CreatePoll from './Polls/CreatePoll'
 import { useModalStore } from '@/utils/store'
 import { FC, useState, useEffect } from 'react'
@@ -53,12 +53,13 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
                     avatar: user?.Profile?.avatar,
                 }}
             />
-            <Socials
+            <Share
                 get={shareLinkModal}
                 set={setShareLinkModal}
                 data={{
-                    username: user?.username,
+                    share: `Please, send me anonymous messages on https://memome.one/anon/${user?.username}`,
                 }}
+                title='Share the link with your Friends.'
             />
             <CreatePoll
                 get={createPollModal}
@@ -167,14 +168,21 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
                                 </>
                             }
                         </>
-                        <p className='flex gap-3 items-center justify-center font-semibold cursor-pointer text-clr-2 text-xl md:text-3xl lg:text-5xl tracking-wide'>
-                            <Link
-                                href={`/anon/${user?.username}`}
-                                target='_blank'>
-                                @{user?.username}
-                            </Link>
-                            {user?.Account?.verified && <LuVerified />}
-                        </p>
+                        <div className='flex flex-col gap-2'>
+                            <p className='flex gap-3 items-center justify-center font-semibold cursor-pointer text-clr-2 text-xl md:text-2xl lg:text-3xl tracking-wide'>
+                                <Link
+                                    href={`/anon/${user?.username}`}
+                                    target='_blank'>
+                                    @{user?.username}
+                                </Link>
+                                {user?.Account?.verified && <LuVerified />}
+                            </p>
+                            {user?.Profile?.bio &&
+                                <p className={`${poppins.className} md:text-base text-sm text-clr-13`}>
+                                    {user?.Profile?.bio}
+                                </p>
+                            }
+                        </div>
                     </div>
                 </article>
                 <article className='profile-card'>
