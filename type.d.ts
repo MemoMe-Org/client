@@ -156,7 +156,8 @@ interface ModalProps extends State<boolean> {
 }
 
 interface ModalComponent extends State<boolean> {
-    data?: T
+    data?: T,
+    title?: string
 }
 
 interface SwitchProps extends State<boolean> {
