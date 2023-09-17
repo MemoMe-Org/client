@@ -191,3 +191,10 @@ interface Poll {
     setMedias: (medias: File[] | null) => void
     setExpiry: (expiry: null | string) => void
 }
+
+interface PollParams {
+    params: {
+        createdById: string,
+        pollId: string
+    }
+}
