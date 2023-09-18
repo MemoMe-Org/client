@@ -174,22 +174,44 @@ interface MyPage {
 interface PollOption {
     id: string
     option: string
+    totalVotes?: number
 }
 
 interface Poll {
     title: string
     pollUrl: string
     hosting: boolean
+    pollLoad: boolean
+    voteLoad: boolean
     medias: File[] | null
     expiry: null | string
     options: PollOption[]
+    poll: MyPoll | undefined
     setPollToDefault: () => void
     setTitle: (title: string) => void
     setPollUrl: (pollUrl: string) => void
     setHosting: (hosting: boolean) => void
     setOptions: (poll: PollOption[]) => void
+    setPollLoad: (pollLoad: boolean) => void
+    setPoll: (poll: MyPoll | undefined) => void
+    setVoteLoad: (voteLoad: boolean) => void
     setMedias: (medias: File[] | null) => void
     setExpiry: (expiry: null | string) => void
+}
+
+interface MyPoll {
+    active: boolean
+    createdById: string
+    date: string
+    expiry: string | null
+    files: MsgFile[]
+    hasVoted: boolean
+    id: string
+    options: PollOption[]
+    private: boolean
+    title: string
+    totalVotes: number
+    views: string
 }
 
 interface PollParams {
