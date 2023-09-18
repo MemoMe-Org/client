@@ -38,15 +38,16 @@ const Message: FC<{ message: MessageStates }> = ({ message }) => {
                 }}>
                 {message.files.length === 0 ?
                     <>
-                        <div
-                            ref={captureDivRef}
-                            className={`${prompt.className} text- [1.2em] text-center text-clr-13`}
-                            style={{
-                                fontSize: '1.2em',
-                                textAlign: 'center',
-                            }}
-                            dangerouslySetInnerHTML={{ __html: message.texts! }}
-                        />
+                        {message.texts &&
+                            <div
+                                ref={captureDivRef}
+                                className={`${prompt.className} text- [1.2em] text-center text-clr-13`}
+                                style={{
+                                    fontSize: '1.2em',
+                                    textAlign: 'center',
+                                }}
+                                dangerouslySetInnerHTML={{ __html: message.texts }}
+                            />}
                         <button
                             onClick={() => downloadDiv(message.id)}
                             className='absolute bottom-3 right-4 text-lg font-semibold text-black'>
@@ -55,10 +56,11 @@ const Message: FC<{ message: MessageStates }> = ({ message }) => {
                     </>
                     :
                     <article className='h-full flex flex-col justify-between'>
-                        <div
-                            className={`${prompt.className} text-[1.2em] text-center text-clr-13 mt-2`}
-                            dangerouslySetInnerHTML={{ __html: message.texts! }}
-                        />
+                        {message.texts &&
+                            <div
+                                className={`${prompt.className} text-[1.2em] text-center text-clr-13 mt-2`}
+                                dangerouslySetInnerHTML={{ __html: message.texts }}
+                            />}
                         <div className='flex gap-2 mt-2 h-[200px]'>
                             {message.files.map((file) => (
                                 <div
