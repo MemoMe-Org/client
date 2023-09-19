@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import Image from 'next/image'
 import download from '@/utils/download'
+import OptionsToVote from './OptionsToVote'
 import { BsDownload } from '@/public/icons/ico'
 import { prompt, questrial } from '@/public/fonts/f'
 import { expiryPeriod, getPeriod } from '@/utils/period'
@@ -23,7 +24,7 @@ const PollToVote: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
 
     return (
         <section
-            className={`rounded-lg bg-clr-0 p-5 min-h-[340px] w-full`}
+            className={`rounded-lg bg-clr-0 p-5 w-full`}
             style={{
                 position: `relative`,
                 boxShadow: `rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px`
@@ -76,7 +77,7 @@ const PollToVote: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
                         </div>
                     ))}
                 </article>}
-            {/* Options to Vote Field here */}
+            <OptionsToVote poll={poll} />
             <article className='w-full flex justify-between items-center'>
                 <div className={`${prompt.className} flex gap-0.5 text-xs absolute bottom-1 text-clr-15`}>
                     <span>Created</span>
