@@ -1,8 +1,10 @@
 import axios from '@/app/api/axios'
 import { usePoll } from '@/utils/store'
-import { prompt } from '@/public/fonts/f'
+import { prompt, questrial } from '@/public/fonts/f'
 import throwError from '@/utils/throwError'
 import { AxiosError, AxiosResponse } from 'axios'
+import { GiCheckMark } from 'react-icons/gi'
+import { formatNumber } from '@/utils/formatNumber'
 
 const OptionsToVote = () => {
 
@@ -10,6 +12,8 @@ const OptionsToVote = () => {
         setPoll, voteLoad,
         poll, setVoteLoad
     } = usePoll()
+
+    console.log(poll)
 
     const expired = () => {
         const now = new Date().getTime()
@@ -35,27 +39,34 @@ const OptionsToVote = () => {
 
 
     return (
-        <section className='w-full my-3 flex flex-col gap-2'>
-            {poll?.options?.map((option) => {
-                return (
-                    <article key={option.id}
-                        className='w-full'
-                    >
-                        <button
-                            onClick={async () => vote(option.id)}
-                            className={`${prompt.className} ${poll.hasVoted ? 'rounded-full' : 'rounded-lg'} px-2 py-1 w-full text-left relative text-sm bg-clr-1 text-clr-0 disabled:bg-clr-9`}
-                            style={{
-                                boxShadow: `rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px`
-                            }}
-                            disabled={Boolean(poll.active === false || expired() || poll.hasVoted)}>
-                            {option.texts}
-                            <div className=''>
-
-                            </div>
-                        </button>
-                    </article>
-                )
-            })}
+        <section className='mb-3'>
+            <div className='w-full my-3.5 flex flex-col gap-3'>
+                {poll?.options?.map((option) => {
+                    const optionPercentage = (option.totalVotes / poll.totalVotes) * 100
+                    return (
+                        <article key={option.id}
+                            className='w-full'
+                        >
+                            <button
+                                title={`${optionPercentage.toFixed(1)}%`}
+                                onClick={async () => vote(option.id)}
+                                className={`${prompt.className} ${poll.hasVoted ? 'rounded-md' : 'rounded-full'} px-2 py-1 w-full flex justify-between relative text-sm bg-clr-7 text-clr-0 disabled:bg-clr-9`}
+                                style={{
+                                    boxShadow: `rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px`
+                                }}
+                                disabled={Boolean(poll.active === false || expired() || poll.hasVoted)}>
+                                <span>{option.texts}</span>
+                                {poll.hasVoted && poll.votedOption === option.id && <GiCheckMark />}
+                                {poll.hasVoted && <span>{option.totalVotes}</span>}
+                            </button>
+                        </article>
+                    )
+                })}
+            </div>
+            <div className={`${questrial.className} flex items-center justify-between text-sm text-clr-4 font-medium tracking-wide px-3 md:px-5`}>
+                <span>Views &#8226; {formatNumber(poll?.views!)}</span>
+                <span>Total Vote(s) &#8226; {poll?.totalVotes}</span>
+            </div>
         </section>
     )
 }
