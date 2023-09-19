@@ -215,7 +215,8 @@ interface MyPoll {
     private: boolean
     title: string
     totalVotes: number
-    views: string
+    views: number
+    votedOption: string
 }
 
 interface PollParams {
