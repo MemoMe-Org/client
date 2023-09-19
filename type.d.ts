@@ -193,8 +193,8 @@ interface Poll {
     setHosting: (hosting: boolean) => void
     setOptions: (poll: PollOption[]) => void
     setPollLoad: (pollLoad: boolean) => void
-    setPoll: (poll: MyPoll | undefined) => void
     setVoteLoad: (voteLoad: boolean) => void
+    setPoll: (poll: MyPoll | undefined) => void
     setMedias: (medias: File[] | null) => void
     setExpiry: (expiry: null | string) => void
 }
