@@ -1,9 +1,9 @@
-import { prompt, questrial } from '@/public/fonts/f'
-import download from '@/utils/download'
-import Image from 'next/image'
 import { FC } from 'react'
+import Image from 'next/image'
+import download from '@/utils/download'
 import { BsDownload } from '@/public/icons/ico'
-import { period } from '@/utils/period'
+import { prompt, questrial } from '@/public/fonts/f'
+import { expiryPeriod, getPeriod } from '@/utils/period'
 
 const PollToVote: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
     console.log(poll)
@@ -17,7 +17,8 @@ const PollToVote: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
         if ((now / 1000) > expiryDate) {
             return "Expired"
         }
-        return period(poll?.expiry!)
+
+        return expiryPeriod(poll?.expiry!)
     }
 
     return (
@@ -80,7 +81,7 @@ const PollToVote: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
                 <div className={`${prompt.className} flex gap-0.5 text-xs absolute bottom-1 text-clr-15`}>
                     <span>Created</span>
                     <span>&#8226;</span>
-                    <span>{period(poll?.date!)}</span>
+                    <span>{getPeriod(poll?.date!)}</span>
                 </div>
                 {poll?.expiry &&
                     <div className='flex gap-0.5 text-xs absolute top-1 right-2 text-clr-13'>
@@ -89,7 +90,7 @@ const PollToVote: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
                             <>
                                 <span>Expired</span>
                                 <span>&#8226;</span>
-                                <span>In {period(poll.expiry)}</span>
+                                <span>In {expiry()}</span>
                             </>
                         }
                     </div>
