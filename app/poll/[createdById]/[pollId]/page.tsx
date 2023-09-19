@@ -44,8 +44,6 @@ const page = ({ params: { createdById, pollId } }: PollParams) => {
 
     if (pollLoad) return <LoaderTwo />
 
-    console.log(userData)
-
     const name = userData?.username
     const avatar_url = userData?.Profile?.avatar?.url
 
