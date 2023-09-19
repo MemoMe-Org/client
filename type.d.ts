@@ -207,7 +207,11 @@ interface MyPoll {
     files: MsgFile[]
     hasVoted: boolean
     id: string
-    options: PollOption[]
+    options: {
+        id: string
+        texts: string
+        totalVotes: number
+    }[]
     private: boolean
     title: string
     totalVotes: number
