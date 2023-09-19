@@ -7,6 +7,7 @@ import axios from '@/app/api/axios'
 import NavBar from '@/components/Nav'
 import { usePoll } from '@/utils/store'
 import { useEffect, useState } from 'react'
+import throwError from '@/utils/throwError'
 import { LoaderTwo } from '@/components/Loader'
 import { LuVerified } from '@/public/icons/ico'
 import { AxiosError, AxiosResponse } from 'axios'
@@ -24,18 +25,14 @@ const page = ({ params: { createdById, pollId } }: PollParams) => {
             .then((res: AxiosResponse) => {
                 setPoll(res.data?.poll)
                 setUserData(res.data?.user || {})
-            }).catch((res: AxiosError) => {
-
+            }).catch((err: AxiosError) => {
+                const statusCodes: unknown = err.response?.status
+                if (statusCodes === 401 || statusCodes === 403) {
+                    // open login modal
+                }
+                // comintg back. But at least -
+                throwError(err)
             }).finally(() => setPollLoad(false))
-    }
-
-    const vote = async (optionId: string) => {
-        await axios.post(`/api/poll/vote/${createdById}/${pollId}/${optionId}`)
-            .then((res: AxiosResponse) => {
-                console.log(res.data)
-            }).catch((res: AxiosError) => {
-
-            }).finally(() => { })
     }
 
     useEffect(() => {
