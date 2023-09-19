@@ -2,8 +2,8 @@ import Image from 'next/image'
 import { FC, useRef } from 'react'
 import html2Canvas from 'html2canvas'
 import download from '@/utils/download'
-import { period } from '@/utils/period'
 import { prompt } from '@/public/fonts/f'
+import { getPeriod } from '@/utils/period'
 import { BsDownload } from '@/public/icons/ico'
 
 const Message: FC<{ message: MessageStates }> = ({ message }) => {
@@ -96,7 +96,7 @@ const Message: FC<{ message: MessageStates }> = ({ message }) => {
                     </article>
                 }
                 <span className={`absolute top-2 left-3 text-xs font-medium text-clr-15`}>
-                    {period(message.date)} ago
+                    {getPeriod(message.date)} ago
                 </span>
             </article>
         </>
