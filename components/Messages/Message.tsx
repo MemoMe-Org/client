@@ -2,12 +2,11 @@ import Image from 'next/image'
 import { FC, useRef } from 'react'
 import html2Canvas from 'html2canvas'
 import download from '@/utils/download'
+import { period } from '@/utils/period'
 import { prompt } from '@/public/fonts/f'
-import { getPeriod } from '@/utils/period'
 import { BsDownload } from '@/public/icons/ico'
 
 const Message: FC<{ message: MessageStates }> = ({ message }) => {
-
     const captureDivRef = useRef<HTMLDivElement>(null)
 
     const downloadDiv = (id: string) => {
@@ -32,7 +31,7 @@ const Message: FC<{ message: MessageStates }> = ({ message }) => {
     return (
         <>
             <article
-                className={` ${message.files.length === 0 && 'flex items-center justify-center'} relative  sm:w-[280px] md:w-[350px] w-[230px] sm:min-h-[235px] md:min-h-[250px] min-h-[220px] rounded-[30px] p-3 bg-clr-11`}
+                className={` ${message.files.length === 0 && 'flex items-center justify-center'} relative sm:w-[280px] md:w-[350px] sm:min-h-[235px] md:min-h-[250px] min-h-[220px] rounded-[30px] p-3 bg-clr-11 w-full`}
                 style={{
                     boxShadow: `10px 10px 18px 0 rgba(0, 0, 0, 0.3), inset -10px -10px 18px 0 rgba(0, 0, 0, 0.3), inset 10px 10px 18px 0 rgba(255, 255, 255, 0.2)`
                 }}>
@@ -41,7 +40,7 @@ const Message: FC<{ message: MessageStates }> = ({ message }) => {
                         {message.texts &&
                             <div
                                 ref={captureDivRef}
-                                className={`${prompt.className} text- [1.2em] text-center text-clr-13`}
+                                className={`${prompt.className} text- [1.2em] text-center text-clr-13 mt-2`}
                                 style={{
                                     fontSize: '1.2em',
                                     textAlign: 'center',
@@ -58,22 +57,22 @@ const Message: FC<{ message: MessageStates }> = ({ message }) => {
                     <article className='h-full flex flex-col justify-between'>
                         {message.texts &&
                             <div
-                                className={`${prompt.className} text-[1.2em] text-center text-clr-13 mt-2`}
+                                className={`${prompt.className} text-[1.2em] text-center text-clr-13 mt-3`}
                                 dangerouslySetInnerHTML={{ __html: message.texts }}
                             />}
-                        <div className='flex gap-2 mt-2 h-[200px]'>
+                        <div className='flex gap-2 mt-4 h-[180px] mx-auto'>
                             {message.files.map((file) => (
                                 <div
                                     key={file.idx}
-                                    className='relative w-full h-full rounded-bl-[30px] rounded-[30px] object-cover overflow-hidden'>
+                                    className='relative w-full h-full rounded-[30px] object-cover overflow-hidden shadow-md'>
                                     {file.type === 'image/png' || file.type === 'image/jpeg' ?
                                         <Image
                                             priority
-                                            className='w-full h-full object-cover'
-                                            src={file.url}
                                             width={300}
                                             height={300}
+                                            src={file.url}
                                             alt={file.idx}
+                                            className='w-full h-full object-cover'
                                         /> :
                                         <video
                                             controls
@@ -96,8 +95,8 @@ const Message: FC<{ message: MessageStates }> = ({ message }) => {
                         </div>
                     </article>
                 }
-                <span className={`absolute top-2 left-3 text-xs font-semibold text-clr-4`}>
-                    {getPeriod(message.date)}
+                <span className={`absolute top-2 left-3 text-xs font-medium text-clr-15`}>
+                    {period(message.date)} ago
                 </span>
             </article>
         </>
