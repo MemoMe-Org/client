@@ -3,12 +3,22 @@ import download from '@/utils/download'
 import Image from 'next/image'
 import { FC } from 'react'
 import { BsDownload } from '@/public/icons/ico'
-import { getPeriod, formatExpiryDate } from '@/utils/period'
+import { period } from '@/utils/period'
 
 const PollToVote: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
     console.log(poll)
 
     const titles = poll?.title?.split('\n')
+
+    const expiry = (): string => {
+        const now = new Date().getTime()
+        const expiryDate = poll?.expiry ? new Date(poll?.expiry).getTime() : 0
+
+        if ((now / 1000) > expiryDate) {
+            return "Expired"
+        }
+        return period(poll?.expiry!)
+    }
 
     return (
         <section
@@ -29,7 +39,7 @@ const PollToVote: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
                 </div>}
             {poll?.files?.length && poll?.files?.length > 0 &&
                 <article
-                    className='w-full md:h-[8rem] h-[5rem] flex gap-1 object-cover overflow-hidden mt-2'>
+                    className='w-full md:h-[9rem] h-[7rem] flex gap-1 object-cover overflow-hidden mt-2'>
                     {poll?.files?.map((file) => (
                         <div
                             key={file?.idx}
@@ -67,16 +77,21 @@ const PollToVote: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
                 </article>}
             {/* Options to Vote Field here */}
             <article className='w-full flex justify-between items-center'>
-                <div className={`${prompt.className} flex gap-0.5 text-xs absolute bottom-1 text-clr-13`}>
+                <div className={`${prompt.className} flex gap-0.5 text-xs absolute bottom-1 text-clr-15`}>
                     <span>Created</span>
                     <span>&#8226;</span>
-                    <span>{getPeriod(poll?.date!)}</span>
+                    <span>{period(poll?.date!)}</span>
                 </div>
                 {poll?.expiry &&
-                    <div className='flex gap-0.5 text-xs absolute top-1 right-2 text-clr-15'>
-                        <span>Expires</span>
-                        <span>&#8226;</span>
-                        <span>{formatExpiryDate(poll.expiry)}</span>
+                    <div className='flex gap-0.5 text-xs absolute top-1 right-2 text-clr-13'>
+                        {expiry() === 'Expired' ?
+                            <span>Expired</span> :
+                            <>
+                                <span>Expired</span>
+                                <span>&#8226;</span>
+                                <span>In {period(poll.expiry)}</span>
+                            </>
+                        }
                     </div>
                 }
             </article>
