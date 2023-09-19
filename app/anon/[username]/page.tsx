@@ -184,7 +184,7 @@ const page = ({ params: { username } }: Params) => {
                                         <BsFillSendFill />
                                         <span>Send</span>
                                     </button> :
-                                    <div className='w-[100px] bg-clr-6 h-5 overflow-hidden rounded-full'>
+                                    <div className='w-[100px] bg-clr-6 h-5 overflow-hidden rounded-full absolute bottom-2.5 right-3.5'>
                                         <div
                                             className='h-full bg-clr-1 rounded-full transition-all duration-500 ease-in-out'
                                             style={{
