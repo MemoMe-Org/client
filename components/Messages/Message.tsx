@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import { FC, useRef } from 'react'
 import html2Canvas from 'html2canvas'
-import getPeriod from '@/utils/period'
 import download from '@/utils/download'
 import { prompt } from '@/public/fonts/f'
+import { getPeriod } from '@/utils/period'
 import { BsDownload } from '@/public/icons/ico'
 
 const Message: FC<{ message: MessageStates }> = ({ message }) => {
