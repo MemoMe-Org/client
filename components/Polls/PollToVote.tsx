@@ -11,10 +11,10 @@ const PollToVote: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
     const titles = poll?.title?.split('\n')
 
     const expiry = (): string => {
-        const now = new Date().getTime()
-        const expiryDate = poll?.expiry ? new Date(poll?.expiry).getTime() : 0
+        const nowInSeconds = Math.floor(new Date().getTime() / 1000)
+        const expiryDateInSeconds = Math.floor(poll?.expiry ? new Date(poll.expiry).getTime() / 1000 : 0)
 
-        if ((now / 1000) > expiryDate) {
+        if (nowInSeconds > expiryDateInSeconds) {
             return "Expired"
         }
 
