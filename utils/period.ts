@@ -1,14 +1,16 @@
-// const getPeriod = (timestamp: string): string => {
-//     let period: string = ''
-//     if (timestamp) {
-//         const date: Date = parseISO(timestamp)
-//         const timePeriod: string = formatDistanceToNow(date)
-//         period = `${timePeriod}..`
-//     }
-//     return period
-// }
+import { parseISO, formatDistanceToNow } from 'date-fns'
 
-function period(expiryISOString: string): string {
+const getPeriod = (timestamp: string): string => {
+    let period: string = ''
+    if (timestamp) {
+        const date: Date = parseISO(timestamp)
+        const timePeriod: string = formatDistanceToNow(date)
+        period = `${timePeriod}..`
+    }
+    return period
+}
+
+function expiryPeriod(expiryISOString: string): string {
     const expiryDate = new Date(expiryISOString)
     const currentDate = new Date()
     const timeDifference = expiryDate.getTime() - currentDate.getTime()
@@ -28,11 +30,11 @@ function period(expiryISOString: string): string {
     for (const unit of timeUnits) {
         const unitCount = Math.floor(timeDifferenceInSeconds / unit.factor)
         if (unitCount >= 1) {
-            return `${unitCount} ${unit.unit}${unitCount > 1 ? 's' : ''}`
+            return `In ${unitCount} ${unit.unit}${unitCount > 1 ? 's' : ''}`
         }
     }
 
-    return "few seconds"
+    return "In few seconds"
 }
 
-export { period }
+export { getPeriod, expiryPeriod }
