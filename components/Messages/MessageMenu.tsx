@@ -19,16 +19,13 @@ const MessageMenu: FC<{
 
     const handleVisibility = async (msgId: string) => {
         await axios.get(`/api/msg/edit/${msgId}`)
-            .then((res: AxiosResponse) => {
-                setVisible((prev) => !prev)
-                notify('success', res.data?.msg)
-            }).catch((err: AxiosError) => throwError(err))
+            .then((res: AxiosResponse) => setVisible((prev) => !prev))
+            .catch((err: AxiosError) => throwError(err))
     }
 
     const handleDelete = async (msgId: string) => {
         await axios.delete(`/api/msg/delete/${msgId}`)
             .then((res: AxiosResponse) => {
-                notify('success', res.data?.msg)
                 const filteredMessages = messages.filter((msg) => msg.id !== msgId)
                 setMessages(filteredMessages)
                 setTotalMessages(filteredMessages.length)
