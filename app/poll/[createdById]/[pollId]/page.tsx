@@ -39,6 +39,11 @@ const page = ({ params: { createdById, pollId } }: PollParams) => {
         getPoll()
     }, [createdById, pollId])
 
+    useEffect(() => {
+        const formatOptions = poll?.options.map((option) => `${option.texts}`)
+        document.title = `Vote here: ${formatOptions}`
+    }, [poll?.options])
+
     if (pollLoad) return <LoaderTwo />
 
     const name = userData?.username
