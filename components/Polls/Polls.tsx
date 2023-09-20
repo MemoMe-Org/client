@@ -39,7 +39,7 @@ const Messages: FC<TabProps> = ({ username }) => {
     }, [page, username])
 
     return (
-        <section className='mb-[30px] w-[95vw] max-w-[600px]'>
+        <section className='mb-[30px] w-[95vw] max-w-[600px] mx-auto'>
             <header className="text-left">
                 <h3 className={`${poppins.className} font-medium text-sm tracking-wide mb-3`}>
                     {totalPolls} Polls

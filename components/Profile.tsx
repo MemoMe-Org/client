@@ -169,7 +169,7 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
                             }
                         </>
                         <div className='flex flex-col gap-2'>
-                            <p className='flex gap-3 items-center justify-center font-semibold cursor-pointer text-clr-2 text-xl md:text-2xl lg:text-3xl tracking-wide'>
+                            <p className='flex gap-3 items-center font-semibold cursor-pointer text-clr-2 text-xl md:text-2xl lg:text-3xl tracking-wide'>
                                 <Link
                                     href={`/anon/${user?.username}`}
                                     target='_blank'>
