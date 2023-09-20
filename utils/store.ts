@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { v4 as uuid } from 'uuid'
+import { Dispatch, SetStateAction } from 'react'
 
 const initialUserStore = {
     otp: '',
@@ -82,6 +83,7 @@ const pollInitialState = {
 }
 
 const usePoll = create<Poll>()((set) => ({
+    polls: [],
     title: '',
     pollUrl: '',
     medias: null,
@@ -106,8 +108,9 @@ const usePoll = create<Poll>()((set) => ({
     setPollLoad: (pollLoad) => set({ pollLoad }),
     setFetching: (fetching) => set({ fetching }),
     setPollToDefault: () => set(pollInitialState),
+    setPolls: (polls: MyPoll[]) => set({ polls }),
     setTotalPolls: (totalPolls) => set({ totalPolls }),
-    setIsAuthenticated: (isAuthenticated) => set({ isAuthenticated })
+    setIsAuthenticated: (isAuthenticated) => set({ isAuthenticated }),
 }))
 
 export {
