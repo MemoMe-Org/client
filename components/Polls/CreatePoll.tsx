@@ -75,7 +75,7 @@ const CreatePoll: FC<State<boolean>> = ({ get, set }) => {
                     </h4>
                     <textarea
                         value={title}
-                        maxLength={267}
+                        maxLength={178}
                         placeholder='Question/Title..'
                         onChange={(e) => setTitle(e.target.value)}
                         className={`${questrial.className} text-clr-16 outline-none border-b-[0.5px] focus:border-clr-15 px-1 py-0.5 w-full bg-clr-12 resize-none`}
@@ -88,7 +88,7 @@ const CreatePoll: FC<State<boolean>> = ({ get, set }) => {
                                 <input
                                     type='text'
                                     value={option}
-                                    maxLength={42}
+                                    maxLength={32}
                                     onChange={(e) => {
                                         setOptions(options.map(
                                             (option) => option.id === id ? {
