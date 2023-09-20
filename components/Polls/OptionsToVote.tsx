@@ -7,13 +7,10 @@ import { prompt, questrial } from '@/public/fonts/f'
 import { GiCheckMark, AiOutlineLoading3Quarters } from '@/public/icons/ico'
 
 const OptionsToVote = () => {
-
     const {
         setPoll, voteLoad,
         poll, setVoteLoad
     } = usePoll()
-
-    console.log(poll)
 
     const expired = () => {
         const now = new Date().getTime()
@@ -38,6 +35,7 @@ const OptionsToVote = () => {
             .finally(() => setVoteLoad(false))
     }
 
+    const notValidToVote = (poll?.hasVoted || expired() || poll?.active === false)
 
     return (
         <section className='mb-3'>
@@ -51,14 +49,14 @@ const OptionsToVote = () => {
                         >
                             <button
                                 onClick={async () => vote(option.id)}
-                                className={`${prompt.className} ${poll.hasVoted ? 'rounded-md' : 'rounded-full'} relative h-[30px] flex items-center overflow-hidden bg-clr-1 w-full text-clr-0 disabled:bg-clr-9`}
+                                className={`${prompt.className} ${notValidToVote ? 'rounded-md' : 'rounded-full'} relative h-[30px] flex items-center overflow-hidden bg-clr-1 w-full text-clr-0 disabled:bg-clr-9`}
                                 style={{
                                     boxShadow: `rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px`
                                 }}
                                 disabled={Boolean(poll?.active === false || expired() || poll.hasVoted)}>
-                                {(poll.hasVoted || expired() || poll.active === false) &&
+                                {notValidToVote &&
                                     <div
-                                        className={`transition-all ease-in-out duration-500 absolute bg-clr-3 h-full rounded-md`}
+                                        className={`transition-all ease-in-out duration-500 absolute bg-clr-3 h-full ${notValidToVote ? 'rounded-md' : 'rounded-full'}`}
                                         style={{
                                             width: `${optionPercentage}%`,
                                             boxShadow: `rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px`
@@ -75,8 +73,8 @@ const OptionsToVote = () => {
                                             <span>
                                                 {option.texts}
                                             </span>
-                                            {poll.hasVoted && poll.votedOption === option.id && <GiCheckMark />}
-                                            {poll.hasVoted &&
+                                            {(poll.hasVoted && poll.votedOption === option.id) && <GiCheckMark />}
+                                            {notValidToVote &&
                                                 <span>
                                                     {option.totalVotes} &#8226; {optionPercentage.toFixed(1)}%
                                                 </span>}
