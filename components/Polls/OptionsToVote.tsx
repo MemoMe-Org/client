@@ -89,7 +89,7 @@ const OptionsToVote = () => {
             </div>
             <div className={`${questrial.className} flex items-center justify-between text-sm text-clr-4 font-medium tracking-wide px-1.5 md:px-3.5`}>
                 <span>Views &#8226; {formatNumber(poll?.views!)}</span>
-                {poll?.active === false || expired() && <span>Final Result</span>}
+                {poll?.active === false || expired() && <span>Final Results</span>}
                 <span>Total Vote(s) &#8226; {poll?.totalVotes}</span>
             </div>
         </section>
