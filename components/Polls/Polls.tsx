@@ -27,7 +27,6 @@ const Messages: FC<TabProps> = ({ username }) => {
         await axios.get(
             `/api/poll/fetch/${username}?limit=${limit}&page=${page}`,
         ).then((res: AxiosResponse) => {
-            console.log(res.data?.polls)
             setTotalPolls(res.data?.length)
             setIsAuthenticated(res.data?.isAuthenticated)
             setPolls((prevPolls) => [...prevPolls, ...res.data?.polls])
