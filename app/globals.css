@@ -231,6 +231,10 @@ header {
     @apply flex justify-between items-center px-2 py-1.5 text-lg tracking-wider;
 }
 
+.vote-load {
+    animation: rotate 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
 
 /* Loader Two */
 .lds-roller {
@@ -402,40 +406,4 @@ header {
 .loader {
     @apply m-auto border-[5px] border-[#EAF0F6] rounded-full border-t-clr-4 w-[23px] h-[23px];
     animation: rotate 4s linear infinite;
-}
-
-
-/* Progress Bar */
-.progress{
-    position: relative;
-    height: 10px;
-    width: 1110%;
-    border: 10px solid #f4a261;
-    border-radius: 15px;
-}
-.progress .color{
-    position: absolute;
-    background-color: #ffffff;
-    width: 0px;
-    height: 10px;
-    border-radius: 15px;
-    animation: progres 4s infinite linear;    
-}
-
-@keyframes progres {
-    0%{
-        width: 0%;
-    }
-    25%{
-        width: 50%;
-    }
-    50%{
-        width: 75%;
-    }
-    75%{
-        width: 85%;
-    }
-    100%{
-        width: 100%;
-    }
 }
