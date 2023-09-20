@@ -87,9 +87,11 @@ const usePoll = create<Poll>()((set) => ({
     medias: null,
     expiry: null,
     hosting: false,
+    fetching: false,
     poll: undefined,
     pollLoad: false,
-    voteLoad: false,
+    totalPolls: 0,
+    isAuthenticated: false,
     options: [
         { id: uuid(), option: '' },
         { id: uuid(), option: '' },
@@ -102,8 +104,10 @@ const usePoll = create<Poll>()((set) => ({
     setHosting: (hosting) => set({ hosting }),
     setOptions: (options) => set({ options }),
     setPollLoad: (pollLoad) => set({ pollLoad }),
-    setVoteLoad: (voteLoad) => set({ voteLoad }),
+    setFetching: (fetching) => set({ fetching }),
     setPollToDefault: () => set(pollInitialState),
+    setTotalPolls: (totalPolls) => set({ totalPolls }),
+    setIsAuthenticated: (isAuthenticated) => set({ isAuthenticated })
 }))
 
 export {
