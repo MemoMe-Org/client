@@ -55,7 +55,7 @@ const OptionsToVote = () => {
                                 style={{
                                     boxShadow: `rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px`
                                 }}
-                                disabled={Boolean(poll.active === false || expired() || poll.hasVoted)}>
+                                disabled={Boolean(poll?.active === false || expired() || poll.hasVoted)}>
                                 {(poll.hasVoted || expired() || poll.active === false) &&
                                     <div
                                         className={`transition-all ease-in-out duration-500 absolute bg-clr-3 h-full rounded-md`}
@@ -88,8 +88,9 @@ const OptionsToVote = () => {
                 })}
             </div>
             <div className={`${questrial.className} flex items-center justify-between text-sm text-clr-4 font-medium tracking-wide px-1.5 md:px-3.5`}>
-                <span>Views &#8226; {formatNumber(poll?.views!)}</span>
-                {poll?.active === false || expired() && <span>Final Results</span>}
+                <span>View(s) &#8226; {formatNumber(poll?.views!)}</span>
+                {(poll?.active === false || expired()) &&
+                    <span className='text-xs'>Final Results</span>}
                 <span>Total Vote(s) &#8226; {poll?.totalVotes}</span>
             </div>
         </section>
