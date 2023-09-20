@@ -15,9 +15,9 @@ const Messages: FC<TabProps> = ({ username }) => {
         setIsAuthenticated,
         fetching, setTotalPolls,
         setFetching, totalPolls,
+        polls, setPolls
     } = usePoll()
     const [page, setPage] = useState<number>(1)
-    const [polls, setPolls] = useState<MyPoll[]>([])
 
     const fetchPolls = async (): Promise<void> => {
         if (fetching) {
@@ -29,7 +29,7 @@ const Messages: FC<TabProps> = ({ username }) => {
         ).then((res: AxiosResponse) => {
             setTotalPolls(res.data?.length)
             setIsAuthenticated(res.data?.isAuthenticated)
-            setPolls((prevPolls) => [...prevPolls, ...res.data?.polls])
+            setPolls((prevPolls: MyPoll[]) => [...prevPolls, ...res.data?.polls])
         }).finally(() => setFetching(false))
     }
 
