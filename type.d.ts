@@ -181,22 +181,26 @@ interface Poll {
     title: string
     pollUrl: string
     hosting: boolean
+    fetching: boolean
     pollLoad: boolean
-    voteLoad: boolean
+    totalPolls: number
     medias: File[] | null
     expiry: null | string
     options: PollOption[]
     poll: MyPoll | undefined
+    isAuthenticated: boolean
     setPollToDefault: () => void
     setTitle: (title: string) => void
     setPollUrl: (pollUrl: string) => void
     setHosting: (hosting: boolean) => void
     setOptions: (poll: PollOption[]) => void
+    setFetching: (fetching: boolean) => void
     setPollLoad: (pollLoad: boolean) => void
-    setVoteLoad: (voteLoad: boolean) => void
-    setPoll: (poll: MyPoll | undefined) => void
     setMedias: (medias: File[] | null) => void
     setExpiry: (expiry: null | string) => void
+    setPoll: (poll: MyPoll | undefined) => void
+    setTotalPolls: (totalPolls: number) => void
+    setIsAuthenticated: (isAuthenticated: boolean) => void
 }
 
 interface MyPoll {
@@ -207,16 +211,23 @@ interface MyPoll {
     files: MsgFile[]
     hasVoted: boolean
     id: string
-    options: {
-        id: string
-        texts: string
-        totalVotes: number
-    }[]
+    options: MyPollOption[]
     private: boolean
     title: string
     totalVotes: number
     views: number
     votedOption: string
+    votes?: {
+        id: string
+        userId: string,
+        optionId: string
+    }[]
+}
+
+interface MyPollOption {
+    id: string
+    texts: string
+    totalVotes: number
 }
 
 interface PollParams {
