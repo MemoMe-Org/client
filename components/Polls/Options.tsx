@@ -1,9 +1,9 @@
 import { FC } from 'react'
-import OptionToVote from './OptionToVote'
+import Option from './Option'
 import { questrial } from '@/public/fonts/f'
 import { formatNumber } from '@/utils/formatNumber'
 
-const OptionsToVote: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
+const Options: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
     const expired = () => {
         const now = new Date().getTime()
 
@@ -30,12 +30,12 @@ const OptionsToVote: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
                             key={option.id}
                             className='w-full'
                         >
-                            <OptionToVote
-                                expired={expired}
+                            <Option
+                                poll={poll}
                                 option={option}
+                                expired={expired}
                                 notValidToVote={notValidToVote}
                                 optionPercentage={optionPercentage}
-                                poll={poll}
                             />
                         </article>
                     )
@@ -51,4 +51,4 @@ const OptionsToVote: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
     )
 }
 
-export default OptionsToVote
+export default Options

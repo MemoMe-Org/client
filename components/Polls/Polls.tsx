@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
+import Poll from './Poll'
 import axios from '@/app/api/axios'
 import { AxiosResponse } from 'axios'
-import PollToVote from './PollToVote'
 import { LoaderThree } from '../Loader'
 import { usePoll } from '@/utils/store'
 import { FC, useEffect, useState } from 'react'
@@ -49,7 +49,7 @@ const Messages: FC<TabProps> = ({ username }) => {
                     <section
                         key={poll.id}
                         className='flex gap-2 w-full'>
-                        <PollToVote poll={poll} />
+                        <Poll poll={poll} />
                         {/* Poll Menu */}
                     </section>
                 ))}

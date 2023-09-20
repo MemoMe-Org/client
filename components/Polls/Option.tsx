@@ -6,7 +6,7 @@ import throwError from '@/utils/throwError'
 import { AxiosError, AxiosResponse } from 'axios'
 import { GiCheckMark, AiOutlineLoading3Quarters } from '@/public/icons/ico'
 
-const OptionToVote: FC<{
+const Option: FC<{
     poll: MyPoll | undefined,
     option: MyPollOption,
     notValidToVote: boolean,
@@ -63,4 +63,4 @@ const OptionToVote: FC<{
     )
 }
 
-export default OptionToVote
+export default Option

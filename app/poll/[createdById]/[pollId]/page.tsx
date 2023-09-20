@@ -11,7 +11,7 @@ import throwError from '@/utils/throwError'
 import { LoaderTwo } from '@/components/Loader'
 import { LuVerified } from '@/public/icons/ico'
 import { AxiosError, AxiosResponse } from 'axios'
-import PollToVote from '@/components/Polls/PollToVote'
+import PollToVote from '@/components/Polls/Poll'
 import { lato, poppins, questrial } from '@/public/fonts/f'
 
 const page = ({ params: { createdById, pollId } }: PollParams) => {

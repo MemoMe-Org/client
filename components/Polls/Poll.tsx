@@ -1,12 +1,12 @@
 import { FC } from 'react'
 import Image from 'next/image'
+import Options from './Options'
 import download from '@/utils/download'
-import OptionsToVote from './OptionsToVote'
 import { BsDownload } from '@/public/icons/ico'
 import { prompt, questrial } from '@/public/fonts/f'
 import { expiryPeriod, getPeriod } from '@/utils/period'
 
-const PollToVote: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
+const Poll: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
     const titles = poll?.title?.split('\n')
 
     const expiry = (): string => {
@@ -75,7 +75,7 @@ const PollToVote: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
                         </div>
                     ))}
                 </article> : ''}
-            <OptionsToVote poll={poll} />
+            <Options poll={poll} />
             <article className='w-full flex justify-between items-center'>
                 <div className={`${prompt.className} flex gap-0.5 text-xs absolute bottom-1 text-clr-15`}>
                     <span>Created</span>
@@ -95,4 +95,4 @@ const PollToVote: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
     )
 }
 
-export default PollToVote
+export default Poll
