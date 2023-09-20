@@ -180,6 +180,7 @@ interface PollOption {
 interface Poll {
     title: string
     pollUrl: string
+    polls: MyPoll[]
     hosting: boolean
     fetching: boolean
     pollLoad: boolean
@@ -200,6 +201,7 @@ interface Poll {
     setExpiry: (expiry: null | string) => void
     setPoll: (poll: MyPoll | undefined) => void
     setTotalPolls: (totalPolls: number) => void
+    setPolls: Dispatch<SetStateAction<MyPoll[]>>
     setIsAuthenticated: (isAuthenticated: boolean) => void
 }
 
