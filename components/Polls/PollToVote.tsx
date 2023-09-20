@@ -37,7 +37,7 @@ const PollToVote: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
                         </span>
                     ))}
                 </div>}
-            {poll?.files?.length && poll?.files?.length > 0 &&
+            {poll?.files?.length && poll.files.length > 0 ?
                 <article
                     className='w-full md:h-[9rem] h-[7rem] flex gap-1 object-cover overflow-hidden mt-2'>
                     {poll?.files?.map((file) => (
@@ -74,8 +74,8 @@ const PollToVote: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
                             }
                         </div>
                     ))}
-                </article>}
-            <OptionsToVote />
+                </article> : ''}
+            <OptionsToVote poll={poll} />
             <article className='w-full flex justify-between items-center'>
                 <div className={`${prompt.className} flex gap-0.5 text-xs absolute bottom-1 text-clr-15`}>
                     <span>Created</span>
