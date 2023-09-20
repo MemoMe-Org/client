@@ -1,16 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
-import Modal from '../Modal'
+import Modal from './Modal'
 import Image from 'next/image'
 import blob from '@/utils/file'
 import axios from '@/app/api/axios'
 import notify from '@/utils/notify'
 import { LoaderThree } from '../Loader'
+import MaxSize from '@/enums/fileMaxSizes'
 import { ChangeEvent, FC, useState } from 'react'
 import { AxiosResponse, AxiosError } from 'axios'
 import { poppins, questrial } from '@/public/fonts/f'
 import { UserStore, useModalStore } from '@/utils/store'
 import { AiOutlineCloudUpload, RiDeleteBin6Line } from '@/public/icons/ico'
-import MaxSize from '@/enums/fileMaxSizes'
 
 const Avatar: FC<ModalComponent> = ({ get, set, data }) => {
     const { avatar, setAvatar } = UserStore()

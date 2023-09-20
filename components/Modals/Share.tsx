@@ -1,4 +1,4 @@
-import Modal from '../Modal'
+import Modal from './Modal'
 import Link from 'next/link'
 import { FC, useState } from 'react'
 import {
