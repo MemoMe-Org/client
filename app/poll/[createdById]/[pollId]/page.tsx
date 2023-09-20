@@ -16,6 +16,7 @@ import { lato, poppins, questrial } from '@/public/fonts/f'
 
 const page = ({ params: { createdById, pollId } }: PollParams) => {
     const [userData, setUserData] = useState<any>({})
+    const [voterData, setVoterData] = useState<any>({})
 
     const { pollLoad, setPollLoad, setPoll, poll } = usePoll()
 
@@ -25,6 +26,7 @@ const page = ({ params: { createdById, pollId } }: PollParams) => {
             .then((res: AxiosResponse) => {
                 setPoll(res.data?.poll)
                 setUserData(res.data?.user || {})
+                setVoterData(res.data?.voter || {})
             }).catch((err: AxiosError) => {
                 const statusCodes: unknown = err.response?.status
                 if (statusCodes === 401 || statusCodes === 403) {
@@ -46,13 +48,13 @@ const page = ({ params: { createdById, pollId } }: PollParams) => {
 
     if (pollLoad) return <LoaderTwo />
 
-    const name = userData?.username
-    const avatar_url = userData?.Profile?.avatar?.url
+    const name = voterData?.username
+    const avatar_url = voterData?.Profile?.avatar?.url
 
     return (
         <>
             <NavBar
-                isAuthenticated={userData?.isAuthenticated}
+                isAuthenticated={voterData?.isAuthenticated}
                 data={avatar_url ? { avatar_url } : { username: name }}
             />
             <main className='w-full min-h-screen bg-clr-12 pt-5'>
@@ -65,7 +67,7 @@ const page = ({ params: { createdById, pollId } }: PollParams) => {
                                     priority
                                     width={300}
                                     height={300}
-                                    src={avatar_url}
+                                    src={userData?.Profile?.avatar?.url}
                                     className='object-cover w-full h-full'
                                 /> :
                                 <div className={`${lato.className} text-clr-2 text-3xl font-bold`}>
@@ -76,9 +78,9 @@ const page = ({ params: { createdById, pollId } }: PollParams) => {
                         <div className='flex flex-col gap-1.5 flex-wrap'>
                             <div className={`${questrial.className} flex gap-2 items-center text-clr-2 font-medium text-lg`}>
                                 <Link
-                                    href={`/${name}`}
+                                    href={`/${userData?.username}`}
                                     target='_blank'>
-                                    @{name}
+                                    @{userData?.username}
                                 </Link>
                                 {userData?.Account?.verified && <LuVerified />}
                             </div>
