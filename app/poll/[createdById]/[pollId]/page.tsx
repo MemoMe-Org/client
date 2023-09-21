@@ -16,11 +16,13 @@ import { LoaderTwo } from '@/components/Loader'
 import { LuVerified } from '@/public/icons/ico'
 import { AxiosError, AxiosResponse } from 'axios'
 import { lato, poppins, questrial } from '@/public/fonts/f'
+import { notFound } from 'next/navigation'
 
 const page = ({ params: { createdById, pollId } }: PollParams) => {
     const token = useToken()
     const [userData, setUserData] = useState<any>({})
     const [voterData, setVoterData] = useState<any>({})
+    const [notExist, setNotExist] = useState<boolean>(false)
 
     const {
         isAuthenticated, setIsAuthenticated,
@@ -43,7 +45,12 @@ const page = ({ params: { createdById, pollId } }: PollParams) => {
             setVoterData(res.data?.voter || {})
             setIsAuthenticated(!res.data?.voter?.isAuthenticated)
         }).catch((err: AxiosError) => {
-            throwError(err)
+            const statusCodes: unknown = err.response?.status
+            if (statusCodes === 404) {
+                setNotExist(true)
+            } else {
+                throwError(err)
+            }
         }).finally(() => setPollLoad(false))
     }
 
@@ -63,6 +70,8 @@ const page = ({ params: { createdById, pollId } }: PollParams) => {
     }, [poll?.options])
 
     if (pollLoad) return <LoaderTwo />
+
+    if (notExist) return notFound()
 
     const name = voterData?.username
     const avatar_url = voterData?.Profile?.avatar?.url
