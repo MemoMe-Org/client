@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 import NavBar from '@/components/Nav'
-import Login from '@/components/Modals/Login'
+import Login from '@/components/Login'
 
 const page = () => {
     return (
