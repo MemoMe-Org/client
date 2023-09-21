@@ -39,33 +39,37 @@ const page = () => {
                 pathName='signup'
                 isAuthenticated={false}
             />
-            <AuthLayout
-                title='Signup'
-                pathName='signup'
-                btnLabel='Sign Up'
-                handler={handleSignup}>
-                <article className='flex flex-col gap-5'>
-                    <Input
-                        type='email'
-                        label='Email'
-                        value={email}
-                        placeholder='example@mail.com'
-                        onChange={setEmail}
-                    />
-                    <Input
-                        type='password'
-                        label='Password'
-                        value={password}
-                        onChange={setPassword}
-                    />
-                    <Input
-                        type='password'
-                        label='Confirm Password'
-                        value={password2}
-                        onChange={setPassword2}
-                    />
-                </article>
-            </AuthLayout>
+            <form
+                onSubmit={(e) => e.preventDefault()}
+                className='card w-[92vw] max-w-[500px] mx-auto mt-3 mb-10 px-5 py-7'>
+                <AuthLayout
+                    title='Signup'
+                    pathName='signup'
+                    btnLabel='Sign Up'
+                    handler={handleSignup}>
+                    <article className='flex flex-col gap-5'>
+                        <Input
+                            type='email'
+                            label='Email'
+                            value={email}
+                            placeholder='example@mail.com'
+                            onChange={setEmail}
+                        />
+                        <Input
+                            type='password'
+                            label='Password'
+                            value={password}
+                            onChange={setPassword}
+                        />
+                        <Input
+                            type='password'
+                            label='Confirm Password'
+                            value={password2}
+                            onChange={setPassword2}
+                        />
+                    </article>
+                </AuthLayout>
+            </form>
         </>
     )
 }
