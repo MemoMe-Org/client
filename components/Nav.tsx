@@ -46,7 +46,7 @@ const NavBar: FC<NavProps> = ({
                                 <Link href='/login' className={`${poppins.className} nav-btn-link`}>
                                     Login
                                 </Link> :
-                                <Link href='/login' className={`${poppins.className} nav-btn-link`}>
+                                <Link href='/signup' className={`${poppins.className} nav-btn-link`}>
                                     Sign Up
                                 </Link>
                             }
