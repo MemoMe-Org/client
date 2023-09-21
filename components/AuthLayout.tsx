@@ -16,9 +16,7 @@ const AuthLayout: FC<AuthProps> = ({
     const { loading } = UserStore()
 
     return (
-        <form
-            onSubmit={(e) => e.preventDefault()}
-            className="card w-[92vw] max-w-[500px] mx-auto mt-3 mb-10 px-5 py-7">
+        <section className='w-full'>
             <h2 className={`${poppins.className} text-2xl tracking-wider font-medium mb-7 md:text-3xl text-clr-4`}>
                 {title}
             </h2>
@@ -85,7 +83,7 @@ const AuthLayout: FC<AuthProps> = ({
                     }
                 </p>
             </div>
-        </form>
+        </section>
     )
 }
 
