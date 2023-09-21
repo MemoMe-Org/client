@@ -3,43 +3,59 @@
 "use client"
 import Link from 'next/link'
 import Image from 'next/image'
-import axios from '@/app/api/axios'
 import NavBar from '@/components/Nav'
+import Login from '@/components/Login'
 import { usePoll } from '@/utils/store'
+import useToken from '@/hooks/useToken'
+import Poll from '@/components/Polls/Poll'
+import { axiosReq } from '@/app/api/axios'
 import { useEffect, useState } from 'react'
 import throwError from '@/utils/throwError'
+import Modal from '@/components/Modals/Modal'
 import { LoaderTwo } from '@/components/Loader'
 import { LuVerified } from '@/public/icons/ico'
 import { AxiosError, AxiosResponse } from 'axios'
-import PollToVote from '@/components/Polls/Poll'
 import { lato, poppins, questrial } from '@/public/fonts/f'
 
 const page = ({ params: { createdById, pollId } }: PollParams) => {
+    const token = useToken()
     const [userData, setUserData] = useState<any>({})
     const [voterData, setVoterData] = useState<any>({})
 
-    const { pollLoad, setPollLoad, setPoll, poll } = usePoll()
+    const {
+        isAuthenticated, setIsAuthenticated,
+        pollLoad, setPollLoad, setPoll, poll,
+    } = usePoll()
 
     const getPoll = async () => {
         setPollLoad(true)
-        await axios.get(`/api/poll/get/${createdById}/${pollId}`)
-            .then((res: AxiosResponse) => {
-                setPoll(res.data?.poll)
-                setUserData(res.data?.user || {})
-                setVoterData(res.data?.voter || {})
-            }).catch((err: AxiosError) => {
-                const statusCodes: unknown = err.response?.status
-                if (statusCodes === 401 || statusCodes === 403) {
-                    // open login modal
+        setIsAuthenticated(false)
+        await axiosReq.get(
+            `/api/poll/get/${createdById}/${pollId}`,
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
                 }
-                // comintg back. But at least -
-                throwError(err)
-            }).finally(() => setPollLoad(false))
+            }
+        ).then((res: AxiosResponse) => {
+            setPoll(res.data?.poll)
+            setUserData(res.data?.user || {})
+            setVoterData(res.data?.voter || {})
+            setIsAuthenticated(!res.data?.voter?.isAuthenticated)
+        }).catch((err: AxiosError) => {
+            throwError(err)
+        }).finally(() => setPollLoad(false))
     }
 
     useEffect(() => {
-        getPoll()
-    }, [createdById, pollId])
+        if (token) {
+            getPoll()
+        } else {
+            if (token === '') {
+                getPoll()
+            }
+        }
+    }, [createdById, pollId, token])
 
     useEffect(() => {
         const formatOptions = poll?.options.map((option) => `${option.texts}`)
@@ -57,11 +73,20 @@ const page = ({ params: { createdById, pollId } }: PollParams) => {
                 isAuthenticated={voterData?.isAuthenticated}
                 data={avatar_url ? { avatar_url } : { username: name }}
             />
+            <Modal
+                get={isAuthenticated}
+                set={setIsAuthenticated}>
+                <form
+                    className='w-full'
+                    onSubmit={(e) => e.preventDefault()}>
+                    <Login title='Login to Vote.' />
+                </form>
+            </Modal>
             <main className='w-full min-h-screen bg-clr-12 pt-5'>
                 <section className='w-[90vw] max-w-[700px] flex flex-col gap-7 mx-auto'>
                     <article className='flex gap-4 items-center'>
                         <div className='grid place-items-center h-[5rem] w-[5rem] rounded-full overflow-hidden border-[2px] bg-clr-0 border-clr-5'>
-                            {avatar_url ?
+                            {userData?.Profile?.avatar?.url ?
                                 <Image
                                     alt='avatar'
                                     priority
@@ -71,7 +96,7 @@ const page = ({ params: { createdById, pollId } }: PollParams) => {
                                     className='object-cover w-full h-full'
                                 /> :
                                 <div className={`${lato.className} text-clr-2 text-3xl font-bold`}>
-                                    {name ? name[0].toUpperCase() : '0'}
+                                    {userData?.username ? userData?.username[0].toUpperCase() : '0'}
                                 </div>
                             }
                         </div>
@@ -89,7 +114,7 @@ const page = ({ params: { createdById, pollId } }: PollParams) => {
                             </p>
                         </div>
                     </article>
-                    <PollToVote poll={poll} />
+                    <Poll poll={poll} />
                 </section>
             </main>
         </>
