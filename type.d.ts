@@ -180,8 +180,8 @@ interface PollOption {
 interface Poll {
     title: string
     pollUrl: string
-    polls: MyPoll[]
     hosting: boolean
+    isOwner: boolean
     fetching: boolean
     pollLoad: boolean
     totalPolls: number
@@ -194,6 +194,7 @@ interface Poll {
     setTitle: (title: string) => void
     setPollUrl: (pollUrl: string) => void
     setHosting: (hosting: boolean) => void
+    setIsOwner: (isOwner: boolean) => void
     setOptions: (poll: PollOption[]) => void
     setFetching: (fetching: boolean) => void
     setPollLoad: (pollLoad: boolean) => void
@@ -201,7 +202,6 @@ interface Poll {
     setExpiry: (expiry: null | string) => void
     setPoll: (poll: MyPoll | undefined) => void
     setTotalPolls: (totalPolls: number) => void
-    setPolls: Dispatch<SetStateAction<MyPoll[]>>
     setIsAuthenticated: (isAuthenticated: boolean) => void
 }
 
@@ -237,4 +237,9 @@ interface PollParams {
         createdById: string,
         pollId: string
     }
+}
+
+interface Login extends PathName {
+    title: string
+    btnLabel?: string
 }
