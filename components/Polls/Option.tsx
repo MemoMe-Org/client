@@ -13,7 +13,7 @@ const Option: FC<{
     optionPercentage: number,
     expired: () => boolean,
 }> = ({ poll, notValidToVote, optionPercentage, expired, option }) => {
-    const { setPoll } = usePoll()
+    const { setPoll, setIsAuthenticated } = usePoll()
     const [voteLoad, setVoteLoad] = useState<boolean>(false)
 
     const vote = async (optionId: string) => {
@@ -21,8 +21,14 @@ const Option: FC<{
         await axios.post(
             `/api/poll/vote/${poll?.createdById}/${poll?.id}/${optionId}`
         ).then((res: AxiosResponse) => setPoll(res.data?.poll))
-            .catch((err: AxiosError) => throwError(err))
-            .finally(() => setVoteLoad(false))
+            .catch((err: AxiosError) => {
+                const statusCodes: unknown = err.response?.status
+                if (statusCodes === 401 || statusCodes === 403) {
+                    setIsAuthenticated(true)
+                } else {
+                    throwError(err)
+                }
+            }).finally(() => setVoteLoad(false))
     }
 
     return (
