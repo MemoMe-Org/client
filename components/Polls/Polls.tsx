@@ -11,13 +11,12 @@ import { poppins, prompt } from '@/public/fonts/f'
 const Messages: FC<TabProps> = ({ username }) => {
     const limit = 5 as const
     const {
-        isAuthenticated,
-        setIsAuthenticated,
+        isOwner, setIsOwner,
         fetching, setTotalPolls,
         setFetching, totalPolls,
-        polls, setPolls
     } = usePoll()
     const [page, setPage] = useState<number>(1)
+    const [polls, setPolls] = useState<MyPoll[]>([])
 
     const fetchPolls = async (): Promise<void> => {
         if (fetching) {
@@ -28,8 +27,8 @@ const Messages: FC<TabProps> = ({ username }) => {
             `/api/poll/fetch/${username}?limit=${limit}&page=${page}`,
         ).then((res: AxiosResponse) => {
             setTotalPolls(res.data?.length)
-            setIsAuthenticated(res.data?.isAuthenticated)
-            setPolls((prevPolls: MyPoll[]) => [...prevPolls, ...res.data?.polls])
+            setIsOwner(res.data?.isAuthenticated)
+            setPolls((prevPolls) => [...prevPolls, ...res.data?.polls])
         }).finally(() => setFetching(false))
     }
 
@@ -45,7 +44,7 @@ const Messages: FC<TabProps> = ({ username }) => {
                 </h3>
             </header>
             <article className="w-full gap-9 place-items-center grid grid-cols-1">
-                {polls.map((poll) => (
+                {polls?.map((poll) => (
                     <section
                         key={poll.id}
                         className='flex gap-2 w-full'>
