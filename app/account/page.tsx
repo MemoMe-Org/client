@@ -48,11 +48,13 @@ const page = () => {
     }
 
     const toggleDisbility = async (): Promise<void> => {
+        setDisabled(!disabled)
         await axios.get(
             '/auth/api/account/disable',
-        ).then((res: AxiosResponse) => {
-            setDisabled(res.data?.disabled)
-        }).catch((err: AxiosError) => throwError(err))
+        ).catch((err: AxiosError) => {
+            setDisabled(disabled)
+            throwError(err)
+        })
     }
 
     return (
