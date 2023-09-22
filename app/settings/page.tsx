@@ -17,7 +17,9 @@ const page = () => {
     // edit gen msg type
 
     const toggler = async (type: string): Promise<void> => {
-        const originalValue = type === 'levels' ? showLevels : type === 'texts' ? allowTexts : allowFiles
+        const originalValue = type === 'levels' ?
+            showLevels : type === 'texts' ?
+                allowTexts : allowFiles
         const newValue = !originalValue
 
         switch (type) {
