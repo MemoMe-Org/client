@@ -3,6 +3,7 @@ import { v4 as uuid } from 'uuid'
 
 const initialUserStore = {
     otp: '',
+    bio: '',
     email: '',
     userId: '',
     auth: false,
@@ -11,12 +12,16 @@ const initialUserStore = {
     password2: '',
     loading: false,
     disabled: false,
+    allowFiles: false,
+    allowTexts: false,
+    showLevels: false,
 }
 
 const UserStore = create<UserStoreStates>()((set) => ({
     token: undefined,
     ...initialUserStore,
     setOtp: (otp) => set({ otp }),
+    setBio: (bio) => set({ bio }),
     setAuth: (auth) => set({ auth }),
     setToken: (token) => set({ token }),
     setEmail: (email) => set({ email }),
@@ -27,6 +32,9 @@ const UserStore = create<UserStoreStates>()((set) => ({
     setPassword: (password) => set({ password }),
     setDisabled: (disabled) => set({ disabled }),
     setPassword2: (password2) => set({ password2 }),
+    setAllowFiles: (allowFiles) => set({ allowFiles }),
+    setAllowTexts: (allowTexts) => set({ allowTexts }),
+    setShowLevels: (showLevels) => set({ showLevels }),
 }))
 
 const useTextEditor = create<TextEditorStates>()((set) => ({
