@@ -1,42 +1,57 @@
 "use client"
-import MyPage from '@/components/MyPage'
-import SwitchBtn from '@/components/Switch'
-import { inter, poppins } from '@/public/fonts/f'
-import { UserStore } from '@/utils/store'
 import axios from '../api/axios'
-import { AxiosError, AxiosResponse } from 'axios'
+import MyPage from '@/components/MyPage'
+import { UserStore } from '@/utils/store'
+import SwitchBtn from '@/components/Switch'
 import throwError from '@/utils/throwError'
+import { AxiosError, AxiosResponse } from 'axios'
+import { inter, poppins } from '@/public/fonts/f'
 
 const page = () => {
-
     const {
         setShowLevels, allowTexts, showLevels,
         allowFiles, setAllowTexts, setAllowFiles,
     } = UserStore()
 
     // edit bio
-    // show levels, allow texts, allow files
     // edit gen msg type
 
     const toggler = async (type: string): Promise<void> => {
-        await axios.patch(
+        const originalValue = type === 'levels' ? showLevels : type === 'texts' ? allowTexts : allowFiles
+        const newValue = !originalValue
+
+        switch (type) {
+            case 'levels':
+                setShowLevels(newValue)
+                break
+            case 'texts':
+                setAllowTexts(newValue)
+                break
+            case 'files':
+                setAllowFiles(newValue)
+                break
+            default:
+                break
+        }
+
+        await axios.get(
             `/auth/api/settings/toggle/${type}`,
-        ).then((res: AxiosResponse) => {
-            const settings = res.data?.settings
+        ).catch((err: AxiosError) => {
             switch (type) {
-                case 'files':
-                    setShowLevels(settings?.allow_files)
+                case 'levels':
+                    setShowLevels(originalValue)
                     break
                 case 'texts':
-                    setAllowTexts(settings?.allow_texts)
+                    setAllowTexts(originalValue)
                     break
-                case 'levels':
-                    setShowLevels(settings?.show_levels)
+                case 'files':
+                    setAllowFiles(originalValue)
                     break
                 default:
                     break
             }
-        }).catch((err: AxiosError) => throwError(err))
+            throwError(err)
+        })
     }
 
     return (
@@ -62,7 +77,7 @@ const page = () => {
                             </div>
                             <footer className='profile-footer'>
                                 <p className='text-clr-17 text-xs md:text-sm'>
-                                    {showLevels ? 'Hide Profile Levles.' : 'Show Profile Levels'}
+                                    {showLevels ? 'Hide your Profile Levels.' : 'Show your Profile Levels'}
                                 </p>
                             </footer>
                         </article>
