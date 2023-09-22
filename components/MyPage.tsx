@@ -34,9 +34,9 @@ const MyPage: FC<MyPage> = ({ children, param }) => {
                         break
                     case 'settings':
                         setBio(user?.Settings?.bio)
-                        setAllowFiles(!user?.Settings?.allow_files)
-                        setShowLevels(!user?.Settings?.show_levels)
-                        setAllowTexts(!user?.Settings?.allow_texts)
+                        setAllowFiles(user?.Settings?.allow_files)
+                        setShowLevels(user?.Settings?.show_levels)
+                        setAllowTexts(user?.Settings?.allow_texts)
                         break
                     default:
                         setData(user)
