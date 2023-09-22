@@ -63,6 +63,7 @@ interface TextEditorStates {
 
 interface UserStoreStates {
     otp: string
+    bio: string
     auth: boolean
     email: string
     userId: string
@@ -71,8 +72,12 @@ interface UserStoreStates {
     disabled: boolean
     password2: string
     avatar: File | null
-    token: string | undefined
+    showLevels: boolean
+    allowTexts: boolean
+    allowFiles: boolean
     resetStates: () => void
+    token: string | undefined
+    setBio: (bio: string) => void
     setOtp: (otp: string) => void
     setAuth: (auth: boolean) => void
     setToken: (token: string) => void
@@ -83,6 +88,9 @@ interface UserStoreStates {
     setDisabled: (disabled: boolean) => void
     setAvatar: (avatar: File | null) => void
     setPassword2: (password2: string) => void
+    setShowLevels: (showLevels: boolean) => void
+    setAllowTexts: (allowTexts: boolean) => void
+    setAllowFiles: (allowFiles: boolean) => void
 }
 
 interface MessageStoreStates {
