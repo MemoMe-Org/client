@@ -3,18 +3,18 @@
 "use client"
 import axios from '@/app/api/axios'
 import NavBar from '@/components/Nav'
-import { UserStore } from '@/utils/store'
-import { useRouter } from 'next/navigation'
 import throwError from '@/utils/throwError'
 import { LoaderTwo } from '@/components/Loader'
 import { useEffect, useState, FC } from 'react'
 import { AxiosError, AxiosResponse } from 'axios'
+import { UserStore, usePoll } from '@/utils/store'
 
 const MyPage: FC<MyPage> = ({ children, param }) => {
-    const router = useRouter()
     const {
-        setUserId, setDisabled
+        setDisabled, setShowLevels, setBio,
+        setUserId, setAllowTexts, setAllowFiles,
     } = UserStore()
+    const { setIsAuthenticated } = usePoll()
     const [data, setData] = useState<any>({})
     const [auth, setAuth] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -26,13 +26,26 @@ const MyPage: FC<MyPage> = ({ children, param }) => {
                 setAuth(true)
                 const user = res.data?.user || {}
                 setData(user)
-                setUserId(user?.username)
-                setDisabled(user?.Account?.disabled)
-                // more set actions coming
+                console.log(user)
+                switch (param) {
+                    case 'account':
+                        setUserId(user?.username)
+                        setDisabled(user?.Account?.disabled)
+                        break
+                    case 'settings':
+                        setBio(user?.Settings?.bio)
+                        setAllowFiles(!user?.Settings?.allow_files)
+                        setShowLevels(!user?.Settings?.show_levels)
+                        setAllowTexts(!user?.Settings?.allow_texts)
+                        break
+                    default:
+                        setData(user)
+                        break
+                }
             }).catch((err: AxiosError) => {
                 const statusCodes: unknown = err.response?.status
                 if (statusCodes === 401 || statusCodes === 403) {
-                    router.push('/login')
+                    setIsAuthenticated(true)
                 } else {
                     throwError(err)
                 }
