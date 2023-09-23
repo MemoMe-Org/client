@@ -5,16 +5,16 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import Share from './Modals/Share'
 import Avatar from './Modals/Avatar'
+import {
+    FaPollH, AiOutlinePlus, LuVerified,
+    BiSolidMessageDetail,AiOutlineCamera,
+} from '@/public/icons/ico'
 import CreatePoll from './Polls/CreatePoll'
 import { useModalStore } from '@/utils/store'
 import { FC, useState, useEffect } from 'react'
-import {
-    AiOutlineCamera, AiOutlinePlus, LuVerified
-} from '@/public/icons/ico'
 import { formatNumber } from '@/utils/formatNumber'
 import { poppins, questrial } from '@/public/fonts/f'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { BiSolidMessageDetail, FaPollH } from '@/public/icons/ico'
 
 const PollTab = dynamic(() => import('@/components/Polls/Polls'))
 const MessageTab = dynamic(() => import('@/components/Messages/Messages'))
@@ -178,7 +178,7 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
                                 {user?.Account?.verified && <LuVerified />}
                             </p>
                             {user?.Profile?.bio &&
-                                <p className={`${poppins.className} md:text-base text-sm text-clr-13`}>
+                                <p className={`${poppins.className} md:text-sm text-xs text-clr-13`}>
                                     {user?.Profile?.bio}
                                 </p>
                             }
