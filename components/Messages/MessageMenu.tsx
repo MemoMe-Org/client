@@ -17,9 +17,13 @@ const MessageMenu: FC<{
     const [visible, setVisible] = useState<boolean>(message.private)
 
     const handleVisibility = async (msgId: string) => {
-        await axios.get(`/api/msg/edit/${msgId}`)
-            .then((res: AxiosResponse) => setVisible((prev) => !prev))
-            .catch((err: AxiosError) => throwError(err))
+        setVisible((prev) => !prev)
+        await axios.get(
+            `/api/msg/edit/${msgId}`
+        ).catch((err: AxiosError) => {
+            setVisible((prev) => !prev)
+            throwError(err)
+        })
     }
 
     const handleDelete = async (msgId: string) => {
@@ -49,8 +53,7 @@ const MessageMenu: FC<{
                     enterTo="transform opacity-100 scale-100"
                     leave="transition ease-in duration-75"
                     leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                >
+                    leaveTo="transform opacity-0 scale-95">
                     <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-clr-11 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <div className="px-1 py-1">
                             <Menu.Item>
@@ -69,7 +72,7 @@ const MessageMenu: FC<{
                                                 className='text-clr-1'
                                             />
                                         )}
-                                        {visible === true ? 'Make Public' : 'Make Private'}
+                                        {visible === true ? 'Private' : 'Public'} Message
                                     </button>
                                 )}
                             </Menu.Item>
