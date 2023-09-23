@@ -9,6 +9,7 @@ import { usePoll } from '@/utils/store'
 import useToken from '@/hooks/useToken'
 import Poll from '@/components/Polls/Poll'
 import { axiosReq } from '@/app/api/axios'
+import { notFound } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import throwError from '@/utils/throwError'
 import Modal from '@/components/Modals/Modal'
@@ -16,7 +17,6 @@ import { LoaderTwo } from '@/components/Loader'
 import { LuVerified } from '@/public/icons/ico'
 import { AxiosError, AxiosResponse } from 'axios'
 import { lato, poppins, questrial } from '@/public/fonts/f'
-import { notFound } from 'next/navigation'
 
 const page = ({ params: { createdById, pollId } }: PollParams) => {
     const token = useToken()
@@ -65,9 +65,31 @@ const page = ({ params: { createdById, pollId } }: PollParams) => {
     }, [createdById, pollId, token])
 
     useEffect(() => {
-        const formatOptions = poll?.options.map((option) => `${option.texts}`)
-        document.title = `Vote here: ${formatOptions}`
+        let title
+        if (poll?.title) {
+            title = `Poll: ${poll.title}`
+        } else {
+            const formatOptions = poll?.options.map((option) => `${option.texts}`)
+            title = `Vote here: ${formatOptions}`
+        }
+
+        document.title = title
     }, [poll?.options])
+
+    useEffect(() => {
+        let intervalId
+        const refreshInterval = 3 * 60 * 1000
+
+        const refreshPage = () => {
+            window.location.reload()
+        }
+
+        if (poll?.hasVoted) {
+            intervalId = setInterval(refreshPage, refreshInterval)
+        }
+
+        return () => clearInterval(intervalId!)
+    }, [poll?.hasVoted])
 
     if (pollLoad) return <LoaderTwo />
 
