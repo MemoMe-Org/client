@@ -12,6 +12,7 @@ import throwError from '@/utils/throwError'
 import { AxiosError, AxiosResponse } from 'axios'
 import { inter, poppins } from '@/public/fonts/f'
 import { LoaderThree } from '@/components/Loader'
+import ListboxComponent from '@/components/ListBox'
 
 const page = () => {
     const {
@@ -21,8 +22,6 @@ const page = () => {
     } = UserStore()
 
     const [bioLoad, setBioLoad] = useState<boolean>(false)
-
-    // edit gen msg type
 
     const toggler = async (type: string): Promise<void> => {
         const originalValue = type === 'levels' ?
@@ -166,6 +165,26 @@ const page = () => {
                                 <p className='text-clr-17 text-xs md:text-sm'>
                                     {allowFiles ? 'Deny Anonymous Media.' : 'Allow Anonymous Media.'}
                                 </p>
+                            </footer>
+                        </article>
+
+                        <article className='relative rounded-lg border-[0.75px] overflow-hidden'>
+                            <div className='flex flex-col gap-3.5 pt-8 px-6 pb-5'>
+                                <h3 className={`${inter.className} text-clr-16 font-medium tracking-wide text-[20px]`}>
+                                    Generated Message
+                                </h3>
+                                <ListboxComponent />
+                            </div>
+                            <footer className='profile-footer'>
+                                <p className='text-clr-17 text-xs md:text-sm'>
+                                    Please select your preferred option.
+                                </p>
+                                <button
+                                    className='save-btn-2'
+                                    disabled={bio === data?.Settings?.gen_msg_type}
+                                    onClick={async () => await editBio()}>
+                                    {bioLoad ? <LoaderThree /> : 'Save'}
+                                </button>
                             </footer>
                         </article>
                     </section>
