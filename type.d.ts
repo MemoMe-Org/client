@@ -17,6 +17,7 @@ interface InputProps<T> {
     value: T
     type: string
     label: string
+    maxLength?: number
     placeholder?: string
     onChange: (value: T) => void
 }
