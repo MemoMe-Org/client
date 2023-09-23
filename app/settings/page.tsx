@@ -127,7 +127,7 @@ const page = () => {
                             </div>
                             <footer className='profile-footer'>
                                 <p className='text-clr-17 text-xs md:text-sm'>
-                                    {showLevels ? 'Hide your Profile Levels.' : 'Show your Profile Levels'}
+                                    {showLevels ? 'Toggle to hide your Profile Levels.' : 'Toggle to show your Profile Levels'}
                                 </p>
                             </footer>
                         </article>
@@ -145,7 +145,7 @@ const page = () => {
                             </div>
                             <footer className='profile-footer'>
                                 <p className='text-clr-17 text-xs md:text-sm'>
-                                    {allowTexts ? 'Deny Anonymous Text Messages.' : 'Allow Anonymous Text Messages.'}
+                                    {allowTexts ? 'Toggle to deny Anonymous Text Messages.' : 'Toggle to allow Anonymous Text Messages.'}
                                 </p>
                             </footer>
                         </article>
@@ -163,7 +163,7 @@ const page = () => {
                             </div>
                             <footer className='profile-footer'>
                                 <p className='text-clr-17 text-xs md:text-sm'>
-                                    {allowFiles ? 'Deny Anonymous Media.' : 'Allow Anonymous Media.'}
+                                    {allowFiles ? 'Toggle to deny Anonymous Media.' : 'Toggle to allow Anonymous Media.'}
                                 </p>
                             </footer>
                         </article>
