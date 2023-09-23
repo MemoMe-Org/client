@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 import Poll from './Poll'
+import PollMenu from './PollMenu'
 import axios from '@/app/api/axios'
 import { LoaderThree } from '../Loader'
 import { usePoll } from '@/utils/store'
@@ -38,8 +39,7 @@ const Messages: FC<TabProps> = ({ username }) => {
             } else {
                 throwError(err)
             }
-        })
-            .finally(() => setFetching(false))
+        }).finally(() => setFetching(false))
     }
 
     useEffect(() => {
@@ -59,7 +59,11 @@ const Messages: FC<TabProps> = ({ username }) => {
                         key={poll.id}
                         className='flex gap-2 w-full'>
                         <Poll poll={poll} />
-                        {/* Poll Menu */}
+                        {isOwner && <PollMenu
+                            poll={poll}
+                            polls={polls}
+                            setPolls={setPolls}
+                        />}
                     </section>
                 ))}
             </article>
