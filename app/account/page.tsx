@@ -80,6 +80,7 @@ const page = () => {
                                     <Input
                                         type='text'
                                         value={userId}
+                                        maxLength={32}
                                         label='memome.one/'
                                         onChange={setUserId}
                                     />
@@ -106,20 +107,26 @@ const page = () => {
                                         <Input
                                             type='text'
                                             value={pswd}
-                                            label='Current Password'
+                                            maxLength={42}
                                             onChange={setPswd}
+                                            className='w-full'
+                                            label='Current Password'
                                         />
                                         <Input
                                             type='text'
+                                            maxLength={42}
                                             value={password}
+                                            className='w-full'
                                             label='New Password'
                                             onChange={setPassword}
                                         />
                                         <Input
                                             type='text'
+                                            maxLength={42}
                                             value={password2}
-                                            label='Confirm Password'
+                                            className='w-full'
                                             onChange={setPassword2}
+                                            label='Confirm Password'
                                         />
                                     </div>
                                 </div>
