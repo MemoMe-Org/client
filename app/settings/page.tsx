@@ -1,19 +1,27 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client"
+import { useState } from 'react'
 import axios from '../api/axios'
+import genBio from '@/lib/genBio'
+import notify from '@/utils/notify'
 import MyPage from '@/components/MyPage'
 import { UserStore } from '@/utils/store'
+import Input from '@/components/EditInput'
 import SwitchBtn from '@/components/Switch'
 import throwError from '@/utils/throwError'
 import { AxiosError, AxiosResponse } from 'axios'
 import { inter, poppins } from '@/public/fonts/f'
+import { LoaderThree } from '@/components/Loader'
 
 const page = () => {
     const {
+        bio, setBio,
         setShowLevels, allowTexts, showLevels,
         allowFiles, setAllowTexts, setAllowFiles,
     } = UserStore()
 
-    // edit bio
+    const [bioLoad, setBioLoad] = useState<boolean>(false)
+
     // edit gen msg type
 
     const toggler = async (type: string): Promise<void> => {
@@ -56,6 +64,18 @@ const page = () => {
         })
     }
 
+    const editBio = async (): Promise<void> => {
+        setBioLoad(true)
+        await axios.patch(
+            '/auth/api/bio',
+            { bio }
+        ).then((res: AxiosResponse) => notify('success', 'Successful.'))
+            .catch((err: AxiosError) => throwError(err))
+            .finally(() => setBioLoad(false))
+    }
+
+    const supriseMe = async () => setBio(await genBio() || '')
+
     return (
         <MyPage param='settings'>
             {({ data }) => (
@@ -66,6 +86,35 @@ const page = () => {
                         </h1>
                     </article>
                     <section className={`${poppins.className} flex flex-col gap-10 text-clr-13 mb-10`}>
+                        <article className='rounded-lg border-[0.75px] overflow-hidden'>
+                            <div className='flex flex-col gap-3.5 pt-8 px-6 pb-5'>
+                                <h3 className={`${inter.className} text-clr-16 font-medium tracking-wide text-[20px]`}>
+                                    Edit your Bio
+                                </h3>
+                                <Input
+                                    type='text'
+                                    label='Bio'
+                                    value={bio}
+                                    maxLength={150}
+                                    className='w-full'
+                                    onChange={setBio}
+                                />
+                            </div>
+                            <footer className='profile-footer'>
+                                <button
+                                    onClick={async () => await supriseMe()}
+                                    className='save-btn'>
+                                    Suprise Me
+                                </button>
+                                <button
+                                    className='save-btn-2'
+                                    disabled={bio === data?.Profile?.bio}
+                                    onClick={async () => await editBio()}>
+                                    {bioLoad ? <LoaderThree /> : 'Save'}
+                                </button>
+                            </footer>
+                        </article>
+
                         <article className='rounded-lg border-[0.75px]  overflow-hidden'>
                             <div className='flex flex-col gap-3.5 pt-8 px-6 pb-5'>
                                 <h3 className={`${inter.className} text-clr-16 font-medium tracking-wide text-[20px]`}>
@@ -115,7 +164,7 @@ const page = () => {
                             </div>
                             <footer className='profile-footer'>
                                 <p className='text-clr-17 text-xs md:text-sm'>
-                                    {allowFiles ? 'Deny Anonymous Medias.' : 'Allow Anonymous Medias.'}
+                                    {allowFiles ? 'Deny Anonymous Media.' : 'Allow Anonymous Media.'}
                                 </p>
                             </footer>
                         </article>
