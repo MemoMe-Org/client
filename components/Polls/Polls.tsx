@@ -2,10 +2,11 @@
 "use client"
 import Poll from './Poll'
 import axios from '@/app/api/axios'
-import { AxiosResponse } from 'axios'
 import { LoaderThree } from '../Loader'
 import { usePoll } from '@/utils/store'
+import throwError from '@/utils/throwError'
 import { FC, useEffect, useState } from 'react'
+import { AxiosError, AxiosResponse } from 'axios'
 import { poppins, prompt } from '@/public/fonts/f'
 
 const Messages: FC<TabProps> = ({ username }) => {
@@ -14,6 +15,7 @@ const Messages: FC<TabProps> = ({ username }) => {
         isOwner, setIsOwner,
         fetching, setTotalPolls,
         setFetching, totalPolls,
+        setIsAuthenticated,
     } = usePoll()
     const [page, setPage] = useState<number>(1)
     const [polls, setPolls] = useState<MyPoll[]>([])
@@ -29,7 +31,15 @@ const Messages: FC<TabProps> = ({ username }) => {
             setTotalPolls(res.data?.length)
             setIsOwner(res.data?.isAuthenticated)
             setPolls((prevPolls) => [...prevPolls, ...res.data?.polls])
-        }).finally(() => setFetching(false))
+        }).catch((err: AxiosError) => {
+            const statusCodes: unknown = err.response?.status
+            if (statusCodes === 403 || statusCodes === 401) {
+                setIsAuthenticated(true)
+            } else {
+                throwError(err)
+            }
+        })
+            .finally(() => setFetching(false))
     }
 
     useEffect(() => {

@@ -36,7 +36,7 @@ const ListboxComponent: FC<{}> = ({ }) => {
                                 <Listbox.Option
                                     key={genMsgIdx}
                                     className={({ active }) =>
-                                        `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-clr-1/100 text-clr-8' : 'text-clr-13'
+                                        `relative cursor-default select-none py-2 pl-10 pr-4 text-clr-0 ${active ? 'bg-clr-1' : 'text-clr-13'
                                         }`
                                     }
                                     value={genMsg}>
@@ -49,7 +49,7 @@ const ListboxComponent: FC<{}> = ({ }) => {
                                                 {genMsg.type}
                                             </span>
                                             {selected ? (
-                                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-clr-1">
+                                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-clr-0">
                                                     <CheckIcon className="h-5 w-5" aria-hidden="true" />
                                                 </span>
                                             ) : null}

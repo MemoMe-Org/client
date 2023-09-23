@@ -1,5 +1,4 @@
 import axios from '@/app/api/axios'
-import notify from '@/utils/notify'
 import { poppins } from '@/public/fonts/f'
 import throwError from '@/utils/throwError'
 import { useMessageStore } from '@/utils/store'
