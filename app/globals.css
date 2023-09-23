@@ -154,7 +154,7 @@ body {
 }
 
 header {
-    @apply sticky top-0 w-full z-[999999];
+    @apply sticky top-0 w-full z-[999];
 }
 
 .nav-bar {
