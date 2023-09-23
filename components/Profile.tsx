@@ -178,7 +178,7 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
                                 {user?.Account?.verified && <LuVerified />}
                             </p>
                             {user?.Profile?.bio &&
-                                <p className={`${poppins.className} md:text-base text-sm text-clr-13`}>
+                                <p className={`${poppins.className} md:text-sm text-xs text-clr-13`}>
                                     {user?.Profile?.bio}
                                 </p>
                             }
