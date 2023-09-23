@@ -27,7 +27,7 @@ const MediasUpload: FC<MediaUploadProps> = ({ get, set, id }) => {
     return (
         <section className='py-1.5 px-0.5 mt-2'>
             <h6 className={`flex gap-2 items-center text-[16px] font-medium tracking-wide ${poppins.className}`}>
-                <span className='text-clr-4'>Medias</span>
+                <span className='text-clr-4'>Media</span>
                 <span className='text-clr-7'>*</span>
             </h6>
             <label htmlFor={id}
