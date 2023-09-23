@@ -33,7 +33,7 @@ const MyPage: FC<MyPage> = ({ children, param }) => {
                         setDisabled(user?.Account?.disabled)
                         break
                     case 'settings':
-                        setBio(user?.Settings?.bio)
+                        setBio(user?.Profile?.bio)
                         setAllowFiles(user?.Settings?.allow_files)
                         setShowLevels(user?.Settings?.show_levels)
                         setAllowTexts(user?.Settings?.allow_texts)
