@@ -145,7 +145,7 @@ const page = () => {
                             <article className='rounded-lg border-[0.75px]  overflow-hidden'>
                                 <div className='flex flex-col gap-3.5 pt-8 px-6 pb-5'>
                                     <h3 className={`${inter.className} text-clr-16 font-medium tracking-wide text-[20px]`}>
-                                        {disabled ? 'Enable' : 'Disable'} your Account
+                                        {disabled ? 'Disabled' : 'Enabled'} your Account
                                     </h3>
                                     <SwitchBtn
                                         get={disabled}
@@ -155,7 +155,7 @@ const page = () => {
                                 </div>
                                 <footer className='profile-footer'>
                                     <p className='text-clr-17 text-xs md:text-sm'>
-                                        Make your account {disabled ? 'active.' : 'inactive.'}
+                                        Toggle to make your account {disabled ? 'active.' : 'inactive.'}
                                     </p>
                                 </footer>
                             </article>
