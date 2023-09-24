@@ -3,13 +3,13 @@
 import Poll from './Poll'
 import PollMenu from './PollMenu'
 import axios from '@/app/api/axios'
+import Share from '../Modals/Share'
 import { LoaderThree } from '../Loader'
 import throwError from '@/utils/throwError'
 import { FC, useEffect, useState } from 'react'
 import { AxiosError, AxiosResponse } from 'axios'
 import { poppins, prompt } from '@/public/fonts/f'
 import { usePoll, useModalStore } from '@/utils/store'
-import Share from '../Modals/Share'
 
 const Messages: FC<TabProps> = ({ username }) => {
     const limit = 5 as const
@@ -57,7 +57,9 @@ const Messages: FC<TabProps> = ({ username }) => {
             </header>
             <article className="w-full gap-9 place-items-center grid grid-cols-1">
                 {polls?.map((poll) => (
-                    <section key={poll.id}>
+                    <section
+                        key={poll.id}
+                        className='flex gap-2 w-full'>
                         <Share
                             get={pollModal}
                             set={setPollModal}
@@ -66,14 +68,12 @@ const Messages: FC<TabProps> = ({ username }) => {
                             }}
                             title='Share Poll'
                         />
-                        <article className='flex gap-2 w-full'>
-                            <Poll poll={poll} />
-                            {isOwner && <PollMenu
-                                poll={poll}
-                                polls={polls}
-                                setPolls={setPolls}
-                            />}
-                        </article>
+                        <Poll poll={poll} />
+                        {isOwner && <PollMenu
+                            poll={poll}
+                            polls={polls}
+                            setPolls={setPolls}
+                        />}
                     </section>
                 ))}
             </article>
