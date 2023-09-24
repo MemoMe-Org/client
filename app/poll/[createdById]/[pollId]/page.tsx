@@ -74,7 +74,7 @@ const page = ({ params: { createdById, pollId } }: PollParams) => {
         }
 
         document.title = title
-    }, [poll?.options])
+    }, [poll?.options, poll?.title])
 
     useEffect(() => {
         let intervalId
