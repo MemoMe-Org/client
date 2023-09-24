@@ -4,22 +4,24 @@ import Poll from './Poll'
 import PollMenu from './PollMenu'
 import axios from '@/app/api/axios'
 import { LoaderThree } from '../Loader'
-import { usePoll } from '@/utils/store'
 import throwError from '@/utils/throwError'
 import { FC, useEffect, useState } from 'react'
 import { AxiosError, AxiosResponse } from 'axios'
 import { poppins, prompt } from '@/public/fonts/f'
+import { usePoll, useModalStore } from '@/utils/store'
+import Share from '../Modals/Share'
 
 const Messages: FC<TabProps> = ({ username }) => {
     const limit = 5 as const
     const {
+        setIsAuthenticated,
         isOwner, setIsOwner,
         fetching, setTotalPolls,
         setFetching, totalPolls,
-        setIsAuthenticated,
     } = usePoll()
     const [page, setPage] = useState<number>(1)
     const [polls, setPolls] = useState<MyPoll[]>([])
+    const { pollModal, setPollModal } = useModalStore()
 
     const fetchPolls = async (): Promise<void> => {
         if (fetching) {
@@ -55,15 +57,23 @@ const Messages: FC<TabProps> = ({ username }) => {
             </header>
             <article className="w-full gap-9 place-items-center grid grid-cols-1">
                 {polls?.map((poll) => (
-                    <section
-                        key={poll.id}
-                        className='flex gap-2 w-full'>
-                        <Poll poll={poll} />
-                        {isOwner && <PollMenu
-                            poll={poll}
-                            polls={polls}
-                            setPolls={setPolls}
-                        />}
+                    <section key={poll.id}>
+                        <Share
+                            get={pollModal}
+                            set={setPollModal}
+                            data={{
+                                share: `Vote here: https://memome.one/poll/${poll.createdById}/${poll.id}`
+                            }}
+                            title='Share Poll'
+                        />
+                        <article className='flex gap-2 w-full'>
+                            <Poll poll={poll} />
+                            {isOwner && <PollMenu
+                                poll={poll}
+                                polls={polls}
+                                setPolls={setPolls}
+                            />}
+                        </article>
                     </section>
                 ))}
             </article>
