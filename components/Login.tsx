@@ -11,6 +11,7 @@ import { AxiosResponse, AxiosError } from 'axios'
 
 const Login: FC<Login> = ({
     title,
+    method,
     pathName = 'login',
     btnLabel = 'Log In',
 }) => {
@@ -36,6 +37,7 @@ const Login: FC<Login> = ({
     return (
         <AuthLayout
             title={title}
+            method={method}
             pathName={pathName}
             btnLabel={btnLabel}
             handler={handleLogin}>
