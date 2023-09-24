@@ -1,5 +1,7 @@
 type AuthMethod = 'google' | 'github'
 
+type SignInType = 'home' | 'modal'
+
 type NotifyAction = 'error' | 'success'
 
 interface PathName {
@@ -9,6 +11,7 @@ interface PathName {
 interface AuthProps extends PathName {
     title: string
     btnLabel?: string
+    method: SignInType
     children: ReactNode
     handler: () => Promise<void>
 }
