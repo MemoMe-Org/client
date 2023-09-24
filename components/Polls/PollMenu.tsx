@@ -3,7 +3,7 @@ import { AxiosError } from 'axios'
 import axios from '@/app/api/axios'
 import { poppins } from '@/public/fonts/f'
 import {
-    CiShare1,
+    CiShare1, BiTimer,
     MdOutlinePrivacyTip, RiDeleteBin7Line,
 } from '@/public/icons/ico'
 import throwError from '@/utils/throwError'
@@ -18,9 +18,9 @@ const PollMenu: FC<{
     setPolls: Dispatch<SetStateAction<MyPoll[]>>
 }> = ({ poll, polls, setPolls }) => {
     const { setTotalPolls } = usePoll()
-    const { setPollModal } = useModalStore()
     const [active, setActive] = useState<boolean>(poll.active)
     const [visible, setVisible] = useState<boolean>(poll.private)
+    const { setSharePollModal, setPollExpiryModal } = useModalStore()
 
     const handleEdit = async (type: 'active' | 'visiblity', pollId: string): Promise<void> => {
         const originalValue = type === 'active' ? active : visible
@@ -139,7 +139,7 @@ const PollMenu: FC<{
                             <Menu.Item>
                                 {({ active }) => (
                                     <button
-                                        onClick={() => setPollModal(true)}
+                                        onClick={() => setSharePollModal(true)}
                                         className={`${poppins.className} ${active ? 'bg-clr-1 rounded-md text-clr-0' : 'font-medium'} w-full items-center flex gap-3 px-2 py-1`}>
                                         {active ? (
                                             <CiShare1
@@ -153,6 +153,28 @@ const PollMenu: FC<{
                                             />
                                         )}
                                         Share
+                                    </button>
+                                )}
+                            </Menu.Item>
+                        </div>
+                        <div className="px-1 py-1">
+                            <Menu.Item>
+                                {({ active }) => (
+                                    <button
+                                        onClick={() => setPollExpiryModal(true)}
+                                        className={`${poppins.className} ${active ? 'bg-clr-1 rounded-md text-clr-0' : 'font-medium'} w-full items-center flex gap-3 px-2 py-1`}>
+                                        {active ? (
+                                            <BiTimer
+                                                aria-hidden='true'
+                                                className='text-clr-0'
+                                            />
+                                        ) : (
+                                            <BiTimer
+                                                aria-hidden='true'
+                                                className='text-clr-1'
+                                            />
+                                        )}
+                                        Set Expiry
                                     </button>
                                 )}
                             </Menu.Item>
