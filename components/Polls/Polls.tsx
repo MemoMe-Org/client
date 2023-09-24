@@ -21,7 +21,10 @@ const Messages: FC<TabProps> = ({ username }) => {
     } = usePoll()
     const [page, setPage] = useState<number>(1)
     const [polls, setPolls] = useState<MyPoll[]>([])
-    const { pollModal, setPollModal } = useModalStore()
+    const {
+        sharePollModal, setSharePollModal,
+        pollExpiryModal, setPollExpiryModal,
+    } = useModalStore()
 
     const fetchPolls = async (): Promise<void> => {
         if (fetching) {
@@ -61,8 +64,8 @@ const Messages: FC<TabProps> = ({ username }) => {
                         key={poll.id}
                         className='flex gap-2 w-full'>
                         <Share
-                            get={pollModal}
-                            set={setPollModal}
+                            get={sharePollModal}
+                            set={setSharePollModal}
                             data={{
                                 share: `Vote here: https://memome.one/poll/${poll.createdById}/${poll.id}`
                             }}
