@@ -67,7 +67,7 @@ const page = ({ params: { createdById, pollId } }: PollParams) => {
     useEffect(() => {
         let title
         if (poll?.title) {
-            title = `Poll: ${poll.title}`
+            title = `Poll: ${poll.title.slice(0, 23)}..`
         } else {
             const formatOptions = poll?.options.map((option) => `${option.texts}`)
             title = `Vote here: ${formatOptions}`
