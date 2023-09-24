@@ -255,4 +255,5 @@ interface PollParams {
 interface Login extends PathName {
     title: string
     btnLabel?: string
+    method: SignInType
 }
