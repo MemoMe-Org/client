@@ -1,26 +1,26 @@
-import { FC } from 'react'
 import { v4 as uuid } from 'uuid'
 import axios from '@/app/api/axios'
 import Share from '../Modals/Share'
 import Modal from '../Modals/Modal'
+import { FC, useState } from 'react'
+import { usePoll } from '@/utils/store'
 import { LoaderThree } from '../Loader'
 import throwError from '@/utils/throwError'
+import {
+    AiOutlineMinusSquare, AiOutlinePlusSquare
+} from '@/public/icons/ico'
 import { AxiosError, AxiosResponse } from 'axios'
 import MediasUpload from '../Messages/MediaUpload'
 import { inter, questrial } from '@/public/fonts/f'
-import { useModalStore, usePoll } from '@/utils/store'
-import { AiOutlineMinusSquare, AiOutlinePlusSquare } from '@/public/icons/ico'
 
 const CreatePoll: FC<State<boolean>> = ({ get, set }) => {
     const {
-        pollModal, setPollModal
-    } = useModalStore()
-    const {
         setTitle, options, title,
         hosting, setHosting, pollUrl,
-        medias, setMedias, setOptions,
         setPollUrl, setPollToDefault,
+        medias, setMedias, setOptions,
     } = usePoll()
+    const [sharePollModal, setSharePollModal] = useState<boolean>(false)
 
     const handlePollHost = async (): Promise<void> => {
         setHosting(true)
@@ -49,8 +49,8 @@ const CreatePoll: FC<State<boolean>> = ({ get, set }) => {
             }
         ).then((res: AxiosResponse) => {
             set(false)
-            setPollModal(true)
             setPollToDefault()
+            setSharePollModal(true)
             setPollUrl(res.data?.url)
         }).catch((err: AxiosError) => throwError(err))
             .finally(() => setHosting(false))
@@ -59,8 +59,8 @@ const CreatePoll: FC<State<boolean>> = ({ get, set }) => {
     return (
         <>
             <Share
-                get={pollModal}
-                set={setPollModal}
+                get={sharePollModal}
+                set={setSharePollModal}
                 data={{
                     share: `Vote here: ${pollUrl}`
                 }}
