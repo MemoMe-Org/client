@@ -8,6 +8,7 @@ import { FcGoogle, AiOutlineGithub } from '@/public/icons/ico'
 
 const AuthLayout: FC<AuthProps> = ({
     title,
+    method,
     handler,
     children,
     pathName,
@@ -44,13 +45,13 @@ const AuthLayout: FC<AuthProps> = ({
                     <div className={`${lato.className} flex flex-col gap-4 my-3`}>
                         <button
                             className='provider-btn'
-                            onClick={() => handleSignIn('google')}>
+                            onClick={() => handleSignIn('google', method)}>
                             <FcGoogle className="text-2xl" />
                             <span>Google</span>
                         </button>
                         <button
                             className='provider-btn'
-                            onClick={() => handleSignIn('github')}>
+                            onClick={() => handleSignIn('github', method)}>
                             <AiOutlineGithub className="text-2xl" />
                             <span>Github</span>
                         </button>
