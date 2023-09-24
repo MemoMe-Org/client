@@ -68,15 +68,17 @@ const useMessageStore = create<MessageStoreStates>()((set) => ({
 
 const useModalStore = create<ModalStates>()((set) => ({
     loading: false,
-    pollModal: false,
     avatarModal: false,
+    sharePollModal: false,
     shareLinkModal: false,
     createPollModal: false,
+    pollExpiryModal: false,
     setLoading: (loading) => set({ loading }),
-    setPollModal: (pollModal) => set({ pollModal }),
     setAvatarModal: (avatarModal) => set({ avatarModal }),
     setShareLinkModal: (shareLinkModal) => set({ shareLinkModal }),
+    setSharePollModal: (sharePollModal) => set({ sharePollModal }),
     setCreatePollModal: (createPollModal) => set({ createPollModal }),
+    setPollExpiryModal: (pollExpiryModal) => set({ pollExpiryModal }),
 }))
 
 
