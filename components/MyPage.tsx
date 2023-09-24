@@ -26,7 +26,6 @@ const MyPage: FC<MyPage> = ({ children, param }) => {
                 setAuth(true)
                 const user = res.data?.user || {}
                 setData(user)
-                console.log(user)
                 switch (param) {
                     case 'account':
                         setUserId(user?.username)
