@@ -1,13 +1,16 @@
 "use client"
+import { AxiosError } from 'axios'
 import axios from '@/app/api/axios'
-import { usePoll } from '@/utils/store'
 import { poppins } from '@/public/fonts/f'
+import {
+    CiShare1,
+    MdOutlinePrivacyTip, RiDeleteBin7Line,
+} from '@/public/icons/ico'
 import throwError from '@/utils/throwError'
-import { AxiosError, AxiosResponse } from 'axios'
 import { Menu, Transition } from '@headlessui/react'
+import { useModalStore, usePoll } from '@/utils/store'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { Fragment, FC, useState, SetStateAction, Dispatch } from 'react'
-import { MdOutlinePrivacyTip, RiDeleteBin7Line } from '@/public/icons/ico'
 
 const PollMenu: FC<{
     poll: MyPoll,
@@ -15,6 +18,7 @@ const PollMenu: FC<{
     setPolls: Dispatch<SetStateAction<MyPoll[]>>
 }> = ({ poll, polls, setPolls }) => {
     const { setTotalPolls } = usePoll()
+    const { setPollModal } = useModalStore()
     const [active, setActive] = useState<boolean>(poll.active)
     const [visible, setVisible] = useState<boolean>(poll.private)
 
@@ -59,7 +63,7 @@ const PollMenu: FC<{
         setTotalPolls(newPolls.length)
 
         await axios.delete(
-            `/api/poll/delete/${poll.id}`
+            `/api/poll/delete/${pollId}`
         ).catch((err: AxiosError) => {
             setPolls(oldPolls)
             setTotalPolls(oldTotalLength)
@@ -68,7 +72,7 @@ const PollMenu: FC<{
     }
 
     return (
-        <div >
+        <div>
             <Menu as="div" className="relative inline-block text-left">
                 <div>
                     <Menu.Button className="inline-flex w-full justify-center rounded-md bg-clr-13 px-3 py-1.5 text-sm font-medium hover:bg-clr-5  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
@@ -127,6 +131,28 @@ const PollMenu: FC<{
                                             />
                                         )}
                                         Delete
+                                    </button>
+                                )}
+                            </Menu.Item>
+                        </div>
+                        <div className="px-1 py-1">
+                            <Menu.Item>
+                                {({ active }) => (
+                                    <button
+                                        onClick={() => setPollModal(true)}
+                                        className={`${poppins.className} ${active ? 'bg-clr-1 rounded-md text-clr-0' : 'font-medium'} w-full items-center flex gap-3 px-2 py-1`}>
+                                        {active ? (
+                                            <CiShare1
+                                                aria-hidden='true'
+                                                className='text-clr-0'
+                                            />
+                                        ) : (
+                                            <CiShare1
+                                                aria-hidden='true'
+                                                className='text-clr-1'
+                                            />
+                                        )}
+                                        Share
                                     </button>
                                 )}
                             </Menu.Item>
