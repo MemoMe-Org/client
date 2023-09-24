@@ -133,15 +133,17 @@ type FileType = 'video/mp4' | 'image/png' | 'image/jpeg'
 
 interface ModalStates {
     loading: boolean
-    pollModal: boolean,
     avatarModal: boolean
     shareLinkModal: boolean
+    sharePollModal: boolean
     createPollModal: boolean
+    pollExpiryModal: boolean
     setLoading: (loading: boolean) => void
-    setPollModal: (pollModal: boolean) => void
     setAvatarModal: (avatarModal: boolean) => void
     setShareLinkModal: (shareLinkModal: boolean) => void
+    setSharePollModal: (sharePollModal: boolean) => void
     setCreatePollModal: (createPollModal: boolean) => void
+    setPollExpiryModal: (pollExpiryModal: boolean) => void
 }
 
 interface MediaUploadProps extends State<File[] | null> {
