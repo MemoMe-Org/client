@@ -110,7 +110,10 @@ const page = ({ params: { createdById, pollId } }: PollParams) => {
                 <form
                     className='w-full'
                     onSubmit={(e) => e.preventDefault()}>
-                    <Login title='Login to Vote.' />
+                    <Login
+                        title='Login to Vote.'
+                        method='modal'
+                    />
                 </form>
             </Modal>
             <main className='w-full min-h-screen bg-clr-12 pt-5'>
