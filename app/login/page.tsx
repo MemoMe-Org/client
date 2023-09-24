@@ -14,7 +14,10 @@ const page = () => {
             <form
                 onSubmit={(e) => e.preventDefault()}
                 className='card w-[92vw] max-w-[500px] mx-auto mt-3 mb-10 px-5 py-7'>
-                <Login title='Login' />
+                <Login
+                    title='Login'
+                    method='home'
+                />
             </form>
         </>
     )
