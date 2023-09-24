@@ -1,3 +1,4 @@
+import { CiShare1 } from 'react-icons/ci'
 import { LuVerified } from 'react-icons/lu'
 import { GiCheckMark } from 'react-icons/gi'
 import { LiaPollHSolid } from 'react-icons/lia'
@@ -23,5 +24,5 @@ export {
     LiaPollHSolid, AiOutlineCloudUpload, FaPollH, ImCancelCircle, RiDeleteBin6Line, FaBold,
     BsDownload, MdOutlinePrivacyTip, RiDeleteBin7Line, AiOutlineTwitter, AiOutlineWhatsApp,
     AiFillCopy, AiOutlinePlusSquare, AiOutlineMinusSquare, AiOutlineLoading3Quarters,
-    GiCheckMark
+    GiCheckMark, CiShare1
 }
