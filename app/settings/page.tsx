@@ -102,7 +102,7 @@ const page = () => {
                             <footer className='profile-footer'>
                                 <button
                                     onClick={async () => await supriseMe()}
-                                    className='save-btn'>
+                                    className='save-btn rounded-md'>
                                     Suprise Me
                                 </button>
                                 <button
