@@ -1,18 +1,14 @@
 import axios from '@/app/api/axios'
 import { poppins } from '@/public/fonts/f'
 import throwError from '@/utils/throwError'
+import { Fragment, FC, useState } from 'react'
 import { useMessageStore } from '@/utils/store'
 import { AxiosError, AxiosResponse } from 'axios'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { Fragment, FC, useState, SetStateAction, Dispatch } from 'react'
 import { MdOutlinePrivacyTip, RiDeleteBin7Line } from '@/public/icons/ico'
 
-const MessageMenu: FC<{
-    message: MessageStates,
-    messages: MessageStates[],
-    setMessages: Dispatch<SetStateAction<MessageStates[]>>
-}> = ({ message, messages, setMessages }) => {
+const MessageMenu: FC<MessageMenu> = ({ message, messages, setMessages }) => {
     const { setTotalMessages } = useMessageStore()
     const [visible, setVisible] = useState<boolean>(message.private)
 
