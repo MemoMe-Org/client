@@ -72,7 +72,7 @@ const PollMenu: FC<PollMenu> = ({ poll, polls, setPolls, isOwner }) => {
         <div>
             <Menu as="div" className="relative inline-block text-left">
                 <div>
-                    <Menu.Button className="inline-flex w-full justify-center rounded-md bg-clr-13 px-3 py-1.5 text-sm font-medium hover:bg-clr-5  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                    <Menu.Button className="inline-flex w-full justify-center rounded-md bg-clr-13 px-3 py-1 text-sm font-medium hover:bg-clr-5  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
                         <ChevronDownIcon
                             className="h-4 w-4 text-clr-0 hover:text-clr-7"
                             aria-hidden='true'
@@ -88,12 +88,12 @@ const PollMenu: FC<PollMenu> = ({ poll, polls, setPolls, isOwner }) => {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95">
                     <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-clr-11 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        {isOwner && <div className="px-1 py-1">
+                        {isOwner && <div className="px-1 py-0.5">
                             <Menu.Item>
                                 {({ active }) => (
                                     <button
                                         onClick={async () => await handleEdit('visiblity', poll.id)}
-                                        className={`${poppins.className} ${active ? 'bg-clr-1 rounded-md text-clr-0' : 'font-medium'} w-full items-center flex gap-3 px-2 py-1`}>
+                                        className={`${poppins.className} ${active ? 'bg-clr-1 rounded-md text-clr-0' : 'font-medium'} w-full items-center flex gap-3 px-2 py-0.5`}>
                                         {active ? (
                                             <MdOutlinePrivacyTip
                                                 aria-hidden='true'
@@ -110,12 +110,12 @@ const PollMenu: FC<PollMenu> = ({ poll, polls, setPolls, isOwner }) => {
                                 )}
                             </Menu.Item>
                         </div>}
-                        {isOwner && <div className="px-1 py-1">
+                        {isOwner && <div className="px-1 py-0.5">
                             <Menu.Item>
                                 {({ active }) => (
                                     <button
                                         onClick={async () => await handleEdit('active', poll.id)}
-                                        className={`${poppins.className} ${active ? 'bg-clr-1 rounded-md text-clr-0' : 'font-medium'} w-full items-center flex gap-3 px-2 py-1`}>
+                                        className={`${poppins.className} ${active ? 'bg-clr-1 rounded-md text-clr-0' : 'font-medium'} w-full items-center flex gap-3 px-2 py-0.5`}>
                                         {active ? (
                                             <MdOutlineCancel
                                                 aria-hidden='true'
@@ -132,12 +132,12 @@ const PollMenu: FC<PollMenu> = ({ poll, polls, setPolls, isOwner }) => {
                                 )}
                             </Menu.Item>
                         </div>}
-                        {isOwner && <div className="px-1 py-1">
+                        {isOwner && <div className="px-1 py-0.5">
                             <Menu.Item>
                                 {({ active }) => (
                                     <button
                                         onClick={async () => await handleDelete(poll.id)}
-                                        className={`${poppins.className} ${active ? 'bg-clr-1 rounded-md text-clr-0' : 'font-medium'} w-full items-center flex gap-3 px-2 py-1`}>
+                                        className={`${poppins.className} ${active ? 'bg-clr-1 rounded-md text-clr-0' : 'font-medium'} w-full items-center flex gap-3 px-2 py-0.5`}>
                                         {active ? (
                                             <RiDeleteBin7Line
                                                 aria-hidden='true'
@@ -154,12 +154,12 @@ const PollMenu: FC<PollMenu> = ({ poll, polls, setPolls, isOwner }) => {
                                 )}
                             </Menu.Item>
                         </div>}
-                        <div className="px-1 py-1">
+                        <div className="px-1 py-0.5">
                             <Menu.Item>
                                 {({ active }) => (
                                     <button
                                         onClick={() => setSharePollModal(true)}
-                                        className={`${poppins.className} ${active ? 'bg-clr-1 rounded-md text-clr-0' : 'font-medium'} w-full items-center flex gap-3 px-2 py-1`}>
+                                        className={`${poppins.className} ${active ? 'bg-clr-1 rounded-md text-clr-0' : 'font-medium'} w-full items-center flex gap-3 px-2 py-0.5`}>
                                         {active ? (
                                             <CiShare1
                                                 aria-hidden='true'
@@ -176,12 +176,12 @@ const PollMenu: FC<PollMenu> = ({ poll, polls, setPolls, isOwner }) => {
                                 )}
                             </Menu.Item>
                         </div>
-                        {isOwner && <div className="px-1 py-1">
+                        {isOwner && <div className="px-1 py-0.5">
                             <Menu.Item>
                                 {({ active }) => (
                                     <button
                                         onClick={() => setPollExpiryModal(true)}
-                                        className={`${poppins.className} ${active ? 'bg-clr-1 rounded-md text-clr-0' : 'font-medium'} w-full items-center flex gap-3 px-2 py-1`}>
+                                        className={`${poppins.className} ${active ? 'bg-clr-1 rounded-md text-clr-0' : 'font-medium'} w-full items-center flex gap-3 px-2 py-0.5`}>
                                         {active ? (
                                             <BiTimer
                                                 aria-hidden='true'
