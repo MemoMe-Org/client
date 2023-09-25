@@ -7,7 +7,7 @@ import Share from './Modals/Share'
 import Avatar from './Modals/Avatar'
 import {
     FaPollH, AiOutlinePlus, LuVerified,
-    BiSolidMessageDetail,AiOutlineCamera,
+    BiSolidMessageDetail, AiOutlineCamera,
 } from '@/public/icons/ico'
 import CreatePoll from './Polls/CreatePoll'
 import { useModalStore } from '@/utils/store'
@@ -59,7 +59,7 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
                 data={{
                     share: `Please, send me anonymous messages on https://memome.one/anon/${user?.username}`,
                 }}
-                title='Share the link with your Friends.'
+                title='Share the link with your Comrades.'
             />
             <CreatePoll
                 get={createPollModal}
