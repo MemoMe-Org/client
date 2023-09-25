@@ -39,7 +39,7 @@ const Messages: FC<TabProps> = ({ username }) => {
             setPolls((prevPolls) => [...prevPolls, ...res.data?.polls])
         }).catch((err: AxiosError) => {
             const statusCodes: unknown = err.response?.status
-            if (statusCodes === 403 || statusCodes === 401) {
+            if (statusCodes === 403) {
                 setIsAuthenticated(true)
             } else {
                 throwError(err)
@@ -48,7 +48,9 @@ const Messages: FC<TabProps> = ({ username }) => {
     }
 
     useEffect(() => {
-        fetchPolls()
+        if (username) {
+            fetchPolls()
+        }
     }, [page, username])
 
     return (
