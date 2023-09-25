@@ -38,7 +38,7 @@ const PollMenu: FC<{
         }
 
         await axios.patch(
-            `/api/poll/edit/${pollId}/${type}`
+            `/api/poll/edit/toggle/${pollId}/${type}`
         ).catch((err: AxiosError) => {
             switch (type) {
                 case 'active':
