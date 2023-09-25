@@ -10,6 +10,7 @@ import { FC, useEffect, useState } from 'react'
 import { AxiosError, AxiosResponse } from 'axios'
 import { poppins, prompt } from '@/public/fonts/f'
 import { usePoll, useModalStore } from '@/utils/store'
+import PollExpiry from './PollExpiry'
 
 const Messages: FC<TabProps> = ({ username }) => {
     const limit = 5 as const
@@ -63,14 +64,17 @@ const Messages: FC<TabProps> = ({ username }) => {
                     <section
                         key={poll.id}
                         className='flex gap-2 w-full'>
-                        <Share
-                            get={sharePollModal}
-                            set={setSharePollModal}
-                            data={{
-                                share: `Vote here: https://memome.one/poll/${poll.createdById}/${poll.id}`
-                            }}
-                            title='Share Poll'
-                        />
+                        <>
+                            <Share
+                                get={sharePollModal}
+                                set={setSharePollModal}
+                                data={{
+                                    share: `Vote here: https://memome.one/poll/${poll.createdById}/${poll.id}`
+                                }}
+                                title='Share Poll'
+                            />
+                            <PollExpiry pollId={poll.id} />
+                        </>
                         <Poll poll={poll} />
                         <PollMenu
                             poll={poll}
