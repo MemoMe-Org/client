@@ -7,17 +7,12 @@ import {
     MdOutlinePrivacyTip, RiDeleteBin7Line,
 } from '@/public/icons/ico'
 import throwError from '@/utils/throwError'
+import { Fragment, FC, useState } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { useModalStore, usePoll } from '@/utils/store'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { Fragment, FC, useState, SetStateAction, Dispatch } from 'react'
 
-const PollMenu: FC<{
-    poll: MyPoll,
-    polls: MyPoll[],
-    isOwner: boolean,
-    setPolls: Dispatch<SetStateAction<MyPoll[]>>
-}> = ({ poll, polls, setPolls, isOwner }) => {
+const PollMenu: FC<PollMenu> = ({ poll, polls, setPolls, isOwner }) => {
     const { setTotalPolls } = usePoll()
     const [active, setActive] = useState<boolean>(poll.active)
     const [visible, setVisible] = useState<boolean>(poll.private)
