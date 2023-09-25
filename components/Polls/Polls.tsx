@@ -55,11 +55,9 @@ const Messages: FC<TabProps> = ({ username }) => {
 
     return (
         <section className='mb-[30px] w-[95vw] max-w-[600px] mx-auto'>
-            <header className="text-left">
-                <h3 className={`${poppins.className} font-medium text-sm tracking-wide mb-3`}>
-                    {totalPolls} Polls
-                </h3>
-            </header>
+            <h3 className={`${poppins.className} text-left font-medium text-sm tracking-wide mb-3`}>
+                {totalPolls} Polls
+            </h3>
             <article className="w-full gap-9 place-items-center grid grid-cols-1">
                 {polls?.map((poll) => (
                     <section
@@ -74,11 +72,12 @@ const Messages: FC<TabProps> = ({ username }) => {
                             title='Share Poll'
                         />
                         <Poll poll={poll} />
-                        {isOwner && <PollMenu
+                        <PollMenu
                             poll={poll}
                             polls={polls}
+                            isOwner={isOwner}
                             setPolls={setPolls}
-                        />}
+                        />
                     </section>
                 ))}
             </article>
