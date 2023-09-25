@@ -259,3 +259,16 @@ interface Login extends PathName {
     btnLabel?: string
     method: SignInType
 }
+
+interface PollMenu {
+    poll: MyPoll,
+    polls: MyPoll[],
+    isOwner: boolean,
+    setPolls: Dispatch<SetStateAction<MyPoll[]>>
+}
+
+interface MessageMenu {
+    message: MessageStates,
+    messages: MessageStates[],
+    setMessages: Dispatch<SetStateAction<MessageStates[]>>
+}
