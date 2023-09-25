@@ -8,7 +8,6 @@ import Login from '@/components/Login'
 import { usePoll } from '@/utils/store'
 import useToken from '@/hooks/useToken'
 import Poll from '@/components/Polls/Poll'
-import { axiosReq } from '@/app/api/axios'
 import { notFound } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import throwError from '@/utils/throwError'
@@ -16,6 +15,7 @@ import Modal from '@/components/Modals/Modal'
 import { LoaderTwo } from '@/components/Loader'
 import { LuVerified } from '@/public/icons/ico'
 import { AxiosError, AxiosResponse } from 'axios'
+import axios, { axiosReq } from '@/app/api/axios'
 import { lato, poppins, questrial } from '@/public/fonts/f'
 
 const page = ({ params: { createdById, pollId } }: PollParams) => {
@@ -29,7 +29,7 @@ const page = ({ params: { createdById, pollId } }: PollParams) => {
         pollLoad, setPollLoad, setPoll, poll,
     } = usePoll()
 
-    const getPoll = async () => {
+    const getPoll = async (): Promise<void> => {
         setPollLoad(true)
         setIsAuthenticated(false)
         await axiosReq.get(
@@ -42,8 +42,6 @@ const page = ({ params: { createdById, pollId } }: PollParams) => {
         ).then((res: AxiosResponse) => {
             setPoll(res.data?.poll)
             setUserData(res.data?.user || {})
-            setVoterData(res.data?.voter || {})
-            setIsAuthenticated(!res.data?.voter?.isAuthenticated)
         }).catch((err: AxiosError) => {
             const statusCodes: unknown = err.response?.status
             if (statusCodes === 404) {
@@ -53,6 +51,21 @@ const page = ({ params: { createdById, pollId } }: PollParams) => {
             }
         }).finally(() => setPollLoad(false))
     }
+
+    const getVoter = async (): Promise<void> => {
+        await axios.get('/api/poll/voter')
+            .then((res: AxiosResponse) => setVoterData(res.data?.voter || {}))
+            .catch((err: AxiosError) => {
+                const statusCodes: unknown = err.response?.status
+                if (statusCodes === 403) {
+                    setIsAuthenticated(true)
+                }
+            })
+    }
+
+    useEffect(() => {
+        getVoter()
+    }, [])
 
     useEffect(() => {
         if (token) {
