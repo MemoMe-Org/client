@@ -3,7 +3,7 @@ import { AxiosError } from 'axios'
 import axios from '@/app/api/axios'
 import { poppins } from '@/public/fonts/f'
 import {
-    CiShare1, BiTimer,
+    CiShare1, BiTimer, MdOutlineCancel,
     MdOutlinePrivacyTip, RiDeleteBin7Line,
 } from '@/public/icons/ico'
 import throwError from '@/utils/throwError'
@@ -14,17 +14,18 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 const PollMenu: FC<PollMenu> = ({ poll, polls, setPolls, isOwner }) => {
     const { setTotalPolls } = usePoll()
-    const [active, setActive] = useState<boolean>(poll.active)
-    const [visible, setVisible] = useState<boolean>(poll.private)
     const { setSharePollModal, setPollExpiryModal } = useModalStore()
 
+    const [visible, setVisible] = useState<boolean>(poll.private)
+    const [activePoll, setActivePoll] = useState<boolean>(poll.active)
+
     const handleEdit = async (type: 'active' | 'visiblity', pollId: string): Promise<void> => {
-        const originalValue = type === 'active' ? active : visible
+        const originalValue = type === 'active' ? activePoll : visible
         const newValue = !originalValue
 
         switch (type) {
             case 'active':
-                setActive(newValue)
+                setActivePoll(newValue)
                 break
             case 'visiblity':
                 setVisible(newValue)
@@ -38,7 +39,7 @@ const PollMenu: FC<PollMenu> = ({ poll, polls, setPolls, isOwner }) => {
         ).catch((err: AxiosError) => {
             switch (type) {
                 case 'active':
-                    setActive(originalValue)
+                    setActivePoll(originalValue)
                     break
                 case 'visiblity':
                     setVisible(originalValue)
@@ -105,6 +106,28 @@ const PollMenu: FC<PollMenu> = ({ poll, polls, setPolls, isOwner }) => {
                                             />
                                         )}
                                         {visible === true ? 'Private' : 'Public'} Poll
+                                    </button>
+                                )}
+                            </Menu.Item>
+                        </div>}
+                        {isOwner && <div className="px-1 py-1">
+                            <Menu.Item>
+                                {({ active }) => (
+                                    <button
+                                        onClick={async () => await handleEdit('active', poll.id)}
+                                        className={`${poppins.className} ${active ? 'bg-clr-1 rounded-md text-clr-0' : 'font-medium'} w-full items-center flex gap-3 px-2 py-1`}>
+                                        {active ? (
+                                            <MdOutlineCancel
+                                                aria-hidden='true'
+                                                className='text-clr-0'
+                                            />
+                                        ) : (
+                                            <MdOutlineCancel
+                                                aria-hidden='true'
+                                                className='text-clr-1'
+                                            />
+                                        )}
+                                        {activePoll === true ? 'Active' : 'Suspended'} Poll
                                     </button>
                                 )}
                             </Menu.Item>
