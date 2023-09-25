@@ -1,6 +1,7 @@
 "use client"
 import { AxiosError } from 'axios'
 import axios from '@/app/api/axios'
+import { IconType } from 'react-icons'
 import { poppins } from '@/public/fonts/f'
 import {
     CiShare1, BiTimer, MdOutlineCancel,
@@ -11,6 +12,37 @@ import { Fragment, FC, useState } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { useModalStore, usePoll } from '@/utils/store'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
+
+const Menus: FC<{
+    Icon: IconType
+    content: string
+    handler: () => void
+}> = ({ Icon, content, handler }) => {
+    return (
+        <div className="px-1 py-0.5">
+            <Menu.Item>
+                {({ active }) => (
+                    <button
+                        onClick={() => handler()}
+                        className={`${poppins.className} ${active ? 'bg-clr-1 rounded-md text-clr-0' : 'font-medium'} w-full items-center flex gap-3 px-2 py-0.5`}>
+                        {active ? (
+                            <Icon
+                                aria-hidden='true'
+                                className='text-clr-0'
+                            />
+                        ) : (
+                            <Icon
+                                aria-hidden='true'
+                                className='text-clr-1'
+                            />
+                        )}
+                        {content}
+                    </button>
+                )}
+            </Menu.Item>
+        </div>
+    )
+}
 
 const PollMenu: FC<PollMenu> = ({ poll, polls, setPolls, isOwner }) => {
     const { setTotalPolls } = usePoll()
@@ -52,8 +84,8 @@ const PollMenu: FC<PollMenu> = ({ poll, polls, setPolls, isOwner }) => {
     }
 
     const handleDelete = async (pollId: string): Promise<void> => {
-        const oldPolls = polls
-        const oldTotalLength = polls.length
+        const prevPolls = polls
+        const prevTotalLength = polls.length
         const newPolls = polls.filter((poll) => poll.id !== pollId)
 
         setPolls(newPolls)
@@ -62,9 +94,9 @@ const PollMenu: FC<PollMenu> = ({ poll, polls, setPolls, isOwner }) => {
         await axios.delete(
             `/api/poll/delete/${pollId}`
         ).catch((err: AxiosError) => {
-            setPolls(oldPolls)
-            setTotalPolls(oldTotalLength)
             throwError(err)
+            setPolls(prevPolls)
+            setTotalPolls(prevTotalLength)
         })
     }
 
@@ -88,116 +120,33 @@ const PollMenu: FC<PollMenu> = ({ poll, polls, setPolls, isOwner }) => {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95">
                     <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-clr-11 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        {isOwner && <div className="px-1 py-0.5">
-                            <Menu.Item>
-                                {({ active }) => (
-                                    <button
-                                        onClick={async () => await handleEdit('visiblity', poll.id)}
-                                        className={`${poppins.className} ${active ? 'bg-clr-1 rounded-md text-clr-0' : 'font-medium'} w-full items-center flex gap-3 px-2 py-0.5`}>
-                                        {active ? (
-                                            <MdOutlinePrivacyTip
-                                                aria-hidden='true'
-                                                className='text-clr-0'
-                                            />
-                                        ) : (
-                                            <MdOutlinePrivacyTip
-                                                aria-hidden='true'
-                                                className='text-clr-1'
-                                            />
-                                        )}
-                                        {visible === true ? 'Private' : 'Public'} Poll
-                                    </button>
-                                )}
-                            </Menu.Item>
-                        </div>}
-                        {isOwner && <div className="px-1 py-0.5">
-                            <Menu.Item>
-                                {({ active }) => (
-                                    <button
-                                        onClick={async () => await handleEdit('active', poll.id)}
-                                        className={`${poppins.className} ${active ? 'bg-clr-1 rounded-md text-clr-0' : 'font-medium'} w-full items-center flex gap-3 px-2 py-0.5`}>
-                                        {active ? (
-                                            <MdOutlineCancel
-                                                aria-hidden='true'
-                                                className='text-clr-0'
-                                            />
-                                        ) : (
-                                            <MdOutlineCancel
-                                                aria-hidden='true'
-                                                className='text-clr-1'
-                                            />
-                                        )}
-                                        {activePoll === true ? 'Active' : 'Suspended'} Poll
-                                    </button>
-                                )}
-                            </Menu.Item>
-                        </div>}
-                        {isOwner && <div className="px-1 py-0.5">
-                            <Menu.Item>
-                                {({ active }) => (
-                                    <button
-                                        onClick={async () => await handleDelete(poll.id)}
-                                        className={`${poppins.className} ${active ? 'bg-clr-1 rounded-md text-clr-0' : 'font-medium'} w-full items-center flex gap-3 px-2 py-0.5`}>
-                                        {active ? (
-                                            <RiDeleteBin7Line
-                                                aria-hidden='true'
-                                                className='text-clr-0'
-                                            />
-                                        ) : (
-                                            <RiDeleteBin7Line
-                                                aria-hidden='true'
-                                                className='text-clr-1'
-                                            />
-                                        )}
-                                        Delete
-                                    </button>
-                                )}
-                            </Menu.Item>
-                        </div>}
-                        <div className="px-1 py-0.5">
-                            <Menu.Item>
-                                {({ active }) => (
-                                    <button
-                                        onClick={() => setSharePollModal(true)}
-                                        className={`${poppins.className} ${active ? 'bg-clr-1 rounded-md text-clr-0' : 'font-medium'} w-full items-center flex gap-3 px-2 py-0.5`}>
-                                        {active ? (
-                                            <CiShare1
-                                                aria-hidden='true'
-                                                className='text-clr-0'
-                                            />
-                                        ) : (
-                                            <CiShare1
-                                                aria-hidden='true'
-                                                className='text-clr-1'
-                                            />
-                                        )}
-                                        Share
-                                    </button>
-                                )}
-                            </Menu.Item>
-                        </div>
-                        {isOwner && <div className="px-1 py-0.5">
-                            <Menu.Item>
-                                {({ active }) => (
-                                    <button
-                                        onClick={() => setPollExpiryModal(true)}
-                                        className={`${poppins.className} ${active ? 'bg-clr-1 rounded-md text-clr-0' : 'font-medium'} w-full items-center flex gap-3 px-2 py-0.5`}>
-                                        {active ? (
-                                            <BiTimer
-                                                aria-hidden='true'
-                                                className='text-clr-0'
-                                            />
-                                        ) : (
-                                            <BiTimer
-                                                aria-hidden='true'
-                                                className='text-clr-1'
-                                            />
-                                        )}
-                                        Set Expiry
-                                    </button>
-                                )}
-                            </Menu.Item>
-                        </div>}
+                        <Menus
+                            Icon={CiShare1}
+                            content='Share'
+                            handler={() => setSharePollModal(true)}
+                        />
+                        {isOwner && <>
+                            <Menus
+                                Icon={MdOutlinePrivacyTip}
+                                content={`${visible === true ? 'Private' : 'Public'} Poll`}
+                                handler={async () => await handleEdit('visiblity', poll.id)}
+                            />
+                            <Menus
+                                Icon={MdOutlineCancel}
+                                handler={async () => await handleEdit('active', poll.id)}
+                                content={`${activePoll === true ? 'Active' : 'Suspended'} Poll`}
+                            />
+                            <Menus
+                                Icon={BiTimer}
+                                content='Set Expiry'
+                                handler={() => setPollExpiryModal(true)}
+                            />
+                            <Menus
+                                content='Delete'
+                                Icon={RiDeleteBin7Line}
+                                handler={async () => await handleDelete(poll.id)}
+                            />
+                        </>}
                     </Menu.Items>
                 </Transition>
             </Menu>
