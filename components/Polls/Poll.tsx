@@ -86,7 +86,7 @@ const Poll: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
                     <div className='text-xs absolute top-1 right-2 text-clr-13'>
                         {expiry() === 'Expired' ?
                             <span>Expired</span> :
-                            <span>Expired &#8226; In {expiry()}</span>
+                            <span>Expires &#8226; {expiry()}</span>
                         }
                     </div>
                 }
