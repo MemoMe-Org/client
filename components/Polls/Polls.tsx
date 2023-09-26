@@ -20,10 +20,7 @@ const Messages: FC<TabProps> = ({ username }) => {
     } = usePoll()
     const [page, setPage] = useState<number>(1)
     const [polls, setPolls] = useState<MyPoll[]>([])
-    const {
-        sharePollModal, setSharePollModal,
-        pollExpiryModal, setPollExpiryModal,
-    } = useModalStore()
+    const { sharePollModal, setSharePollModal } = useModalStore()
 
     const fetchPolls = async (): Promise<void> => {
         if (fetching) {

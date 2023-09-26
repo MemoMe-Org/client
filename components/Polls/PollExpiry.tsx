@@ -39,11 +39,10 @@ const PollExpiry: FC<{ pollId: string }> = ({ pollId }) => {
         await axios.post(
             `/api/poll/edit/expiry/${pollId}`,
             { date: getDate.toISOString() }
-        )
-            .then((res: AxiosResponse) => {
-                setPollExpiryModal(false)
-                notify('success', 'Expiry date successfully set.')
-            }).catch((err: AxiosError) => throwError(err))
+        ).then((res: AxiosResponse) => {
+            setPollExpiryModal(false)
+            notify('success', 'Expiry date successfully set.')
+        }).catch((err: AxiosError) => throwError(err))
             .finally(() => setLoad(false))
     }
 
