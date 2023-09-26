@@ -12,16 +12,15 @@ import {
 import CreatePoll from './Polls/CreatePoll'
 import { useModalStore } from '@/utils/store'
 import { FC, useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { formatNumber } from '@/utils/formatNumber'
 import { poppins, questrial } from '@/public/fonts/f'
-import { useRouter, useSearchParams } from 'next/navigation'
 
 const PollTab = dynamic(() => import('@/components/Polls/Polls'))
 const MessageTab = dynamic(() => import('@/components/Messages/Messages'))
 
 const Profile: FC<IProfile> = ({ user, pathName, username }) => {
-    const router = useRouter()
-    const tab = useSearchParams().get('tab')
+    const activeTab = useSearchParams().get('tab') || 'messages'
     const {
         avatarModal, setAvatarModal,
         shareLinkModal, setShareLinkModal,
@@ -30,17 +29,14 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
 
     const [onMouse, setOnMouse] = useState<boolean>(false)
     const [plusClicked, setPlusClicked] = useState<boolean>(false)
-    const [activeTab, setActiveTab] = useState<string>(tab || 'message')
 
     useEffect(() => {
         if (pathName === 'main') {
-            router.push(`/profile?tab=${activeTab}`)
             document.title = 'Profile | MemoMe'
         } else {
-            router.push(`/${username}?tab=${activeTab}`)
-            document.title = `Profile | ${user?.username}`
+            document.title = `Profile | ${username}`
         }
-    }, [router, activeTab, pathName, username, user])
+    }, [activeTab, pathName, username])
 
     return (
         <main className='profile'>
@@ -207,18 +203,19 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
                     </div>
                 </article>
                 <article className='flex gap-9 mt-5'>
-                    <button
-                        onClick={() => setActiveTab('message')}
-                        className={`${questrial.className} tab ${activeTab === 'message' && 'active'}`}>
+                    <Link
+                        href={`/profile?tab=messages`}
+                        className={`${questrial.className} tab ${activeTab === 'messages' && 'active'}`}>
                         Messages
-                    </button>
-                    <button onClick={() => setActiveTab('poll')}
-                        className={`${questrial.className} tab ${activeTab === 'poll' && 'active'}`}>
+                    </Link>
+                    <Link
+                        href={`/profile?tab=polls`}
+                        className={`${questrial.className} tab ${activeTab === 'polls' && 'active'}`}>
                         Polls
-                    </button>
+                    </Link>
                 </article>
-                {activeTab === 'poll' && <PollTab username={user?.username} />}
-                {activeTab === 'message' && <MessageTab username={user?.username} />}
+                {activeTab === 'polls' && <PollTab username={user?.username} />}
+                {activeTab === 'messages' && <MessageTab username={user?.username} />}
             </section>
         </main>
     )
