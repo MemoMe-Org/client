@@ -27,7 +27,7 @@ export default function Home() {
           </article>
           <article className='text-center'>
             <p className={`${questrial.className}`}>
-              {`The old chef has no idea about how this page is going to looks like. Guess, he lags in creativity.`}
+              {`The old chef has no idea what this page is going to look like.`}
             </p>
             <Link
               target='_blank'
