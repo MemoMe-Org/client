@@ -4,13 +4,13 @@ import Poll from './Poll'
 import PollMenu from './PollMenu'
 import axios from '@/app/api/axios'
 import Share from '../Modals/Share'
+import PollExpiry from './PollExpiry'
 import { LoaderThree } from '../Loader'
 import throwError from '@/utils/throwError'
 import { FC, useEffect, useState } from 'react'
 import { AxiosError, AxiosResponse } from 'axios'
 import { poppins, prompt } from '@/public/fonts/f'
 import { usePoll, useModalStore } from '@/utils/store'
-import PollExpiry from './PollExpiry'
 
 const Messages: FC<TabProps> = ({ username }) => {
     const limit = 5 as const
