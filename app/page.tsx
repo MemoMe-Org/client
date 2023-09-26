@@ -37,7 +37,7 @@ export default function Home() {
             </Link>
           </article>
           <p className='text-center'>
-            {`Well, that doesn't stop us from using the entire app.`}
+            {`Well, that doesn't stop us from using the entire app he dished.`}
           </p>
           <Link
             href={`/login`}
