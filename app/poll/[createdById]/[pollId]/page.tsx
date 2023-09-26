@@ -91,7 +91,7 @@ const page = ({ params: { createdById, pollId } }: PollParams) => {
 
     useEffect(() => {
         let intervalId
-        const refreshInterval = 3 * 60 * 1000
+        const refreshInterval = 1.5 * 60 * 1000
 
         const refreshPage = () => {
             window.location.reload()
