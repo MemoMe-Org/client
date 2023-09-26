@@ -1,3 +1,4 @@
+"use client"
 import { FC } from 'react'
 import Option from './Option'
 import { questrial } from '@/public/fonts/f'
@@ -28,8 +29,7 @@ const Options: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
                     return (
                         <article
                             key={option.id}
-                            className='w-full'
-                        >
+                            className='w-full'>
                             <Option
                                 poll={poll}
                                 option={option}
