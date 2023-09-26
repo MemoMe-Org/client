@@ -1,3 +1,4 @@
+"use client"
 import axios from '@/app/api/axios'
 import { FC, useState } from 'react'
 import { usePoll } from '@/utils/store'
