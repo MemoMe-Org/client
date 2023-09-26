@@ -4,16 +4,15 @@ import { FC, useState } from 'react'
 import { usePoll } from '@/utils/store'
 import { prompt } from '@/public/fonts/f'
 import throwError from '@/utils/throwError'
+import {
+    GiCheckMark, AiOutlineLoading3Quarters
+} from '@/public/icons/ico'
 import { AxiosError, AxiosResponse } from 'axios'
-import { GiCheckMark, AiOutlineLoading3Quarters } from '@/public/icons/ico'
 
-const Option: FC<{
-    poll: MyPoll | undefined,
-    option: MyPollOption,
-    notValidToVote: boolean,
-    optionPercentage: number,
-    expired: () => boolean,
-}> = ({ poll, notValidToVote, optionPercentage, expired, option }) => {
+const Option: FC<PollOptionProps> = ({
+    optionPercentage, expired,
+    poll, notValidToVote, option
+}) => {
     const { setPoll, setIsAuthenticated } = usePoll()
     const [voteLoad, setVoteLoad] = useState<boolean>(false)
 
