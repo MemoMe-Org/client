@@ -6,7 +6,7 @@ import QueryProvider from '@/components/QueryProvider'
 
 export const metadata: Metadata = {
   title: 'MemoMe',
-  description: 'Spectaculamazinderful way to Host a Poll, Send and Receive Anonymous Messages.',
+  description: 'Amazinderful way to Host a Poll, Send and Receive Anonymous Messages.',
 }
 
 export default function RootLayout({
