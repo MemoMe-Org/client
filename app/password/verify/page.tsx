@@ -31,17 +31,21 @@ const page = () => {
     return (
         <>
             <NavBar isAuthenticated={false} />
-            <AuthLayout
-                btnLabel='Send OTP'
-                title='Find your account'
-                handler={handleReqeustOTP}>
-                <Input
-                    type='email'
-                    label='Email'
-                    value={email}
-                    onChange={setEmail}
-                />
+            <form
+                onSubmit={(e) => e.preventDefault()}
+                className='card w-[92vw] max-w-[500px] mx-auto mt-3 mb-10 px-5 py-7'>
+                <AuthLayout
+                    btnLabel='Send OTP'
+                    title='Find your account'
+                    handler={handleReqeustOTP}>
+                    <Input
+                        type='email'
+                        label='Email'
+                        value={email}
+                        onChange={setEmail}
+                    />
             </AuthLayout>
+            </form>
         </>
     )
 }
