@@ -272,3 +272,10 @@ interface MessageMenu {
     messages: MessageStates[],
     setMessages: Dispatch<SetStateAction<MessageStates[]>>
 }
+
+interface ListBox {
+    current: string
+    listMsgs: string[]
+    selected: string
+    setSelected: (selected: string) => void
+}
