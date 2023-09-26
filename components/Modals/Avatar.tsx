@@ -6,6 +6,7 @@ import axios from '@/app/api/axios'
 import notify from '@/utils/notify'
 import { LoaderThree } from '../Loader'
 import MaxSize from '@/enums/fileMaxSizes'
+import throwError from '@/utils/throwError'
 import { ChangeEvent, FC, useState } from 'react'
 import { AxiosResponse, AxiosError } from 'axios'
 import { poppins, questrial } from '@/public/fonts/f'
@@ -25,23 +26,21 @@ const Avatar: FC<ModalComponent> = ({ get, set, data }) => {
             formData.append('avatar', avatar, avatar.name)
         }
 
-        try {
-            const res = await axios.post(
-                '/auth/api/avatar', formData, {
-                headers: {
-                    'Content-Type': 'multipart/formdata'
-                }
-            })
+        await axios.post(
+            '/auth/api/avatar', formData, {
+            headers: {
+                'Content-Type': 'multipart/formdata'
+            }
+        }).then((res: AxiosResponse) => {
             set(false)
             notify('success', res.data?.msg)
             setTimeout(() => {
                 window.location.reload()
             }, 450)
-        } catch (err) {
-            console.log(err)
-        } finally {
-            setLoading(false)
-        }
+        }).catch((err: AxiosError) => throwError(err))
+            .finally(() => setLoading(false))
+
+
     }
 
     const delAvatar = async (): Promise<void> => {
