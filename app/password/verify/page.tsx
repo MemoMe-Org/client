@@ -44,7 +44,7 @@ const page = () => {
                         value={email}
                         onChange={setEmail}
                     />
-            </AuthLayout>
+                </AuthLayout>
             </form>
         </>
     )
