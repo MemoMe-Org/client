@@ -12,7 +12,7 @@ const Share: FC<ModalComponent> = ({ get, set, data, title }) => {
 
     return (
         <Modal get={get} set={set}>
-            {title && <h3 className={`${poppins.className} text-clr-13 text-lg font-medium`}>
+            {title && <h3 className={`${poppins.className} text-clr-13 text-lg md:text-base font-medium mt-3`}>
                 {title}
             </h3>}
             <ul className='flex flex-col gap-4 mt-6'>
