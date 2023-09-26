@@ -11,7 +11,7 @@ interface PathName {
 interface AuthProps extends PathName {
     title: string
     btnLabel?: string
-    method: SignInType
+    method?: SignInType
     children: ReactNode
     handler: () => Promise<void>
 }
