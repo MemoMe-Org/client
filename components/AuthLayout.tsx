@@ -45,13 +45,13 @@ const AuthLayout: FC<AuthProps> = ({
                     <div className={`${lato.className} flex flex-col gap-4 my-3`}>
                         <button
                             className='provider-btn'
-                            onClick={() => handleSignIn('google', method)}>
+                            onClick={() => handleSignIn('google', method!)}>
                             <FcGoogle className="text-2xl" />
                             <span>Google</span>
                         </button>
                         <button
                             className='provider-btn'
-                            onClick={() => handleSignIn('github', method)}>
+                            onClick={() => handleSignIn('github', method!)}>
                             <AiOutlineGithub className="text-2xl" />
                             <span>Github</span>
                         </button>
