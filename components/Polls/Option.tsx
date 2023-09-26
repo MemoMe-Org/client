@@ -23,7 +23,7 @@ const Option: FC<{
         ).then((res: AxiosResponse) => setPoll(res.data?.poll))
             .catch((err: AxiosError) => {
                 const statusCodes: unknown = err.response?.status
-                if (statusCodes === 401 || statusCodes === 403) {
+                if (statusCodes === 403) {
                     setIsAuthenticated(true)
                 } else {
                     throwError(err)
