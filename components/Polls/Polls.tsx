@@ -15,10 +15,8 @@ import { usePoll, useModalStore } from '@/utils/store'
 const Messages: FC<TabProps> = ({ username }) => {
     const limit = 5 as const
     const {
-        setIsAuthenticated,
-        isOwner, setIsOwner,
-        fetching, setTotalPolls,
-        setFetching, totalPolls,
+        setIsAuthenticated, fetching, setTotalPolls,
+        isOwner, setIsOwner, setFetching, totalPolls,
     } = usePoll()
     const [page, setPage] = useState<number>(1)
     const [polls, setPolls] = useState<MyPoll[]>([])
