@@ -34,7 +34,7 @@ function expiryPeriod(expiryISOString: string): string {
         }
     }
 
-    return "In few seconds"
+    return "In a few seconds"
 }
 
 export { getPeriod, expiryPeriod }
