@@ -1,3 +1,4 @@
+"use client"
 import { v4 as uuid } from 'uuid'
 import axios from '@/app/api/axios'
 import Share from '../Modals/Share'
