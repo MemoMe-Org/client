@@ -15,6 +15,13 @@ import { LoaderThree } from '@/components/Loader'
 import ListboxComponent from '@/components/ListBox'
 
 const page = () => {
+    const listMsgs = [
+        'All',
+        'Nasty',
+        'Normal',
+        'Relationship',
+    ]
+
     const {
         bio, setBio,
         setShowLevels, allowTexts, showLevels,
@@ -22,6 +29,9 @@ const page = () => {
     } = UserStore()
 
     const [bioLoad, setBioLoad] = useState<boolean>(false)
+    const [msgLoad, setMsgLoad] = useState<boolean>(false)
+
+    const [selectedMsg, setSelectedMsg] = useState<string>(listMsgs[0])
 
     const toggler = async (type: string): Promise<void> => {
         const originalValue = type === 'levels' ?
@@ -74,6 +84,15 @@ const page = () => {
     }
 
     const supriseMe = async () => setBio(await genBio() || '')
+
+    const handleMsgSelection = async (): Promise<void> => {
+        setMsgLoad(true)
+        await axios.get(
+            `/auth/api/settings/msg-type?type=${selectedMsg.toLowerCase()}`,
+        ).then((res: AxiosResponse) => notify('success', 'Generated Message Changed.'))
+            .catch((err: AxiosError) => throwError(err))
+            .finally(() => setMsgLoad(false))
+    }
 
     return (
         <MyPage param='settings'>
@@ -173,7 +192,12 @@ const page = () => {
                                 <h3 className={`${inter.className} text-clr-16 font-medium tracking-wide text-[20px]`}>
                                     Generated Message
                                 </h3>
-                                <ListboxComponent />
+                                <ListboxComponent
+                                    listMsgs={listMsgs}
+                                    selected={selectedMsg}
+                                    setSelected={setSelectedMsg}
+                                    current={data?.Settings?.gen_msg_type}
+                                />
                             </div>
                             <footer className='profile-footer'>
                                 <p className='text-clr-17 text-xs md:text-sm'>
@@ -181,9 +205,9 @@ const page = () => {
                                 </p>
                                 <button
                                     className='save-btn-2'
-                                    disabled={bio === data?.Settings?.gen_msg_type}
-                                    onClick={async () => await editBio()}>
-                                    {bioLoad ? <LoaderThree /> : 'Save'}
+                                    disabled={selectedMsg?.toLowerCase() === data?.Settings?.gen_msg_type}
+                                    onClick={async () => await handleMsgSelection()}>
+                                    {msgLoad ? <LoaderThree /> : 'Save'}
                                 </button>
                             </footer>
                         </article>
