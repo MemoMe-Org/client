@@ -279,3 +279,11 @@ interface ListBox {
     selected: string
     setSelected: (selected: string) => void
 }
+
+interface PollOptionProps {
+    option: MyPollOption,
+    expired: () => boolean,
+    notValidToVote: boolean,
+    poll: MyPoll | undefined,
+    optionPercentage: number,
+}
