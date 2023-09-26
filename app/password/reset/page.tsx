@@ -37,34 +37,38 @@ const page = () => {
     return (
         <>
             <NavBar isAuthenticated={false} />
+            <form
+                onSubmit={(e) => e.preventDefault()}
+                className='card w-[92vw] max-w-[500px] mx-auto mt-3 mb-10 px-5 py-7'>
             <AuthLayout
                 btnLabel='Reset'
                 handler={handlePswdReset}
                 title='Password Reset'>
-                <article className='flex flex-col gap-5'>
-                    <OtpInput
-                        value={otp}
-                        onChange={setOtp}
-                        numInputs={5}
-                        renderSeparator={<span> <FcLock /> </span>}
-                        containerStyle='w-full flex gap-1.5 font-semibold'
-                        inputStyle='outline-none rounded-full text-lg text-clr-4 border-[2px] border-clr-3 focus:border-clr-1 focus:bg-clr-11 trans'
-                        renderInput={(props) => <input {...props} />}
-                    />
-                    <Input
-                        type='password'
-                        label='New Password'
-                        value={password}
-                        onChange={setPassword}
-                    />
-                    <Input
-                        type='password'
-                        label='Confirm New Password'
-                        value={password2}
-                        onChange={setPassword2}
-                    />
-                </article>
-            </AuthLayout>
+                    <article className='flex flex-col gap-5'>
+                        <OtpInput
+                            value={otp}
+                            onChange={setOtp}
+                            numInputs={5}
+                            renderSeparator={<span> <FcLock /> </span>}
+                            containerStyle='w-full flex gap-1.5 font-semibold'
+                            inputStyle='outline-none rounded-full text-lg text-clr-4 border-[2px] border-clr-3 focus:border-clr-1 focus:bg-clr-11 trans'
+                            renderInput={(props) => <input {...props} />}
+                        />
+                        <Input
+                            type='password'
+                            label='New Password'
+                            value={password}
+                            onChange={setPassword}
+                        />
+                        <Input
+                            type='password'
+                            label='Confirm New Password'
+                            value={password2}
+                            onChange={setPassword2}
+                        />
+                    </article>
+                </AuthLayout>
+            <form/>
         </>
     )
 }
