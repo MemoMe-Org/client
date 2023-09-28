@@ -145,7 +145,7 @@ const page = () => {
                             <article className='rounded-lg border-[0.75px]  overflow-hidden'>
                                 <div className='flex flex-col gap-3.5 pt-8 px-6 pb-5'>
                                     <h3 className={`${inter.className} text-clr-16 font-medium tracking-wide text-[20px]`}>
-                                        {disabled ? 'Disabled' : 'Enabled'} your Account
+                                        Your account is {disabled ? 'disabled' : 'enabled'}
                                     </h3>
                                     <SwitchBtn
                                         get={disabled}

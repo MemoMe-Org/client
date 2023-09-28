@@ -1,42 +1,41 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client"
+import { useEffect } from 'react'
 import NavBar from '@/components/Nav'
 import useToken from '@/hooks/useToken'
 import { axiosReq } from '@/app/api/axios'
 import Profile from '@/components/Profile'
-import { useEffect, useState } from 'react'
 import throwError from '@/utils/throwError'
 import { LoaderTwo } from '@/components/Loader'
+import { useQuery } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
 
 const page = ({ params: { username } }: Params) => {
     const token = useToken()
-
-    const [data, setData] = useState<any>({})
-    const [isLoading, setIsLoading] = useState<boolean>(false)
-
-    const handleUserPage = async (): Promise<void> => {
-        setIsLoading(true)
-        await axiosReq.get(
-            `/api/user/${username?.toLowerCase()?.trim()}`,
-            {
-                headers: {
-                    'Authorization': `Bearer ${token}`
+    const { refetch, isLoading, data } = useQuery({
+        queryKey: ['user_profile'],
+        queryFn: async () => {
+            return await axiosReq.get(
+                `/api/user/${username?.toLowerCase()?.trim()}`,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
                 }
-            }
-        ).then((res: AxiosResponse) => {
-            setData(res.data || {})
-        }).catch((err: AxiosError) => throwError(err))
-            .finally(() => setIsLoading(false))
-    }
+            ).then((res: AxiosResponse) => {
+                return res.data || {}
+            }).catch((err: AxiosError) => throwError(err))
+        },
+        enabled: false
+    })
 
     useEffect(() => {
         if (token) {
-            handleUserPage()
+            refetch()
         } else {
             if (token === '') {
-                handleUserPage()
+                refetch()
             }
         }
     }, [token])

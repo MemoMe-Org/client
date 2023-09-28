@@ -7,7 +7,7 @@ const handleSignIn = (
     method: SignInType
 ) => {
     const authUrlWindow = window.open(
-    `${isProd ? process.env.NEXT_PUBLIC_AUTH_URL : 'http://localhost:2002'}/auth/${type === 'github' ? 'github' : 'google'}`,
+    `${isProd ? process.env.NEXT_PUBLIC_AUTH_URL : 'http://localhost:2002'}/auth/${type}`,
     `${method === 'home' ? '_self': '_blank'}`
     )
 

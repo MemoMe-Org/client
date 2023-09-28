@@ -204,12 +204,12 @@ const Profile: FC<IProfile> = ({ user, pathName, username }) => {
                 </article>
                 <article className='flex gap-9 mt-5'>
                     <Link
-                        href={`/profile?tab=messages`}
+                        href={`/${pathName === 'main' ? 'profile': username}?tab=messages`}
                         className={`${questrial.className} tab ${activeTab === 'messages' && 'active'}`}>
                         Messages
                     </Link>
                     <Link
-                        href={`/profile?tab=polls`}
+                        href={`/${pathName === 'main' ? 'profile': username}?tab=polls`}
                         className={`${questrial.className} tab ${activeTab === 'polls' && 'active'}`}>
                         Polls
                     </Link>

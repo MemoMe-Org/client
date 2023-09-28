@@ -28,13 +28,13 @@ const PollExpiry: FC<{ pollId: string }> = ({ pollId }) => {
             return
         }
 
-        setLoad(true)
-
         const getDate = new Date(expiry)
         if (getDate < new Date()) {
             notify('error', 'Invalid Expiry Date.')
             return
         }
+
+        setLoad(true)
 
         await axios.post(
             `/api/poll/edit/expiry/${pollId}`,

@@ -60,7 +60,7 @@ const Message: FC<{ message: MessageStates }> = ({ message }) => {
                                 className={`${prompt.className} text-[1.2em] text-center text-clr-13 mt-3`}
                                 dangerouslySetInnerHTML={{ __html: message.texts }}
                             />}
-                        <div className='flex gap-2 mt-4 h-[180px] mx-auto'>
+                        <div className='flex gap-2 mt-4 h-[180px]'>
                             {message.files.map((file) => (
                                 <div
                                     key={file.idx}

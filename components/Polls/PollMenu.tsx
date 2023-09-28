@@ -104,7 +104,7 @@ const PollMenu: FC<PollMenu> = ({ poll, polls, setPolls, isOwner }) => {
         <div>
             <Menu as="div" className="relative inline-block text-left">
                 <div>
-                    <Menu.Button className="inline-flex w-full justify-center rounded-md bg-clr-13 px-3 py-1 text-sm font-medium hover:bg-clr-5  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                    <Menu.Button className="inline-flex w-full justify-center rounded-md bg-clr-13 px-3 py-1.5 text-sm font-medium hover:bg-clr-5  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
                         <ChevronDownIcon
                             className="h-4 w-4 text-clr-0 hover:text-clr-7"
                             aria-hidden='true'

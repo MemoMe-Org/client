@@ -25,19 +25,22 @@ const NavBar: FC<NavProps> = ({
         <header>
             <nav className='nav-bar'>
                 {isAuthenticated ?
-                    <Link href='/'
-                        className={`rounded-full object-cover overflow-hidden w-14 h-10`}>
+                    <Link
+                        href='/'
+                        className={`object-cover overflow-hidden w-14 h-10`}>
                         <Image
                             src='https://d15zb4m4p46ai4.cloudfront.net/Dist/logo.png'
                             alt='logo' priority
                             width={150} height={150} />
                     </Link> :
-                    <div className='object-cover overflow-hidden w-24 h-14'>
+                    <Link
+                        href='/'
+                        className='object-cover overflow-hidden w-24 h-14'>
                         <Image
                             src='https://d15zb4m4p46ai4.cloudfront.net/Dist/logo-2.png'
                             alt='logo' priority
                             width={300} height={300} />
-                    </div>
+                    </Link>
                 }
                 <div className='relative'>
                     {!isAuthenticated &&

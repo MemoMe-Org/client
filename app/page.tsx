@@ -20,7 +20,7 @@ export default function Home() {
             <Link
               target='_blank'
               className='font-medium underline'
-              href={'https://twitter.com/@HeyVickyJay'}>
+              href={'https://twitter.com/HeyVickyJay'}>
               @VickyJay
             </Link>
             <span> is currently cooking this page.</span>
@@ -37,7 +37,7 @@ export default function Home() {
             </Link>
           </article>
           <p className='text-center'>
-            {`Well, that doesn't stop us from using the entire app he dished.`}
+            {`Well, that won't stop us from using the entire app he dished.`}
           </p>
           <Link
             href={`/login`}

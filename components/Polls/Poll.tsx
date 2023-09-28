@@ -40,7 +40,7 @@ const Poll: FC<{ poll: MyPoll | undefined }> = ({ poll }) => {
                 </div>}
             {poll?.files?.length && poll.files.length > 0 ?
                 <article
-                    className='w-full md:h-[9rem] h-[7rem] flex gap-1 object-cover overflow-hidden mt-2'>
+                    className='w-full md:h-[12rem] h-[10rem] flex gap-1 object-cover overflow-hidden mt-2'>
                     {poll?.files?.map((file) => (
                         <div
                             key={file?.idx}
