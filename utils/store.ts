@@ -9,6 +9,7 @@ const initialUserStore = {
     auth: false,
     avatar: null,
     password: '',
+    username: '',
     password2: '',
     loading: false,
     disabled: false,
@@ -31,6 +32,7 @@ const UserStore = create<UserStoreStates>()((set) => ({
     setLoading: (loading) => set({ loading }),
     setPassword: (password) => set({ password }),
     setDisabled: (disabled) => set({ disabled }),
+    setUsername: (username) => set({ username }),
     setPassword2: (password2) => set({ password2 }),
     setAllowFiles: (allowFiles) => set({ allowFiles }),
     setAllowTexts: (allowTexts) => set({ allowTexts }),
@@ -73,12 +75,14 @@ const useModalStore = create<ModalStates>()((set) => ({
     shareLinkModal: false,
     createPollModal: false,
     pollExpiryModal: false,
+    deleteAccountModal: false,
     setLoading: (loading) => set({ loading }),
     setAvatarModal: (avatarModal) => set({ avatarModal }),
     setShareLinkModal: (shareLinkModal) => set({ shareLinkModal }),
     setSharePollModal: (sharePollModal) => set({ sharePollModal }),
     setCreatePollModal: (createPollModal) => set({ createPollModal }),
     setPollExpiryModal: (pollExpiryModal) => set({ pollExpiryModal }),
+    setDeleteAccountModal: (deleteAccountModal) => set({ deleteAccountModal }),
 }))
 
 

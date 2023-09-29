@@ -73,6 +73,7 @@ interface UserStoreStates {
     email: string
     userId: string
     loading: boolean
+    username: string
     password: string
     disabled: boolean
     password2: string
@@ -90,6 +91,7 @@ interface UserStoreStates {
     setUserId: (userId: string) => void
     setLoading: (loading: boolean) => void
     setPassword: (password: string) => void
+    setUsername: (username: string) => void
     setDisabled: (disabled: boolean) => void
     setAvatar: (avatar: File | null) => void
     setPassword2: (password2: string) => void
@@ -138,12 +140,14 @@ interface ModalStates {
     sharePollModal: boolean
     createPollModal: boolean
     pollExpiryModal: boolean
+    deleteAccountModal: boolean
     setLoading: (loading: boolean) => void
     setAvatarModal: (avatarModal: boolean) => void
     setShareLinkModal: (shareLinkModal: boolean) => void
     setSharePollModal: (sharePollModal: boolean) => void
     setCreatePollModal: (createPollModal: boolean) => void
     setPollExpiryModal: (pollExpiryModal: boolean) => void
+    setDeleteAccountModal: (deleteAccountModal: boolean) => void
 }
 
 interface MediaUploadProps extends State<File[] | null> {
@@ -171,7 +175,7 @@ interface ModalProps extends State<boolean> {
 }
 
 interface ModalComponent extends State<boolean> {
-    data?: T,
+    data?: T
     title?: string
 }
 
@@ -236,7 +240,7 @@ interface MyPoll {
     votedOption: string
     votes?: {
         id: string
-        userId: string,
+        userId: string
         optionId: string
     }[]
 }
@@ -249,7 +253,7 @@ interface MyPollOption {
 
 interface PollParams {
     params: {
-        createdById: string,
+        createdById: string
         pollId: string
     }
 }
@@ -261,15 +265,15 @@ interface Login extends PathName {
 }
 
 interface PollMenu {
-    poll: MyPoll,
-    polls: MyPoll[],
-    isOwner: boolean,
+    poll: MyPoll
+    polls: MyPoll[]
+    isOwner: boolean
     setPolls: Dispatch<SetStateAction<MyPoll[]>>
 }
 
 interface MessageMenu {
-    message: MessageStates,
-    messages: MessageStates[],
+    message: MessageStates
+    messages: MessageStates[]
     setMessages: Dispatch<SetStateAction<MessageStates[]>>
 }
 
@@ -281,9 +285,15 @@ interface ListBox {
 }
 
 interface PollOptionProps {
-    option: MyPollOption,
-    expired: () => boolean,
-    notValidToVote: boolean,
-    poll: MyPoll | undefined,
-    optionPercentage: number,
+    option: MyPollOption
+    expired: () => boolean
+    notValidToVote: boolean
+    poll: MyPoll | undefined
+    optionPercentage: number
+}
+
+interface MenuItem {
+    Icon: IconType
+    content: string
+    handler: () => void
 }

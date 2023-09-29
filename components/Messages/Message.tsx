@@ -1,45 +1,48 @@
+"use client"
 import Image from 'next/image'
-import { FC, useRef } from 'react'
 import html2Canvas from 'html2canvas'
 import download from '@/utils/download'
 import { prompt } from '@/public/fonts/f'
 import { getPeriod } from '@/utils/period'
+import { FC, useRef, useState } from 'react'
 import { BsDownload } from '@/public/icons/ico'
 
 const Message: FC<{ message: MessageStates }> = ({ message }) => {
+    const [
+        downloadBtnClicked, setDownloadBtnClicked
+    ] = useState<boolean>(false)
     const captureDivRef = useRef<HTMLDivElement>(null)
 
-    const downloadDiv = (id: string) => {
-        const divToCapture = captureDivRef.current
+    const downloadHTMLTemplate = async (id: string) => {
+        setDownloadBtnClicked(true)
 
-        if (!divToCapture) {
-            return
-        }
+        const divToCapture = await captureDivRef.current
 
-        html2Canvas(divToCapture).then((canvas) => {
-            const dataURL = canvas.toDataURL('image/png')
+        if (!divToCapture) return
 
-            const downloadLink = document.createElement('a')
-            downloadLink.href = dataURL
-            downloadLink.download = `memome_${id}.png`
-            downloadLink.click()
-        })
-
-        // trust me - I am coming back to it.
+        await html2Canvas(divToCapture)
+            .then((canvas) => {
+                const dataURL = canvas.toDataURL('image/png')
+                const downloadLink = document.createElement('a')
+                downloadLink.href = dataURL
+                downloadLink.download = `memome_${id}.png`
+                downloadLink.click()
+            }).finally(() => setDownloadBtnClicked(false))
     }
 
     return (
         <>
             <article
-                className={` ${message.files.length === 0 && 'flex items-center justify-center'} relative sm:w-[280px] md:w-[350px] sm:min-h-[235px] md:min-h-[250px] min-h-[220px] rounded-[30px] p-3 bg-clr-11 w-full`}
+                ref={captureDivRef}
+                className={`${message.files.length === 0 && 'flex items-center justify-center'} relative sm:min-h-[235px] md:min-h-[250px] min-h-[220px] rounded-[30px] p-3 bg-clr-11 max-w-[300px] w-[90vw]`}
                 style={{
-                    boxShadow: `10px 10px 18px 0 rgba(0, 0, 0, 0.3), inset -10px -10px 18px 0 rgba(0, 0, 0, 0.3), inset 10px 10px 18px 0 rgba(255, 255, 255, 0.2)`
+                    boxShadow: downloadBtnClicked ?
+                        'none' : `10px 10px 18px 0 rgba(0, 0, 0, 0.3), inset -10px -10px 18px 0 rgba(0, 0, 0, 0.3), inset 10px 10px 18px 0 rgba(255, 255, 255, 0.2)`
                 }}>
                 {message.files.length === 0 ?
                     <>
                         {message.texts &&
                             <div
-                                ref={captureDivRef}
                                 className={`${prompt.className} text- [1.2em] text-center text-clr-13 mt-2`}
                                 style={{
                                     fontSize: '1.2em',
@@ -48,12 +51,11 @@ const Message: FC<{ message: MessageStates }> = ({ message }) => {
                                 dangerouslySetInnerHTML={{ __html: message.texts }}
                             />}
                         <button
-                            onClick={() => downloadDiv(message.id)}
+                            onClick={async () => await downloadHTMLTemplate(message.id)}
                             className='absolute bottom-3 right-4 text-lg font-semibold text-black'>
                             <BsDownload />
                         </button>
-                    </>
-                    :
+                    </> :
                     <article className='h-full flex flex-col justify-between'>
                         {message.texts &&
                             <div
