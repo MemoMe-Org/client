@@ -4,6 +4,7 @@ import Link from "next/link";
 // import NavBar from '@/components/Nav';
 import { poppins, questrial } from "@/public/fonts/f";
 import Navbar from "@/components/navbar/navbar";
+import Button from "@/components/button";
 
 export default function Home() {
   return (
@@ -11,37 +12,28 @@ export default function Home() {
       {/* <NavBar isAuthenticated={false} /> */}
       <Navbar />
 
-      <main className={`${poppins.className} mt-[100px] w-[95vw]`}>
-        <section className="flex flex-col gap-4 items-center">
-          <img src={`https://i.gifer.com/4MvL.gif`} alt="gif" />
-          <article>
-            <Link
-              target="_blank"
-              className="font-medium underline"
-              href={"https://twitter.com/HeyVickyJay"}
+      <main className={`${poppins.className} mx-auto mt-[100px] w-[100vw]`}>
+        <section>
+          {/* hero */}
+          <div className="flex flex-col items-center mx-auto text-center">
+            <h3
+              className={`text-black font-bold mx-auto md:text-[40px] lg:max-w-[1250px]`}
             >
-              @VickyJay
-            </Link>
-            <span> is currently cooking this page.</span>
-          </article>
-          <article className="text-center">
-            <p className={`${questrial.className}`}>
-              {`The old chef has no idea what this page is going to look like.`}
+              Ultimate Anonymous Platform for Secure Communication, Polls,
+              and Content Control
+            </h3>
+            <p className="lg:text-[20px] lg:max-w-[773px] text-center mx-auto lg:text-[#A9A9A9] font-normal  ">
+              The ultimate anonymous platform for secure communication, hosting
+              polls, and sharing without fear of judgment.
             </p>
-            <Link
-              target="_blank"
-              className="font-medium underline"
-              href={"https://twitter.com/@kawojue_"}
-            >
-              @kawojue
-            </Link>
-          </article>
-          <p className="text-center">
-            {`Well, that won't stop us from using the entire app he dished.`}
-          </p>
-          <Link href={`/login`} className="save-btn-2">
-            Login
-          </Link>
+            <div>
+              <Link href="/signup">
+                <Button className="border-memo border-[2px]" type="button">
+                  Get Started
+                </Button>
+              </Link>
+            </div>
+          </div>
         </section>
       </main>
     </>

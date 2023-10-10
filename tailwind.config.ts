@@ -1,10 +1,10 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -19,7 +19,7 @@ const config: Config = {
         "clr-7": "#BFD5E2",
         "clr-8": "#DE8209",
         "clr-9": "#BD7112",
-        "clr-10": '#9D601B',
+        "clr-10": "#9D601B",
         "clr-11": "#f1faee",
         "clr-12": "rgb(241, 245, 248)",
         "clr-13": "rgb(16, 42, 66)",
@@ -32,14 +32,15 @@ const config: Config = {
         "clr-20": "rgb(255, 240, 240)",
         "clr-x": "rgba(0, 0, 0, 0.25)",
         "clr-y": "rgba(0, 0, 0, 0.5)",
+        memo: "#FF9400",
       },
       screens: {
-        sm: '600px',
-        md: '800px',
-        lg: '960px'
-      }
+        sm: "600px",
+        md: "800px",
+        lg: "960px",
+      },
     },
   },
   plugins: [],
-}
-export default config
+};
+export default config;

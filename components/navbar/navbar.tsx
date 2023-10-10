@@ -41,9 +41,9 @@ export default function Navbar() {
         </div>
         <ToggleButton setOpened={setOpened} opened={opened} />
         <div className="hidden md:block">
-          <Link href="/auth/login">
+          <Link href="/login">
             <div className="bg-[#FF9400] rounded-md lg:px-[60px] lg:py-4 text-white text-base font-semibold transition-all duration-300 active:scale-90 hover:scale-105">
-              Register
+              Login
             </div>
           </Link>
         </div>
