@@ -5,6 +5,7 @@ import Link from "next/link";
 import { poppins, questrial } from "@/public/fonts/f";
 import Navbar from "@/components/navbar/navbar";
 import Button from "@/components/button";
+import { Play } from "@/icons/icons";
 
 export default function Home() {
   return (
@@ -15,7 +16,7 @@ export default function Home() {
       <main className={`${poppins.className} mx-auto mt-[100px] w-[100vw]`}>
         <section>
           {/* hero */}
-          <div className="flex flex-col items-center mx-auto text-center">
+          <div className="flex flex-col gap-[21px] items-center mx-auto text-center">
             <h3
               className={`text-black font-bold mx-auto md:text-[40px] lg:max-w-[1250px]`}
             >
@@ -26,12 +27,28 @@ export default function Home() {
               The ultimate anonymous platform for secure communication, hosting
               polls, and sharing without fear of judgment.
             </p>
-            <div>
+            <div className="flex flex-row gap-4 items-center">
               <Link href="/signup">
                 <Button className="border-memo border-[2px]" type="button">
                   Get Started
                 </Button>
               </Link>
+              <div className="flex items-center gap-1">
+                <div className="w-[42px] h-[42px] relative">
+                  <div className="w-[40px] h-[40px] rounded-[50%] circular-box-shadow grid place-items-center">
+                    <Play />
+                  </div>
+                  <img
+                    src="https://res.cloudinary.com/dkoe20rzl/image/upload/v1696959526/u794klbg2goqnlfkhanm.svg"
+                    alt="Ellipse Half"
+                    draggable={false}
+                    className="w-[40px] h-[40px] absolute left-[-8px] top-[-2px]"
+                  />
+                </div>
+                <h1 className="font-bold text-black text-[7.189px] max-w-[44px] lg:max-w-[74px] lg:text-[12px] lg:leading-[14px] w-[74px] relative after:content-[''] after:absolute after:w-[5px] after:h-[5px] after:bg-[#18A0FB] after:rounded-[50%] after:right-[-10px] after:bottom-[4px]">
+                  Watch Our Short video
+                </h1>
+              </div>
             </div>
           </div>
         </section>
