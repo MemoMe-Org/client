@@ -7,6 +7,7 @@ import Button from '@/components/button';
 import { Play } from '@/public/svgs/svg';
 import Hero from './home/hero';
 import Features from './home/features';
+import Summary from './home/summary';
 
 export default function Home() {
   return (
@@ -55,6 +56,7 @@ export default function Home() {
         </section>
         <Hero />
         <Features />
+        <Summary />
       </main>
     </>
   );
