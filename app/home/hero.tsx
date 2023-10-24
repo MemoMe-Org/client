@@ -12,7 +12,8 @@ export default function Hero() {
             fetchPriority='high'
             placeholder='blur'
             priority
-            alt='hero_img'
+            draggable={false}
+            alt='wave illustration'
             className='mx-auto object-cover block'
           />
         </figure>
@@ -22,8 +23,9 @@ export default function Hero() {
             fetchPriority='high'
             placeholder='blur'
             priority
+            draggable={false}
             alt='hero_img'
-            className='mx-auto object-cover block transition-all duration-300 group-hover:scale-95'
+            className='mx-auto object-cover block transition-all duration-300 group-hover:scale-[.96]'
           />
         </figure>
       </div>

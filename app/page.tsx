@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { monst } from '@/public/fonts/f';
 import Navbar from '@/components/navbar/navbar';
 import Button from '@/components/button';
-import { Play } from '@/svgs/svg';
+import { Play } from '@/public/svgs/svg';
 import Hero from './home/hero';
 import Features from './home/features';
 
@@ -19,12 +19,12 @@ export default function Home() {
           {/* hero */}
           <div className='flex flex-col gap-[21px] items-center mx-auto text-center'>
             <h3
-              className={`text-black font-bold mx-auto md:text-[40px] lg:max-w-[1250px]`}
+              className={`text-black font-bold max-w-[373px] text-[25px] text-center md:max-w-xl  mx-auto md:text-[40px] lg:max-w-[1250px]`}
             >
               Ultimate Anonymous Platform for Secure Communication, Polls,
               and Content Control
             </h3>
-            <p className='lg:text-[20px] lg:max-w-[773px] text-center mx-auto lg:text-[#A9A9A9] font-normal  '>
+            <p className='lg:text-[20px] max-w-[367px] text-base lg:max-w-[773px] text-center mx-auto lg:text-[#A9A9A9] font-normal  '>
               The ultimate anonymous platform for secure communication, hosting
               polls, and sharing without fear of judgment.
             </p>

@@ -1,15 +1,19 @@
-"use client";
-import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import logo from "~/public/logo.png";
-import { LargeLinks } from "./LargeLinks";
-import { MobileDrawer } from "./MobileDrawer";
-import { ToggleButton } from "./toggleButton";
+'use client';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
+import logo from '~/public/logo.png';
+import { LargeLinks } from './LargeLinks';
+import { MobileDrawer } from './MobileDrawer';
+import { ToggleButton } from './toggleButton';
+import { Search } from '@/public/svgs/svg';
 
 export default function Navbar() {
   const [opened, setOpened] = useState(false);
   const headerRef = useRef<HTMLDivElement | null>(null);
+  const [search, setSearch] = useState('');
+
+  const handleChange = (e: any) => setSearch(e.target.value);
 
   useEffect(() => {
     function handleClicks(e: MouseEvent): void {
@@ -18,31 +22,45 @@ export default function Navbar() {
       }
       setOpened(false);
     }
-    window.addEventListener("click", handleClicks);
+    window.addEventListener('click', handleClicks);
     return () => {
-      window.removeEventListener("click", handleClicks);
+      window.removeEventListener('click', handleClicks);
     };
   }, []);
 
   return (
     <header
       ref={headerRef}
-      className="w-full px-[33px] py-[21px] lg:py-[39px] lg:px-[71px] text-black border-b border-white/20"
+      className='w-full px-[33px] py-[21px] lg:py-[39px] lg:px-[71px] text-black border-b border-white/20'
     >
-      <nav className="container flex items-center justify-between px-3 mx-auto">
-        <div className="flex flex-row items-center lg:gap-20 ">
-          <Link href="/" onClick={() => setOpened(false)}>
-            <b className="text-xl font-black md:text-2xl">
+      <nav className='container flex items-center justify-between px-3 mx-auto'>
+        <div className='flex flex-row items-center lg:gap-20 '>
+          <Link href='/' onClick={() => setOpened(false)}>
+            <b className='text-xl font-black md:text-2xl'>
               <span>Memo</span>
-              <span className="text-[#FF9400]-1">Me</span>
+              <span className='text-[#FF9400]-1'>Me</span>
             </b>
           </Link>
           <LargeLinks />
         </div>
         <ToggleButton setOpened={setOpened} opened={opened} />
-        <div className="hidden md:block">
-          <Link href="/login">
-            <div className="bg-[#FF9400] rounded-md lg:px-[60px] lg:py-4 text-white text-base font-semibold transition-all duration-300 active:scale-90 hover:scale-105">
+        <div className='hidden md:flex flex-row gap-5 items-center'>
+          <form className='relative'>
+            <figure className='absolute top-5 ml-r left-3 active:scale-95'>
+              <Search />
+            </figure>
+            <input
+              type='search'
+              name='search'
+              id='search'
+              placeholder='search'
+              onChange={handleChange}
+              value={search}
+              className='outline-none w-[373px] rounded-[5px] border-solid border-[1.5px] border-[#ddd] pl-12 px-[30px] py-[18px] text-[#A9A9A9] text-base font-semibold'
+            />
+          </form>
+          <Link href='/login'>
+            <div className='bg-[#FF9400] rounded-md lg:px-[60px] lg:py-4 text-white text-base font-semibold transition-all duration-300 active:scale-90 hover:scale-105'>
               Login
             </div>
           </Link>

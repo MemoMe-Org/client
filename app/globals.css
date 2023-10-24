@@ -4,7 +4,7 @@
 
 * {
   box-sizing: border-box;
-  /* outline: 1px solid red; */
+  outline: 1px solid red;
 }
 
 html {
@@ -267,7 +267,7 @@ header {
 }
 
 .lds-roller div:after {
-  content: " ";
+  content: ' ';
   @apply block absolute w-[5px] h-[5px] rounded-full bg-clr-1 -mt-[4px] mb-0 ml-0 -mr-[4px];
 }
 

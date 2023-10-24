@@ -5,10 +5,10 @@
   },
   {
     "name": "Features",
-    "route": "/features"
+    "route": "/#features"
   },
   {
     "name": "FAQs",
-    "route": "/faqs"
+    "route": "/#faqs"
   }
 ]
