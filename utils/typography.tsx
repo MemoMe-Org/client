@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface TypographyProps extends React.HTMLProps<HTMLHeadingElement> {
   children?: React.ReactNode;
   className?: string;

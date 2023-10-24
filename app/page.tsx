@@ -1,11 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import Link from 'next/link';
-import { poppins, questrial } from '@/public/fonts/f';
+import { monst } from '@/public/fonts/f';
 import Navbar from '@/components/navbar/navbar';
 import Button from '@/components/button';
 import { Play } from '@/svgs/svg';
 import Hero from './home/hero';
+import Features from './home/features';
 
 export default function Home() {
   return (
@@ -13,7 +14,7 @@ export default function Home() {
       {/* <NavBar isAuthenticated={false} /> */}
       <Navbar />
 
-      <main className={`${poppins.className} mx-auto mt-[100px] w-[100vw]`}>
+      <main className={`${monst.className} mx-auto mt-[100px] w-[100vw]`}>
         <section>
           {/* hero */}
           <div className='flex flex-col gap-[21px] items-center mx-auto text-center'>
@@ -53,6 +54,7 @@ export default function Home() {
           </div>
         </section>
         <Hero />
+        <Features />
       </main>
     </>
   );
