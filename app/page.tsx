@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import Link from 'next/link';
-// import NavBar from '@/components/Nav';
 import { poppins, questrial } from '@/public/fonts/f';
 import Navbar from '@/components/navbar/navbar';
 import Button from '@/components/button';
 import { Play } from '@/svgs/svg';
+import Hero from './home/hero';
 
 export default function Home() {
   return (
@@ -52,6 +52,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <Hero />
       </main>
     </>
   );
