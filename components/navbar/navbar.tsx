@@ -1,8 +1,9 @@
 'use client';
 import Image from 'next/image';
+import { monst } from '@/public/fonts/f';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import logo from '~/public/logo.png';
+import logo from '@/public/images/logo.png';
 import { LargeLinks } from './LargeLinks';
 import { MobileDrawer } from './MobileDrawer';
 import { ToggleButton } from './toggleButton';
@@ -31,15 +32,24 @@ export default function Navbar() {
   return (
     <header
       ref={headerRef}
-      className='w-full px-[33px] py-[21px] lg:py-[39px] lg:px-[71px] text-black border-b border-white/20'
+      className={`${monst.className} w-full px-[33px] py-[21px] lg:py-[39px] lg:px-[71px] text-black border-b border-white/20`}
     >
       <nav className='container flex items-center justify-between px-3 mx-auto'>
         <div className='flex flex-row items-center lg:gap-20 '>
           <Link href='/' onClick={() => setOpened(false)}>
-            <b className='text-xl font-black md:text-2xl'>
+            {/* <b className='text-xl font-black md:text-2xl'>
               <span>Memo</span>
               <span className='text-[#FF9400]-1'>Me</span>
-            </b>
+            </b> */}
+            <Image
+              src={logo}
+              alt='logo'
+              // width={100}
+              // height={100}
+              priority
+              draggable={false}
+              className='w-[88px] block  md:w-[168px] '
+            />
           </Link>
           <LargeLinks />
         </div>

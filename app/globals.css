@@ -424,3 +424,29 @@ header {
   @apply m-auto border-[5px] border-[#EAF0F6] rounded-full border-t-clr-4 w-[23px] h-[23px];
   animation: rotate 4s linear infinite;
 }
+
+/* scrollbar */
+body::-webkit-scrollbar {
+  @apply w-1 bg-transparent;
+}
+
+body::-webkit-scrollbar-corner {
+  @apply bg-transparent;
+}
+
+body::-webkit-scrollbar-track {
+  @apply bg-memo/60;
+}
+
+body::-webkit-scrollbar-track-piece {
+  @apply bg-transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  @apply transition-all duration-500 rounded-full bg-black/60 hover:bg-black/40;
+}
+
+html {
+  scrollbar-color: rgb(0, 0, 0, 0.4) rgb(0, 0, 0, 0);
+  scrollbar-width: thin;
+}
