@@ -58,3 +58,39 @@ MemoMe Levels:`,
     content: `As you continue to engage with MemoMe, you'll notice your level increasing. This isn't just a number; it's a symbol of your dedication to our community. The more you use MemoMe, the higher your level will climb, and with it comes a range of exciting benefits and privileges.`,
   },
 ];
+
+export const faqs = [
+  {
+    question: 'What is MemoMe?',
+    answer: `Memome is an anonymous messaging app that allows users to send and receive messages without revealing their identities. It's a platform for sharing thoughts, feelings, and experiences without fear of judgment or retaliation.`,
+  },
+  {
+    question: 'How does Memome work?',
+    answer: `Memome uses a variety of methods to protect user privacy, including encryption, anonymizing IP addresses, and not requiring registration or personal information. Users can create anonymous profiles and post memos (short messages) that are visible to other users.`,
+  },
+  {
+    question: 'Can I customize my Memome profile?',
+    answer: `Yes, you can choose a username and profile picture to represent yourself on Memome.one. However, these do not reveal your real identity and are solely for personalization within the platform.`,
+  },
+  {
+    question: 'How does the point and level works?',
+    answer: `You will get update on that soonest`,
+  },
+  {
+    question: 'What is Memomome?',
+    answer: `Memome is an anonymous messaging app that allows users to send and receive messages without revealing their identities. It's a platform for sharing thoughts, feelings, and experiences without fear of judgment or retaliation.`,
+    isOpened: false,
+  },
+  {
+    question: 'What is Memomome?',
+    answer: `Memome is an anonymous messaging app that allows users to send and receive messages without revealing their identities. It's a platform for sharing thoughts, feelings, and experiences without fear of judgment or retaliation.`,
+  },
+  {
+    question: 'What is Memomome?',
+    answer: `Memome is an anonymous messaging app that allows users to send and receive messages without revealing their identities. It's a platform for sharing thoughts, feelings, and experiences without fear of judgment or retaliation.`,
+  },
+  {
+    question: 'What is Memomome?',
+    answer: `Memome is an anonymous messaging app that allows users to send and receive messages without revealing their identities. It's a platform for sharing thoughts, feelings, and experiences without fear of judgment or retaliation.`,
+  },
+];

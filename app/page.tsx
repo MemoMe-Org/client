@@ -5,9 +5,8 @@ import { monst } from '@/public/fonts/f';
 import Navbar from '@/components/navbar/navbar';
 import Button from '@/components/button';
 import { Play } from '@/public/svgs/svg';
-import Hero from './home/hero';
-import Features from './home/features';
-import Summary from './home/summary';
+import { Hero, Faqs, Features, Summary } from './home';
+import { faqs } from '@/data/data';
 
 export default function Home() {
   return (
@@ -57,6 +56,7 @@ export default function Home() {
         <Hero />
         <Features />
         <Summary />
+        <Faqs faqs={faqs} />
       </main>
     </>
   );

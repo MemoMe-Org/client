@@ -319,3 +319,17 @@ interface ShowWhenVisibleProps {
 interface SvgsProps {
   className?: string;
 }
+
+interface FaqItemProps {
+  faq: {
+    question: string;
+    answer: string;
+  };
+}
+
+interface FaqsProps {
+  faqs: Array<{
+    question: string;
+    answer: string;
+  }>;
+}
