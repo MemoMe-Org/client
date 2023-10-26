@@ -7,6 +7,7 @@ import Button from '@/components/button';
 import { Play } from '@/public/svgs/svg';
 import { Hero, Faqs, Features, Summary } from './home';
 import { faqs } from '@/data/data';
+import Footer from '@/components/footer/footer';
 
 export default function Home() {
   return (
@@ -58,6 +59,7 @@ export default function Home() {
         <Summary />
         <Faqs faqs={faqs} />
       </main>
+      <Footer />
     </>
   );
 }
