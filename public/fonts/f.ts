@@ -13,7 +13,7 @@ const questrial = Questrial({
 });
 
 const monst = Montserrat_Alternates({
-  weight: ['400', '600'],
+  weight: ['400', '500', '600', '700'],
   subsets: ['latin'],
 });
 
