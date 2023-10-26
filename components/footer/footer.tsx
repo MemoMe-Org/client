@@ -13,7 +13,7 @@ export default function Footer() {
              Copyright <span>&copy;</span>&nbsp;
             <span>{new Date().getFullYear()} </span> MemoMe
           </P>
-          <P>BUilt with ❤</P>
+          <P>Built with ❤</P>
         </div>
       </footer>
     </>

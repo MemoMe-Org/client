@@ -15,7 +15,9 @@ export default function Home() {
       {/* <NavBar isAuthenticated={false} /> */}
       <Navbar />
 
-      <main className={`${monst.className} mx-auto mt-[100px] w-[100vw]`}>
+      <main
+        className={`${monst.className} mx-auto mt-[42px] md:mt-[100px] w-[100vw]`}
+      >
         <section>
           {/* hero */}
           <div className='flex flex-col gap-[21px] items-center mx-auto text-center'>
@@ -29,7 +31,7 @@ export default function Home() {
               The ultimate anonymous platform for secure communication, hosting
               polls, and sharing without fear of judgment.
             </p>
-            <div className='flex flex-row gap-4 items-center'>
+            <div className='flex flex-row gap-[10px] md:gap-4 items-center'>
               <Link href='/signup'>
                 <Button className='border-memo border-[2px]' type='button'>
                   Get Started
@@ -48,7 +50,7 @@ export default function Home() {
                   />
                 </div>
                 <h1 className="font-bold text-black text-[7.189px] max-w-[44px] lg:max-w-[74px] lg:text-[12px] lg:leading-[14px] w-[74px] relative after:content-[''] after:absolute after:w-[5px] after:h-[5px] after:bg-[#18A0FB] after:rounded-[50%] after:right-[-10px] after:bottom-[4px]">
-                  Watch Our Short video
+                  Watch Our Short film
                 </h1>
               </div>
             </div>

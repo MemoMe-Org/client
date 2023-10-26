@@ -17,7 +17,7 @@ export default function Hero() {
             className='mx-aut object-cover block'
           />
         </figure>
-        <figure className='relative z-20 group bg-hero mt-[40px] px-[41px] py-[42px] rounded-[20px] outline-red-300 outline w-fit mx-auto'>
+        <figure className='relative z-20 group bg-hero mt-[40px] px-[41px] py-[42px] rounded-[20px] outline-red-50 outline w-fit mx-auto'>
           <Image
             src={hero}
             fetchPriority='high'
@@ -25,7 +25,7 @@ export default function Hero() {
             priority
             draggable={false}
             alt='hero_img'
-            className='mx-auto object-cover block transition-all duration-300 group-hover:scale-[.96]'
+            className='mx-auto object-cover block transition-all duration-300 group-hover:scale-[.96] md:w-full w-3/4'
           />
         </figure>
       </div>

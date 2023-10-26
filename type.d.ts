@@ -333,3 +333,9 @@ interface FaqsProps {
     answer: string;
   }>;
 }
+
+interface ButtonProps {
+  children: ReactNode;
+  className?: string;
+  type?: 'button' | 'submit' | 'reset';
+}
