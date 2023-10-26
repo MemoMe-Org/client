@@ -9,11 +9,11 @@ export default function Features() {
       id='features'
       className={`${monst.className} bg-[#FAFAFA] pt-[62px]`}
     >
-      <div className='flex flex-col items-center mx-auto font-alt'>
+      <div className='flex flex-col items-center mx-auto '>
         <H1>Features </H1>
         <P>This are the ultimate features in memome</P>
       </div>
-      <div className='flex flex-row flex-wrap justify-center mx-auto items-center gap-5 mt-[85px]'>
+      <div className='flex flex-row flex-wrap justify-center mx-[77px] items-center gap-5 mt-[85px]'>
         {features.map((feature) => (
           <div
             key={feature?.id}

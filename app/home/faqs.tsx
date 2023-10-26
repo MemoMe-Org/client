@@ -15,8 +15,8 @@ const FaqItem: React.FC<FaqItemProps> = ({ faq }) => {
     <div className={`block`} id='faqs'>
       <div
         onClick={toggle}
-        className={` flex flex-row justify-between self-start items-center text-[15px] rounded-[2px] min-w-[1200px] p-[17px] md:pl-[10px] md:text-[20px] font-semibold ${
-          isOpen ? 'bg-memo/10' : 'bg-white text-black'
+        className={`max-w-[1000px] flex flex-row justify-between  items-center text-[15px] rounded-[2px] p-[17px] md:pl-[10px] md:text-[20px] font-semibold ${
+          isOpen ? 'bg-memo/5' : 'bg-white text-black'
         }`}
       >
         {faq.question}
@@ -36,13 +36,13 @@ const FaqItem: React.FC<FaqItemProps> = ({ faq }) => {
       </div>
 
       <div
-        className={`transition-all duration-300 ${
+        className={`transition-all duration-300 border-b-2 border-b-[#CECECE] ${
           isOpen
-            ? 'md:backdrop:max-h-[255px] self-start pt-[14px] pb-[20px] md:pb-[40px] md:pt-[25px]'
+            ? 'md:backdrop:max-h-[255px] pt-[14px] pb-[20px] md:pb-[40px] md:pt-[25px]'
             : 'h-0 pb-0 pt-0'
         } overflow-hidden bg-white pr-[14px] pl-[10px] md:pr-[25px]`}
       >
-        <p className='text-[#363636] text-[15px] max-w-max self-start md:text-[18px] font-normal'>
+        <p className='text-[#363636] text-[15px] max-w-3xl md:text-[18px] font-normal'>
           {faq.answer}
         </p>
       </div>
@@ -53,7 +53,7 @@ const FaqItem: React.FC<FaqItemProps> = ({ faq }) => {
 const Faqs: React.FC<FaqsProps> = () => {
   return (
     <section
-      className={`${monst.className} mt-[40px] mx-[32px] md:mx-[66px] md:mt-[55px]`}
+      className={`${monst.className} flex flex-col items-center mt-[40px] mx-[32px] md:mx-[66px] md:mt-[55px]`}
     >
       <div>
         <h2
@@ -65,7 +65,7 @@ const Faqs: React.FC<FaqsProps> = () => {
           have question? we are here to help
         </P>
 
-        <div className='lg:cursor-pointer mt-[37px] space-y-3 lg:space-y-0 lg:flex lg:flex-col items-center mx-[97px] lg:gap-4'>
+        <div className='lg:cursor-pointer mt-[37px] space-y-3 lg:space-y-0 lg:flex lg:flex-col items mx-[97px] lg:gap-4'>
           {faqs.map((faq, index) => (
             <FaqItem key={index} faq={faq} />
           ))}
