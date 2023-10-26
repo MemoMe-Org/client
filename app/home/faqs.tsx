@@ -15,7 +15,7 @@ const FaqItem: React.FC<FaqItemProps> = ({ faq }) => {
     <div className={`block`} id='faqs'>
       <div
         onClick={toggle}
-        className={`max-w-[1000px] flex flex-row justify-between  items-center text-[15px] rounded-[2px] p-[17px] md:pl-[10px] md:text-[20px] font-semibold ${
+        className={`max-w-[1000px] flex flex-row justify-between  items-center text-[18px] rounded-[2px] p-[17px] md:pl-[10px] md:text-[20px] font-semibold ${
           isOpen ? 'bg-memo/5' : 'bg-white text-black'
         }`}
       >
@@ -57,11 +57,11 @@ const Faqs: React.FC<FaqsProps> = () => {
     >
       <div>
         <h2
-          className={`text-black mx-auto block text-center font-semibold  text-[30px] md:text-[45px] md:leading-[64px]`}
+          className={`text-black mx-auto block text-center font-semibold  text-[25px] md:text-[45px] leading-[64px]`}
         >
           Frequently Asked <span className='text-memo'>Questions</span>
         </h2>
-        <P className='text-[#959595] leading-[64px] text-[20px] font-semibold mx-auto text-center '>
+        <P className='text-[#959595] leading-[64px]text-[18px] md:text-[20px] font-semibold mx-auto text-center '>
           have question? we are here to help
         </P>
 
