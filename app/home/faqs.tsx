@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { faqs } from '@/data/data';
 import { MinusIcon, PlusIcon } from '@/public/svgs/svg';
 import { monst } from '@/public/fonts/f';
+import { P } from '@/utils/typography';
 
 const FaqItem: React.FC<FaqItemProps> = ({ faq }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,33 +12,37 @@ const FaqItem: React.FC<FaqItemProps> = ({ faq }) => {
   };
 
   return (
-    <div className={`mx-auto block`} id='faqs'>
+    <div className={`block`} id='faqs'>
       <div
         onClick={toggle}
-        className={`cursor-pointe  md:max-w-[642px] flex justify-between items-center text-[15px] rounded-[2px] p-[17px] md:p-[30px] md:text-[20px] font-medium ${
-          isOpen ? 'bg-[#6503BF] text-white' : 'bg-white text-black'
+        className={` flex flex-row justify-between items-center text-[15px] rounded-[2px] min-w-[1299px] p-[17px] md:pl-[10px] md:text-[20px] font-semibold ${
+          isOpen ? 'bg-memo/10' : 'bg-white text-black'
         }`}
       >
         {faq.question}
         {isOpen ? (
-          <MinusIcon
-            className={`transition-all duration-200 w-[14px] h-[14px] md:w-[24px] md:h-[24px]`}
-          />
+          <figure className='bg-memo rounded-full p-2'>
+            <MinusIcon
+              className={`transition-all duration-200 w-[14px] h-[14px] md:w-[24px] md:h-[24px]`}
+            />
+          </figure>
         ) : (
-          <PlusIcon
-            className={`transition-all duration-200 w-[14px] h-[14px] md:w-[24px] md:h-[24px]`}
-          />
+          <figure className='border border-memo rounded-full p-2 '>
+            <PlusIcon
+              className={`transition-all duration-200 w-[14px] h-[14px] md:w-[24px] md:h-[24px]`}
+            />
+          </figure>
         )}
       </div>
 
       <div
-        className={`h-aut transition-all duration-300 ${
+        className={`transition-all duration-300 ${
           isOpen
-            ? 'md:backdrop:max-h-[255px] pt-[14px] pb-[30px] md:pb-[85px] md:pt-[25px]'
+            ? 'md:backdrop:max-h-[255px]  pt-[14px] pb-[20px] md:pb-[40px] md:pt-[25px]'
             : 'h-0 pb-0 pt-0'
-        } overflow-hidden bg-white max-w-[367px] max-w-max px-[14px] lg:max-w-[642px] md:px-[25px]`}
+        } overflow-hidden bg-white pr-[14px] pl-[10px] md:pr-[25px]`}
       >
-        <p className='text-[#000000] text-[15px] w-full  px md:text-[20px] lg:max-w-[579px] font-normal'>
+        <p className='text-[#363636] text-[15px] max-w-max self-start md:text-[18px] font-normal'>
           {faq.answer}
         </p>
       </div>
@@ -45,35 +50,22 @@ const FaqItem: React.FC<FaqItemProps> = ({ faq }) => {
   );
 };
 
-interface FaqsProps {
-  faqs: Array<{
-    question: string;
-    answer: string;
-  }>;
-}
-
 const Faqs: React.FC<FaqsProps> = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const toggle = (index: number) => {
-    if (index === openIndex) {
-      setOpenIndex(null);
-    } else {
-      setOpenIndex(index);
-    }
-  };
   return (
     <section
       className={`${monst.className} mt-[40px] mx-[32px] md:mx-[66px] md:mt-[55px]`}
     >
       <div>
         <h2
-          className={`text-[#00453B] mx-auto block text-center font-semibold  text-[30px] max-w-[272px]  md:max-w-max md:text-[40px] md:leading-[49px]`}
+          className={`text-black mx-auto block text-center font-semibold  text-[30px] md:text-[45px] md:leading-[64px]`}
         >
-          Frequently Asked Question
+          Frequently Asked <span className='text-memo'>Questions</span>
         </h2>
+        <P className='text-[#959595] leading-[64px] text-[20px] font-semibold mx-auto text-center '>
+          have question? we are here to help
+        </P>
 
-        <div className='lg:cursor-pointer mt-[37px] space-y-3 lg:space-y-0 lg:flex lg:flex-row lg:flex-wrap lg:gap-4 lg:mt-[95px]'>
+        <div className='lg:cursor-pointer mt-[37px] space-y-3 lg:space-y-0 lg:flex lg:flex-col items-start mx-[97px] lg:gap-4'>
           {faqs.map((faq, index) => (
             <FaqItem key={index} faq={faq} />
           ))}

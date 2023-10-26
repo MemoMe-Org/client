@@ -5,7 +5,10 @@ import Image from 'next/image';
 
 export default function Features() {
   return (
-    <section className={`${monst.className} bg-[#FAFAFA] pt-[62px]`}>
+    <section
+      id='features'
+      className={`${monst.className} bg-[#FAFAFA] pt-[62px]`}
+    >
       <div className='flex flex-col items-center mx-auto font-alt'>
         <H1>Features </H1>
         <P>This are the ultimate features in memome</P>
