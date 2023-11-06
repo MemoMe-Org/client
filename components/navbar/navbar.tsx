@@ -13,6 +13,7 @@ export default function Navbar() {
   const [opened, setOpened] = useState(false);
   const headerRef = useRef<HTMLDivElement | null>(null);
   const [search, setSearch] = useState('');
+  const [scrolled, setScrolled] = useState(false);
 
   const handleChange = (e: any) => setSearch(e.target.value);
 
@@ -29,13 +30,32 @@ export default function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
     <header
       ref={headerRef}
       className={`${monst.className} w-full px-[33px] py-[21px] lg:py-[39px] lg:px-[71px] text-black border-b border-white/20`}
     >
-      <nav className='container flex items-center justify-between px-3 mx-auto'>
-        <div className='flex flex-row items-center lg:gap-20 '>
+      <nav
+        className={`  ${
+          scrolled ? 'bg-memo/10 p-2' : ''
+        } container flex items-center justify-between px-3 mx-auto`}
+      >
+        <div className={` flex flex-row items-center lg:gap-20`}>
           <Link href='/' onClick={() => setOpened(false)}>
             {/* <b className='text-xl font-black md:text-2xl'>
               <span>Memo</span>
@@ -48,7 +68,7 @@ export default function Navbar() {
               // height={100}
               priority
               draggable={false}
-              className='w-[88px] block  md:w-[168px] '
+              className='w-[100px] block  md:w-[168px] '
             />
           </Link>
           <LargeLinks />
