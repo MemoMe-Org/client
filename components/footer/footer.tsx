@@ -8,11 +8,12 @@ export default function Footer() {
         className={` ${monst.className} flex flex-row justify-center my-[50px] lg:px-[31px] lg:my-[100px]`}
       >
         <div className='flex flex-col items-center'>
-          <P className='text-base'>All rights Reserved</P>
           <Text className='text-[#4F4F4F] !text-base md:!text-lg leading-[33px]'>
              Copyright <span>&copy;</span>&nbsp;
-            <span>{new Date().getFullYear()} </span> MemoMe
+            <span>{new Date().getFullYear()} </span>{' '}
+            <span className='font-semibold'>MemoMe</span>
           </Text>
+          <P className='text-base'>All rights Reserved</P>
           <Text>Built with ❤ && ⚡</Text>
         </div>
       </footer>
