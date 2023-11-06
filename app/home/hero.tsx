@@ -14,7 +14,7 @@ export default function Hero() {
             priority
             draggable={false}
             alt='wave illustration'
-            className='mx-aut object-cover block'
+            className='w-full z-40 object-cover block'
           />
         </figure>
         <figure className='relative z-20 group bg-hero mt-[40px] px-[41px] py-[42px] rounded-[20px] outline-red-50 outline w-fit mx-auto'>

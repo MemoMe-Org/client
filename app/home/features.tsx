@@ -17,7 +17,7 @@ export default function Features() {
           This are the ultimate features in memome
         </P>
       </div>
-      <div className='flex flex-row flex-wrap justify-center mx-[77px] items-center gap-5 mt-[85px]'>
+      <div className='flex flex-row flex-wrap justify-center mx-[77px] items-center gap-5 md:mt-[85px]'>
         {features.map((feature) => (
           <div
             key={feature?.id}
