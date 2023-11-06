@@ -66,11 +66,11 @@ export default function Navbar() {
               placeholder='search'
               onChange={handleChange}
               value={search}
-              className='outline-none w-[373px] rounded-[5px] border-solid border-[1.5px] border-[#ddd] pl-12 px-[30px] py-[18px] text-[#A9A9A9] text-base font-semibold'
+              className='outline-none w-[230px] lg:w-[373px] rounded-[5px] border-solid border-[1.5px] border-[#ddd] pl-12 px-[30px] py-[18px] text-[#A9A9A9] text-base font-semibold'
             />
           </form>
           <Link href='/login'>
-            <div className='bg-[#FF9400] rounded-md lg:px-[60px] lg:py-4 text-white text-base font-semibold transition-all duration-300 active:scale-90 hover:scale-105'>
+            <div className='bg-[#FF9400] rounded-md md:px-6 md:py-4 lg:px-[60px] lg:py-4 text-white text-base font-semibold transition-all duration-300 active:scale-90 hover:scale-105'>
               Login
             </div>
           </Link>
