@@ -29,6 +29,7 @@ export default function Features() {
                 alt={feature?.title}
                 priority
                 width={100}
+                height={100}
                 draggable={false}
                 className='object-cover w-[41.9px] h-[41.9px] md:w-[50px] md:h-[50px]'
               />

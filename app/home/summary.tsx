@@ -1,5 +1,4 @@
 import { monst } from '@/public/fonts/f';
-import summary from '@/public/images/summary.png';
 import { H3, P } from '@/utils/typography';
 import Image from 'next/image';
 
@@ -11,9 +10,12 @@ export default function Summary() {
       <div className='flex flex-col-reverse gap-[34px] md:flex md:flex-row md:gap-[46px] items-center justify-center'>
         <figure>
           <Image
-            src={summary}
-            alt='summary_alt'
+            src={`https://d15zb4m4p46ai4.cloudfront.net/Dist/summary.png`}
+            alt='summary_illustation'
             draggable={false}
+            height={100}
+            width={100}
+            priority
             className='object-cover mx-auto w-3/4 lg:w-full'
           />
         </figure>

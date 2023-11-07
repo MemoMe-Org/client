@@ -62,10 +62,10 @@ export default function Navbar() {
               <span className='text-[#FF9400]-1'>Me</span>
             </b> */}
             <Image
-              src={logo}
+              src='https://d15zb4m4p46ai4.cloudfront.net/Dist/logo.png'
               alt='logo'
-              // width={100}
-              // height={100}
+              width={100}
+              height={100}
               priority
               draggable={false}
               className='w-[100px] block  md:w-[168px] '
