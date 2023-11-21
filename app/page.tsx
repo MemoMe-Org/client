@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-'use client';
-import Link from 'next/link';
-import { monst } from '@/public/fonts/f';
-import Navbar from '@/components/navbar/navbar';
-import Button from '@/components/button';
-import { Play } from '@/public/svgs/svg';
-import { Hero, Faqs, Features, Summary } from './home';
-import { faqs } from '@/data/data';
-import Footer from '@/components/footer/footer';
+'use client'
+import Link from 'next/link'
+import { faqs } from '@/data/data'
+import { monst } from '@/public/fonts/f'
+import Button from '@/components/Button'
+import { Play } from '@/public/svgs/svg'
+import Footer from '@/components/Footer'
+import Navbar from '@/components/NavBar/Navbar'
+import { Hero, Faqs, Features, Summary } from '@/components/Home/'
 
 export default function Home() {
   return (
@@ -15,15 +15,12 @@ export default function Home() {
       {/* <NavBar isAuthenticated={false} /> */}
       <Navbar />
 
-      <main
-        className={`${monst.className} mx-auto mt-[42px] md:mt-[100px] w-[100vw]`}
-      >
+      <main className={`${monst.className} mx-auto mt-[42px] md:mt-[100px] w-[100vw]`}>
         <section>
           {/* hero */}
           <div className='flex flex-col gap-[21px] items-center mx-auto text-center'>
             <h3
-              className={`text-black font-bold max-w-[373px] text-[25px] text-center md:max-w-xl  mx-auto md:text-[40px] lg:max-w-[1250px]`}
-            >
+              className={`text-black font-bold max-w-[373px] text-[25px] text-center md:max-w-xl  mx-auto md:text-[40px] lg:max-w-[1250px]`}>
               Ultimate Anonymous Platform for Secure Communication, Polls,
               and Content Control
             </h3>
@@ -63,5 +60,5 @@ export default function Home() {
       </main>
       <Footer />
     </>
-  );
+  )
 }

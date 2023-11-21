@@ -1,59 +1,57 @@
-'use client';
-import Image from 'next/image';
-import { monst } from '@/public/fonts/f';
-import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
-import logo from '@/public/images/logo.png';
-import { LargeLinks } from './LargeLinks';
-import { MobileDrawer } from './MobileDrawer';
-import { ToggleButton } from './toggleButton';
-import { Search } from '@/public/svgs/svg';
+'use client'
+import Link from 'next/link'
+import Image from 'next/image'
+import { monst } from '@/public/fonts/f'
+import { LargeLinks } from './LargeLinks'
+import { ToggleButton } from './ToggleBtn'
+import { Search } from '@/public/svgs/svg'
+import { MobileDrawer } from './MobileDrawer'
+import { useEffect, useRef, useState } from 'react'
 
 export default function Navbar() {
-  const [opened, setOpened] = useState(false);
-  const headerRef = useRef<HTMLDivElement | null>(null);
-  const [search, setSearch] = useState('');
-  const [scrolled, setScrolled] = useState(false);
+  const [search, setSearch] = useState('')
+  const [opened, setOpened] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const headerRef = useRef<HTMLDivElement | null>(null)
 
-  const handleChange = (e: any) => setSearch(e.target.value);
+  const handleChange = (e: any) => setSearch(e.target.value)
 
   useEffect(() => {
     function handleClicks(e: MouseEvent): void {
       if (headerRef.current?.contains(e.target as Node)) {
-        return;
+        return
       }
-      setOpened(false);
+      setOpened(false)
     }
-    window.addEventListener('click', handleClicks);
+    window.addEventListener('click', handleClicks)
     return () => {
-      window.removeEventListener('click', handleClicks);
-    };
-  }, []);
+      window.removeEventListener('click', handleClicks)
+    }
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
-        setScrolled(true);
+        setScrolled(true)
       } else {
-        setScrolled(false);
+        setScrolled(false)
       }
-    };
+    }
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll)
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
   return (
     <header
       ref={headerRef}
       className={`${monst.className} w-full px-[33px] py-[21px] lg:py-[39px] lg:px-[71px] text-black border-b border-white/20`}
     >
       <nav
-        className={`  ${
-          scrolled ? 'bg-memo/10 p-2' : ''
-        } container flex items-center justify-between px-3 mx-auto`}
+        className={`  ${scrolled ? 'bg-memo/10 p-2' : ''
+          } container flex items-center justify-between px-3 mx-auto`}
       >
         <div className={` flex flex-row items-center lg:gap-20`}>
           <Link href='/' onClick={() => setOpened(false)}>
@@ -98,5 +96,5 @@ export default function Navbar() {
       </nav>
       <MobileDrawer opened={opened} setOpened={setOpened} />
     </header>
-  );
+  )
 }
