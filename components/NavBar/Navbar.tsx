@@ -47,7 +47,7 @@ export default function Navbar() {
   return (
     <header
       ref={headerRef}
-      className={`${monst.className} w-full px-[33px] py-[21px] lg:py-[39px] lg:px-[71px] text-black border-b border-white/20`}
+      className={`${monst.className} bg-white w-full px-[33px] py-[21px] lg:py-8 lg:px-[71px] text-black border-b border-white/20`}
     >
       <nav
         className={`  ${scrolled ? 'bg-memo/10 p-2' : ''
