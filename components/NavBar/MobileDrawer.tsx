@@ -10,7 +10,7 @@ export function MobileDrawer({ opened, setOpened }: ToggleProps) {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
 
   return (
-    <div className={`transition-all duration-300 w-full -z-10 md:hidden grid overflow-hidden ${opened ? 'grid-rows-[1fr] p-3' : 'grid-rows-[0fr]'
+    <div className={`transition-all duration-300 w-full -z-10 md:hidden overflow-hidden grid ${opened ? 'grid-rows-[1fr] p-3' : 'grid-rows-[0fr]'
       }`}>
       <div className='min-h-0 transition-all duration-300'>
         <ul className='space-y-2'>
@@ -36,7 +36,7 @@ export function MobileDrawer({ opened, setOpened }: ToggleProps) {
             </li>
           ))}
           <form className='relative'>
-            <figure className='absolute top-5 ml-r left-3 active:scale-95'>
+            <figure className='absolute top-2 ml-r left-3 active:scale-95'>
               <Search />
             </figure>
             <input
@@ -46,16 +46,19 @@ export function MobileDrawer({ opened, setOpened }: ToggleProps) {
               placeholder='search'
               onChange={handleChange}
               value={search}
-              className='outline-none w-[373px] rounded-[5px] border-solid border-[1.5px] border-[#ddd] pl-12 px-[30px] py-[18px] text-[#A9A9A9] text-base font-semibold'
+              className='outline-none w-full rounded-[5px] border-solid border-[1.5px] border-[#ddd] pl-12 px-[30px] py-2 text-[#A9A9A9] text-base font-semibold'
             />
           </form>
         </ul>
-        <Link
+        <div className="w-full flex justify-center items-center">
+         <Link
           href='/auth/login'
           onClick={() => setOpened(false)}
-          className={`w-full rounded-md bg-[#FF9400] text-white font-bae flex justify-center items-center py-2 active:scale-95 transition-all duration-300 mt-3`}>
+          className={`w-full text-center rounded-md bg-[#FF9400] text-white font-bae  py-2 active:scale-95 transition-all duration-300 mt-3`}>
           Login
-        </Link>
+        </Link> 
+        </div>
+        
       </div>
     </div>
   )
